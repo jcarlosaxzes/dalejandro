@@ -131,6 +131,24 @@ Partial Public Class activejobsdashboad
     Protected WithEvents RadGridFooter As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
+    '''RadWizard1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWizard1 As Global.Telerik.Web.UI.RadWizard
+
+    '''<summary>
+    '''RadWizardStepJobs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWizardStepJobs As Global.Telerik.Web.UI.RadWizardStep
+
+    '''<summary>
     '''RadListView1 control.
     '''</summary>
     '''<remarks>
@@ -156,6 +174,33 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadListView3 As Global.Telerik.Web.UI.RadListView
+
+    '''<summary>
+    '''RadWizardStepProposals control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWizardStepProposals As Global.Telerik.Web.UI.RadWizardStep
+
+    '''<summary>
+    '''RadListViewProposal1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadListViewProposal1 As Global.Telerik.Web.UI.RadListView
+
+    '''<summary>
+    '''RadListViewProposal2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadListViewProposal2 As Global.Telerik.Web.UI.RadListView
 
     '''<summary>
     '''PanelLegend control.
@@ -264,6 +309,24 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceEmpl_activos As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourceProposalsNotEmitted control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceProposalsNotEmitted As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourceProposalsPending control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceProposalsPending As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''lblLogedEmployeeId control.

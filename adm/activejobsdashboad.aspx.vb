@@ -64,9 +64,14 @@ Public Class activejobsdashboad
     End Sub
 
     Private Sub RadListViewRefresh()
+        ' Jobs...................
         RadListView1.DataBind()
         RadListView2.DataBind()
         RadListView3.DataBind()
+
+        ' Proposals...................
+        RadListViewProposal1.DataBind()
+        RadListViewProposal2.DataBind()
     End Sub
 
 
@@ -90,18 +95,17 @@ Public Class activejobsdashboad
 
             Case "AddNewTime"
                 Response.Redirect("~/adm/employeenewtime.aspx?JobId=" & e.CommandArgument & "&backpage=activejobsdashboad")
-
-            Case "EditReviews"
-                If LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 Then
-                    ' Programmers/Computer/IT
-                    Response.Redirect("~/adm/JobTickets.aspx?JobId=" & e.CommandArgument)
-                Else
-                    CreateRadWindows("NewJob", "~/adm/Reviews.aspx?JobId=" & e.CommandArgument, 960, 600, False, True)
-                End If
-
-                lblSelectedJob.Text = e.CommandArgument
         End Select
     End Sub
+    Private Sub RadListViewProposal1_ItemCommand(sender As Object, e As RadListViewCommandEventArgs) Handles RadListViewProposal1.ItemCommand, RadListViewProposal2.ItemCommand
+        Select Case e.CommandName
+
+            Case "AddNewTime"
+                Response.Redirect("~/adm/employeenewdowntime.aspx?proposalId=" & e.CommandArgument & "&backpage=activejobsdashboad")
+        End Select
+
+    End Sub
+
 
     Protected Sub btnNewMiscellaneousTime_Click(sender As Object, e As EventArgs) Handles btnNewMiscellaneousTime.Click
         SaveFilter()
@@ -164,6 +168,7 @@ Public Class activejobsdashboad
         Catch ex As Exception
         End Try
     End Sub
+
 End Class
 
 

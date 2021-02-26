@@ -59,13 +59,6 @@ Public Class employeenewtime
 
             txtDescription.Text = ""
 
-            Dim DefaultValuesObject = LocalAPI.GetJobNewTimeDefaultValues(lblSelectedJob.Text, lblEmployeeId.Text)
-            ' Dim SalesRep as String = verificationRecord("SalesRep")
-
-            txtTimeSel.Text = DefaultValuesObject("Hours")
-
-            RefreshCalendar(DefaultValuesObject("DateOfWork"))
-
             If LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 Then
                 ' Programmers/Computer/IT
                 divProposalTask.Visible = False
@@ -81,6 +74,12 @@ Public Class employeenewtime
                 divTickets.Visible = False
                 divProposalTask.Visible = LocalAPI.IsProposalTaskForJob(lblSelectedJob.Text)
             End If
+
+            Dim DefaultValuesObject = LocalAPI.GetJobNewTimeDefaultValues(lblSelectedJob.Text, lblEmployeeId.Text)
+            ' Dim SalesRep as String = verificationRecord("SalesRep")
+
+            txtTimeSel.Text = DefaultValuesObject("Hours")
+
 
             ' Fdo, categoria a escoger cboCategory.SelectedValue = DefaultValuesObject("CategoryId")
 
@@ -98,6 +97,8 @@ Public Class employeenewtime
             RadGridTimes.DataBind()
 
             BotonesVisibles()
+
+            RefreshCalendar(DefaultValuesObject("DateOfWork"))
 
         Catch ex As Exception
 

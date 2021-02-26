@@ -92,7 +92,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align: right">End/Due Date: 
+                <td style="text-align: right">End Date: 
                 </td>
                 <td>
                     <telerik:RadDateTimePicker ID="RadDateTimePickerEnd" runat="server" Width="250px">
@@ -104,7 +104,7 @@
                 </td>
                 <td>
                     <telerik:RadComboBox ID="cboClient" runat="server" DataSourceID="SqlDataSourceClients" ZIndex="50001" AutoPostBack="true"
-                        DataTextField="Name" DataValueField="Id" Width="60%" MarkFirstMatch="True" Filter="Contains" Height="300px"
+                        DataTextField="Name" DataValueField="Id" Width="60%" MarkFirstMatch="True" Filter="Contains" Height="300px" CausesValidation="false"
                         AppendDataBoundItems="true">
                         <Items>
                             <telerik:RadComboBoxItem Text="(Select Clients...)" Value="0" />
@@ -312,20 +312,23 @@
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSourceJob" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="select Id, Code+' '+Job as Name from Jobs where client=@ClientId order by Open_date Desc">
+        SelectCommand="select Id, Code+' '+Job as Name from Jobs where companyId=@companyId and client=@ClientId order by Open_date Desc">
         <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
             <asp:ControlParameter ControlID="cboClient" Name="ClientId" PropertyName="SelectedValue" />
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourcePreProposal" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="select Id, Name from Clients_pre_projects where clientId=@ClientId order by DateIn Desc">
+        SelectCommand="select Id, Name from Clients_pre_projects where companyId=@companyId and clientId=@ClientId order by DateIn Desc">
         <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
             <asp:ControlParameter ControlID="cboClient" Name="ClientId" PropertyName="SelectedValue" />
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceProposal" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="select Id, ProjectName as Name from Proposal where clientId=@ClientId order by Date Desc">
+        SelectCommand="select Id, ProjectName as Name from Proposal where companyId=@companyId and clientId=@ClientId order by Date Desc">
         <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
             <asp:ControlParameter ControlID="cboClient" Name="ClientId" PropertyName="SelectedValue" />
         </SelectParameters>
     </asp:SqlDataSource>
