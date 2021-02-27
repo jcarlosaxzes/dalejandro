@@ -7170,29 +7170,40 @@ Public Class LocalAPI
         End Try
     End Function
 
-    Public Shared Function NewNonJobTime_Request(ByVal lEmployee As Integer, ByVal lType As Integer, ByVal DateFrom As String,
-                                            ByVal DateTo As String, ByVal nTime As String, ByVal sNotes As String, companyId As Integer) As Integer
+    Public Shared Function NewNonJobTime_Request(ByVal EmployeeId As Integer, ByVal TypeId As Integer, ByVal DateFrom As DateTime,
+                                            ByVal DateTo As DateTime, ByVal Hours As Double, ByVal Notes As String, companyId As Integer, ClientId As Integer, clientspreprojectId As Integer, proposalId As Integer, proposaldetalleId As Integer) As Integer
         Try
+            'InicializeEmployeeOfJob(lEmployee, lJob)
+
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
-            Dim sTime As String = FormatearNumero2Tsql(nTime.ToString)
-            ' ClienteEmail
-            cmd.CommandText = "INSERT INTO [Employees_NonRegularHours_Request] (DateRequest, EmployeeId, Type, DateFrom, DateTo, Hours, Notes, companyId) " &
-                                                    "VALUES (" & GetDateUTHlocal() & ", " & lEmployee.ToString & "," &
-                                                        lType.ToString & "," &
-                                                        GetFecha_102(DateFrom) & "," &
-                                                        GetFecha_102(DateTo) & "," &
-                                                        sTime & ",'" &
-                                                        sNotes & "'," &
-                                                        companyId & ")"
 
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Employees_NonRegularHours_Request_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@EmployeeId", EmployeeId)
+            cmd.Parameters.AddWithValue("@TypeId", TypeId)
+            cmd.Parameters.AddWithValue("@DateFrom", DateFrom)
+            cmd.Parameters.AddWithValue("@DateTo", DateTo)
+            cmd.Parameters.AddWithValue("@Hours", Hours)
+            cmd.Parameters.AddWithValue("@Notes", Notes)
+
+            cmd.Parameters.AddWithValue("@ClientId", ClientId)
+            cmd.Parameters.AddWithValue("@clientspreprojectId", clientspreprojectId)
+            cmd.Parameters.AddWithValue("@proposalId", proposalId)
+            cmd.Parameters.AddWithValue("@proposaldetalleId", proposaldetalleId)
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+
+            ' Execute the stored procedure.
             cmd.ExecuteNonQuery()
             cnn1.Close()
 
-            Dim requestId As Integer = GetNumericEscalar("select top 1 Id from [Employees_NonRegularHours_Request] where companyId=" & companyId & " and EmployeeId=" & lEmployee & " order by Id desc")
-            Return requestId
+            LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.NewNonJobTime, -1, Notes)
 
-            LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.NewNonJobTime, -1, sNotes)
+            Dim requestId As Integer = GetNumericEscalar($"select top 1 Id from [Employees_NonRegularHours_Request] where companyId={companyId} and EmployeeId={EmployeeId} order by Id desc")
+            Return requestId
 
         Catch ex As Exception
             Throw ex

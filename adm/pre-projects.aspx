@@ -157,6 +157,13 @@
                                     </tr>
                                     <tr>
                                         <td>
+                                            <asp:LinkButton ID="LinkButton1444" runat="server" UseSubmitBehavior="false" CommandName="AddTime" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            <i class="fas fa-user-clock"></i>&nbsp;&nbsp;Add Time
+                                            </asp:LinkButton>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
                                             <div class="dropdown-divider"></div>
                                         </td>
                                     </tr>
@@ -406,7 +413,7 @@
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
 
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
-    
+
     <asp:Label ID="lblSelectedClientId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblSelected" runat="server" Visible="False"></asp:Label>
 </asp:Content>

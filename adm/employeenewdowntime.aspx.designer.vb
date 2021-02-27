@@ -104,6 +104,24 @@ Partial Public Class employeenewdowntime
     Protected WithEvents lblClientTitle As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''PanelPreProposal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PanelPreProposal As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''lblPreProposalLabel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblPreProposalLabel As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''PanelProposal control.
     '''</summary>
     '''<remarks>
@@ -390,6 +408,15 @@ Partial Public Class employeenewdowntime
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblProposalId As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblPreProposalId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblPreProposalId As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Master property.

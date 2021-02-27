@@ -86,6 +86,9 @@ Public Class MasterPROPOSAL
                 Dim JobId As Integer = LocalAPI.GetProposalProperty(lblProposalId.Text, "JobId")
                 Response.Redirect(LocalAPI.GetSharedLink_URL(8004, JobId))
 
+            Case "pre_projects"
+                Response.Redirect("~/adm/pre_projects?restoreFilter=1")
+
             Case Else
                 Response.Redirect("~/adm/proposals?restoreFilter=1")
         End Select

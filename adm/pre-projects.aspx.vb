@@ -28,8 +28,11 @@ Public Class pre_projects
                 lblSelectedClientId.Text = LocalAPI.GetPreProjectProperty(lblSelected.Text, "clientId")
                 NewClientActivityDlg(True)
 
+            Case "AddTime"
+                Response.Redirect("~/adm/employeenewdowntime.aspx?preproposalId=" & e.CommandArgument & "&backpage=pre_projects")
+
             Case "EditProposal"
-                Response.Redirect(LocalAPI.GetSharedLink_URL(11001, e.CommandArgument) & "&backpage=job_proposals")
+                Response.Redirect(LocalAPI.GetSharedLink_URL(11001, e.CommandArgument) & "&backpage=pre_projects")
 
             Case "NewProposal"
                 Response.Redirect("~/ADM/ProposalNewWizard.aspx?preprojectId=" & e.CommandArgument)

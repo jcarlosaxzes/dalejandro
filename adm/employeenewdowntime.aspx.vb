@@ -29,6 +29,15 @@ Public Class employeenewdowntime
                     PanelClient.Visible = False
                 End If
 
+                If Not Request.QueryString("preproposalId") Is Nothing Then
+                    lblPreProposalId.Text = Request.QueryString("preproposalId")
+                    lblClientId.Text = LocalAPI.GetPreProjectProperty(lblPreProposalId.Text, "clientId")
+                    lblPreProposalLabel.Text = LocalAPI.GetPreProjectProperty(lblPreProposalId.Text, "Name")
+                    PanelClient.Visible = True
+                Else
+                    PanelClient.Visible = False
+                End If
+
                 If Not Session("employeefortime") Is Nothing Then
                     lblEmployeeId.Text = Session("employeefortime")
                 Else
@@ -125,12 +134,14 @@ Public Class employeenewdowntime
                     Response.Redirect("~/adm/activejobsdashboad.aspx?restoreFilter=true")
                 End If
 
-
             Case "time"
                 Response.Redirect("~/adm/time.aspx?restoreFilter=true")
 
             Case "proposals"
                 Response.Redirect("~/adm/proposals.aspx?restoreFilter=true")
+
+            Case "pre_projects"
+                Response.Redirect("~/adm/pre-projects.aspx?restoreFilter=true")
 
             Case "clients"
                 Response.Redirect("~/adm/clients.aspx?restoreFilter=true")
@@ -183,7 +194,7 @@ Public Class employeenewdowntime
             Select Case cboType.SelectedValue
                 Case 5, 6, 7
                     If AnalisisDeBenefits() Then
-                        Dim requestId As Integer = LocalAPI.NewNonJobTime_Request(lblEmployeeId.Text, cboType.SelectedValue, RadDatePickerFrom.SelectedDate, RadDatePickerTo.SelectedDate, txtMiscellaneousHours.Text, txtNotes.Text, lblCompanyId.Text)
+                        Dim requestId As Integer = LocalAPI.NewNonJobTime_Request(lblEmployeeId.Text, cboType.SelectedValue, RadDatePickerFrom.SelectedDate, RadDatePickerTo.SelectedDate, txtMiscellaneousHours.Text, txtNotes.Text, lblCompanyId.Text, lblClientId.Text, lblPreProposalId.Text, lblProposalId.Text, cboProposalTask.SelectedValue)
                         If requestId > 0 Then
                             bRet = True
                             MessageRequest(requestId)
@@ -192,7 +203,7 @@ Public Class employeenewdowntime
 
                     End If
                 Case Else
-                    bRet = LocalAPI.NewNonJobTime(lblEmployeeId.Text, cboType.SelectedValue, RadDatePickerFrom.SelectedDate, RadDatePickerFrom.SelectedDate, txtMiscellaneousHours.Text, txtNotes.Text, lblClientId.Text, 0, lblProposalId.Text, cboProposalTask.SelectedValue)
+                    bRet = LocalAPI.NewNonJobTime(lblEmployeeId.Text, cboType.SelectedValue, RadDatePickerFrom.SelectedDate, RadDatePickerFrom.SelectedDate, txtMiscellaneousHours.Text, txtNotes.Text, lblClientId.Text, lblPreProposalId.Text, lblProposalId.Text, cboProposalTask.SelectedValue)
                     If bRet Then Master.InfoMessage(cboType.Text & " time inserted")
             End Select
 
