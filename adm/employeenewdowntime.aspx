@@ -51,13 +51,21 @@
                 </div>
                 <br />
 
-                <%--Proposal Source--%>
+                <%--Client Source--%>
                 <asp:Panel runat="server" ID="PanelClient">
                     <div  style="width:100%;text-align:center;font-weight:bold">
                         <asp:Label ID="lblClientTitle" runat="server"></asp:Label>
                     </div>
                 </asp:Panel>
 
+                <%--Pre-Proposal Source--%>
+                <asp:Panel runat="server" ID="PanelPreProposal">
+                    <div  style="width:100%;text-align:center;font-weight:bold">
+                        <asp:Label ID="lblPreProposalLabel" runat="server"></asp:Label>
+                    </div>
+                </asp:Panel>
+
+                <%--Proposal Source--%>
                 <asp:Panel runat="server" ID="PanelProposal">
 
                     <table class="table-sm" style="width: 100%;">
@@ -336,5 +344,6 @@
 
     <asp:Label ID="lblClientId" runat="server" Visible="False" Text="0"></asp:Label>
     <asp:Label ID="lblProposalId" runat="server" Visible="False" Text="0"></asp:Label>
+    <asp:Label ID="lblPreProposalId" runat="server" Visible="False" Text="0"></asp:Label>
 
 </asp:Content>
