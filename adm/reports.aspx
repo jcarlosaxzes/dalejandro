@@ -138,9 +138,10 @@
     <asp:SqlDataSource ID="SqlDataSourceGroups" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT RPTGroup FROM Reports GROUP BY RPTGroup ORDER BY RPTGroup"></asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceName" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT Id, [Name] FROM [Reports] WHERE ([RPTGroup] = @RPTGroup) ORDER BY [Name]">
+        SelectCommand="SELECT Id, [Name] FROM [Reports] WHERE (isnull(CustomCompanyId,0)=0 or isnull(CustomCompanyId,0)=@companyId) and [RPTGroup] = @RPTGroup ORDER BY [Name]">
         <SelectParameters>
             <asp:ControlParameter ControlID="cboGroups" Name="RPTGroup" PropertyName="SelectedValue" Type="String" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceYear" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
