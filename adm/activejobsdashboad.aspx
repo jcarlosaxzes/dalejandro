@@ -351,7 +351,7 @@
                                                 <div class="progress" style="margin-bottom: 0;">
                                                     <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage12")  %>' aria-valuemin="0" aria-valuemax="100"
                                                         style='width: <%# Eval("HoursPercentage12") %>%; font-size: small!important'>
-                                                        <%# Eval("Hours11")%> hrs
+                                                        <%# Eval("Hours12")%> hrs
                                                
                                                     </div>
                                                 </div>
