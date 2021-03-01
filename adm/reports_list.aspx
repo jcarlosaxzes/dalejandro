@@ -23,7 +23,11 @@
     </telerik:RadTreeList>
 
     <asp:SqlDataSource ID="SqlDataSourceReportsList" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="select distinct 0 as [Id],[RPTGroup] as [Name], '' as [RPTGroup],'' as [SQLSource],'' as [Description] FROM [dbo].[Reports] union SELECT  [Id],[Name],[RPTGroup],[SQLSource],[Description] FROM [dbo].[Reports]"></asp:SqlDataSource>
+        SelectCommand="select distinct 0 as [Id],[RPTGroup] as [Name], '' as [RPTGroup],'' as [SQLSource],'' as [Description] FROM [dbo].[Reports] union SELECT  [Id],[Name],[RPTGroup],[SQLSource],[Description] FROM [Reports] WHERE isnull(CustomCompanyId,0)=0 or isnull(CustomCompanyId,0)=@companyId">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
 
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
 </asp:Content>
