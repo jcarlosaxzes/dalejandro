@@ -33,8 +33,8 @@
     <div>
         <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" GridLines="None"
                         AutoGenerateColumns="False" AllowAutomaticInserts="True" AllowAutomaticDeletes="True"
-                        AllowAutomaticUpdates="True" AllowPaging="True" PageSize="25" AllowSorting="True" CellSpacing="0"
-                        HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
+                        HeaderStyle-HorizontalAlign="Center"
+                        AllowAutomaticUpdates="True" AllowPaging="True" PageSize="25" AllowSorting="True">
                         <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1">
                             <PagerStyle Mode="Slider" AlwaysVisible="false" />
                             <Columns>
@@ -42,7 +42,7 @@
                                     HeaderText="" HeaderStyle-Width="50px">
                                 </telerik:GridEditCommandColumn>
                                 <telerik:GridTemplateColumn DataField="Name"
-                                    FilterControlAltText="Filter Name column" HeaderText="Name" SortExpression="Name" UniqueName="Name" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left">
+                                    FilterControlAltText="Filter Name column" HeaderText="Name" SortExpression="Name" UniqueName="Name"  ItemStyle-HorizontalAlign="Left">
                                     <EditItemTemplate>
                                         <div style="margin: 5px">
                                             <telerik:RadTextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' MaxLength="80" Width="600px"></telerik:RadTextBox>
@@ -50,13 +50,22 @@
                                         </div>
                                     </EditItemTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="NameLabel0" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
+                                        <%# Eval("Name") %>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
+
+                               <telerik:GridBoundColumn DataField="PositionCount" HeaderText="Active Employees" SortExpression="PositionCount" UniqueName="PositionCount" HeaderStyle-Width="220px" ItemStyle-HorizontalAlign="Center" ReadOnly="true" HeaderTooltip="Number of active employees assigned to that position">
+                                </telerik:GridBoundColumn>
+                               <telerik:GridBoundColumn DataField="AverageHourlySalary" HeaderText="Average Hourly Salary" SortExpression="AverageHourlySalary" UniqueName="AverageHourlySalary" HeaderStyle-Width="220px" ItemStyle-HorizontalAlign="Center" ReadOnly="true" HeaderTooltip="Average salary of Active employees in that position">
+                                </telerik:GridBoundColumn>
+                               <telerik:GridBoundColumn DataField="RecommendedRate" HeaderText="Recommended Rate" SortExpression="RecommendedRate" UniqueName="RecommendedRate" HeaderStyle-Width="220px" ItemStyle-HorizontalAlign="Center" ReadOnly="true" HeaderTooltip="[Average Hourly Salary] * [Multiplier]">
+                                </telerik:GridBoundColumn>
+
+
                                 <telerik:GridTemplateColumn DataField="HourRate" HeaderText="Hourly Rate" SortExpression="HourRate" UniqueName="HourRate" HeaderStyle-Width="220px"
-                                    ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
+                                    ItemStyle-HorizontalAlign="Center" >
                                     <ItemTemplate>
-                                        <asp:Label ID="lblHourRate" runat="server" Text='<%# Eval("HourRate", "{0:N2}")%>'></asp:Label>
+                                        <%# Eval("HourRate", "{0:N2}")%>
                                     </ItemTemplate>
                                     <EditItemTemplate>
                                         <div style="margin: 5px">
@@ -66,7 +75,7 @@
                                 </telerik:GridTemplateColumn>
                                 <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
                                     CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText=""
-                                    HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
+                                     HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
                                 </telerik:GridButtonColumn>
                             </Columns>
                             <EditFormSettings>
@@ -76,12 +85,10 @@
                         </MasterTableView>
                     </telerik:RadGrid>
     </div>
-    
-
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="Employees_Position_DELETE" DeleteCommandType="StoredProcedure"
         InsertCommand="INSERT INTO Employees_Position(companyId, Name, HourRate) VALUES (@companyId, @Name, @HourRate)"
-        SelectCommand="SELECT Id, Name, isnull(HourRate,0) as HourRate FROM Employees_Position WHERE (companyId = @companyId) ORDER BY Name"
+        SelectCommand="Employees_Position_v21_SELECT" SelectCommandType="StoredProcedure"
         UpdateCommand="UPDATE Employees_Position SET Name = @Name, HourRate=@HourRate WHERE (Id = @Id)">
         <DeleteParameters>
             <asp:Parameter Name="Id" />

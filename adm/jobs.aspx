@@ -189,7 +189,7 @@
             </asp:LinkButton>
 
             <asp:LinkButton ID="btnPrivate" runat="server" UseSubmitBehavior="false" ToolTip="Private/Public Mode" Font-Underline="false">
-                <input type="checkbox" data-toggle="toggle" data-onstyle="danger" />
+                <input type="checkbox" data-toggle="toggle" data-onstyle="danger" id="togglePrivate"/>
             </asp:LinkButton>
         </span>
     </div>
