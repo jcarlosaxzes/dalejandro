@@ -54,11 +54,11 @@
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
 
-                               <telerik:GridBoundColumn DataField="PositionCount" HeaderText="Active Employees" SortExpression="PositionCount" UniqueName="PositionCount" HeaderStyle-Width="220px" ItemStyle-HorizontalAlign="Center" ReadOnly="true" HeaderTooltip="Number of active employees assigned to that position">
+                               <telerik:GridBoundColumn DataField="PositionCount" HeaderText="Active Employees *" SortExpression="PositionCount" UniqueName="PositionCount" HeaderStyle-Width="220px" ItemStyle-HorizontalAlign="Center" ReadOnly="true" HeaderTooltip="Number of active employees assigned to that position">
                                 </telerik:GridBoundColumn>
-                               <telerik:GridBoundColumn DataField="AverageHourlySalary" HeaderText="Average Hourly Salary" SortExpression="AverageHourlySalary" UniqueName="AverageHourlySalary" HeaderStyle-Width="220px" ItemStyle-HorizontalAlign="Center" ReadOnly="true" HeaderTooltip="Average salary of Active employees in that position">
+                               <telerik:GridBoundColumn DataField="AverageHourlySalary" HeaderText="Average Hourly Salary *" SortExpression="AverageHourlySalary" UniqueName="AverageHourlySalary" HeaderStyle-Width="220px" ItemStyle-HorizontalAlign="Center" ReadOnly="true" HeaderTooltip="Average salary of Active employees in that position">
                                 </telerik:GridBoundColumn>
-                               <telerik:GridBoundColumn DataField="RecommendedRate" HeaderText="Recommended Rate" SortExpression="RecommendedRate" UniqueName="RecommendedRate" HeaderStyle-Width="220px" ItemStyle-HorizontalAlign="Center" ReadOnly="true" HeaderTooltip="[Average Hourly Salary] * [Multiplier]">
+                               <telerik:GridBoundColumn DataField="RecommendedRate" HeaderText="Recommended Rate *" SortExpression="RecommendedRate" UniqueName="RecommendedRate" HeaderStyle-Width="220px" ItemStyle-HorizontalAlign="Center" ReadOnly="true" HeaderTooltip="[Average Hourly Salary] * [Multiplier]">
                                 </telerik:GridBoundColumn>
 
 
@@ -85,6 +85,10 @@
                         </MasterTableView>
                     </telerik:RadGrid>
     </div>
+    * These three fields, Active Employees, Average Hourly Salary and Recommended Rate are all calculated by PASconcept and are not editable fields.<br />
+Active Employees indicates the current number of active employees with this position.<br />
+Average Hourly Salary is the total hourly salary of these Active Employees with this position divided by the by the number of Active Employees with this position.<br />
+Recommended Rate is the value of that Average Hourly Salary multiplied by your company's Multiplier.
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="Employees_Position_DELETE" DeleteCommandType="StoredProcedure"
         InsertCommand="INSERT INTO Employees_Position(companyId, Name, HourRate) VALUES (@companyId, @Name, @HourRate)"

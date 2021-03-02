@@ -19,7 +19,8 @@
         </div>
         <telerik:RadGrid ID="RadGridPhases" runat="server" DataSourceID="SqlDataSourcePhases" GridLines="None" AllowAutomaticDeletes="true"
             AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true"
-            ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center" FooterStyle-Font-Bold="true">
+            HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-Font-Bold="true"
+            HeaderStyle-HorizontalAlign="Center" >
             <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePhases">
                 <PagerStyle Mode="Slider" AlwaysVisible="false" />
                 <BatchEditingSettings EditType="Cell" />
@@ -57,12 +58,17 @@
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="Progress" HeaderText="Progress" SortExpression="Progress" DataFormatString="{0:N0}" UniqueName="Progress" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
                     </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="Total" HeaderText="Total" ReadOnly="True" SortExpression="Total" DataFormatString="{0:C2}" UniqueName="Total" Aggregate="Sum"
-                        FooterAggregateFormatString="{0:C2}" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
-                    </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="DateFrom" HeaderText="Date From" SortExpression="DateFrom" UniqueName="DateFrom" DataFormatString="{0:d}" HeaderStyle-Width="150px">
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="DateTo" HeaderText="Date To" SortExpression="DateTo" UniqueName="DateTo" DataFormatString="{0:d}" HeaderStyle-Width="150px">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="EstimatorHours" HeaderText="Estimated Hours" ReadOnly="True" SortExpression="EstimatorHours" DataFormatString="{0:N0}" UniqueName="EstimatorHours" Aggregate="Sum" FooterAggregateFormatString="{0:N0}" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Center">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="Estimator" HeaderText="Estimated" ReadOnly="True" SortExpression="Estimator" DataFormatString="{0:C2}" UniqueName="Estimated" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right"
+                        HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="Total" HeaderText="Total" ReadOnly="True" SortExpression="Total" DataFormatString="{0:C2}" UniqueName="Total" Aggregate="Sum"
+                        FooterAggregateFormatString="{0:C2}" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
                     </telerik:GridBoundColumn>
                     <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this phase and its related tasks?"
                         ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
@@ -90,7 +96,8 @@
     <div style="padding-top: 10px">
         <telerik:RadGrid ID="RadGridFees" runat="server" AllowAutomaticDeletes="True"
             AutoGenerateColumns="False" DataSourceID="SqlDataSourceServiceFees" CellSpacing="0" Width="100%"
-            ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center" FooterStyle-Font-Bold="true">
+            HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-Font-Bold="true"
+            HeaderStyle-HorizontalAlign="Center" >
             <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceServiceFees" ShowFooter="true">
                 <Columns>
                     <telerik:GridBoundColumn DataField="Id" HeaderText="ID" ReadOnly="True" SortExpression="Id" UniqueName="Id" Display="False">
@@ -148,25 +155,24 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="Rates" DataType="System.Double" HeaderText="Rates"
-                        SortExpression="Rates" UniqueName="Rates" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right">
+                        SortExpression="Rates" UniqueName="Rates" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
                         <ItemTemplate>
                             <asp:Label ID="lblRates" runat="server" Text='<%# Eval("Rates", "{0:C2}")%>'></asp:Label>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridBoundColumn DataField="BillType" HeaderText="Bill Type" SortExpression="BillType" UniqueName="BillType" HeaderStyle-Width="180px">
                     </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="Estimator" HeaderText="Estimated" ReadOnly="True"
-                        SortExpression="Estimator" DataFormatString="{0:C2}" UniqueName="Estimated" Aggregate="Sum"
-                        FooterAggregateFormatString="{0:C2}" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right"
-                        FooterStyle-HorizontalAlign="Right">
+                    <telerik:GridBoundColumn DataField="EstimatorHours" HeaderText="Estimated Hours" ReadOnly="True" SortExpression="EstimatorHours" DataFormatString="{0:N0}" UniqueName="EstimatorHours" Aggregate="Sum" FooterAggregateFormatString="{0:N0}" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Center">
                     </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="TotalRow" HeaderText="Total" ReadOnly="True"
-                        SortExpression="TotalRow" DataFormatString="{0:C2}" UniqueName="TotalRow" Aggregate="Sum"
+                    <telerik:GridBoundColumn DataField="Estimator" HeaderText="Estimated" ReadOnly="True" SortExpression="Estimator" DataFormatString="{0:C2}" UniqueName="Estimated" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right"
+                        HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="TotalRow" HeaderText="Total" ReadOnly="True" SortExpression="TotalRow" DataFormatString="{0:C2}" UniqueName="TotalRow" Aggregate="Sum"
                         FooterAggregateFormatString="{0:C2}" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right"
                         FooterStyle-HorizontalAlign="Right">
                     </telerik:GridBoundColumn>
                     <telerik:GridTemplateColumn DataField="Paymentschedule" FilterControlAltText="Filter Paymentschedule column" ItemStyle-HorizontalAlign="Center"
-                        HeaderText="Payment Shedule" SortExpression="Paymentschedule" UniqueName="Paymentschedule" HeaderStyle-Width="300px">
+                        HeaderText="Payment Shedule" SortExpression="Paymentschedule" UniqueName="Paymentschedule" HeaderStyle-Width="250px">
                         <ItemTemplate>
                             <%# Eval("Paymentschedule") %>
                         </ItemTemplate>
