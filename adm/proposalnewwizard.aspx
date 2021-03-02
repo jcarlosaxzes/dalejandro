@@ -191,9 +191,8 @@
                     </div>
 
 
-                    
-                        <h4>
-                            Client Info:
+
+                    <h4>Client Info:
                             <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient" Width="450px"
                                 DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Height="250px"
                                 AppendDataBoundItems="true" AutoPostBack="true" Font-Size="Medium">
@@ -201,8 +200,8 @@
                                     <telerik:RadComboBoxItem runat="server" Text="[+ New client...]" Value="0" />
                                 </Items>
                             </telerik:RadComboBox>
-                        </h4>
-                    
+                    </h4>
+
 
                     <table class="table-sm" style="width: 100%">
                         <tr>
@@ -393,10 +392,10 @@
                     <h4>Proposal Info</h4>
                     <table style="width: 100%" class="table-sm">
                         <tr>
-                            <td  style="width: 10%; text-align: right">Template:
+                            <td style="width: 10%; text-align: right">Template:
                             </td>
                             <td style="width: 40%">
-                                <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceType" DataTextField="Name" MarkFirstMatch="True" Filter="Contains" CausesValidation="false" 
+                                <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceType" DataTextField="Name" MarkFirstMatch="True" Filter="Contains" CausesValidation="false"
                                     DataValueField="Id" Width="100%" Height="250px" AppendDataBoundItems="True" AutoPostBack="true"
                                     RenderMode="Lightweight">
                                     <Items>
@@ -426,8 +425,7 @@
                                     RenderMode="Lightweight">
                                 </telerik:RadTextBox>
                             </td>
-                            <td style="text-align: right">
-                                Sector:
+                            <td style="text-align: right">Sector:
                             </td>
                             <td>
                                 <telerik:RadComboBox ID="cboSector" runat="server" DataSourceID="SqlDataSourceProjectSector" DataTextField="Name" DataValueField="Id"
@@ -450,7 +448,7 @@
                             </td>
                             <td>
                                 <telerik:RadComboBox ID="cboUse" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceProjectUse" DataTextField="Name" DataValueField="Id"
-                                    Width="100%" MarkFirstMatch="True" Filter="Contains" Height="350px" AutoPostBack="True" CausesValidation="false" 
+                                    Width="100%" MarkFirstMatch="True" Filter="Contains" Height="350px" AutoPostBack="True" CausesValidation="false"
                                     RenderMode="Lightweight">
                                     <Items>
                                         <telerik:RadComboBoxItem runat="server" Text="(Not defined...)" Value="0" />
@@ -496,7 +494,7 @@
                             <td style="text-align: right">Department:
                             </td>
                             <td>
-                                <telerik:RadComboBox ID="cboDepartment" runat="server" AppendDataBoundItems="True" 
+                                <telerik:RadComboBox ID="cboDepartment" runat="server" AppendDataBoundItems="True"
                                     DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id" Width="100%" Height="250px"
                                     RenderMode="Lightweight">
                                     <Items>
@@ -507,7 +505,7 @@
                             <td style="text-align: right">Prepared By:
                             </td>
                             <td>
-                                <telerik:RadComboBox ID="cboEmployee" runat="server" 
+                                <telerik:RadComboBox ID="cboEmployee" runat="server"
                                     DataSourceID="SqlDataSourceEmployees" DataTextField="Name" DataValueField="Id" MarkFirstMatch="true" Filter="Contains"
                                     Width="100%" CausesValidation="false" Height="350px"
                                     RenderMode="Lightweight">
@@ -614,7 +612,7 @@
                             </div>
                             <telerik:RadGrid ID="RadGridPhases" runat="server" DataSourceID="SqlDataSourcePhases" GridLines="None" AllowAutomaticDeletes="true"
                                 AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true" HeaderStyle-HorizontalAlign="Center"
-                                HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
+                                HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-Font-Bold="true">
                                 <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePhases">
                                     <PagerStyle Mode="Slider" AlwaysVisible="false" />
                                     <BatchEditingSettings EditType="Cell" />
@@ -656,6 +654,13 @@
                                         </telerik:GridBoundColumn>
                                         <telerik:GridBoundColumn DataField="Progress" HeaderText="Progress" SortExpression="Progress" DataFormatString="{0:N0}" UniqueName="Progress" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
                                         </telerik:GridBoundColumn>
+
+                                        <telerik:GridBoundColumn DataField="EstimatorHours" HeaderText="Estimated Hours" ReadOnly="True" SortExpression="EstimatorHours" DataFormatString="{0:N0}" UniqueName="EstimatorHours" Aggregate="Sum" FooterAggregateFormatString="{0:N0}" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Center">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Estimator" HeaderText="Estimated" ReadOnly="True" SortExpression="Estimator" DataFormatString="{0:C2}" UniqueName="Estimated" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right"
+                                            HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
+                                        </telerik:GridBoundColumn>
+
                                         <telerik:GridBoundColumn DataField="Total" HeaderText="Total" ReadOnly="True" SortExpression="Total" DataFormatString="{0:N2}" UniqueName="Total" Aggregate="Sum"
                                             FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
                                         </telerik:GridBoundColumn>
@@ -683,7 +688,7 @@
                         </div>
                         <telerik:RadGrid ID="RadGridFees" runat="server" AllowAutomaticDeletes="True"
                             AutoGenerateColumns="False" DataSourceID="SqlDataSourceServiceFees" CellSpacing="0" Width="100%"
-                            HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small">
+                            HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-Font-Bold="true">
                             <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceServiceFees" ShowFooter="true">
                                 <Columns>
                                     <telerik:GridBoundColumn DataField="Id" HeaderText="ID" ReadOnly="True" SortExpression="Id" UniqueName="Id" Display="False">
@@ -754,15 +759,13 @@
                                     </telerik:GridTemplateColumn>
                                     <telerik:GridBoundColumn DataField="BillType" HeaderText="Bill Type" SortExpression="BillType" UniqueName="BillType" HeaderStyle-Width="180px">
                                     </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="Estimator" HeaderText="Estimated" ReadOnly="True"
-                                        SortExpression="Estimator" DataFormatString="{0:N2}" UniqueName="Estimated" Aggregate="Sum"
-                                        FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right"
+                                    <telerik:GridBoundColumn DataField="EstimatorHours" HeaderText="Estimated Hours" ReadOnly="True" SortExpression="EstimatorHours" DataFormatString="{0:N0}" UniqueName="EstimatorHours" Aggregate="Sum" FooterAggregateFormatString="{0:N0}" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Center">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="Estimator" HeaderText="Estimated" ReadOnly="True" SortExpression="Estimator" DataFormatString="{0:C2}" UniqueName="Estimated" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right"
                                         HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
                                     </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="TotalRow" HeaderText="Total" ReadOnly="True"
-                                        SortExpression="TotalRow" DataFormatString="{0:N2}" UniqueName="TotalRow" Aggregate="Sum"
-                                        FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right"
-                                        HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
+                                    <telerik:GridBoundColumn DataField="TotalRow" HeaderText="Total" ReadOnly="True" SortExpression="TotalRow" DataFormatString="{0:N2}" UniqueName="TotalRow" Aggregate="Sum"
+                                        FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
                                     </telerik:GridBoundColumn>
                                     <telerik:GridTemplateColumn DataField="Paymentschedule" FilterControlAltText="Filter Paymentschedule column" ItemStyle-HorizontalAlign="Center"
                                         HeaderText="Payment Shedule" SortExpression="Paymentschedule" UniqueName="Paymentschedule" HeaderStyle-HorizontalAlign="Center">
@@ -1605,19 +1608,6 @@
             <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
-
-    <%--<asp:SqlDataSource ID="SqlDataSourceScopeOfWork" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="PROPOSAL_details_SELECT" SelectCommandType="StoredProcedure"
-        UpdateCommand="PROPOSAL_details_ScopeOfWork_UPDATE" UpdateCommandType="StoredProcedure">
-        <UpdateParameters>
-            <asp:Parameter Name="Description" Type="String" />
-            <asp:Parameter Name="DescriptionPlus" Type="String" />
-            <asp:Parameter Name="Id" Type="String" />
-        </UpdateParameters>
-        <SelectParameters>
-            <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" />
-        </SelectParameters>
-    </asp:SqlDataSource>--%>
 
     <asp:SqlDataSource ID="SqlDataSourceDocTypes" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT [Id], [Name] FROM [Jobs_azureuploads_types] ORDER BY [Id]"></asp:SqlDataSource>
