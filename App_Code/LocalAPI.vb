@@ -39,6 +39,7 @@ Public Class LocalAPI
         AdminLogin = 1
         EmployeeLogin = 2
         ClientLogin = 3
+        DeleteClient = 33
         SubconsultanLogin = 4
         SMS_send = 7
         EmailCampaign = 8
@@ -48,12 +49,19 @@ Public Class LocalAPI
         DeleteProposal = 202
         AceptProposal = 205
         NewEmployee = 301
+        InactiveEmployee = 302
+        DeleteEmployee = 303
         NewClient = 401
         NewPaid = 601
+        DeletePaid = 602
         NewJobLink = 901
         NewRFP = 1001
+        DeleteRFP = 1002
         NewJobNote = 1101
         NewInvoice = 1201
+        DeleteInvoice = 1202
+        NewStatement = 1203
+        DeleteStatement = 1204
         NewPaidDay = 1301
         NewTime = 1401
         NewNonJobTime = 1501
@@ -107,7 +115,16 @@ Public Class LocalAPI
         Canceled = 0
     End Enum
 
-
+    Public Structure JobStruct
+        Public ID As Integer
+        Public JobName As String
+        Public JobDate As DateTime
+        Public ClientName As String
+        Public Budget As Double
+        Public Description As String
+        Public Reference As String
+        Public IsClosed As Boolean
+    End Structure
     Public Structure ContactStruct
         Public ID As Integer
         Public FirstName As String
@@ -187,6 +204,19 @@ Public Class LocalAPI
     Public Shared Function GetDateTime() As Date
         Return DateAdd(DateInterval.Hour, -5, Date.Now)
     End Function
+
+    Public Shared Function UnixTimeStampToDateTime(unixTimeStamp As Int64) As DateTime
+        Dim dtDateTime As System.DateTime = New DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc)
+        dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime()
+        Return dtDateTime
+    End Function
+
+    Public Shared Function DateTimeToUnixTimeStamp(sdate As DateTime) As Int64
+        Dim epoch As DateTime = New DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime()
+        Dim span As TimeSpan = (sdate.ToLocalTime() - epoch)
+        Return CType(span.TotalSeconds, Int64)
+    End Function
+
 
     Public Shared Function sys_VersionAndRevision(versionId As Integer) As String
         Dim sVerName As String = sys_VersionName(versionId)
@@ -441,6 +471,55 @@ Public Class LocalAPI
                     comm.Parameters.Add(p0)
 
                     Dim reader = comm.ExecuteReader()
+                    If reader.HasRows Then
+                        ' We only read one time (of course, its only one result :p)
+                        reader.Read()
+                        For lp As Integer = 0 To reader.FieldCount - 1
+                            result.Add(reader.GetName(lp), reader.GetValue(lp))
+                        Next
+                    End If
+                End Using
+            End Using
+            Return result
+        Catch e As Exception
+            Return result
+        End Try
+    End Function
+
+    Public Shared Function GetRecordFromQuery(sql As String) As Dictionary(Of String, Object)
+        ' Devuelve un objeto con todos los valores del SELECT
+        Dim result = New Dictionary(Of String, Object)()
+        Try
+            Using conn As SqlConnection = GetConnection()
+                Using comm As New SqlCommand(sql, conn)
+                    comm.CommandType = CommandType.Text
+
+                    Dim reader = comm.ExecuteReader()
+                    If reader.HasRows Then
+                        ' We only read one time (of course, its only one result :p)
+                        reader.Read()
+                        For lp As Integer = 0 To reader.FieldCount - 1
+                            result.Add(reader.GetName(lp), reader.GetValue(lp))
+                        Next
+                    End If
+                End Using
+            End Using
+            Return result
+        Catch e As Exception
+            Return result
+        End Try
+    End Function
+
+    Public Shared Function GetRecordAllFromQuery(sql As String) As Dictionary(Of String, Object)
+        ' Devuelve un objeto con todos los valores del SELECT
+        Dim result = New Dictionary(Of String, Object)()
+        Try
+            Using conn As SqlConnection = GetConnection()
+                Using comm As New SqlCommand(sql, conn)
+                    comm.CommandType = CommandType.Text
+
+                    Dim reader = comm.ExecuteReader()
+
                     If reader.HasRows Then
                         ' We only read one time (of course, its only one result :p)
                         reader.Read()
@@ -902,6 +981,25 @@ Public Class LocalAPI
 
 
     End Function
+    Public Shared Function GetCompanyBySubDomain() As Integer
+        If HttpContext.Current.Session("IsMultiCompany") = "Verdadero" Then
+            Return 0
+        End If
+
+        If HttpContext.Current.Session("IsMultiCompany") = "Falso" Then
+            Return HttpContext.Current.Session("IsMultiCompanyId")
+        End If
+
+        Dim hostName As String = LocalAPI.GetHostAppSite()
+        Dim hostCompany As Integer = LocalAPI.GetNumericEscalar($"Select isnull(companyId,0) As companyId from Company where SubDomain='{hostName}'")
+        If hostCompany = 0 Then
+            HttpContext.Current.Session("IsMultiCompany") = "Verdadero"
+        Else
+            HttpContext.Current.Session("IsMultiCompany") = "Falso"
+            HttpContext.Current.Session("IsMultiCompanyId") = hostCompany
+        End If
+        Return hostCompany
+    End Function
 
     Public Shared Function GetSubscriberDatabase(ByVal sSubscriberCode As String) As String
         Dim cnn1 As OleDbConnection
@@ -922,34 +1020,6 @@ Public Class LocalAPI
         End Try
 
     End Function
-    Public Shared Sub RefreshYearsList()
-        Try
-
-            Dim bExisteAnoaActual As Boolean
-            Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As New SqlCommand("SELECT ISNULL(COUNT(*), 0) As Cantidad  FROM [Years] WHERE [Year]=" & Today.Year, cnn1)
-            Dim rdr As SqlDataReader
-            rdr = cmd.ExecuteReader
-            rdr.Read()
-            If rdr.HasRows Then
-                bExisteAnoaActual = (rdr("Cantidad") > 0)
-            End If
-            rdr.Close()
-
-            If Not bExisteAnoaActual Then
-                cmd.CommandText = "INSERT INTO [Years] ([Year], [nYear]) " &
-                                                        "VALUES (" & Today.Year & ", '" & Today.Year & "')"
-
-                cmd.ExecuteNonQuery()
-
-            End If
-            cnn1.Close()
-
-        Catch ex As Exception
-
-        End Try
-
-    End Sub
 
     Public Shared Function urlProjectLocationGmap(sProjectLocation As String) As String
         If Len(sProjectLocation) > 0 Then
@@ -1372,7 +1442,7 @@ Public Class LocalAPI
                 Case "Multiplier"
                     Return GetCompanyMultiplier(companyId, GetDateTime().Year)
 
-                Case "webEmailEnableSsl", "webEmailPort", "Inactive", "Billing_plan", "Version", "Type", "SMS_api_id", "PayHereMax", "AxzesClientId", "AxzesJobId", "webUseDefaultCredentials", "Custom"
+                Case "webEmailEnableSsl", "webEmailPort", "Inactive", "Billing_plan", "Version", "Type", "SMS_api_id", "PayHereMax", "AxzesClientId", "AxzesJobId", "webUseDefaultCredentials", "Custom", "HR_payfrequencyId"
                     Return GetNumericEscalar("SELECT ISNULL([" & sProperty & "],0) FROM [Company] WHERE [companyId]=" & companyId)
 
                 Case "StartYear"
@@ -1390,9 +1460,38 @@ Public Class LocalAPI
         Return IIf(GetNumericEscalar(String.Format("select count(*) from [{0}] where Id={1} and [companyId]={2}", Entity, entityId, companyId)) = 0, True, False)
     End Function
     Public Shared Function GetCompanyMultiplier(ByVal companyId As Integer, Year As Integer) As Double
-        Dim Multiplier As Double = GetNumericEscalar("SELECT ISNULL([Multiplier],0) FROM [Company_MultiplierByYear] WHERE [companyId]=" & companyId & " and [Year]=" & Year)
+        Dim Multiplier As Double = GetNumericEscalar($"SELECT ISNULL([Multiplier],0) FROM [Company_MultiplierByYear] WHERE [companyId]={companyId} and [Year]={Year}")
         Return IIf(Multiplier < 1, 1, Multiplier)
     End Function
+
+    Public Shared Function GetCompanyMaxFileSizeForUpload(ByVal companyId As Integer) As Integer
+        Dim MaxFileSize As Double = GetNumericEscalar($"SELECT ISNULL([MaxFileSize],0) FROM [Company] WHERE [companyId]={companyId}")
+        If MaxFileSize = 0 Then
+            ' Default MaxFileSize (1048576)
+            Return 1048576
+        Else
+            Return MaxFileSize
+        End If
+    End Function
+
+
+    Public Shared Function IsCompanyTwilio(companyId As Integer) As Boolean
+        Return IIf(GetNumericEscalar($"select count(*) from [Company_twiliosetting] where companyId={companyId} and Active=1") = 1, True, False)
+    End Function
+
+    Public Shared Function IsCompanyNotification(ByVal companyId As Integer, NotificationField As String) As Boolean
+        Try
+
+            Return GetNumericEscalar("SELECT ISNULL(" & NotificationField & ",0) FROM [Company] WHERE companyId=" & companyId)
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+    Public Shared Function IsCompanySMSservice(ByVal companyId As Integer) As Boolean
+        Return IsCompanyTwilio(companyId)
+    End Function
+
 
     Public Shared Function GetCompanyMultiplierProperty(ByVal companyId As Integer, sProperty As String) As Double
         Try
@@ -1493,25 +1592,209 @@ Public Class LocalAPI
             Throw ex
         End Try
     End Function
+    Public Shared Function GetCompanyMultiplierStatusLabelCSS(ByVal status As String) As String
+        Select Case UCase(status)
+            Case "YES"
+                Return "badge badge-success statuslabel"
+            Case Else   ' NO'
+                Return "badge badge-danger statuslabel"
+        End Select
 
-    Public Shared Function CompanyCalculateMultiplier(ByVal companyId As Integer, Year As Integer) As Boolean
+    End Function
+
+
+    Public Shared Function CompanyMultiplier_INSERT(companyId As Integer, Year As Integer, Salary As Double, SubContracts As Double, Rent As Double, Others As Double, ProductiveSalary As Double, Profit As Double, CalculateSalary As Integer, CalculateProductiveSalary As Integer, InitializeEmployee As Integer, CalculateBudgetDepartment As Integer, Closed As Integer) As Integer
         Try
+
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
 
-            cmd.CommandText = "CompanyCalculateMultiplier_UPDATE"
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "CompanyMultiplierRecord_INSERT"
             cmd.CommandType = CommandType.StoredProcedure
-            cmd.Parameters.AddWithValue("@year", Year)
+
+            ' Set up the input parameter 
             cmd.Parameters.AddWithValue("@companyId", companyId)
+            cmd.Parameters.AddWithValue("@Year", Year)
+            cmd.Parameters.AddWithValue("@Salary", Salary)
+            cmd.Parameters.AddWithValue("@SubContracts", SubContracts)
+            cmd.Parameters.AddWithValue("@Rent", Rent)
+            cmd.Parameters.AddWithValue("@Others", Others)
+            cmd.Parameters.AddWithValue("@ProductiveSalary", ProductiveSalary)
+            cmd.Parameters.AddWithValue("@Profit", Profit)
+            cmd.Parameters.AddWithValue("@CalculateSalary", CalculateSalary)
+            cmd.Parameters.AddWithValue("@CalculateProductiveSalary", CalculateProductiveSalary)
+            cmd.Parameters.AddWithValue("@InitializeEmployee", InitializeEmployee)
+            cmd.Parameters.AddWithValue("@CalculateBudgetDepartment", CalculateBudgetDepartment)
+            cmd.Parameters.AddWithValue("@Closed", Closed)
 
             cmd.ExecuteNonQuery()
-
             cnn1.Close()
+
+            Return GetNumericEscalar($"select Id from Company_MultiplierByYear where companyId={companyId} and year={Year}")
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Shared Function CompanyPayrollCallendar_InitYear(year As Integer, companyId As Integer) As Boolean
+        Try
+
+            '   7  Every week
+            '   14  Every other week
+            '   1  Every month
+
+            Dim Payfrequency As Integer = GetCompanyProperty(companyId, "HR_payfrequencyId")
+            If Payfrequency = 0 Then Payfrequency = 14
+            Dim dDate As DateTime = GetLastPaidDay(companyId)
+
+            While dDate.Year <= year
+                Select Case Payfrequency
+                    Case 7, 14
+                        dDate = DateAdd(DateInterval.Day, Payfrequency, dDate)
+                    Case 1
+                        dDate = DateAdd(DateInterval.Month, Payfrequency, dDate)
+                End Select
+                NuevoPaidDay(dDate, companyId)
+            End While
+
             Return True
+
         Catch ex As Exception
 
         End Try
     End Function
+
+    Public Shared Function AllCompanyPayrollCallendar_InitYear(year As Integer) As Boolean
+        Try
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As New SqlCommand("select companyId from Company where ISNULL(Company.BlockSubcriptionExpired, 0)=0", cnn1)
+            Dim rdr As SqlDataReader
+            rdr = cmd.ExecuteReader
+
+            Do While rdr.Read()
+                If rdr.HasRows Then
+                    CompanyPayrollCallendar_InitYear(year,rdr("companyId"))
+                End If
+            Loop
+
+            rdr.Close()
+            cnn1.Close()
+
+        Catch ex As Exception
+
+        End Try
+    End Function
+
+    Public Shared Function CompanyMultiplier_UPDATE(Id As Integer, Salary As Double, SubContracts As Double, Rent As Double, Others As Double, ProductiveSalary As Double, Profit As Double, CalculateSalary As Integer, CalculateProductiveSalary As Integer, InitializeEmployee As Integer, CalculateBudgetDepartment As Integer, Closed As Integer) As Boolean
+        Try
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "CompanyMultiplierRecord_UPDATE"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@Salary", Salary)
+            cmd.Parameters.AddWithValue("@SubContracts", SubContracts)
+            cmd.Parameters.AddWithValue("@Rent", Rent)
+            cmd.Parameters.AddWithValue("@Others", Others)
+            cmd.Parameters.AddWithValue("@ProductiveSalary", ProductiveSalary)
+            cmd.Parameters.AddWithValue("@Profit", Profit)
+            cmd.Parameters.AddWithValue("@CalculateSalary", CalculateSalary)
+            cmd.Parameters.AddWithValue("@CalculateProductiveSalary", CalculateProductiveSalary)
+            cmd.Parameters.AddWithValue("@InitializeEmployee", InitializeEmployee)
+            cmd.Parameters.AddWithValue("@CalculateBudgetDepartment", CalculateBudgetDepartment)
+            cmd.Parameters.AddWithValue("@Closed", Closed)
+            cmd.Parameters.AddWithValue("@Id", Id)
+
+            cmd.ExecuteNonQuery()
+            cnn1.Close()
+
+            Return True
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+    Public Shared Function CompanyMultiplier_DELETE(companyId As Integer, Year As Integer) As Boolean
+        Try
+
+            Dim MultiplierId As Integer = LocalAPI.GetNumericEscalar($"select Id from Company_MultiplierByYear where companyId={companyId} and year={Year}")
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "CompanyMultiplierRecord_DELETE"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@Id", MultiplierId)
+
+            cmd.ExecuteNonQuery()
+            cnn1.Close()
+
+            Return True
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Shared Function CompanyCalculateMultiplier(ByVal companyId As Integer, YearValue As Integer) As Double
+        Try
+            Dim MultiplierId As Integer = GetNumericEscalar($"select top 1 Id from Company_MultiplierByYear WHERE companyId={companyId} and [Year]={YearValue}")
+            Dim RecordObject = LocalAPI.GetRecord(MultiplierId, "CompanyMultiplierRecord_SELECT")
+
+            ' If Closed?
+            If RecordObject("Closed") = 0 Then
+                If RecordObject("InitializeEmployee") = 1 Then
+                    ' Before Calculate
+                    EmployeesHourlyWage_INSERT(YearValue, companyId)
+
+                    ' Calculate....................................................................
+                    Dim cnn1 As SqlConnection = GetConnection()
+                    Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+                    cmd.CommandText = "CompanyCalculateMultiplier_CALCULATE"
+                    cmd.CommandType = CommandType.StoredProcedure
+                    cmd.Parameters.AddWithValue("@year", YearValue)
+                    cmd.Parameters.AddWithValue("@companyId", companyId)
+
+                    cmd.ExecuteNonQuery()
+
+                    cnn1.Close()
+
+                    ' After Calculate
+                    If RecordObject("CalculateBudgetDepartment") = 1 Then
+                        DeparmentBudgetByBaseSalaryForMultiplierFromThisMonth(companyId, RecordObject("Multiplier"), YearValue, IIf(YearValue = Year(Today), Month(Today), 1))
+                    End If
+                End If
+            End If
+
+            Return GetCompanyMultiplier(companyId, YearValue)
+
+        Catch ex As Exception
+
+        End Try
+    End Function
+
+    Public Shared Function GetMaxYearOfCompanyMultiplier(ByVal companyId As Integer) As Integer
+        Dim MaxYear As Integer = GetNumericEscalar($"SELECT max([Year]) FROM [Company_MultiplierByYear] WHERE [companyId]={companyId}")
+        If MaxYear > 0 Then
+            Return MaxYear
+        Else
+            Return GetCompanyProperty(companyId, "StartYear")
+        End If
+    End Function
+
+
+
 
     Public Shared Function EmployeesUpdateHourlyRate(ByVal companyId As Integer, Multiplier As Double) As Boolean
         Try
@@ -1548,7 +1831,8 @@ Public Class LocalAPI
     End Function
 
     Public Shared Function CompanyExpirationDateUpdate(ByVal companyId As Integer, NewExpirationDate As DateTime) As Boolean
-        Return ExecuteNonQuery(String.Format("UPDATE [Company] SET [billingExpirationDate]={0} WHERE [companyId]={1}", GetFecha_102(NewExpirationDate), companyId))
+
+        Return ExecuteNonQuery(String.Format("UPDATE [Company] SET [billingExpirationDate]={0} ,AlertMasterSubscriptionExpired = 0, SendRenewSubscription = 0 WHERE [companyId]={1}", GetFecha_102(NewExpirationDate), companyId))
     End Function
 
     Public Shared Function GetCompanyHRemail(ByVal companyId As Long) As String
@@ -1645,7 +1929,7 @@ Public Class LocalAPI
 
 #End Region
 
-#Region "Job"
+#Region "Jobs"
 
     Public Shared Function GetJobStatusLabelCSS(ByVal statusId As Integer) As String
         '        0   Not in Progress		"default"
@@ -1674,6 +1958,25 @@ Public Class LocalAPI
             Case 7  ' Done
                 Return "badge badge-dark statuslabel"
         End Select
+    End Function
+
+    Public Shared Function GetBudgetUsedCss(ByVal dPercent As Double) As String
+        Try
+
+            If dPercent < 25 Then
+                Return "GreenYellowProgressBar"
+            ElseIf dPercent < 50 Then
+                Return "GreenProgressBar"
+            ElseIf dPercent < 75 Then
+                Return "OrangeProgressBar" 'System.Drawing.Color.Orange
+            ElseIf dPercent < 100 Then
+                Return "OrangeRedProgressBar" 'System.Drawing.Color.OrangeRed
+            Else
+                Return "RedProgressBar" 'System.Drawing.Color.DarkRed
+            End If
+        Catch ex As Exception
+            Return "GreenYellowProgressBar"
+        End Try
     End Function
 
 
@@ -1794,6 +2097,39 @@ Public Class LocalAPI
             sRet = sRet & "</td></tr></table>"
         End If
         Return sRet
+    End Function
+
+    Public Shared Function Job_IMPORT(JobObject As LocalAPI.JobStruct, CompanyId As Integer) As Integer
+        Try
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+            cmd.CommandText = "JOB_Import"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            cmd.Parameters.AddWithValue("@JobName", JobObject.JobName)
+            cmd.Parameters.AddWithValue("@JobDate", JobObject.JobDate)
+            cmd.Parameters.AddWithValue("@ClientName", JobObject.ClientName)
+            cmd.Parameters.AddWithValue("@Budget", JobObject.Budget)
+            cmd.Parameters.AddWithValue("@Description", JobObject.Description)
+            cmd.Parameters.AddWithValue("@ExternalReference", JobObject.Reference)
+            cmd.Parameters.AddWithValue("@IsClosed", IIf(JobObject.IsClosed, 1, 0))
+
+            cmd.Parameters.AddWithValue("@CompanyId", CompanyId)
+
+            Dim parOUT_ID As New SqlParameter("@Id_OUT", SqlDbType.Int)
+            parOUT_ID.Direction = ParameterDirection.Output
+            cmd.Parameters.Add(parOUT_ID)
+
+
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+            Return parOUT_ID.Value
+
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Function
 
     Public Shared Function JobMailStatusChange(jobId As Integer, employeeId As Integer, statusName As String, companyId As Integer) As Boolean
@@ -1950,7 +2286,7 @@ Public Class LocalAPI
 
                     Dim sCodejobClientType As String = sCode & "-" & GetClientInitials(lClient) & "-" & sType
                     Dim sFullBody As New System.Text.StringBuilder
-                    sFullBody.Append("You had been assigned Job " & sCode & ", '" & sJob & "', on " & FormatDateTime(sOpen_date, DateFormat.ShortDate) & "")
+                    sFullBody.Append("You have been assigned Job " & sCode & ", '" & sJob & "', on " & FormatDateTime(sOpen_date, DateFormat.ShortDate) & "")
                     sFullBody.Append("<br />")
                     sFullBody.Append("Client: '" & GetClientName(lClient) & "'")
                     sFullBody.Append("<br />")
@@ -2089,7 +2425,7 @@ Public Class LocalAPI
     End Function
     Public Shared Function GetJobCodeName(ByVal lJobId As Long) As String
         Try
-            Return GetStringEscalar("SELECT [Code]+' '+[Job] FROM [Jobs] WHERE [Id]=" & lJobId)
+            Return GetStringEscalar("SELECT case when len(isnull(ExternalReference,''))=0 then '' else '['+ExternalReference+'] ' end+[Code]+' '+[Job] FROM [Jobs] WHERE [Id]=" & lJobId)
         Catch ex As Exception
             Throw ex
         End Try
@@ -2414,6 +2750,25 @@ Public Class LocalAPI
 
     End Function
 
+    Public Shared Function GetJobSubContractedFees(ByVal jobId As Long) As Double
+        Try
+            '************COSTE POR HORA DEL EMPLOYEE x MULTIPLIER ************************
+            Return GetNumericEscalar(String.Format("select dbo.JobSubContracted({0})", jobId))
+
+        Catch ex As Exception
+
+        End Try
+    End Function
+    Public Shared Function GetJobBudgetUsed(ByVal jobId As Long) As Double
+        Try
+            Return GetNumericEscalar(String.Format("select dbo.JobCoste({0})", jobId))
+
+        Catch ex As Exception
+
+        End Try
+    End Function
+
+
     Public Shared Function GetJobStreeViewImage(ByRef jobId As Integer, Optional Resolution As String = "1024x768") As String
         Dim Address As String = GetStringEscalar("SELECT isnull(ProjectLocation,'') FROM [Jobs] where [Id]=" & jobId)
         Return "https://maps.googleapis.com/maps/api/streetview?size=" & Resolution & "&location=" & Address & "&key=AIzaSyAqYC89QG6cp_vv1UnQIo-wgVpRV4wzX3A"
@@ -2665,7 +3020,7 @@ Public Class LocalAPI
     '    End If
     'End Function
 
-    Public Shared Function Jobs_Employees_assigned_INSERT(jobId As Integer, employeeId As Integer, Optional Hours As Integer = 0, Optional HourRate As Double = 0, Optional Scope As String = "Poject Manager") As Boolean
+    Public Shared Function Jobs_Employees_assigned_INSERT(jobId As Integer, employeeId As Integer, Optional Hours As Integer = 0, Optional HourRate As Double = 0, Optional Scope As String = "Poject Manager", Optional positionId As Integer = 0) As Boolean
         Try
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
@@ -2677,7 +3032,7 @@ Public Class LocalAPI
             ' Set up the input parameter 
             cmd.Parameters.AddWithValue("@jobId", jobId)
             cmd.Parameters.AddWithValue("@employeeId", employeeId)
-            cmd.Parameters.AddWithValue("@positionId", 0)
+            cmd.Parameters.AddWithValue("@positionId", IIf(positionId > 0, positionId, GetEmployeeProperty(employeeId, "PositionId")))
             cmd.Parameters.AddWithValue("@Scope", Scope)
             cmd.Parameters.AddWithValue("@Hours", Hours)
             cmd.Parameters.AddWithValue("@HourRate", HourRate)
@@ -3275,9 +3630,6 @@ Public Class LocalAPI
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
 
-            'cmd.CommandText = "INSERT INTO [Invoices] ([JobId],[InvoiceDate],[Amount],[InvoiceNotes],[Emitted],[InvoiceType],[Time],[Rate],[employeeTimeId], [Number], [guid])  " &
-            '                                        "SELECT [Job], [Fecha]dAmount AS [TimexCoste], @invDescription, 0, 1dHours AS [Time]dRate AS HourRate, [Id]Number AS Number, NewId() FROM [Employees_time] WHERE [Id]=@timeId"
-
             cmd.CommandText = "INVOICE_HourlyRate_INSERT"
             cmd.CommandType = CommandType.StoredProcedure
             cmd.Parameters.AddWithValue("@dAmount", FormatearNumero2Tsql(dAmount))
@@ -3292,10 +3644,7 @@ Public Class LocalAPI
 
             cnn1.Close()
 
-            ' Recalculo Budget desde un nuevo "hr"
-            'LocalAPI.JobCalculateBudgetFromNewInvoice(lJob, dAmount)
-
-            NuevoInvoiceHourlyRate = True
+            Return True
 
             Dim companyId As Integer = GetCompanyIdFromJob(lJob)
             LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.NewInvoice, companyId, "Time id: " & timeId)
@@ -3370,20 +3719,6 @@ Public Class LocalAPI
 #End Region
 
 #Region "SinClasificar"
-
-    Public Shared Function IsCompanyNotification(ByVal companyId As Integer, NotificationField As String) As Boolean
-        Try
-
-            Return GetNumericEscalar("SELECT ISNULL(" & NotificationField & ",0) FROM [Company] WHERE companyId=" & companyId)
-
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
-    Public Shared Function IsCompanySMSservice(ByVal companyId As Integer) As Boolean
-        Return GetNumericEscalar("SELECT ISNULL(SMSservice,0) FROM [Company] WHERE companyId=" & companyId)
-    End Function
-
 
     Public Shared Function IsJobName(ByVal lJobId As Integer, ByVal sName As String, ByVal companyId As Integer) As Boolean
         Try
@@ -3937,7 +4272,7 @@ Public Class LocalAPI
     End Function
 
 
-    Public Shared Function NewNonJobTime(ByVal EmployeeId As Integer, ByVal TypeId As Integer, ByVal DateFrom As DateTime, ByVal DateTo As DateTime, ByVal Hours As Double, ByVal Notes As String) As Boolean
+    Public Shared Function NewNonJobTime(ByVal EmployeeId As Integer, ByVal TypeId As Integer, ByVal DateFrom As DateTime, ByVal DateTo As DateTime, ByVal Hours As Double, ByVal Notes As String, ClientId As Integer, clientspreprojectId As Integer, proposalId As Integer, proposaldetalleId As Integer) As Boolean
         Try
             'InicializeEmployeeOfJob(lEmployee, lJob)
 
@@ -3945,7 +4280,7 @@ Public Class LocalAPI
             Dim cmd As SqlCommand = cnn1.CreateCommand()
 
             ' Setup the command to execute the stored procedure.
-            cmd.CommandText = "NonProductiveTime_INSERT"
+            cmd.CommandText = "NonProductiveTime_v21_INSERT"
             cmd.CommandType = CommandType.StoredProcedure
 
             ' Set up the input parameter 
@@ -3955,6 +4290,11 @@ Public Class LocalAPI
             cmd.Parameters.AddWithValue("@DateTo", DateTo)
             cmd.Parameters.AddWithValue("@Hours", Hours)
             cmd.Parameters.AddWithValue("@Notes", Notes)
+
+            cmd.Parameters.AddWithValue("@ClientId", ClientId)
+            cmd.Parameters.AddWithValue("@clientspreprojectId", clientspreprojectId)
+            cmd.Parameters.AddWithValue("@proposalId", proposalId)
+            cmd.Parameters.AddWithValue("@proposaldetalleId", proposaldetalleId)
 
             ' Execute the stored procedure.
             cmd.ExecuteNonQuery()
@@ -4406,7 +4746,7 @@ Public Class LocalAPI
     Public Shared Function GetClientProperty(ByVal clientId As Long, ByVal sProperty As String) As String
         Try
             Select Case sProperty
-                Case "companyId", "Notification_invoiceemitted", "Notification_invoicecollected", "Notification_acceptedproposal", "Notification_declinedproposal", "ProposalPDFattached", "Type", "Subtype", "Deny_SMSnotification", "AvailabilityId", "qbCustomerId", "BillType", "Longitude", "Latitude"
+                Case "companyId", "Notification_invoiceemitted", "Notification_invoicecollected", "Notification_acceptedproposal", "Notification_declinedproposal", "ProposalPDFattached", "Type", "Subtype", "Allow_SMSnotification", "AvailabilityId", "qbCustomerId", "BillType", "Longitude", "Latitude"
                     Return GetNumericEscalar(String.Format("SELECT ISNULL([{0}],0) FROM [Clients] WHERE [Id]={1}", sProperty, clientId))
                 Case Else
                     Return GetStringEscalar(String.Format("SELECT ISNULL([{0}],'') FROM [Clients] WHERE [Id]={1}", sProperty, clientId))
@@ -5225,12 +5565,7 @@ Public Class LocalAPI
     '          Nuevo registro en la tabla 'Proposal'. Inicializacion segun su tipo 
     ' Retorno: Id del nuevo proposal. 
     ' ................................................................................................................................
-    Public Shared Function CreateProposal(ByVal lType As Integer, ByVal ProjectName As String, employeeId As Integer, ByVal companyId As Integer,
-                                          activeEmployeeId As Integer,
-                                       Optional ProjectSector As Integer = 0, Optional ProjectUse As String = "", Optional ProjectUse2 As String = "",
-                                          Optional DepartmentId As Integer = 0, Optional Retainer As Boolean = True,
-                                          Optional ProjectLocation As String = "", Optional Unit As Double = 0, Optional Measure As Integer = 0,
-                                          Optional ProjectType As String = "", Optional clientId As Integer = 0, Optional ProjectManagerId As Integer = 0) As Integer
+    Public Shared Function Proposal_Wizard_INSERT(ByVal lType As Integer, ByVal ProjectName As String, employeeId As Integer, ByVal companyId As Integer, activeEmployeeId As Integer, ProjectSector As Integer, ProjectUse As String, ProjectUse2 As String, DepartmentId As Integer, Retainer As Boolean, ProjectLocation As String, Unit As Double, Measure As Integer, ProjectType As String, clientId As Integer, ProjectManagerId As Integer, Owner As String, TextBegin As String, TextEnd As String) As Integer
         Try
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
@@ -5238,7 +5573,7 @@ Public Class LocalAPI
             Dim SharePublicLinks As Boolean = IsAzureStorage(companyId)
 
             ' Setup the command to execute the stored procedure.
-            cmd.CommandText = "Proposal_v20_INSERT"
+            cmd.CommandText = "Proposal_Wizard_INSERT"
             cmd.CommandType = CommandType.StoredProcedure
             Dim taskId As String
 
@@ -5262,6 +5597,9 @@ Public Class LocalAPI
             cmd.Parameters.AddWithValue("@ProjectManagerId", ProjectManagerId)
             cmd.Parameters.AddWithValue("@employeeId", activeEmployeeId)
 
+            cmd.Parameters.AddWithValue("@Owner", Owner)
+            cmd.Parameters.AddWithValue("@TextBegin", TextBegin)
+            cmd.Parameters.AddWithValue("@TextEnd", TextEnd)
 
             ' Set up the output parameter 
             Dim parTaskIdList As SqlParameter = New SqlParameter("@TaskIdList", SqlDbType.NVarChar, 80)
@@ -5285,24 +5623,6 @@ Public Class LocalAPI
             proposalId = parId.Value
 
             Dim sArr As String()
-            If Len("" & parTaskIdList.Value) > 0 Then
-                sArr = Split(Trim(parTaskIdList.Value), ",")
-                If sArr.Length > 0 Then
-
-                    Dim i As Int16
-                    For i = 0 To sArr.Length - 1
-                        If Len(sArr(i).ToString) > 0 Then
-                            ' Limpiar caracteres no deseados
-                            sArr(i) = Replace(sArr(i), vbLf, "")
-                            sArr(i) = Replace(sArr(i), " ", "")
-                            taskId = GetTaskIdFromTaskcode(sArr(i), companyId)
-                            If Len("" & taskId) > 0 Then
-                                NewDetailProposal(proposalId, taskId)
-                            End If
-                        End If
-                    Next
-                End If
-            End If
 
             If Len("" & parPaymentsScheduleList.Value) > 0 Then
                 ' Insertar ScheduleList
@@ -5348,6 +5668,51 @@ Public Class LocalAPI
             Throw ex
         End Try
     End Function
+
+    Public Shared Function Proposal_Wizard_UPDATE(proposalId As Integer, clientId As Integer, lType As Integer, ProjectType As String, ProjectName As String, ProjectLocation As String, ProjectSector As Integer, ProjectUse As String, ProjectUse2 As String, DepartmentId As Integer, EmployeeAprovedId As Integer, Unit As Double, Measure As Integer, Owner As String, ProjectManagerId As Integer, employeeId As Integer, TextBegin As String, TextEnd As String) As Integer
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Proposal_Wizard_v21_UPDATE"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@ClientId", clientId)
+            cmd.Parameters.AddWithValue("@Type", lType)
+            cmd.Parameters.AddWithValue("@ProjectType", ProjectType)
+            cmd.Parameters.AddWithValue("@ProjectName", ProjectName)
+            cmd.Parameters.AddWithValue("@ProjectLocation", ProjectLocation)
+            cmd.Parameters.AddWithValue("@ProjectSector", ProjectSector)
+            cmd.Parameters.AddWithValue("@ProjectUse", ProjectUse)
+            cmd.Parameters.AddWithValue("@ProjectUse2", ProjectUse2)
+            cmd.Parameters.AddWithValue("@DepartmentId", DepartmentId)
+            cmd.Parameters.AddWithValue("@EmployeeAprovedId", EmployeeAprovedId)
+            cmd.Parameters.AddWithValue("@Unit", FormatearNumero2Tsql(Unit))
+            cmd.Parameters.AddWithValue("@Measure", Measure)
+            cmd.Parameters.AddWithValue("@Owner", Owner)
+            cmd.Parameters.AddWithValue("@ProjectManagerId", ProjectManagerId)
+            cmd.Parameters.AddWithValue("@employeeId", employeeId)
+            cmd.Parameters.AddWithValue("@TextBegin", TextBegin)
+            cmd.Parameters.AddWithValue("@TextEnd", TextEnd)
+
+            cmd.Parameters.AddWithValue("@Id", proposalId)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            Return proposalId
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+
+
     Public Shared Function CreateProposalFromRFP(guid As String, employeeId As Integer, companyId As Integer) As Integer
         Try
             Dim cnn1 As SqlConnection = GetConnection()
@@ -5656,6 +6021,89 @@ Public Class LocalAPI
 
     Public Shared Function GetPhaseTemplateProperty(phaselId As Integer, sProperty As String) As String
         Return GetStringEscalar("SELECT isnull([" & sProperty & "],'') FROM Proposal_phases_template WHERE Id=" & phaselId)
+    End Function
+
+    Public Shared Function ProposalPhases_INSERT(ByVal proposalId As Integer, ByVal Order As Integer, ByVal Code As String, Name As String, Description As String, Period As String, ByVal DateFrom As DateTime, DateTo As DateTime, Progress As Double) As Boolean
+        Dim cnn1 As SqlConnection = GetConnection()
+        Try
+
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            cmd.CommandText = "PROPOSAL_phases_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            cmd.Parameters.AddWithValue("@proposalId", proposalId)
+            cmd.Parameters.AddWithValue("@Order", Order)
+            cmd.Parameters.AddWithValue("@Code", Code)
+            cmd.Parameters.AddWithValue("@Name", Name)
+            cmd.Parameters.AddWithValue("@Description", Description)
+            cmd.Parameters.AddWithValue("@Period", Period)
+
+            If Not (DateFrom = Nothing) Then
+                cmd.Parameters.AddWithValue("@DateFrom", DateFrom)
+            Else
+                cmd.Parameters.AddWithValue("@DateFrom", DBNull.Value)
+            End If
+            If Not (DateTo = Nothing) Then
+                cmd.Parameters.AddWithValue("@DateTo", DateTo)
+            Else
+                cmd.Parameters.AddWithValue("@DateTo", DBNull.Value)
+            End If
+
+            cmd.Parameters.AddWithValue("@Progress", Progress)
+
+            cmd.ExecuteNonQuery()
+
+            Return True
+
+        Catch ex As Exception
+            ' Evita tratamiento de error
+            Return False
+        Finally
+            cnn1.Close()
+        End Try
+
+    End Function
+    Public Shared Function ProposalPhases_UPDATE(ByVal phaseId As Integer, ByVal Order As Integer, ByVal Code As String, Name As String, Description As String, Period As String, ByVal DateFrom As DateTime, DateTo As DateTime, Progress As Double) As Boolean
+        Dim cnn1 As SqlConnection = GetConnection()
+        Try
+
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            cmd.CommandText = "PROPOSAL_phases_UPDATE"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            cmd.Parameters.AddWithValue("@Order", Order)
+            cmd.Parameters.AddWithValue("@Code", Code)
+            cmd.Parameters.AddWithValue("@Name", Name)
+            cmd.Parameters.AddWithValue("@Description", Description)
+            cmd.Parameters.AddWithValue("@Period", Period)
+
+            If Not (DateFrom = Nothing) Then
+                cmd.Parameters.AddWithValue("@DateFrom", DateFrom)
+            Else
+                cmd.Parameters.AddWithValue("@DateFrom", DBNull.Value)
+            End If
+            If Not (DateTo = Nothing) Then
+                cmd.Parameters.AddWithValue("@DateTo", DateTo)
+            Else
+                cmd.Parameters.AddWithValue("@DateTo", DBNull.Value)
+            End If
+            cmd.Parameters.AddWithValue("@Progress", Progress)
+
+            cmd.Parameters.AddWithValue("@Id", phaseId)
+
+            cmd.ExecuteNonQuery()
+
+            Return True
+
+        Catch ex As Exception
+            ' Evita tratamiento de error
+            Return False
+        Finally
+            cnn1.Close()
+        End Try
+
     End Function
 
     Public Shared Function GetProposalTypename(ByVal lId As Long) As String
@@ -6125,24 +6573,25 @@ Public Class LocalAPI
 
                     sFullBody.Append("<br />")
                     sFullBody.Append("<br />")
-                    sFullBody.Append("wellcome to PASconcept. ")
+                    sFullBody.Append("Welcome to PASconcept!")
                     sFullBody.Append("<br />")
-                    sFullBody.Append("You can set a new password")
-                    sFullBody.Append("<a href=" & """" & GetHostAppSite() & "/Account/ResetPasswordConfirmation.aspx?guid=" & userGuid & """> here</a>")
+                    sFullBody.Append("It is with great pride and excitement that we take this time to personally welcome you to PASconcept. Please use the following links to set-up your password.")
+                    sFullBody.Append("<br />")
+                    sFullBody.Append("<a href=" & """" & GetHostAppSite() & "/Account/ResetPasswordConfirmation.aspx?guid=" & userGuid & """> Set-Up Password Here</a>")
+                    sFullBody.Append("<br />")
                     sFullBody.Append("<br />")
 
 
-                    sFullBody.Append("Or you can got to Employee Site")
+                    sFullBody.Append("We strive to provide you with the necessary support and resource materials to begin utilizing the your new  platform. Should you experience any issues or have any questions, we are here to help!")
                     sFullBody.Append("<br />")
-                    sFullBody.Append("<a href=" & """" & GetHostAppSite() & "/Default.aspx" & """" & ">Link to Employee Site</a>")
-
+                    sFullBody.Append("<br />")
+                    sFullBody.Append("Best Regards,")
+                    'sFullBody.Append("<a href=" & """" & GetHostAppSite() & "/default.aspx" & """" & ">Link to Employee Site</a>")
+                    sFullBody.Append("<br />")
+                    sFullBody.Append("PasConcept Technical Support")
 
                     Try
-                        If ConfigurationManager.AppSettings("Debug") = "1" Then
-                            SendGrid.Email.SendMail("jcarlos@axzes.com", "fernando@easterneg.com", "", ConfigurationManager.AppSettings("Titulo") & ". Credentials", sFullBody.ToString, companyId, 0, 0)
-                        Else
-                            SendGrid.Email.SendMail(rdr("Email").ToString, "", "", ConfigurationManager.AppSettings("Titulo") & ". Credentials", sFullBody.ToString, companyId, 0, 0)
-                        End If
+                        SendGrid.Email.SendMail(rdr("Email").ToString, "", "", ConfigurationManager.AppSettings("Titulo") & ". Credentials", sFullBody.ToString, companyId, 0, 0)
                         EmployeeEmailCredentials = True
                     Finally
                     End Try
@@ -6703,21 +7152,7 @@ Public Class LocalAPI
     End Function
 
     Public Shared Function GetNonRegularTypesFromName(ByVal companyId As Long, ByVal sName As String) As Integer
-        Try
-            Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As New SqlCommand("SELECT Id FROM  NonRegularHours_types " &
-                                        "WHERE companyId=" & companyId & " And Name='" & sName & "'", cnn1)
-            Dim rdr As SqlDataReader
-            rdr = cmd.ExecuteReader
-            rdr.Read()
-            If rdr.HasRows Then
-                GetNonRegularTypesFromName = "" & rdr(0).ToString()
-            End If
-            rdr.Close()
-            cnn1.Close()
-        Catch ex As Exception
-            Throw ex
-        End Try
+        Return GetNumericEscalar($"SELECT top 1 Id FROM  NonRegularHours_types WHERE companyId={companyId} And Name='{sName}'")
     End Function
 
     Public Shared Function GetEmployees_NonRegularHoursProperty(Id As Integer, sProperty As String) As String
@@ -6735,29 +7170,40 @@ Public Class LocalAPI
         End Try
     End Function
 
-    Public Shared Function NewNonJobTime_Request(ByVal lEmployee As Integer, ByVal lType As Integer, ByVal DateFrom As String,
-                                            ByVal DateTo As String, ByVal nTime As String, ByVal sNotes As String, companyId As Integer) As Integer
+    Public Shared Function NewNonJobTime_Request(ByVal EmployeeId As Integer, ByVal TypeId As Integer, ByVal DateFrom As DateTime,
+                                            ByVal DateTo As DateTime, ByVal Hours As Double, ByVal Notes As String, companyId As Integer, ClientId As Integer, clientspreprojectId As Integer, proposalId As Integer, proposaldetalleId As Integer) As Integer
         Try
+            'InicializeEmployeeOfJob(lEmployee, lJob)
+
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
-            Dim sTime As String = FormatearNumero2Tsql(nTime.ToString)
-            ' ClienteEmail
-            cmd.CommandText = "INSERT INTO [Employees_NonRegularHours_Request] (DateRequest, EmployeeId, Type, DateFrom, DateTo, Hours, Notes, companyId) " &
-                                                    "VALUES (" & GetDateUTHlocal() & ", " & lEmployee.ToString & "," &
-                                                        lType.ToString & "," &
-                                                        GetFecha_102(DateFrom) & "," &
-                                                        GetFecha_102(DateTo) & "," &
-                                                        sTime & ",'" &
-                                                        sNotes & "'," &
-                                                        companyId & ")"
 
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Employees_NonRegularHours_Request_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@EmployeeId", EmployeeId)
+            cmd.Parameters.AddWithValue("@TypeId", TypeId)
+            cmd.Parameters.AddWithValue("@DateFrom", DateFrom)
+            cmd.Parameters.AddWithValue("@DateTo", DateTo)
+            cmd.Parameters.AddWithValue("@Hours", Hours)
+            cmd.Parameters.AddWithValue("@Notes", Notes)
+
+            cmd.Parameters.AddWithValue("@ClientId", ClientId)
+            cmd.Parameters.AddWithValue("@clientspreprojectId", clientspreprojectId)
+            cmd.Parameters.AddWithValue("@proposalId", proposalId)
+            cmd.Parameters.AddWithValue("@proposaldetalleId", proposaldetalleId)
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+
+            ' Execute the stored procedure.
             cmd.ExecuteNonQuery()
             cnn1.Close()
 
-            Dim requestId As Integer = GetNumericEscalar("select top 1 Id from [Employees_NonRegularHours_Request] where companyId=" & companyId & " and EmployeeId=" & lEmployee & " order by Id desc")
-            Return requestId
+            LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.NewNonJobTime, -1, Notes)
 
-            LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.NewNonJobTime, -1, sNotes)
+            Dim requestId As Integer = GetNumericEscalar($"select top 1 Id from [Employees_NonRegularHours_Request] where companyId={companyId} and EmployeeId={EmployeeId} order by Id desc")
+            Return requestId
 
         Catch ex As Exception
             Throw ex
@@ -6954,18 +7400,20 @@ Public Class LocalAPI
 
             'find all <a href=""></> nodes ?
             Dim hrefValue As String
-            For Each linkNode As HtmlNode In htmlDoc.DocumentNode.SelectNodes("//a[@href]")
+            If Not IsNothing(htmlDoc.DocumentNode.SelectNodes("//a[@href]")) Then
+                For Each linkNode As HtmlNode In htmlDoc.DocumentNode.SelectNodes("//a[@href]")
 
-                ' Get url
-                hrefValue = linkNode.GetAttributeValue("href", String.Empty)
+                    ' Get url
+                    hrefValue = linkNode.GetAttributeValue("href", String.Empty)
 
-                ' Insert child node with plain url Text
-                If linkNode.ChildNodes.Count > 0 Then
-                    linkNode.ReplaceChild(htmlDoc.CreateTextNode(" " & hrefValue), linkNode.ChildNodes.First())
-                Else
-                    linkNode.AppendChild(htmlDoc.CreateTextNode(" " & hrefValue))
-                End If
-            Next
+                    ' Insert child node with plain url Text
+                    If linkNode.ChildNodes.Count > 0 Then
+                        linkNode.ReplaceChild(htmlDoc.CreateTextNode(" " & hrefValue), linkNode.ChildNodes.First())
+                    Else
+                        linkNode.AppendChild(htmlDoc.CreateTextNode(" " & hrefValue))
+                    End If
+                Next
+            End If
 
             Return htmlDoc.DocumentNode.InnerText
 
@@ -7209,6 +7657,37 @@ Public Class LocalAPI
 
     End Function
 
+    Public Shared Function CreateCalendarIcs(DateStart As DateTime, DateEnd As DateTime, Summary As String, Location As String, Description As String) As String
+
+        Dim FileName As String = "CalendarItem"
+        Dim sb As StringBuilder = New StringBuilder()
+        sb.AppendLine("BEGIN:VCALENDAR")
+        sb.AppendLine("VERSION:2.0")
+        sb.AppendLine("PRODID:pasconcept.com")
+        sb.AppendLine("CALSCALE:GREGORIAN")
+        sb.AppendLine("METHOD:PUBLISH")
+        'sb.AppendLine("BEGIN:VTIMEZONE")
+        'sb.AppendLine("TZID:Europe/Amsterdam")
+        'sb.AppendLine("BEGIN:STANDARD")
+        'sb.AppendLine("TZOFFSETTO:+0100")
+        'sb.AppendLine("TZOFFSETFROM:+0100")
+        'sb.AppendLine("END:STANDARD")
+        'sb.AppendLine("END:VTIMEZONE")
+        sb.AppendLine("BEGIN:VEVENT")
+        'sb.AppendLine("DTSTART;TZID=Europe/Amsterdam:" & DateStart.ToString("yyyyMMddTHHmm00"))
+        'sb.AppendLine("DTEND;TZID=Europe/Amsterdam:" & DateEnd.ToString("yyyyMMddTHHmm00"))
+        sb.AppendLine("DTSTART:" & DateStart.ToString("yyyyMMddTHHmm00"))
+        sb.AppendLine("DTEND:" & DateEnd.ToString("yyyyMMddTHHmm00"))
+        sb.AppendLine("SUMMARY:" & Summary & "")
+        sb.AppendLine("LOCATION:" & Location & "")
+        sb.AppendLine("DESCRIPTION:" & Description & "")
+        sb.AppendLine("PRIORITY:3")
+        sb.AppendLine("END:VEVENT")
+        sb.AppendLine("END:VCALENDAR")
+        Dim CalendarItem As String = sb.ToString()
+        Return CalendarItem
+
+    End Function
     Public Shared Function SendMailAndAttachmentExt(ByVal sTo As String, sCCO As String,
                                 ByVal sSubtject As String,
                                 fileData As Byte(), sFileName As String, ByVal companyId As Integer, clientId As Integer, jobId As Integer) As Boolean
@@ -7966,7 +8445,9 @@ Public Class LocalAPI
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
 
-            cmd.CommandText = "UPDATE [Invoices] SET [statementId]=" & statementId & " WHERE Id=" & invoiceId
+            ' 9-3-2020
+            ' No add invoices with Amount=0
+            cmd.CommandText = $"UPDATE [Invoices] SET [statementId]={statementId} WHERE Id={invoiceId} and Amount<>0"
 
             cmd.ExecuteNonQuery()
             cnn1.Close()
@@ -8534,6 +9015,52 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function EmployeesHourlyWage_INSERT(year As Integer, companyId As Integer) As Boolean
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Employee_HourlyWageInitializeYear_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+            cmd.Parameters.AddWithValue("@year", year)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            Return True
+        Catch ex As Exception
+
+        End Try
+    End Function
+
+    Public Shared Function AllCompaniesEmployeesHourlyWage_INSERT(year As Integer) As Boolean
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "AllCompaniesEmployee_HourlyWageInitializeYear_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@year", year)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            Return True
+        Catch ex As Exception
+
+        End Try
+    End Function
     Public Shared Function GetCompanyProductiveSalary(companyId As Integer, year As Integer) As Double
         Return GetNumericEscalar("select dbo.CompanyProductiveSalary(" & year & "," & companyId & ")")
     End Function
@@ -8576,8 +9103,15 @@ Public Class LocalAPI
     Public Shared Function GetEmployee_HourlyWageHistoryProperty(ByRef Employee_HourlyWageHistoryId As Integer, ByVal sProperty As String) As String
         Return GetStringEscalar("SELECT TOP 1 [" & sProperty & "] FROM [Employee_HourlyWageHistory] where [Id]=" & Employee_HourlyWageHistoryId)
     End Function
+    Public Shared Function GetEmployee_HourlyWageHistoryPreviousPeriodProperty(ByRef Employee_HourlyWageHistoryId As Integer, ByVal sProperty As String) As String
+        Return GetStringEscalar($"SELECT TOP 1 {sProperty} FROM [Employee_HourlyWageHistory] HW where [Id]<{Employee_HourlyWageHistoryId} and HW.employeeId=(select employeeId from [Employee_HourlyWageHistory] where Id={Employee_HourlyWageHistoryId}) order by Date desc")
+    End Function
+
     Public Shared Function GetHourlyWageHistoryLastRecord(ByRef EmployeeId As Integer, ByVal year As Integer) As Integer
         Return GetNumericEscalar(String.Format("SELECT TOP 1 Id FROM [Employee_HourlyWageHistory] where [employeeId]={0} And Year([Date])={1} order by [Date] desc", EmployeeId, year))
+    End Function
+    Public Shared Function GetHoursEmployeeTimeCheckIn(ByRef EmployeeId As Integer, ByVal DateEntry As DateTime) As Double
+        Return GetNumericEscalar($"select dbo.EmployeeTimeCheckIn({EmployeeId},'{DateEntry}')")
     End Function
 
 
@@ -8651,6 +9185,64 @@ Public Class LocalAPI
         Catch ex As Exception
 
         End Try
+    End Function
+
+    Public Shared Function ActivateTechnicalSupportEmployee(UserEmail As String, companyId As Integer) As Boolean
+        Try
+            'InicializeEmployeeOfJob(lEmployee, lJob)
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "ActivateTechnicalSupportEmployee"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            sys_log_Nuevo(UserEmail, LocalAPI.sys_log_AccionENUM.NewEmployee, companyId, "Activate Technical Support Employee")
+
+            Return True
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Shared Function DeactivateTechnicalSupportEmployee(UserEmail As String, companyId As Integer) As Boolean
+        Try
+            'InicializeEmployeeOfJob(lEmployee, lJob)
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "DeactivateTechnicalSupportEmployee"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            sys_log_Nuevo(UserEmail, LocalAPI.sys_log_AccionENUM.InactiveEmployee, companyId, "Dectivate Technical Support Employee")
+
+            Return True
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Shared Function IsTechnicalSupportEmployee(ByVal companyId As Integer) As Boolean
+        Return (GetNumericEscalar($"SELECT count(*) FROM Employees WHERE companyId={companyId} AND Email='support@pasconcept.com' and isnull(Inactive,0)=0") > 0)
     End Function
 
     Public Shared Function NewExpense(ByRef companyId As Integer, ExpDate As DateTime, ExpType As String, Reference As String, Amount As Double, Category As String, Vendor As String, Memo As String) As Boolean
@@ -8747,10 +9339,6 @@ Public Class LocalAPI
             Throw ex
         End Try
     End Function
-
-
-
-
     Public Shared Function NewEmployee(ByVal sName As String, sLastName As String, ByVal PositionId As Integer, ByVal sEmployee_Code As String,
                                          ByVal sAddress As String, ByVal sAddress2 As String, ByVal sCity As String, ByVal sSate As String,
                                             ByVal sZipCode As String, ByVal sPhone As String, ByVal sCellular As String,
@@ -8816,81 +9404,6 @@ Public Class LocalAPI
         End Try
     End Function
 
-    Public Shared Function NuevoEmpleado_obsolete(ByVal sName As String, sLastName As String, ByVal PositionId As Integer, ByVal sEmployee_Code As String,
-                                         ByVal sAddress As String, ByVal sAddress2 As String, ByVal sCity As String, ByVal sSate As String,
-                                            ByVal sZipCode As String, ByVal sPhone As String, ByVal sCellular As String,
-                                            ByVal sEmail As String, ByVal sHourRate As String, ByVal sNotes As String,
-                                            ByVal companyId As Integer) As Integer
-        Try
-            Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As SqlCommand = cnn1.CreateCommand()
-            If PositionId > 0 Then
-                cmd.CommandText = "INSERT INTO [Employees] (Name,LastName,PositionId,Employee_Code,Address,Address2,City,Estate,ZipCode,Phone,Cellular,Email,HourRate, companyId, starting_Date, Notes) " &
-                                                    "VALUES ('" & sName & "','" &
-                                                        sLastName & "'," &
-                                                        PositionId & ",'" &
-                                                        sEmployee_Code & "','" &
-                                                        sAddress & "','" &
-                                                        sAddress2 & "','" &
-                                                        sCity & "','" &
-                                                        sSate & "','" &
-                                                        sZipCode & "','" &
-                                                        sPhone & "','" &
-                                                        sCellular & "','" &
-                                                        sEmail & "', " &
-                                                        FormatearNumero2Tsql(sHourRate) & ", " &
-                                                        companyId & ", " & GetDateUTHlocal() & ",'" &
-                                                        sNotes & "'" &
-                                                        ")"
-            Else
-                cmd.CommandText = "INSERT INTO [Employees] (Name,LastName,Employee_Code,Address,Address2,City,Estate,ZipCode,Phone,Cellular,Email,HourRate, companyId, starting_Date, Notes) " &
-                                                    "VALUES ('" & sName & "','" &
-                                                        sLastName & "','" &
-                                                        sEmployee_Code & "','" &
-                                                        sAddress & "','" &
-                                                        sAddress2 & "','" &
-                                                        sCity & "','" &
-                                                        sSate & "','" &
-                                                        sZipCode & "','" &
-                                                        sPhone & "','" &
-                                                        sCellular & "','" &
-                                                        sEmail & "', " &
-                                                        FormatearNumero2Tsql(sHourRate) & ", " &
-                                                        companyId & ", " & GetDateUTHlocal() & ",'" &
-                                                        sNotes & "'" &
-                                                        ")"
-            End If
-            cmd.ExecuteNonQuery()
-
-
-
-
-            ' Evitar Employee code vacio
-            If sEmployee_Code.Length = 0 Then
-                cmd.CommandText = "UPDATE Employees SET [Employee_Code]= " &
-                                                    "SUBSTRING([Name], 1, 1) + SUBSTRING([Name], PATINDEX('% %', [Name]) + 1, 1) " &
-                                                    "WHERE ISNULL([Employee_Code],'')=''"
-                cmd.ExecuteNonQuery()
-            End If
-            cnn1.Close()
-
-            'Dim lEmplId  As Integer = GetEmployeeId(sEmail)
-            'If lEmplId > 0 Then AddEmployeeToUser(sEmail, lEmplId, bAdministrator, True, companyId)
-            RefrescarUsuarioVinculadoAsync(sEmail, "Empleados")
-
-
-            ' Set algunos perminos de inicio
-            Dim employeeId As Integer = GetEmployeeId(sEmail, companyId)
-            ExecuteNonQuery("UPDATE [Employees] SET [Allow_OtherEmployeeJobs]=1 WHERE Id=" & employeeId)
-
-            LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.NewEmployee, companyId, sName)
-
-            Return GetEmployeeId(sEmail, companyId)
-
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
 
     Public Shared Function IsEmployeeEmail(ByVal sEmail As String, ByVal companyId As Integer) As Boolean
         Return (GetNumericEscalar("SELECT COUNT(*) FROM Employees WHERE companyId=" & companyId & " AND ISNULL(Email,'')='" & sEmail & "'") > 0)
@@ -9091,6 +9604,16 @@ Public Class LocalAPI
             Throw ex
         End Try
     End Function
+
+    Public Shared Function GetEmployeeIdFromGUID(EmployeeGUID As String) As Integer
+        Dim cnn1 As SqlConnection = GetConnection()
+        Dim cmd As New SqlCommand("SELECT ISNULL(Id,0) FROM [Employees] WHERE [guid]=@guid", cnn1)
+        cmd.Parameters.AddWithValue("@guid", EmployeeGUID)
+        GetEmployeeIdFromGUID = Convert.ToDouble(cmd.ExecuteScalar())
+        cnn1.Close()
+    End Function
+
+
     Public Shared Function GetEmployeeIdFromLastFirstName(ByVal FirstName As String, ByVal LastName As String, ByVal companyId As Integer) As Integer
         Try
             Dim cnn1 As SqlConnection = GetConnection()
@@ -9412,80 +9935,84 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function GetEmployeeAssignedHourRate(jobId As Integer, ByVal employeeId As Long) As Double
+        Try
+            '************ Rate of Position of Employee in Job ************************
+            Return GetNumericEscalar($"select dbo.EmployeeAssignedHourRate({jobId},{employeeId})")
+
+        Catch ex As Exception
+
+        End Try
+    End Function
+
+    Public Shared Function GetEmployeeJobPositionHourRate(jobId As Integer, ByVal employeeId As Long) As Double
+        Try
+            '************ Rate of Position of Employee in Job ************************
+            Return GetNumericEscalar($"select dbo.EmployeeJobPositionHourRate({jobId},{employeeId})")
+
+        Catch ex As Exception
+
+        End Try
+    End Function
+
     Public Shared Function GetWeeklyHoursByEmp(ByVal employeeId As Integer, companyId As Integer) As Double
-        Return GetNumericEscalar("SELECT dbo.WeeklyHoursByEmp(" & employeeId & "," & companyId & ",dbo.CurrentTime())")
+        Return GetNumericEscalar($"SELECT dbo.WeeklyHoursByEmp({employeeId},{companyId},dbo.CurrentTimeZone({companyId}))")
     End Function
     Public Shared Function GetWeeklyHoursByEmpExt(ByVal employeeId As Integer, companyId As Integer, DateInWeek As Date) As Double
-        Return GetNumericEscalar("SELECT dbo.WeeklyHoursByEmp(" & employeeId & "," & companyId & "," & GetFecha_102(DateInWeek) & ")")
+        Return GetNumericEscalar("Select dbo.WeeklyHoursByEmp(" & employeeId & "," & companyId & "," & GetFecha_102(DateInWeek) & ")")
     End Function
     Public Shared Function GetBiWeeklyHoursByEmp(ByVal employeeId As Integer, companyId As Integer) As Double
-        Return GetNumericEscalar("SELECT dbo.BiWeeklyHoursByEmp(" & employeeId & "," & companyId & ",dbo.CurrentTime())")
+        Return GetNumericEscalar($"Select dbo.BiWeeklyHoursByEmp({employeeId},{companyId},dbo.CurrentTimeZone({companyId}))")
     End Function
 
     Public Shared Function GetEmployeeRoleId(ByVal RoleName As String, companyId As Integer) As Integer
-        Return GetNumericEscalar("select top 1 Id from [Employees_roles] where [Name]='" & RoleName & "' and companyId=" & companyId)
+        Return GetNumericEscalar("Select top 1 Id from [Employees_roles] where [Name]='" & RoleName & "' and companyId=" & companyId)
     End Function
-    Public Shared Function GetEmployeeProperty(ByVal lId As Long, ByRef sProperty As String) As String
-        Try
-            Dim cnn1 As SqlConnection = GetConnection()
-            Dim sSQL As String
-            Dim ret As String = ""
 
-            ' Analisis del tipo de dato de retorno
+    Public Shared Function SetEmployee_IPv4_UPDATE(ByVal lId As Long, IPv4 As String) As Boolean
+        Return ExecuteNonQuery($"UPDATE [Employees] SET [URLFirewall]='{IPv4}' WHERE Id={lId}")
+    End Function
+
+
+    Public Shared Function GetEmployeeProperty(ByVal EmployeeId As Long, ByRef sProperty As String) As String
+        Try
             Select Case sProperty
-                Case "DepartmentId", "companyId", "Inactive", "HourRate", "Benefits_vacations", "Benefits_personals"
+
+                Case "DepartmentId", "companyId", "Inactive", "HourRate", "Benefits_vacations", "Benefits_personals", "PositionId", "FilterCalendarViewAll"
                     'Enteros
-                    sSQL = "SELECT ISNULL(" & sProperty & ",0) FROM [Employees] WHERE [Id]=" & lId
+                    Return GetNumericEscalar($"SELECT ISNULL({sProperty},0) FROM [Employees] WHERE [Id]={EmployeeId}")
 
                 Case "RadScheduler_Default_View", "RadScheduler_JobEdit_View", "FilterJob_Employee", "FilterJob_Department", "FilterProposal_Department",
                      "Benefits_vacations", "Benefits_personals"
                     ' Enteros  Null es -1
-                    sSQL = "SELECT ISNULL(" & sProperty & ",-1) FROM [Employees] WHERE [Id]=" & lId
-                Case "FilterJob_Year", "FilterProposal_Year"
-                    ' Enteros Null es 0
-                    sSQL = "SELECT ISNULL(" & sProperty & "," & GetDateTime().Year & ") FROM [Employees] WHERE [Id]=" & lId
+                    Return GetNumericEscalar($"SELECT ISNULL({sProperty},-1) FROM [Employees] WHERE [Id]={EmployeeId}")
+
                 Case "FilterJob_Month", "FilterProposal_Month"
-                    ' Enteros Null es 30
-                    sSQL = "SELECT ISNULL(" & sProperty & "," & GetDateTime().Month & ") FROM [Employees] WHERE [Id]=" & lId
+                    Return GetNumericEscalar($"SELECT ISNULL({sProperty},{GetDateTime().Month}) FROM [Employees] WHERE [Id]={EmployeeId}")
+
+                Case "RadScheduler_Default_View", "RadScheduler_JobEdit_View"
+                    Dim ViewId As Integer = GetNumericEscalar($"SELECT ISNULL({sProperty},0) FROM [Employees] WHERE [Id]={EmployeeId}")
+                    Select Case ViewId
+                        Case 0
+                            Return SchedulerViewType.DayView
+                        Case 1
+                            Return SchedulerViewType.WeekView
+                        Case 2
+                            Return SchedulerViewType.MonthView
+                        Case 3
+                            Return SchedulerViewType.TimelineView
+                        Case 4
+                            Return SchedulerViewType.MultiDayView
+                        Case 5
+                            Return SchedulerViewType.AgendaView
+                        Case Else
+                            Return ViewId
+                    End Select
+
                 Case Else
                     ' String
-                    sSQL = "SELECT ISNULL(" & sProperty & ",'') FROM [Employees] WHERE [Id]=" & lId
+                    Return GetStringEscalar($"SELECT ISNULL({sProperty},'') FROM [Employees] WHERE [Id]={EmployeeId}")
             End Select
-
-            Dim cmd As New SqlCommand(sSQL, cnn1)
-            Dim rdr As SqlDataReader
-            rdr = cmd.ExecuteReader
-            rdr.Read()
-            If rdr.HasRows Then
-                Select Case sProperty
-                    Case "RadScheduler_Default_View", "RadScheduler_JobEdit_View"
-                        Select Case rdr(0)
-                            Case 0
-                                ret = SchedulerViewType.DayView
-                            Case 1
-                                ret = SchedulerViewType.WeekView
-                            Case 2
-                                ret = SchedulerViewType.MonthView
-                            Case 3
-                                ret = SchedulerViewType.TimelineView
-                            Case 4
-                                ret = SchedulerViewType.MultiDayView
-                            Case 5
-                                ret = SchedulerViewType.AgendaView
-                            Case Else
-                                ret = rdr(0).ToString()
-                        End Select
-
-
-                    Case Else
-
-                        ret = rdr(0).ToString
-                End Select
-            End If
-            rdr.Close()
-            cnn1.Close()
-
-            Return ret
 
         Catch ex As Exception
             Throw ex
@@ -9588,10 +10115,10 @@ Public Class LocalAPI
         Dim nRecs As Integer = GetNumericEscalar("select dbo.ClientFilesCount(" & clientId & ")")
         Return IIf(nRecs = 0, "", nRecs)
     End Function
-    Public Shared Function IsClientDenySMS(ByVal clientId As Integer) As Boolean
+    Public Shared Function IsClientAllowSMS(ByVal clientId As Integer) As Boolean
         Try
 
-            Return GetNumericEscalar("SELECT ISNULL(Deny_SMSnotification,0) FROM [Clients] WHERE Id=" & clientId)
+            Return GetNumericEscalar("SELECT ISNULL(Allow_SMSnotification,0) FROM [Clients] WHERE Id=" & clientId)
 
         Catch ex As Exception
             Throw ex
@@ -10152,6 +10679,158 @@ Public Class LocalAPI
     Public Shared Function UpdateProposaltaskIdAppointment(ByVal lId As Integer, proposaldetalleId As Integer) As Boolean
         Return ExecuteNonQuery("UPDATE [Appointments] SET proposaldetalleId=" & proposaldetalleId & " WHERE Id=" & lId)
     End Function
+
+
+    Public Shared Function Appointment_DragAndDrop_UPDATE(ByVal Id As Integer, StartDate As DateTime, EndDate As DateTime) As Boolean
+        Try
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Appointment_DragAndDrop_UPDATE"
+            cmd.CommandType = CommandType.StoredProcedure
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@Start", StartDate)
+            cmd.Parameters.AddWithValue("@End", EndDate)
+            cmd.Parameters.AddWithValue("@Id", Id)
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+        Catch ex As Exception
+            Throw ex
+        End Try
+
+    End Function
+
+    Public Shared Function Activity_INSERT(Subject As String, StartDate As DateTime, EndDate As DateTime, ActivityId As Integer, EmployeeId As Integer, ClientId As Integer, JobId As Integer, ProposalId As Integer, PreprojectId As Integer, companyId As Integer, statusId As Integer, Optional Description As String = "", Optional Location As String = "", Optional NotifyEmployee As Boolean = 0, Optional RecurrenceFrequency As Integer = 0, Optional RecurrenceInterval As Integer = 0, Optional RecurrenceUntil As String = "") As Integer
+        Try
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Appointment_v21_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@Subject", Subject)
+
+            ' Validating Dates
+            If InStr(StartDate.ToString, "12:00:00 AM") > 0 Then
+                StartDate = DateAdd(DateInterval.Hour, 9, StartDate)
+            End If
+            If InStr(EndDate.ToString, "12:00:00 AM") > 0 Then
+                EndDate = DateAdd(DateInterval.Hour, 9, EndDate)
+            End If
+            If StartDate > EndDate Then
+                EndDate = DateAdd(DateInterval.Hour, 1, StartDate)
+            End If
+
+            cmd.Parameters.AddWithValue("@Start", StartDate)
+            cmd.Parameters.AddWithValue("@End", EndDate)
+            cmd.Parameters.AddWithValue("@ActivityId", ActivityId)
+            cmd.Parameters.AddWithValue("@EmployeeId", EmployeeId)
+            cmd.Parameters.AddWithValue("@ClientId", ClientId)
+            cmd.Parameters.AddWithValue("@JobId", JobId)
+            cmd.Parameters.AddWithValue("@ProposalId", ProposalId)
+            cmd.Parameters.AddWithValue("@PreprojectId", PreprojectId)
+            cmd.Parameters.AddWithValue("@statusId", statusId)
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+
+            ' Optional Parameters....
+            cmd.Parameters.AddWithValue("@Description", Description)
+            cmd.Parameters.AddWithValue("@Location", Location)
+
+            cmd.Parameters.AddWithValue("@NotifyEmployee", IIf(NotifyEmployee, 1, 0))
+
+            cmd.Parameters.AddWithValue("@RecurrenceFrequency", RecurrenceFrequency)
+            cmd.Parameters.AddWithValue("@RecurrenceInterval", RecurrenceInterval)
+            If Len(RecurrenceUntil) > 0 Then
+                cmd.Parameters.AddWithValue("@RecurrenceUntil", RecurrenceUntil)
+            Else
+                cmd.Parameters.AddWithValue("@RecurrenceUntil", DBNull.Value)
+            End If
+
+            Dim parOUT_ID As New SqlParameter("@Id_OUT", SqlDbType.Int)
+            parOUT_ID.Direction = ParameterDirection.Output
+            cmd.Parameters.Add(parOUT_ID)
+
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+            Return parOUT_ID.Value
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+
+    End Function
+    Public Shared Function Activity_UPDATE(Id As Integer, Subject As String, StartDate As DateTime, EndDate As DateTime, ActivityId As Integer, EmployeeId As Integer, ClientId As Integer, JobId As Integer, ProposalId As Integer, PreprojectId As Integer, statusId As Integer, Optional Description As String = "", Optional Location As String = "", Optional NotifyEmployee As Boolean = 0, Optional RecurrenceFrequency As Integer = 0, Optional RecurrenceInterval As Integer = 0, Optional RecurrenceUntil As String = "") As Boolean
+        Try
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Appointment_v21_UPDATE"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@Subject", Subject)
+
+            ' Validating Dates
+            If InStr(StartDate.ToString, "12:00:00 AM") > 0 Then
+                StartDate = DateAdd(DateInterval.Hour, 9, StartDate)
+            End If
+            If InStr(EndDate.ToString, "12:00:00 AM") > 0 Then
+                EndDate = DateAdd(DateInterval.Hour, 9, EndDate)
+            End If
+            If StartDate > EndDate Then
+                EndDate = DateAdd(DateInterval.Hour, 1, StartDate)
+            End If
+
+            cmd.Parameters.AddWithValue("@Start", StartDate)
+            cmd.Parameters.AddWithValue("@End", EndDate)
+            cmd.Parameters.AddWithValue("@ActivityId", ActivityId)
+            cmd.Parameters.AddWithValue("@EmployeeId", EmployeeId)
+            cmd.Parameters.AddWithValue("@ClientId", ClientId)
+            cmd.Parameters.AddWithValue("@JobId", JobId)
+            cmd.Parameters.AddWithValue("@ProposalId", ProposalId)
+            cmd.Parameters.AddWithValue("@PreprojectId", PreprojectId)
+            cmd.Parameters.AddWithValue("@statusId", statusId)
+            cmd.Parameters.AddWithValue("@Id", Id)
+
+            ' Optional Parameters....
+            cmd.Parameters.AddWithValue("@Description", Description)
+            cmd.Parameters.AddWithValue("@Location", Location)
+
+            cmd.Parameters.AddWithValue("@NotifyEmployee", IIf(NotifyEmployee, 1, 0))
+
+            cmd.Parameters.AddWithValue("@RecurrenceFrequency", RecurrenceFrequency)
+            cmd.Parameters.AddWithValue("@RecurrenceInterval", RecurrenceInterval)
+            If Len(RecurrenceUntil) > 0 Then
+                cmd.Parameters.AddWithValue("@RecurrenceUntil", RecurrenceUntil)
+            Else
+                cmd.Parameters.AddWithValue("@RecurrenceUntil", DBNull.Value)
+            End If
+
+
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+            Return True
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+
+    End Function
+
+    Public Shared Function AppointmentComplete(ByVal Id As Integer, DateCompleted As DateTime, Duration As Integer) As Boolean
+        Return ExecuteNonQuery($"UPDATE [Appointments] SET statusId=2,DateCompleted='{DateCompleted}',Duration={Duration} WHERE Id={Id}")
+    End Function
+
 #End Region
 
 #Region "Version"
@@ -10532,6 +11211,60 @@ Public Class LocalAPI
                     Case 2003  ' RFP to Proposal
                         url = LocalAPI.GetHostAppSite() & "/adm/Proposals.aspx?rfpGUID=" & LocalAPI.GetRFPProperty(objId, "guid")
 
+                    Case 3001  'Client Acknowledgment Page
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/acknowledgment.aspx?clientguid=" & LocalAPI.GetClientProperty(objId, "guid")
+
+
+                    ' Job_ pages............................................
+                    Case 8001
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_job.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8002
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_accounting.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8003
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_employees.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8004
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_proposals.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8005
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_rfps.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8006
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_notes.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8007
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_times.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8008
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_links.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8009
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_schedule.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8010
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_reviews.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8011
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_tags.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8012
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_transmittals.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8014
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_addemployee.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+
+                    ' Proposal_ pages............................................
+                    Case 11001
+                        url = LocalAPI.GetHostAppSite() & "/adm/pro_proposal.aspx?guid=" & LocalAPI.GetProposalProperty(objId, "guid")
+                    Case 11002
+                        url = LocalAPI.GetHostAppSite() & "/adm/pro_paymentschedules.aspx?guid=" & LocalAPI.GetProposalProperty(objId, "guid")
+                    Case 11003
+                        url = LocalAPI.GetHostAppSite() & "/adm/pro_openingclosing.aspx?guid=" & LocalAPI.GetProposalProperty(objId, "guid")
+                    Case 11004
+                        url = LocalAPI.GetHostAppSite() & "/adm/pro_termandconditions.aspx?guid=" & LocalAPI.GetProposalProperty(objId, "guid")
+                    Case 11005
+                        url = LocalAPI.GetHostAppSite() & "/adm/pro_files.aspx?guid=" & LocalAPI.GetProposalProperty(objId, "guid")
+                    Case 11006
+                        url = LocalAPI.GetHostAppSite() & "/adm/pro_phases.aspx?guid=" & LocalAPI.GetProposalProperty(objId, "guid")
+                    Case 11007
+                        url = LocalAPI.GetHostAppSite() & "/adm/pro_notes.aspx?guid=" & LocalAPI.GetProposalProperty(objId, "guid")
+                    Case 11008
+                        url = LocalAPI.GetHostAppSite() & "/adm/pro_preview.aspx?guid=" & LocalAPI.GetProposalProperty(objId, "guid")
+
+                    ' Appoitment pages............................................
+                    Case 12001
+                        url = LocalAPI.GetHostAppSite() & $"/adm/appointment.aspx?Id={objId}EntityType=Appointment&EntityId={objId}&backpage=Schedule"
+
                 End Select
                 If PrintParameter Then
                     url = url & "&Print=1"
@@ -10677,16 +11410,20 @@ Public Class LocalAPI
         Try
 
             Dim cnn1 As SqlConnection = GetConnection()
-            Dim query As String = String.Format("SELECT [Id] FROM [Jobs] WHERE [companyId]={0} AND [Job]='{1}'", companyId, sName)
+            Dim query As String = String.Format("SELECT [Id] FROM [Jobs] WHERE [companyId]={0} AND [Job]=@ProjectName", companyId, sName)
             Dim cmd As New SqlCommand(query, cnn1)
             Dim rdr As SqlDataReader
+
+            cmd.Parameters.AddWithValue("@ProjectName", sName)
+
             rdr = cmd.ExecuteReader
             rdr.Read()
             IsProposalOrJobName = rdr.HasRows
             rdr.Close()
             If Not IsProposalOrJobName Then
-                query = String.Format("SELECT [Id] FROM [Proposal] WHERE [companyId]={0} AND [ProjectName]='{1}'", companyId, sName)
+                query = String.Format("SELECT [Id] FROM [Proposal] WHERE [companyId]={0} AND [ProjectName]=@ProjectName", companyId, sName)
                 Dim cmd1 As New SqlCommand(query, cnn1)
+                cmd1.Parameters.AddWithValue("@ProjectName", sName)
                 rdr = cmd1.ExecuteReader
                 rdr.Read()
                 IsProposalOrJobName = rdr.HasRows
@@ -10702,13 +11439,35 @@ Public Class LocalAPI
         Select Case statusId
             Case 0  'Not Emitted
                 Return "badge badge-secondary statuslabel"
-            Case 1  'Emitted
+            Case 1  'Pending
                 Return "badge badge-warning statuslabel"
             Case 2  'Accepted
                 Return "badge badge-success statuslabel"
             Case Else
                 Return "badge badge-danger statuslabel"
         End Select
+
+    End Function
+
+    Public Shared Function GetProposalStatusColorCSS(ByVal statusId As Integer) As String
+        Select Case statusId
+            Case 0  'Not Emitted
+                Return "color:#6c757d"
+            Case 1  'Pending
+                Return "color:#ff8000"
+            Case 2  'Accepted
+                Return "color:#28a745"
+            Case Else
+                Return "color:#dc3545"
+        End Select
+    End Function
+
+    Public Shared Function GetProposalIdFromGUID(ByVal guid As String) As Integer
+        Dim cnn1 As SqlConnection = GetConnection()
+        Dim cmd As New SqlCommand("SELECT [Id] FROM [Proposal] where [guid]=@guid", cnn1)
+        cmd.Parameters.AddWithValue("@guid", guid)
+        GetProposalIdFromGUID = Convert.ToDouble(cmd.ExecuteScalar())
+        cnn1.Close()
 
     End Function
 
@@ -10885,9 +11644,8 @@ Public Class LocalAPI
     End Function
 
     Public Shared Function ProposalStatus2Acept(ByVal proposalId As Long, ByVal companyId As Integer) As Integer
-        Dim jobId As Integer = 0
+        Dim jobId As Integer = GetProposalProperty(proposalId, "JobId")
         Try
-
             If GetProposalProperty(proposalId, "StatusId") < 2 Then
 
                 '1.- Pasarlo a statusId=2 para que no vuelva por esta rama
@@ -10896,11 +11654,10 @@ Public Class LocalAPI
                 '0.- Es un primer Proposal o es un Change Order (ya tiene JobId)
                 Dim dProposalTotal As Double = GetProposalTotal(proposalId)
 
-                jobId = GetProposalProperty(proposalId, "JobId")
                 Dim statusId As Integer = GetProposalProperty(proposalId, "StatusId")
                 Dim bRetainer As Boolean
 
-                If jobId = 0 Then
+                If jobId <= 0 Then
                     '2.1 -  Crear job Asociado
                     ' No Aceptado y sin JobId creado
 
@@ -11017,7 +11774,151 @@ Public Class LocalAPI
                 'Task.Run(Function() pdf.CreateProposalSignedPdfAsync(proposalId, newName))
                 'pdfUrl = "https://pasconceptstorage.blob.core.windows.net/documents/" & newName
                 Return jobId
+            Else
+                Return jobId
             End If
+
+        Catch ex As Exception
+            Return jobId
+            Throw ex
+        End Try
+    End Function
+
+
+    Public Shared Function ProposalCreateJob(ByVal proposalId As Long, ByVal companyId As Integer) As Integer
+        Dim jobId As Integer = 0
+        Try
+
+            'If GetProposalProperty(proposalId, "StatusId") < 2 Then
+
+            '1.- Pasarlo a statusId=2 para que no vuelva por esta rama
+            'ProposalStatus2Accepted(proposalId)
+
+            '0.- Es un primer Proposal o es un Change Order (ya tiene JobId)
+            Dim dProposalTotal As Double = GetProposalTotal(proposalId)
+
+            jobId = GetProposalProperty(proposalId, "JobId")
+            Dim statusId As Integer = GetProposalProperty(proposalId, "StatusId")
+            Dim bRetainer As Boolean
+
+            If jobId <= 0 Then
+                '2.1 -  Crear job Asociado
+                ' No Aceptado y sin JobId creado
+
+                ' Leer Otros datos para el Job
+                Dim ProposalObject = LocalAPI.GetRecord(proposalId, "PROPOSAL_FOR_Aceptance_SELECT")
+
+                '.....................................Aceprtar Proposal inicial, (No tiene Job asignado, hay que crearlo.....................)
+                '2.2 - Obtener datos del Proposal
+                Dim sJobCode As String = GetNextJobCode(Right(Year(GetDateTime()), 2), companyId)
+
+                If Len(sJobCode) > 0 Then
+                    Dim sJobName As String = ProposalObject("ProjectName")
+                    Dim sClientId As String = ProposalObject("ClientId")
+                    Dim ProjectManagerId As String = "0"
+                    Dim sJobType As String = ProposalObject("ProjectType")
+                    Dim nJobSector As Integer = ProposalObject("ProjectSector")
+                    Dim sJobUse As String = ProposalObject("ProjectUse")
+                    Dim sJobUse2 As String = ProposalObject("ProjectUse2")
+                    Dim sProjLocation As String = ProposalObject("ProjectLocation")
+                    Dim sProjArea As String = ProposalObject("ProjectArea")
+                    Dim sOwner As String = ProposalObject("Owner")
+                    Dim Dpto As String = ProposalObject("DepartmentId")
+                    Dim sProposalType As String = ProposalObject("Type")
+                    Dim nWorkingDays As Integer = ProposalObject("Workdays")
+                    Dim DeadLine As DateTime = ProposalObject("Deadline")
+                    Dim StartDay As DateTime
+
+                    bRetainer = ProposalObject("Retainer")
+
+                    '2.3 -.- Get Job Code
+                    ' Verificar que no existe el Nombre
+                    jobId = GetJobId(sJobName, companyId)
+                    Dim i As Integer = 0
+                    While jobId > 0
+                        i = i + 1
+                        sJobName = sJobName & " (" & i & ")"
+                        jobId = GetJobId(sJobName, companyId)
+                    End While
+
+                    '2.4 - Crear Job asociado
+                    jobId = NuevoJob(sJobCode, sJobName, GetDateTime(), sClientId, dProposalTotal, sProposalType, sJobType, ProjectManagerId, sProjLocation, sProjArea, nJobSector, sJobUse, sJobUse2, Dpto, sOwner, 0, 0, companyId)
+
+                    '2.5 - Update parametros del Proposal
+                    ExecuteNonQuery($"UPDATE [Proposal] Set JobId={jobId} WHERE Id={proposalId}")
+
+                    '2.6 - New Job Note acceptande
+                    NewJobNote(jobId, "Log: Job created by the acceptance of the Proposal " & ProposalNumber(proposalId), 0)
+
+                    '2.7 - Setting Dates attributes of Job
+                    If Year(DeadLine) = 1980 Then
+                        ' Fecha de fin sin definir, se calcula a partir de los WorkinDays
+                        If nWorkingDays = 0 Then
+                            nWorkingDays = 1
+                        End If
+                        ' Un dia mas, pues se supon que no se empieza a trabajar el mismo dia de aceptacion
+                        DeadLine = AddWorkDays(GetDateTime(), nWorkingDays + 1)
+                    End If
+                    StartDay = AddWorkDays(GetDateTime(), 1)
+                    ExecuteNonQuery("UPDATE [Jobs] set [StartDay]=" & GetFecha_102(StartDay) & ", [EndDay]=" & GetFecha_102(DeadLine) & ", Workdays=" & nWorkingDays & " WHERE Id=" & jobId)
+                    ' Otros atributos del Proposal->Job
+                    ExecuteNonQuery($"UPDATE [Jobs] set [Unit]=(select Unit from Proposal where Id={proposalId}), [Measure]=(select Measure from Proposal where Id={proposalId}) WHERE Id={jobId}")
+
+                    If Len(sProjLocation) > 2 Then
+                        Dim Latitude As String = ""
+                        Dim Longitude As String = ""
+                        LocalAPI.GetLatitudeLongitude(sProjLocation, Latitude, Longitude)
+                        LocalAPI.SetJobLatitudeLongitude(jobId, Latitude, Longitude)
+                    End If
+
+                End If
+            Else
+                '2.1 -Proposal Change Order
+                ' Ya existe JobId, es un Aditional change.......................................................................................
+                If dProposalTotal <> 0 Then
+                    '2.2.- Incrementar el Jobs.Budget=+Proposal.Total)
+                    ExecuteNonQuery($"UPDATE [Jobs] SET Budget=Budget+{dProposalTotal} WHERE Id={jobId}")
+                    NewJobNote(jobId, "$Log: job Budget modified (+" & dProposalTotal & ") by the acceptance of the Proposal (Aditional Change): " & ProposalNumber(proposalId), 0)
+
+                    ''2.3 Simple Charge, and ..., se esta duplicando en 3. - Invoices from PaymentSchedule
+                    'NuevoInvoiceSimpleCharge(jobId, GetDateTime(), dProposalTotal, "Proposal (Additional Charge): " & ProposalNumber(proposalId))
+
+                    '2.4 Mandatory Retainer
+                    bRetainer = True
+                End If
+
+                '2.2 - Update parametros del Proposal
+                ExecuteNonQuery("UPDATE [Proposal] SET AceptedDate=" & GetFecha_102(Today.Date) & ", [StatusId]=2 WHERE Id=" & proposalId.ToString)
+            End If
+
+            '3. - Invoices from PaymentSchedule
+            If jobId > 0 And dProposalTotal > 0 Then CreateInvoicesFromPaymentSchedule(proposalId, jobId)
+
+            '4. -' Retainer..............
+            If jobId > 0 And bRetainer Then
+                ' Se emite el Invoice por 100% al client
+                Dim invoiceId As Integer = GetNumericEscalar($"select top 1 Id from Invoices where JobId={jobId} and [Emitted]=0 order by Number")
+                If invoiceId > 0 Then
+                    InvoiceAutomatictToClient(invoiceId, companyId)
+                    NewJobNote(jobId, "Log: New Automatic Invoice for Reatiner by the acceptance of the Proposal : " & ProposalNumber(proposalId), 0)
+                End If
+            End If
+
+            '5. - TAGuear al cliente en Agile
+            If companyId = 260962 Then
+                Task.Run(Function() ProposalTAGAgile(proposalId, companyId, "Accepted"))
+            End If
+
+            '6. - Log................... End
+            LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.AceptProposal, companyId, proposalId)
+
+            '7. Create Signed PDF
+            'Dim pdf As PdfApi = New PdfApi()
+            'Dim newName = "Companies/" & companyId & $"/{Guid.NewGuid().ToString()}.pdf"
+            'Task.Run(Function() pdf.CreateProposalSignedPdfAsync(proposalId, newName))
+            'pdfUrl = "https://pasconceptstorage.blob.core.windows.net/documents/" & newName
+            Return jobId
+            'End If
 
         Catch ex As Exception
             Return jobId
@@ -11483,6 +12384,12 @@ Public Class LocalAPI
     Public Shared Function ProposalNumber(ByVal Id As Integer) As String
         Return GetStringEscalar("SELECT dbo.ProposalNumber(" & Id & ")")
     End Function
+
+    Public Shared Function IsPhases(ByVal proposalId As Integer) As Integer
+        Return GetNumericEscalar($"select count(*) from Proposal_phases where proposalId={proposalId}")
+    End Function
+
+
     Public Shared Function Proposal_GeneratePaymentSchedules(proposalId As Integer, psId As Integer) As Boolean
         Try
             Dim psValues As String = GetStringEscalar("SELECT PaymentsScheduleList FROM Invoices_types WHERE [Id]=" & psId)
@@ -11586,6 +12493,17 @@ Public Class LocalAPI
             Case 1  'Ready for Pick Up
                 Return "badge badge-danger statuslabel"
             Case 2  'Picked Up
+                Return "badge badge-success statuslabel"
+            Case Else
+                Return "badge badge-secondary statuslabel"
+        End Select
+
+    End Function
+    Public Shared Function GetRevisionsStatusLabelCSS(ByVal statusId As String) As String
+        Select Case statusId
+            Case 0, "Under Revision"
+                Return "badge badge-danger statuslabel"
+            Case 1, "Approved"
                 Return "badge badge-success statuslabel"
             Case Else
                 Return "badge badge-secondary statuslabel"
@@ -11747,6 +12665,10 @@ Public Class LocalAPI
     Public Shared Function GetProposalPhasesCount(proposalId As Integer) As Integer
         Return GetNumericEscalar(String.Format("select count(*) from [Proposal_phases] where proposalId={0}", proposalId))
     End Function
+    Public Shared Function GetCompanyPhasesCount(companyId As Integer) As Integer
+        Return GetNumericEscalar($"select count(*) from [Proposal_phases_template] where companyId={companyId}")
+    End Function
+
     Public Shared Function GetScopeOfWork(proposalId As Integer, ByRef sb As StringBuilder) As Boolean
         Dim cnn1 As SqlConnection = GetConnection()
         Dim cmd As New SqlCommand("SELECT Proposal_details.Description, ISNULL(Proposal_details.DescriptionPlus, '') AS DescriptionPlus, Proposal_phases.Code as PhaseCode, Proposal_phases.Name as PhaseName FROM Proposal_details INNER JOIN Proposal_tasks ON Proposal_details.TaskId = Proposal_tasks.Id LEFT OUTER JOIN Proposal_phases ON Proposal_details.phaseId = Proposal_phases.Id WHERE (Proposal_details.ProposalId = " & proposalId & ") AND (Proposal_tasks.taskcode<>'999') AND (Proposal_details.taskId<>3457) ORDER BY Proposal_phases.nOrder, Proposal_details.OrderBy", cnn1)
@@ -12232,6 +13154,102 @@ Public Class LocalAPI
             Return result
         End Try
     End Function
+
+    Public Shared Function Vendor_INSERT(ByVal sName As String,
+                                        ByVal companyId As Integer,
+                                        Optional ByVal sEmail As String = "",
+                                        Optional ByVal sCompany As String = "",
+                                        Optional ByVal sAddress As String = "",
+                                        Optional ByVal sAddress2 As String = "",
+                                        Optional ByVal sCity As String = "",
+                                        Optional ByVal sState As String = "",
+                                        Optional ByVal sZipCode As String = "",
+                                        Optional ByVal sPhone As String = "",
+                                        Optional ByVal sCellular As String = "",
+                                        Optional ByVal sFax As String = "",
+                                        Optional ByVal sWeb As String = "",
+                                        Optional ByVal sPosition As String = "",
+                                        Optional ByVal sNotes As String = "",
+                                        Optional ByVal Type As Integer = 0,
+                                        Optional ByVal Subtype As Integer = 0,
+                                        Optional ByVal NAICS_code As String = "") As Integer
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' ClienteEmail
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Vendor_v20_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@Name", sName)
+            cmd.Parameters.AddWithValue("@Position", sPosition)
+            cmd.Parameters.AddWithValue("@Company", sCompany)
+            cmd.Parameters.AddWithValue("@Type", Type)
+            cmd.Parameters.AddWithValue("@Subtype", Subtype)
+            cmd.Parameters.AddWithValue("@Address", sAddress)
+            cmd.Parameters.AddWithValue("@Address2", sAddress2)
+            cmd.Parameters.AddWithValue("@City", sCity)
+            cmd.Parameters.AddWithValue("@State", sState)
+            cmd.Parameters.AddWithValue("@ZipCode", sZipCode)
+            cmd.Parameters.AddWithValue("@Phone", sPhone)
+            cmd.Parameters.AddWithValue("@Cellular", sCellular)
+            cmd.Parameters.AddWithValue("@Fax", sFax)
+            cmd.Parameters.AddWithValue("@Email", sEmail)
+            cmd.Parameters.AddWithValue("@Web", sWeb)
+            cmd.Parameters.AddWithValue("@Notes", sNotes)
+            cmd.Parameters.AddWithValue("@NAICS_code", NAICS_code)
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+
+            ' Execute the stored procedure.
+            Dim parOUT_ID As New SqlParameter("@Id_OUT", SqlDbType.Int)
+            parOUT_ID.Direction = ParameterDirection.Output
+            cmd.Parameters.Add(parOUT_ID)
+
+            cmd.ExecuteNonQuery()
+
+            Dim clientId As Integer = parOUT_ID.Value
+            cnn1.Close()
+
+            LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.NewClient, companyId, sName)
+
+            ' Update Latitude, Longitude
+            LocalAPI.ClientGeolocationUpdate(clientId)
+
+            Return clientId
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Shared Function GetqbVendors(QBId As Integer) As Dictionary(Of String, Object)
+
+        Dim result = New Dictionary(Of String, Object)()
+        Try
+            Using conn As SqlConnection = GetConnection()
+                Using comm As New SqlCommand("select * from [Vendors_SyncQB] where [QBId] = " & QBId, conn)
+                    comm.CommandType = CommandType.Text
+
+                    Dim reader = comm.ExecuteReader()
+                    If reader.HasRows Then
+                        ' We only read one time (of course, its only one result :p)
+                        reader.Read()
+                        For lp As Integer = 0 To reader.FieldCount - 1
+                            Dim val = reader.GetValue(lp)
+                            If TypeOf val Is DBNull Then
+                                val = ""
+                            End If
+                            result.Add(reader.GetName(lp), val)
+                        Next
+                    End If
+                End Using
+            End Using
+            Return result
+        Catch e As Exception
+            Return result
+        End Try
+    End Function
     Public Shared Function SetqbAccessToken(companyId As Integer, AccessToken As String, AccessTokenExpiresIn As Long) As Boolean
         Try
 
@@ -12292,6 +13310,200 @@ Public Class LocalAPI
 
 #End Region
 
+#Region "Ebillity Time Entries"
+    Public Shared Function IsEbilityModule(companyId As Integer) As Boolean
+        Return GetNumericEscalar("SELECT isnull([IsEbilityModule],0) FROM Company where companyId=" & companyId)
+    End Function
+
+    Public Shared Function GetEabillityAccessToken(companyId As Integer) As String
+        Return GetStringEscalar("SELECT isnull([EbillityAccessToken],'') FROM Company where companyId=" & companyId)
+    End Function
+    Public Shared Function GetEbillityClientLastSyncDate(companyId As Integer) As String
+        Return GetStringEscalar("SELECT isnull([EbillityClientLastSyncDate],0) FROM Company where companyId=" & companyId)
+    End Function
+    Public Shared Function SetEbillityClientLastSyncDate(companyId As Integer, LastSyncDate As Int64) As String
+        Return GetStringEscalar($"update Company set [EbillityClientLastSyncDate] = {LastSyncDate} where companyId=" & companyId)
+    End Function
+
+    Public Shared Function Client_Sync_Ebillity_Clone(companyId As Integer, ClientId As Integer) As Integer
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' ClienteEmail
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "CLIENT_Sync_Ebillity_Clone"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter )
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+            cmd.Parameters.AddWithValue("@ClientId", ClientId)
+
+            ' Execute the stored procedure.
+            Dim parOUT_ID As New SqlParameter("@Id_OUT", SqlDbType.Int)
+            parOUT_ID.Direction = ParameterDirection.Output
+            cmd.Parameters.Add(parOUT_ID)
+
+            cmd.ExecuteNonQuery()
+
+            Dim NewClientId As Integer = parOUT_ID.Value
+            cnn1.Close()
+
+
+            Return NewClientId
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+
+    Public Shared Sub CLIENT_Sync_Ebillity_Link(companyId As Integer, ClientId As Integer, PC_Clientid As Integer)
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' ClienteEmail
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "CLIENT_Sync_Ebillity_Link"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter )
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+            cmd.Parameters.AddWithValue("@ClientId", ClientId)
+            cmd.Parameters.AddWithValue("@PC_CLientId", PC_Clientid)
+
+            ' Execute the stored procedure.
+
+            cmd.ExecuteNonQuery()
+            cnn1.Close()
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+
+    Public Shared Sub CloneJobEbillity(ByRef ClientId As Integer, ByVal companyId As Integer)
+        Try
+            Dim record = LocalAPI.GetRecordFromQuery($"Select PC_ClientId, Case When (CHARINDEX(':', ClientName) > 0 ) then SUBSTRING(ClientName, CHARINDEX(':', ClientName)+1, 100 ) else ClientName end as ProjectName from [dbo].Clients_Sync_Ebillity where companyId = {companyId} and PC_ClientId is not null and ClientId = {ClientId}")
+            Dim JobId = LocalAPI.NuevoJobEbillity(record("ProjectName"), record("PC_ClientId"), companyId)
+            LocalAPI.ExecuteNonQuery($"update Clients_Sync_Ebillity set PC_JobId = {JobId} where ClientId = {ClientId}  and companyId={companyId}")
+            LocalAPI.Ebillity_Run_After_Sync(companyId)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+
+    Public Shared Function NuevoJobEbillity(
+                                        ByRef sJob As String,
+                                        ByRef ClientId As Integer,
+                                        ByVal companyId As Integer) As Long
+        Try
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "JOB_EBillity_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@JobName", sJob)
+            cmd.Parameters.AddWithValue("@ClientId", ClientId)
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+
+            ' Execute the stored procedure.
+            Dim parOUT_ID As New SqlParameter("@Id_OUT", SqlDbType.Int)
+            parOUT_ID.Direction = ParameterDirection.Output
+            cmd.Parameters.Add(parOUT_ID)
+
+            cmd.ExecuteNonQuery()
+
+            Dim lJobId As Integer = parOUT_ID.Value
+            cnn1.Close()
+
+
+            Return lJobId
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Shared Sub Activity_Sync_Ebillity_Clone(companyId As Integer, ActivityId As Integer)
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' ClienteEmail
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Time_Categories_Sync_Ebillity_Clone"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter )
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+            cmd.Parameters.AddWithValue("@ActivityId", ActivityId)
+
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Public Shared Sub Ebillity_Run_After_Sync(companyId As Integer)
+        Try
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' ClienteEmail
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Ebillity_Run_Sync"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter )
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+
+    Public Shared Sub JobTimeEntries_Ebillity_Import(companyId As Integer)
+        Try
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' ClienteEmail
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "JobTimeEntries_Ebillity_Import"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter )
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+
+#End Region
+
 #Region "FilterClipboard"
     Public Shared Function IsFilterClipboard(employeeId As Integer, companyId As Integer) As Boolean
         Dim nRecs As Integer = GetNumericEscalar("SELECT count(*) FROM [Employee_Filterclipboard] WHERE companyId=" & companyId & " and employeeId=" & employeeId)
@@ -12322,6 +13534,13 @@ Public Class LocalAPI
 
     Public Shared Function GetEntityAzureFilesCount(entityId As Integer, EntityLabel As String) As Integer
         Return GetNumericEscalar($"SELECT count(*) FROM [Azure_Uploads] where EntityType= '{EntityLabel}' and EntityId={entityId}")
+    End Function
+    Public Shared Function GetAzureFilesCount(clientId As Integer, proposalId As Integer, jobId As Integer) As Integer
+        Return GetNumericEscalar($"SELECT count(*) FROM (select au.Id from Azure_Uploads au where [Deleted] = 0 and {clientId}>0 and au.EntityType='Clients' and au.EntityId = {clientId}
+			union all
+			select au.Id from [Azure_Uploads] au where  {proposalId}>0 and au.EntityType='Proposal' and au.EntityId = {proposalId} 
+			union all
+			select au.Id from [Azure_Uploads] au where {jobId}>0 and au.EntityType='Jobs' and au.EntityId = {jobId})F")
     End Function
 
 
@@ -12632,7 +13851,57 @@ Public Class LocalAPI
         End Try
 
     End Function
+    Public Shared Function CreateIcon(sContentType As String, sUrl As String, sGuid As String, FileName As String, IconPixelsHeihgt As Integer)
+        Dim FileExtention As String = ""
+        Dim FontSizeStyle As String = IIf(IconPixelsHeihgt > 16, $"font-size:{IconPixelsHeihgt}px;", "")
 
+        Select Case sContentType
+            Case "application/pdf"
+                FileExtention = ".pdf"
+            Case "application/zip", "application/x-tar", "application/x-rar"
+                FileExtention = ".zip"
+
+            Case "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                FileExtention = ".xls"
+
+            Case "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                FileExtention = ".doc"
+
+            Case "image/tiff", "image/bmp", "image/jpeg", "image/gif", "Image/jpg", "image/png"
+                FileExtention = ".png"
+            Case Else
+                FileExtention = LCase(System.IO.Path.GetExtension(FileName))
+        End Select
+
+        Select Case LCase(FileExtention)
+            Case ".pdf"
+                Return $"<a title=""{FileName}"" class=""far fa-file-pdf"" style=""{FontSizeStyle} color: darkred"" title=""Click To View "" href='{LocalAPI.GetHostAppSite()}/e2103445_8a47_49ff_808e_6008c0fe13a1/DownFiles?guid={sGuid}' target=""_blank"" aria-hidden=""True""></a>"
+            Case ".zip"
+                Return $"<a title=""{FileName}"" class=""far fa-file-archive"" style=""{FontSizeStyle} color: black"" title=""Click To View "" href='{LocalAPI.GetHostAppSite()}/e2103445_8a47_49ff_808e_6008c0fe13a1/DownFiles?guid={sGuid}' target=""_blank"" aria-hidden=""True""></a>"
+            Case ".xls", ".xlsx", ".csv"
+                Return $"<a title=""{FileName}"" class=""far fa-file-excel"" style=""{FontSizeStyle} color: darkgreen"" title=""Click To View "" href='{LocalAPI.GetHostAppSite()}/e2103445_8a47_49ff_808e_6008c0fe13a1/DownFiles?guid={sGuid}' target=""_blank"" aria-hidden=""True""></a>"
+            Case ".doc", ".docx"
+                Return $"<a title=""{FileName}"" class=""far fa-file-word"" style=""{FontSizeStyle} color: darkblue"" title=""Click To View "" href='{LocalAPI.GetHostAppSite()}/e2103445_8a47_49ff_808e_6008c0fe13a1/DownFiles?guid={sGuid}' target=""_blank"" aria-hidden=""True""></a>"
+            Case ".txt"
+                Return $"<a title=""{FileName}"" class=""far fa-file-alt"" style=""{FontSizeStyle} color: black"" title=""Click To View "" href='{LocalAPI.GetHostAppSite()}/e2103445_8a47_49ff_808e_6008c0fe13a1/DownFiles?guid={sGuid}' target=""_blank"" aria-hidden=""True""></a>"
+            Case ".dwg"
+                Return $"<a title=""{FileName}"" class=""fas fa-drafting-compass"" style=""{FontSizeStyle} color: black"" title=""Click To View "" href='{LocalAPI.GetHostAppSite()}/e2103445_8a47_49ff_808e_6008c0fe13a1/DownFiles?guid={sGuid}' target=""_blank"" aria-hidden=""True""></a>"
+            Case ".msg"
+                Return $"<a title=""{FileName}"" class=""far fa-envelope"" style=""{FontSizeStyle} color: black"" title=""Click To View "" href='{LocalAPI.GetHostAppSite()}/e2103445_8a47_49ff_808e_6008c0fe13a1/DownFiles?guid={sGuid}' target=""_blank"" aria-hidden=""True""></a>"
+            Case ".xmcd"
+                Return $"<a title=""{FileName}"" class=""fas fa-equals"" style=""{FontSizeStyle} color: black"" title=""Click To View "" href='{LocalAPI.GetHostAppSite()}/e2103445_8a47_49ff_808e_6008c0fe13a1/DownFiles?guid={sGuid}' target=""_blank"" aria-hidden=""True""></a>"
+
+            Case ".tiff", ".bmp", ".jpeg", ".gif", ".jpg", ".png"
+                If IconPixelsHeihgt > 16 Then
+                    Return $"<div class=""container-fluid px-0""><div class=""row""><div class=""col-md-12""><a title=""{FileName}""  href='{LocalAPI.GetHostAppSite()}/e2103445_8a47_49ff_808e_6008c0fe13a1/DownFiles?guid={sGuid}' target=""_blank""><img src=""{sUrl}"" class=""img-fluid w-100"" style=""object-fit: cover;height: {IconPixelsHeihgt}px;"" /></a></div></div></div>"
+                Else
+                    Return $"<a class=""far fa-file-image"" style=""color: red"" title=""Click To View "" href='{LocalAPI.GetHostAppSite()}/e2103445_8a47_49ff_808e_6008c0fe13a1/DownFiles?guid={sGuid}' target=""_blank"" aria-hidden=""True""></a>"
+                End If
+            Case Else
+                Return $"<a title=""{FileName}"" class=""far fa-file"" style=""{FontSizeStyle} color: darkgray"" title=""Click To View "" href='{LocalAPI.GetHostAppSite()}/e2103445_8a47_49ff_808e_6008c0fe13a1/DownFiles?guid={sGuid}' target=""_blank"" aria-hidden=""True""></a>"
+        End Select
+
+    End Function
 
     Public Shared Function CreateIcon(sContentType As String, sUrl As String, FileName As String, IconPixelsHeihgt As Integer)
         Dim FileExtention As String = ""
@@ -12696,12 +13965,44 @@ Public Class LocalAPI
         '[Authorization Token] = "Bearer 7497EE20-6811-4405-A2EE-471A8BFE3682"
         '[HttpMethod] = "POST"
 
-        LocalAPI.sys_log_Nuevo("jcarlos@axzes.com", LocalAPI.sys_log_AccionENUM.azure_post, 260973, "POST DailyRecurrenceTasks")
+        sys_log_Nuevo("jcarlos@axzes.com", LocalAPI.sys_log_AccionENUM.azure_post, 260973, "POST DailyRecurrenceTasks")
+
+        RefreshYearsList()
+
         SendRecurrenceInvoices()
+
         SendDueDateInvoices()
+
         SendEEGProposalsNotEmitted()
+
         Return DeletePendingAzureFiles()
     End Function
+
+    Public Shared Sub RefreshYearsList()
+        Try
+            Dim CurrentYear As Integer = Today.Year
+            Dim bExisteAnoaActual As Boolean = (GetNumericEscalar($"select isnull(count(*), 0) from [Years] where [Year]= {CurrentYear}") > 0)
+
+            If Not bExisteAnoaActual Then
+                ExecuteNonQuery($"INSERT INTO [Years] ([Year], [nYear]) VALUES ({CurrentYear}, '{CurrentYear}')")
+                sys_Webhooks_INSERT("RefreshYearsList", 1, "")
+
+                AllCompanyPayrollCallendar_InitYear(CurrentYear)
+
+            Else
+                sys_Webhooks_INSERT("RefreshYearsList", 0, "")
+            End If
+
+            ' Update employees in year hourly wage table
+            AllCompaniesEmployeesHourlyWage_INSERT(CurrentYear)
+
+            '
+
+        Catch ex As Exception
+            sys_Webhooks_INSERT("RefreshYearsList", 0, ex.Message)
+        End Try
+
+    End Sub
 
     Public Shared Function SendRecurrenceInvoices() As Boolean
         ' Company.billingModule 
@@ -12981,44 +14282,44 @@ Public Class LocalAPI
 
         End Try
     End Function
-    Public Shared Function LeerStatementTemplate(statementId As Integer, companyId As Integer, ByRef Subject As String, ByRef Body As String) As Boolean
-        Try
-            ' Variables
-            Dim sClienteName = LocalAPI.GetStatementProperty(statementId, "[Clients].[Name]")
-            'Dim sSign = LocalAPI.GetCompanySign(companyId)
-            Dim statementNumber As String = LocalAPI.GetStatementNumber(statementId)
+    'Public Shared Function LeerStatementTemplate(statementId As Integer, companyId As Integer, ByRef Subject As String, ByRef Body As String) As Boolean
+    '    Try
+    '        ' Variables
+    '        Dim sClienteName = LocalAPI.GetStatementProperty(statementId, "[Clients].[Name]")
+    '        'Dim sSign = LocalAPI.GetCompanySign(companyId)
+    '        Dim statementNumber As String = LocalAPI.GetStatementNumber(statementId)
 
-            Subject = "Statement of Invoices Number [Statement Number]"
-            Subject = Replace(Subject, "[Statement Number]", statementNumber)
+    '        Subject = "Statement of Invoices Number [Statement Number]"
+    '        Subject = Replace(Subject, "[Statement Number]", statementNumber)
 
-            If Body.Length = 0 Then
-                Dim sBody As New System.Text.StringBuilder
-                sBody.Append("Dear <strong>[Client Name]</strong>,")
-                sBody.Append("<br />")
-                sBody.Append("<br />")
-                sBody.Append("<a href=" & """" & "[StatementUrl]" & """" & ">Click here</a> to review statement [Statement Number] for Services rendered in the project(s) referenced within.")
-                sBody.Append("<br />")
-                sBody.Append("If you have any inquiries concerning it, please do not hesitate to contact our office.")
-                sBody.Append("<br />")
-                sBody.Append("<br />")
-                sBody.Append("Thank you very much,")
-                sBody.Append("<br />")
-                sBody.Append("[Sign]")
-                Body = sBody.ToString
-            End If
+    '        If Body.Length = 0 Then
+    '            Dim sBody As New System.Text.StringBuilder
+    '            sBody.Append("Dear <strong>[Client Name]</strong>,")
+    '            sBody.Append("<br />")
+    '            sBody.Append("<br />")
+    '            sBody.Append("<a href=" & """" & "[StatementUrl]" & """" & ">Click here</a> to review statement [Statement Number] for Services rendered in the project(s) referenced within.")
+    '            sBody.Append("<br />")
+    '            sBody.Append("If you have any inquiries concerning it, please do not hesitate to contact our office.")
+    '            sBody.Append("<br />")
+    '            sBody.Append("<br />")
+    '            sBody.Append("Thank you very much,")
+    '            sBody.Append("<br />")
+    '            sBody.Append("[Sign]")
+    '            Body = sBody.ToString
+    '        End If
 
-            Body = Replace(Body, "[Statement Number]", statementNumber)
-            Body = Replace(Body, "[Client Name]", sClienteName)
-            'Body = Replace(Body, "[Sign]", sSign)
+    '        Body = Replace(Body, "[Statement Number]", statementNumber)
+    '        Body = Replace(Body, "[Client Name]", sClienteName)
+    '        'Body = Replace(Body, "[Sign]", sSign)
 
-            Dim sURL As String = LocalAPI.GetSharedLink_URL(5555, statementId)
-            Body = Replace(Body, "[StatementUrl]", sURL)
+    '        Dim sURL As String = LocalAPI.GetSharedLink_URL(5555, statementId)
+    '        Body = Replace(Body, "[StatementUrl]", sURL)
 
-            Return True
-        Catch ex As Exception
+    '        Return True
+    '    Catch ex As Exception
 
-        End Try
-    End Function
+    '    End Try
+    'End Function
     Public Shared Function LeerInvoiceRemainderTemplate(invoiceId As Integer) As String
         Try
             Dim sMsg As New System.Text.StringBuilder
@@ -13104,7 +14405,7 @@ Public Class LocalAPI
             sMsg.Append("<br />")
             sMsg.Append("<br />")
 
-            sMsg.Append("<a href=" & """" & LocalAPI.GetHostAppSite() & "/adm/proposal.aspx?proposalId=" & proposalId.ToString & """" & ">[ProposalNumber], [ProjectName]</a>")
+            sMsg.Append("<a href=" & """" & LocalAPI.GetSharedLink_URL(11001, proposalId.ToString) & """" & ">[ProposalNumber], [ProjectName]</a>")
 
             sMsg.Append("<br />")
             sMsg.Append("<br />")
@@ -14045,7 +15346,7 @@ Public Class LocalAPI
     End Function
 #End Region
 
-#Region "ClientPortal"
+#Region "ClientPortal & Acknowledgments"
     Public Shared Function sys_Log_clients_INSERT(IP_Address As String, clientId As Integer, ActionId As Integer, DocumentId As Integer, companyId As Integer) As Boolean
         Try
             ' ActionId codes
@@ -14076,6 +15377,70 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function GetClientAcknowledgments(clientId As Integer) As Boolean
+        Return IIf(GetNumericEscalar($"select count(*) from Clients_acknowledgments where clientId={clientId} and EndDate Is Null") = 0, False, True)
+    End Function
+
+    Public Shared Function ClientAcknowledgment_INSERT(clientId As Integer, Acknowledment As String, Initials As String, IP_Address As String) As Boolean
+        Try
+            ' ActionId codes
+            '   1:  Proposal visit page
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Clients_acknowledgments_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@clientId", clientId)
+            cmd.Parameters.AddWithValue("@Acknowledment", Acknowledment)
+            cmd.Parameters.AddWithValue("@Initials", Initials)
+            cmd.Parameters.AddWithValue("@IP_Address", IP_Address)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            Return True
+        Catch ex As Exception
+
+        End Try
+    End Function
+
+    Public Shared Function SendClientAcknowledmentEmail(ByVal clientId As Integer, employeeId As Integer, ByVal companyId As Integer) As Boolean
+
+        Try
+            Dim employeeEmail As String = GetEmployeeEmail(employeeId)
+            Dim ClientObject = GetRecord(clientId, "Client_v20_SELECT")
+            Dim sFullBody As New System.Text.StringBuilder
+            sFullBody.Append("Mr./Mrs. " & ClientObject("Name") & ":")
+
+            sFullBody.Append("<br />")
+            sFullBody.Append("<br />")
+            sFullBody.Append("In order to improve our communication, we ask for your authorization to send you text messages about Proposals, Invoices and Statements.")
+            sFullBody.Append("<br />")
+            sFullBody.Append("<br />")
+            sFullBody.Append("<a href=" & """" & LocalAPI.GetSharedLink_URL(3001, clientId) & """> Click to Authorize SMS Messages</a>")
+
+            sFullBody.Append("<br />")
+            sFullBody.Append("<br />")
+            sFullBody.Append("Thank you,")
+            sFullBody.Append("<br />")
+            sFullBody.Append("<br />")
+            sFullBody.Append(GetEmployeesSign(employeeId))
+
+            Try
+                SendClientAcknowledmentEmail = SendGrid.Email.SendMail(ClientObject("Email"), employeeEmail, "", "Get SMS updates from " & GetCompanyName(companyId), sFullBody.ToString, companyId, ClientObject("Id"), 0, employeeEmail,, employeeEmail, employeeEmail)
+            Finally
+            End Try
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
 #End Region
 
 #Region "Propsal Payment Sschedule"
@@ -14270,6 +15635,248 @@ Public Class LocalAPI
         End Try
 
     End Function
+
+    Public Shared Function PASconceptClientToAgile(clientId As Integer, Tag As String, employeeId As Integer) As Boolean
+
+        Try
+            Dim companyId As Integer = 260973     ' Axzes
+            Dim LeadObject = GetRecord(clientId, "ClientForAgile_SELECT")
+
+            If Not Agile.IsContact(LeadObject("Email"), companyId) Then
+                Dim AgileRet As String
+                'Dim jsonContactInfo As String = "{""tags"":[""tag_value""], ""properties"":[" &
+                '                                                "{""type"":""SYSTEM"", ""name"":""email"",""value"":""email_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"":""first_name"", ""value"":""first_name_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"":""last_name"", ""value"":""last_name_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"":""company"", ""value"":""company_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"":""phone"", ""value"":""phone_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"":""website"", ""value"":""website_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"":""title"", ""value"":""title_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"": ""address"", ""value"":" & "{\""address\"":\""address_value\"",\""city\"":\""city_value\"",\""state\"":\""state_value\"",\""zip\"":\""zip_value\"",\""country\"":\""US\""}}," &
+                '                                                "{""type"":""CUSTOM"", ""name"":""Source"", ""value"":""source_value""}" &
+                '                                                "]}"
+
+                '{"subtype":null,"name":"address","type":"SYSTEM","value":"{\"country\":\"US\",\"city\":\"doral\",\"latitude\":\"25.819542\",\"countryname\":\"United States\",\"state\":\"fl\",\"longitude\":\"-80.355330\"}"}
+                Dim jsonContactInfo As String = "{""tags"":[""tag_value""], ""properties"":[" &
+                    "{""type"":""SYSTEM"", ""name"":""email"",""value"":""email_value""}," &
+                    "{""type"":""SYSTEM"", ""name"":""first_name"", ""value"":""first_name_value""}," &
+                    "{""type"":""SYSTEM"", ""name"":""last_name"", ""value"":""last_name_value""}," &
+                    "{""type"":""SYSTEM"", ""name"":""company"", ""value"":""company_value""}," &
+                    "{""type"":""SYSTEM"", ""name"":""phone"", ""value"":""phone_value""}," &
+                    "{""type"":""SYSTEM"", ""name"":""website"", ""value"":""website_value""}," &
+                    "{""type"":""SYSTEM"", ""name"":""title"", ""value"":""title_value""}," &
+                    "{""type"":""CUSTOM"", ""name"":""Source"", ""value"":""source_value""}," &
+                    "{""type"":""CUSTOM"", ""name"":""Notes"", ""value"":""notes_value""}," &
+                    "{""subtype"":null,""name"":""address"",""type"":""SYSTEM"",""value"":""{\""zip\"":\""zip_value\"",\""country\"":\""US\"",\""address\"":\""address_value\"",\""city\"":\""city_value\"",\""countryname\"":\""United States\"",\""state\"":\""state_value\""}""}" &
+                    "]}"
+
+                ' -- SYSTEM FIELDS
+
+                jsonContactInfo = Replace(jsonContactInfo, "email_value", LeadObject("Email"))
+                jsonContactInfo = Replace(jsonContactInfo, "first_name_value", LeadObject("FirstName"))
+                jsonContactInfo = Replace(jsonContactInfo, "last_name_value", LeadObject("LastName"))
+                jsonContactInfo = Replace(jsonContactInfo, "company_value", LeadObject("Company"))
+                jsonContactInfo = Replace(jsonContactInfo, "phone_value", LeadObject("Phone"))
+                jsonContactInfo = Replace(jsonContactInfo, "website_value", LeadObject("WebSite"))
+                jsonContactInfo = Replace(jsonContactInfo, "title_value", LeadObject("Position"))
+                jsonContactInfo = Replace(jsonContactInfo, "address_value", LeadObject("AddressLine1"))
+                jsonContactInfo = Replace(jsonContactInfo, "city_value", LeadObject("City"))
+                jsonContactInfo = Replace(jsonContactInfo, "state_value", LeadObject("State"))
+                jsonContactInfo = Replace(jsonContactInfo, "zip_value", LeadObject("ZipCode"))
+
+                jsonContactInfo = Replace(jsonContactInfo, "source_value", LeadObject("Source"))
+                jsonContactInfo = Replace(jsonContactInfo, "notes_value", LeadObject("JobTitle"))
+
+                jsonContactInfo = Replace(jsonContactInfo, "tag_value", Tag)
+
+                ' Others...........................
+                'InAgile Check Column No visible por defecto
+                '"Off" Field No visible por defecto
+                'Agile Custom Field "Source"
+                'Agile Custom Field "Notes" <- JobTitle/Capabilities
+                'Agile Standard ?Field "WebSite"
+                'Agile Custom Field "State"
+                'Agile Custom Field "City"
+                'Agile Custom Field "ZipCode"
+
+
+                AgileRet = Agile.CreateContact(jsonContactInfo, companyId)
+
+            Else
+                ' Add new Tag only
+                Agile.AddTags(LeadObject("Email"), Tag, companyId)
+
+            End If
+
+            LocalAPI.Clients_activities_INSERT(clientId, "A", "Clients", "Clients", employeeId)
+
+            Return True
+
+        Catch ex As Exception
+
+        End Try
+
+    End Function
+#End Region
+
+
+#Region "40 years app"
+    Public Shared Function SendMail40year(ByVal sTo As String, ByVal sCC As String, ByVal sCCO As String, ByVal sSubtject As String, ByVal sBody As String,
+                                    Optional ByVal sFromMail As String = "", Optional ByVal sFromDisplay As String = "") As Boolean
+        Try
+
+            Dim host As String
+            Dim fromAddr As String
+            Dim sUserName As String
+            Dim sPassword As String
+            Dim EnableSsl As Integer
+            Dim Port As Integer
+
+            ' Si existe credenciales de envio de email desde una company, se utilizan
+            host = "smtp.office365.com"
+            fromAddr = "admin@easterneg.com"
+            sUserName = "admin@easterneg.com"
+            sPassword = "ViejaLind@"
+            EnableSsl = "1"
+            Port = 587
+
+            Dim smtp As New SmtpClient(host)
+            smtp.UseDefaultCredentials = False
+            smtp.Credentials = New System.Net.NetworkCredential(sUserName, sPassword)
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network
+            smtp.EnableSsl = EnableSsl
+            smtp.Port = Port
+            'smtp.Timeout = 10000
+
+            Dim message As New MailMessage()
+            'message.To.Add(sTo)
+            If Len(sTo) > 0 Then MessageAddEmailList(message, sTo, "To")
+            If Len(sCC) > 0 Then MessageAddEmailList(message, sCC, "CC")
+            If Len(sCCO) > 0 Then MessageAddEmailList(message, sCCO, "CCO")
+
+            message.Subject = sSubtject
+            message.IsBodyHtml = True
+            message.Body = sBody
+
+            Dim sFrom As String = sFromMail
+            If sFrom.Length = 0 Then sFrom = fromAddr
+            message.From = New MailAddress(sFrom, "Eastern Engineering Group")
+
+            smtp.Send(message)
+
+
+            Dim sAdresses As String = sTo
+            If Len(sCC) > 0 And sTo <> sCC Then
+                sAdresses = sAdresses & ";" & sCC
+            End If
+
+            Return True
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+#End Region
+
+#Region "Progress Invoices"
+    Public Shared Function GetInvoices_progress_detailsProperty(Invoices_progress_detailsId As Integer, sProperty As String) As String
+        Return GetStringEscalar($"SELECT isnull([" & sProperty & "],'') FROM Invoices_progress_details WHERE Id={Invoices_progress_details}")
+    End Function
+
+    Public Shared Function NuevoInvoiceProgress(ByVal lJob As Integer,
+                                    ByVal sInvoiceDate As DateTime,
+                                    ByVal dAmount As Double,
+                                    ByVal sInvoiceNotes As String,
+                                    Optional employeeId As Integer = 0) As Integer
+        Try
+
+            Dim Number As Integer = GetInvoiceNumber(lJob)
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            cmd.CommandText = "INVOICE_Progress_v20_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            cmd.Parameters.AddWithValue("@JobId", lJob)
+            cmd.Parameters.AddWithValue("@InvoiceDate", sInvoiceDate)
+            cmd.Parameters.AddWithValue("@Amount", FormatearNumero2Tsql(dAmount))
+            cmd.Parameters.AddWithValue("@InvoiceNotes", sInvoiceNotes)
+            cmd.Parameters.AddWithValue("@Number", Number)
+            cmd.Parameters.AddWithValue("@employeeId", employeeId)
+
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+
+            Return GetNumericEscalar("SELECT TOP 1 [Id] FROM [Invoices] where [JobId]=" & lJob & " order by Id desc")
+
+            'Dim companyId As Integer = GetCompanyIdFromJob(lJob)
+            'LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.NewInvoice, companyId, sInvoiceNotes)
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Shared Function ProgressInvoices_INSERT(ByVal jobId As Integer, ByVal SourceId As Integer, InvoiceDate As DateTime, MaturityDate As DateTime, InvoiceNotes As String, employeeId As Integer) As Integer
+        Dim cnn1 As SqlConnection = GetConnection()
+        Try
+
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+            Dim Number As Integer = GetInvoiceNumber(jobId)
+
+            cmd.CommandText = "INVOICE_Progress_v20_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            cmd.Parameters.AddWithValue("@JobId", jobId)
+            cmd.Parameters.AddWithValue("@InvoiceDate", InvoiceDate)
+            If Not (MaturityDate = Nothing) Then
+                cmd.Parameters.AddWithValue("@MaturityDate", MaturityDate)
+            Else
+                cmd.Parameters.AddWithValue("@MaturityDate", DBNull.Value)
+            End If
+            cmd.Parameters.AddWithValue("@InvoiceNotes", InvoiceNotes)
+            cmd.Parameters.AddWithValue("@Number", Number)
+            cmd.Parameters.AddWithValue("@employeeId", employeeId)
+            cmd.Parameters.AddWithValue("@sourceId", SourceId)
+
+            cmd.ExecuteNonQuery()
+
+            Return GetNumericEscalar($"SELECT TOP 1 [Id] FROM [Invoices] where [JobId]={jobId} and InvoiceType=3 order by Id desc")
+
+        Catch ex As Exception
+            ' Evita tratamiento de error
+            Return 0
+        Finally
+            cnn1.Close()
+        End Try
+
+    End Function
+
+    Public Shared Sub INVOICE_PAYMENTS_QB_INSERT(InvoiceId As Integer, CollectedDate As DateTime, Method As Integer, Amount As Double, CollectedNotes As String, qbPaymentId As Integer)
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            cmd.CommandText = "INVOICE_PAYMENTS_QB_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.Parameters.AddWithValue("@InvoiceId", InvoiceId)
+            cmd.Parameters.AddWithValue("@CollectedDate", CollectedDate)
+            cmd.Parameters.AddWithValue("@Method", Method)
+            cmd.Parameters.AddWithValue("@Amount", Amount)
+            cmd.Parameters.AddWithValue("@CollectedNotes", CollectedNotes)
+            cmd.Parameters.AddWithValue("@qbPaymentId", qbPaymentId)
+
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
 
 #End Region
 End Class

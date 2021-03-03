@@ -23,6 +23,15 @@ Partial Public Class client
     Protected WithEvents RadCodeBlock As Global.Telerik.Web.UI.RadCodeBlock
 
     '''<summary>
+    '''RadCodeBlock1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadCodeBlock1 As Global.Telerik.Web.UI.RadCodeBlock
+
+    '''<summary>
     '''RadWindowManager1 control.
     '''</summary>
     '''<remarks>
@@ -149,6 +158,33 @@ Partial Public Class client
     Protected WithEvents RadWizardStep4 As Global.Telerik.Web.UI.RadWizardStep
 
     '''<summary>
+    '''btnAddEvent control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnAddEvent As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''lblTitle control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTitle As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''RadGridPending control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadGridPending As Global.Telerik.Web.UI.RadGrid
+
+    '''<summary>
     '''RadScheduler1 control.
     '''</summary>
     '''<remarks>
@@ -156,24 +192,6 @@ Partial Public Class client
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadScheduler1 As Global.Telerik.Web.UI.RadScheduler
-
-    '''<summary>
-    '''RadWizardStep5 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadWizardStep5 As Global.Telerik.Web.UI.RadWizardStep
-
-    '''<summary>
-    '''RadGrid1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
     '''RadWizardStep6 control.
@@ -230,6 +248,51 @@ Partial Public Class client
     Protected WithEvents RadGridMessages As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
+    '''RadToolTipComplete control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadToolTipComplete As Global.Telerik.Web.UI.RadToolTip
+
+    '''<summary>
+    '''lblActivitySubject control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblActivitySubject As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''RadDateTimePickerCompletedDate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadDateTimePickerCompletedDate As Global.Telerik.Web.UI.RadDateTimePicker
+
+    '''<summary>
+    '''cboDuration control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboDuration As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
+    '''btnCompleteActivity control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnCompleteActivity As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
     '''SqlDataSource1 control.
     '''</summary>
     '''<remarks>
@@ -246,24 +309,6 @@ Partial Public Class client
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceTypes As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''SqlDataSourceAppointments control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceAppointments As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''SqlDataSourceActivityType control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceActivityType As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''SqlDataSourceAvailability control.
@@ -365,6 +410,42 @@ Partial Public Class client
     Protected WithEvents SqlDataSourceMessages As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
+    '''SqlDataSourceAppointments control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceAppointments As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourcePending control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourcePending As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourceType control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceType As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourceJob control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceJob As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
     '''lblCompanyId control.
     '''</summary>
     '''<remarks>
@@ -417,6 +498,15 @@ Partial Public Class client
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblBackSource As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblSelectedAppointmentId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSelectedAppointmentId As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Master property.

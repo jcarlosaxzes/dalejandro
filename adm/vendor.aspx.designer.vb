@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class vendor
-    
+
     '''<summary>
     '''RadAjaxManager1 control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class vendor
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadAjaxManager1 As Global.Telerik.Web.UI.RadAjaxManager
-    
+
     '''<summary>
     '''RadAjaxLoadingPanel1 control.
     '''</summary>
@@ -30,16 +30,7 @@ Partial Public Class vendor
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
-    
-    '''<summary>
-    '''btnBack control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''vsClient control.
     '''</summary>
@@ -48,7 +39,7 @@ Partial Public Class vendor
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents vsClient As Global.System.Web.UI.WebControls.ValidationSummary
-    
+
     '''<summary>
     '''FormView1 control.
     '''</summary>
@@ -57,7 +48,7 @@ Partial Public Class vendor
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents FormView1 As Global.System.Web.UI.WebControls.FormView
-    
+
     '''<summary>
     '''SqlDataSource1 control.
     '''</summary>
@@ -66,7 +57,7 @@ Partial Public Class vendor
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceTypes control.
     '''</summary>
@@ -75,7 +66,7 @@ Partial Public Class vendor
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceTypes As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceNAICS control.
     '''</summary>
@@ -84,7 +75,7 @@ Partial Public Class vendor
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceNAICS As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -93,7 +84,7 @@ Partial Public Class vendor
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblVendorId control.
     '''</summary>
@@ -102,7 +93,7 @@ Partial Public Class vendor
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblVendorId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblBackSource control.
     '''</summary>
@@ -111,7 +102,7 @@ Partial Public Class vendor
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblBackSource As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''Master property.
     '''</summary>
@@ -120,7 +111,7 @@ Partial Public Class vendor
     '''</remarks>
     Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
         Get
-            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
+            Return CType(MyBase.Master, pasconcept20.ADM_Main_Responsive)
         End Get
     End Property
 End Class

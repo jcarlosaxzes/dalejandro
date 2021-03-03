@@ -5,7 +5,7 @@ Public Class projectschedule
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack() Then
             ' Si no tiene permiso, la dirijo a message
-            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Projectmap") Then Response.RedirectPermanent("~/adm/default.aspx")
+            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Projectmap") Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Project Schedule"
             Master.PageTitle = "Analytics/Project Schedule"
@@ -35,6 +35,14 @@ Public Class projectschedule
             Case 15  ' (Last Years)
                 RadDatePickerFrom.DbSelectedDate = "01/01/" & Today.Year - 1
                 RadDatePickerTo.DbSelectedDate = "12/31/" & Today.Year - 1
+
+            Case 16  ' (This Month)
+                RadDatePickerFrom.DbSelectedDate = Today.Month & "/01/" & Today.Year
+                RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Day, -1, DateAdd(DateInterval.Month, 1, RadDatePickerFrom.DbSelectedDate))
+            Case 17  ' (Past Month)
+                RadDatePickerFrom.DbSelectedDate = Today.Month & "/01/" & Today.Year
+                RadDatePickerFrom.DbSelectedDate = DateAdd(DateInterval.Month, -1, RadDatePickerFrom.DbSelectedDate)
+                RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Day, -1, DateAdd(DateInterval.Month, 1, RadDatePickerFrom.DbSelectedDate))
 
             Case 30, 60, 90, 120, 180, 365 '   days....
                 RadDatePickerTo.DbSelectedDate = Date.Today

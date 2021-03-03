@@ -43,6 +43,7 @@
                                 <telerik:RadComboBoxItem runat="server" Text="Clients" Value="Clients" />
                                 <telerik:RadComboBoxItem runat="server" Text="Employees" Value="Employees" />
                                 <telerik:RadComboBoxItem runat="server" Text="Subconsultants" Value="Subconsultants" />
+                                <telerik:RadComboBoxItem runat="server" Text="Jobs" Value="Jobs" />
                             </Items>
                         </telerik:RadComboBox>
                     </td>

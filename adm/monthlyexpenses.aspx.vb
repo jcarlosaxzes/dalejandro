@@ -7,7 +7,7 @@ Public Class monthlyexpenses
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             ' Si no tiene permiso, la dirijo a message
-            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Expenses") Then Response.RedirectPermanent("~/adm/default.aspx")
+            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Expenses") Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Company Expenses"
             Master.PageTitle = "Expenses/Company Expenses"
@@ -22,6 +22,10 @@ Public Class monthlyexpenses
             cboCategory.DataBind()
             cboCategory.SelectedValue = -1
             cboVendors.DataBind()
+            DPFrom.DbSelectedDate = Date.Today.Month & "/01/" & Date.Today.Year
+            DPTo.DbSelectedDate = DateAdd(DateInterval.Month, 1, DPFrom.DbSelectedDate)
+            DPTo.DbSelectedDate = DateAdd(DateInterval.Day, -1, DPTo.DbSelectedDate)
+            btnExpensesImportQb.Visible = LocalAPI.IsQuickBookModule(lblCompanyId.Text)
             Refresh()
         End If
     End Sub
@@ -47,6 +51,7 @@ Public Class monthlyexpenses
             Master.ErrorMessage(ex.Message)
         End Try
     End Sub
+
 
 
 #Region "Expenses"
@@ -157,10 +162,22 @@ Public Class monthlyexpenses
         End Try
     End Sub
 
-    Private Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
+    Private Sub btnAddExpense_Click(sender As Object, e As EventArgs) Handles btnAddExpense.Click
+        RadWizardStepExpenses.Active = True
         RadGridExpenses.MasterTableView.InsertItem()
     End Sub
 
+    Private Sub SqlDataSourceExpenses_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceExpenses.Updated
+        Refresh()
+    End Sub
+
+    Private Sub SqlDataSourceExpenses_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceExpenses.Inserted
+        Refresh()
+    End Sub
+
+    Private Sub SqlDataSourceExpenses_Deleted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceExpenses.Deleted
+        Refresh()
+    End Sub
 
 #End Region
 
@@ -168,7 +185,6 @@ Public Class monthlyexpenses
     Private Sub btnImportPayroll_Click(sender As Object, e As EventArgs) Handles btnImportPayroll.Click
         Try
             If cboImportPayrollMode.SelectedValue <> -1 Then
-
                 If cboImportPayrollMode.SelectedValue = 0 Then
                     'DELETE before all records for the selected year, and then Import
                     SqlDataSourceExpensesUtility.Update()
@@ -177,6 +193,10 @@ Public Class monthlyexpenses
                 ImportPayroll()
                 cboYear.SelectedValue = txtYearPayroll.Text
                 Refresh()
+                If RadListBoxImportError.Items.Count > 0 Then
+                    RadToolTipImport.Visible = True
+                    RadToolTipImport.Show()
+                End If
             End If
         Catch ex As Exception
             Master.ErrorMessage(ex.Message)
@@ -186,6 +206,8 @@ Public Class monthlyexpenses
     Private Sub ImportPayroll()
         Try
             'Company Expenses
+            RadListBoxImportError.Items.Clear()
+
             If RadAsyncUploadPayroll.UploadedFiles.Count > 0 Then
 
                 ' declare CsvDataReader object which will act as a source for data for SqlBulkCopy
@@ -252,8 +274,13 @@ Public Class monthlyexpenses
                             Next
 
                             If bIsValidDataRow Then
-                                LocalAPI.NewPayroll(employeeId, CheckDate, NetAmount, TotalHours, TotalPay, TotalCost, EmployeeName, lblCompanyId.Text)
-                                nRecs = nRecs + 1
+                                If employeeId > 0 Then
+                                    LocalAPI.NewPayroll(employeeId, CheckDate, NetAmount, TotalHours, TotalPay, TotalCost, EmployeeName, lblCompanyId.Text)
+                                    nRecs = nRecs + 1
+                                Else
+                                    Dim item1 As RadListBoxItem = New RadListBoxItem(EmployeeName & "  Date: " & CheckDate)
+                                    RadListBoxImportError.Items.Add(item1)
+                                End If
 
                             End If
 
@@ -272,11 +299,43 @@ Public Class monthlyexpenses
     Private Sub SqlDataSourceExpenses_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceExpenses.Selecting
         Dim e1 As String = e.Command.Parameters(0).Value
     End Sub
+
+    Private Sub btbAddPayroll_Click(sender As Object, e As EventArgs) Handles btbAddPayroll.Click
+        RadWizardStepPayroll.Active = True
+        RadGridPayroll.MasterTableView.InsertItem()
+    End Sub
+
+    Private Sub SqlDataSourcePayroll_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourcePayroll.Inserted
+        Refresh()
+    End Sub
+
+    Private Sub SqlDataSourcePayroll_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourcePayroll.Updated
+        Refresh()
+    End Sub
+
+    Private Sub SqlDataSourcePayroll_Deleted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourcePayroll.Deleted
+        Refresh()
+    End Sub
+
+
 #End Region
 
+    Private Sub btnExpensesImportQb_Click(sender As Object, e As EventArgs) Handles btnExpensesImportQb.Click
+        RadToolTipQBExpenses.Visible = True
+        RadToolTipQBExpenses.Show()
+    End Sub
 
-
-
-
+    Private Sub btnImportExpensesQB_Click(sender As Object, e As EventArgs) Handles btnImportExpensesQB.Click
+        If qbAPI.IsValidAccessOrRefreshToken(lblCompanyId.Text) Then
+            System.Threading.Thread.Sleep(3000)
+            If Not IsNothing(DPFrom.DbSelectedDate) And Not IsNothing(DPTo.DbSelectedDate) Then
+                qbAPI.LoadQBExpenses(lblCompanyId.Text, DPFrom.DbSelectedDate, DPTo.DbSelectedDate, IIf(chIgnore.Checked, txtIgnore.Text, "IncludeAllNotIgnore"))
+                Refresh()
+            End If
+        Else
+            ' New Tab for QB Authentication
+            Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=monthlyexpenses")
+        End If
+    End Sub
 
 End Class

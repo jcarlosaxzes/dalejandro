@@ -4,8 +4,6 @@
 
 <%@ MasterType VirtualPath="~/e2103445_8a47_49ff_808e_6008c0fe13a1/ClientPortalMP.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <style>
         .main-content {
             text-align: center;
@@ -43,7 +41,7 @@
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="uxLoadingPanel" runat="server"></telerik:RadAjaxLoadingPanel>
+    <telerik:RadAjaxLoadingPanel ID="uxLoadingPanel" runat="server" EnableEmbeddedSkins="false"></telerik:RadAjaxLoadingPanel>
     <%-- Modals and the like --%>
     <div class="modal fade" id="modal-card">
         <div class="modal-dialog" role="document">
@@ -207,6 +205,36 @@
                                 </div>
                                 <h4>Invoice Description:</h4>
                                 <%# Eval("Notes") %>
+                                <asp:Panel runat="server" ID="InvoicesItems" Visible='<%# Eval("InvoiceType") = 3 %>'>
+                                    <br />
+                                    <h4>Invoice Items</h4>
+                                    <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" ShowFooter="false" Skin="Office2010Silver" 
+                                        AutoGenerateColumns="False" DataSourceID="SqlDataSourceInvoiceItems" CellSpacing="0" Width="100%" HeaderStyle-HorizontalAlign="Center" >
+                                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceInvoiceItems" ShowFooter="true" >
+                                            <Columns>
+                                                <telerik:GridBoundColumn DataField="Id" HeaderText="ID" SortExpression="Id" UniqueName="Id" Display="False">
+                                                </telerik:GridBoundColumn>
+                                                <telerik:GridBoundColumn DataField="Item" HeaderText="Item" SortExpression="Item" UniqueName="Item" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
+                                                </telerik:GridBoundColumn>
+                                                <telerik:GridBoundColumn DataField="Description" HeaderText="Description" SortExpression="Description" UniqueName="Description">
+                                                </telerik:GridBoundColumn>
+                                                <telerik:GridNumericColumn DataField="Amount" HeaderText="Total Fee" SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="150px" NumericType="Currency" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right">
+                                                </telerik:GridNumericColumn>
+                                                <telerik:GridNumericColumn DataField="AmountPrev" HeaderText="Amount Previously Invoiced" SortExpression="AmountPrev" UniqueName="AmountPrev" HeaderStyle-Width="150px" NumericType="Currency" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right">
+                                                </telerik:GridNumericColumn>
+                                                <telerik:GridTemplateColumn DataField="Progress" HeaderText="Percent Complete<br/>To Date" SortExpression="Progress" UniqueName="Progress" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <%# Eval("Progress") %><span style="color:dimgray;">%</span>
+                                                    </ItemTemplate>
+                                                </telerik:GridTemplateColumn>
+                                                <telerik:GridBoundColumn DataField="Total" HeaderText="Amount Due <br/>This Invoice" SortExpression="Total" DataFormatString="{0:C2}" UniqueName="Total" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right">
+                                                </telerik:GridBoundColumn>
+                                                <telerik:GridBoundColumn DataField="Balance" HeaderText="Balance To<br/>Complete" SortExpression="Balance" DataFormatString="{0:C2}" UniqueName="Balance" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right">
+                                                </telerik:GridBoundColumn>
+                                            </Columns>
+                                        </MasterTableView>
+                                    </telerik:RadGrid>
+                                </asp:Panel>
                             </td>
                         </tr>
                     </table>
@@ -296,7 +324,7 @@
 
 
             <%-- Fixed Btns --%>
-            <asp:Panel ID="pnlSideTools" runat="server" CssClass="row hidden-print" Visible="false">
+            <asp:Panel ID="pnlSideTools" runat="server" CssClass="row hidden-print noprint" Visible="false">
                 <div class="col-lg-12" style="margin-top: 10px">
                     <div class="row">
                         <div class="col-lg-6 col-lg-offset-6">
@@ -348,17 +376,19 @@
             <asp:ControlParameter ControlID="lblInvoiceId" Name="InvoiceId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
-
+    <asp:SqlDataSource ID="SqlDataSourceInvoiceItems" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="Invoices_progress_details_SELECT" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblInvoiceId" Name="invoicelId" PropertyName="Text" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
 
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblInvoiceId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblInvoiceGuid" runat="server" Visible="False"></asp:Label>
 
     <script
-        src="https://code.jquery.com/jquery-3.1.1.min.js"
-        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <telerik:RadCodeBlock ID="RadCodeBlockInvoice" runat="server">
         <script>
             $(document).on('click', '.btn-modal-card', function (e) {

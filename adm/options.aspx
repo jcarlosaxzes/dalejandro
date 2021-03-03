@@ -1,5 +1,6 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="options.aspx.vb" Inherits="pasconcept20.options" Async="true"  %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="options.aspx.vb" Inherits="pasconcept20.options" Async="true" %>
 
+<%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/adm/ADM_Main_Responsive.master" %>
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -17,7 +18,7 @@
         }
     </style>
 
-    <telerik:RadWizard ID="RadWizard1" runat="server" Height="720px" DisplayCancelButton="false" 
+    <telerik:RadWizard ID="RadWizard1" runat="server" Height="720px" DisplayCancelButton="false"
         RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
         <WizardSteps>
             <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Employee Profile" StepType="Step">
@@ -39,10 +40,8 @@
                         </tr>
                         <tr>
                             <td>
-                               <telerik:RadAsyncUpload ID="RadAsyncUpload1" runat="server" RenderMode="Classic"
-                                    AllowedFileExtensions=".jpeg,.jpg,.png"
-                                    MaxFileInputsCount="1"
-                                    Width="100%" InputSize="45" ControlObjectsVisibility="None" MaxFileSize="524288">
+                                <telerik:RadAsyncUpload ID="RadAsyncUpload1" runat="server" RenderMode="Auto" AllowedFileExtensions=".jpeg,.jpg,.png"
+                                    MaxFileInputsCount="1" Width="100%" InputSize="45" ControlObjectsVisibility="None" MaxFileSize="524288">
                                 </telerik:RadAsyncUpload>
                             </td>
                             <td>
@@ -101,7 +100,7 @@
                                             </telerik:RadTextBox>
                                         </td>
                                         <td>
-                                            <telerik:RadButton ID="btnOk" runat="server" OnClick="btnOk_Click" Text="Update Password" >
+                                            <telerik:RadButton ID="btnOk" runat="server" OnClick="btnOk_Click" Text="Update Password">
                                                 <Icon PrimaryIconCssClass="rbSave"></Icon>
                                             </telerik:RadButton>
                                         </td>
@@ -121,49 +120,53 @@
             <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Page Settings" StepType="Step">
                 <fieldset style="width: 800px; height: 520px;">
                     <legend>
-                        <h3>
-                        Page Settings</h3></legend>
+                        <h3>Default Settings</h3>
+                    </legend>
                     <div>
                         <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" DefaultMode="Edit" Width="100%">
                             <EditItemTemplate>
-
-
                                 <table class="table-sm" style="width: 100%">
                                     <tr>
-                                        <td colspan="2" style="padding-left: 50px" class="NormalNegrita">You can define your favorite home page to begin PASconcept:
+                                        <td colspan="2" style="padding-left: 50px">
+                                            <h4>Home Page Selection</h4>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="text-align: right; width: 150px" class="Normal">My Favorite Page:
+                                        <td style="text-align: right; width: 150px" class="Normal">My Home Page:
                                         </td>
                                         <td style="text-align: left">
-                                            <telerik:RadComboBox ID="RadComboBox1" runat="server" Width="250px" SelectedValue='<%# Bind("MyHomePage")%>'>
+                                            <telerik:RadComboBox ID="RadComboBox1" runat="server" Width="350px" SelectedValue='<%# Bind("MyHomePage")%>'>
                                                 <Items>
-                                                    <telerik:RadComboBoxItem runat="server" Text="Time Activity" Value="activejobsdashboad.aspx" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="Job List" Value="Jobs.aspx" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="Proposal List" Value="Proposals.aspx" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="Company Overview" Value="Default.aspx" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="Job Calendar" Value="~/ADM/Schedule.aspx" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="Invoices" Value="Invoices.aspx" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="Statements" Value="Jobs.aspx" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="Client List" Value="Clients.aspx" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="Client Management" Value="ClientManagement.aspx" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="Requests for Proposals" Value="RequestForProposals.aspx" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="Timesheet" Value="TimeSheet.aspx" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="Company Insights" Value="Dashboard.aspx" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="Project Schedule" Value="ProjectSchedule.aspx" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="Project Map" Value="ProjectMap.aspx" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="Top ten" Value="TopTen.aspx" />
+                                                    <telerik:RadComboBoxItem runat="server" Text="Projects->Job" Value="jobs.aspx" />
+                                                    <telerik:RadComboBoxItem runat="server" Text="Projects->Proposals" Value="proposals.aspx" />
+                                                    <telerik:RadComboBoxItem runat="server" Text="Projects->Requests for Proposals" Value="requestforproposals.aspx" />
+
+                                                    <telerik:RadComboBoxItem runat="server" Text="Projects->Calendar" Value="schedule.aspx" />
+                                                    <telerik:RadComboBoxItem runat="server" Text="Projects->Timesheet" Value="timesheet.aspx" />
+                                                    <telerik:RadComboBoxItem runat="server" Text="Projects->Time Activity" Value="activejobsdashboad.aspx" />
+                                                    <telerik:RadComboBoxItem runat="server" Text="Finances->Invoices" Value="invoices.aspx" />
+                                                    <telerik:RadComboBoxItem runat="server" Text="Finances->Statements" Value="statement.aspx" />
+                                                    <telerik:RadComboBoxItem runat="server" Text="Finances->Payments" Value="payments.aspx" />
+                                                    <telerik:RadComboBoxItem runat="server" Text="Contacts->Clients" Value="clients.aspx" />
+                                                    <telerik:RadComboBoxItem runat="server" Text="Contacts->Client Management" Value="clientmanagement.aspx" />
+
+                                                    <telerik:RadComboBoxItem runat="server" Text="Dashboards->Company Overview" Value="default.aspx" />
+                                                    <telerik:RadComboBoxItem runat="server" Text="Dashboards->Company Insights" Value="dashboard.aspx" />
+                                                    <telerik:RadComboBoxItem runat="server" Text="Dashboards->Top ten" Value="topten.aspx" />
+
+                                                    <telerik:RadComboBoxItem runat="server" Text="Reports->Permit Tracker" Value="revisions.aspx" />
                                                 </Items>
                                             </telerik:RadComboBox>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2" style="padding-left: 100px; padding-top: 10px" class="NormalNegrita">Pre-defined filters for Job List page
+                                        <td colspan="2" style="padding-left: 50px">
+                                            <h4>Job Filter Settings</h4>
                                         </td>
                                     </tr>
+
                                     <tr>
-                                        <td style="text-align: right; width: 150px" class="Normal">Period:
+                                        <td style="text-align: right; width: 150px" class="Normal">Period Filter:
                                         </td>
                                         <td>
                                             <telerik:RadDropDownList ID="cboMesJob" runat="server" Width="100%" SelectedValue='<%# Bind("FilterJob_Month")%>'>
@@ -206,14 +209,13 @@
 
                                         </td>
                                     </tr>
-
-
                                     <tr>
-                                        <td colspan="2" style="padding-left: 100px; padding-top: 10px" class="NormalNegrita">Pre-defined filters for Proposal List page
+                                        <td colspan="2" style="padding-left: 50px">
+                                            <h4>Proposal Filter Settings</h4>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="text-align: right; width: 150px" class="Normal">Period:
+                                        <td style="text-align: right; width: 150px" class="Normal">Period Filter:
                                         </td>
                                         <td>
                                             <telerik:RadDropDownList ID="cboMesProposal" runat="server" Width="100%" SelectedValue='<%# Bind("FilterProposal_Month")%>'>
@@ -244,6 +246,24 @@
 
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td colspan="2" style="padding-left: 50px">
+                                            <h4>Calendar Filter Settings</h4>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="text-align: right; width: 150px" class="Normal">Activity Calendar Filter:
+                                        </td>
+                                        <td>
+                                            <telerik:RadDropDownList ID="RadDropDownList1" runat="server" Width="100%" SelectedValue='<%# Bind("FilterCalendarViewAll")%>'>
+                                                <Items>
+                                                    <telerik:DropDownListItem Text="View My Activities" Value="0"/>
+                                                    <telerik:DropDownListItem Text="View Activities for All Employees" Value="1" />
+                                                </Items>
+                                            </telerik:RadDropDownList>
+                                        </td>
+                                    </tr>
                                 </table>
                                 <div style="text-align: right">
                                     <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ToolTip="Update" CommandName="Update">
@@ -260,22 +280,46 @@
 
                 </fieldset>
             </telerik:RadWizardStep>
-            <telerik:RadWizardStep runat="server" ID="RadWizardStep3" Title="Mobile App" StepType="Step">
-                <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceMobile" HeaderStyle-HorizontalAlign="Center">
-                    <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourceMobile">
+
+            <telerik:RadWizardStep runat="server" ID="RadWizardStep3" Title="Documents (W2, Paychecks, Contracts, Agreements)" StepType="Step">
+                <h3>Employee Documents</h3>
+                <telerik:RadGrid ID="RadGridFiles" runat="server" DataSourceID="SqlDataSourceAzureFiles" GridLines="None"
+                    AllowPaging="True" PageSize="25" AutoGenerateColumns="False" HeaderStyle-HorizontalAlign="Center">
+                    <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceAzureFiles">
+                        <PagerStyle Mode="Slider" AlwaysVisible="false" />
                         <Columns>
-                            <telerik:GridBoundColumn UniqueName="Platform" HeaderText="Platform" DataField="Platform" HeaderStyle-Width="200px">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn UniqueName="VersionNumber" HeaderText="Version" DataField="VersionNumber" HeaderStyle-Width="200px" ItemStyle-HorizontalAlign="Center" >
+                            <telerik:GridBoundColumn DataField="Id" HeaderText="Id" ReadOnly="True" UniqueName="Id" Display="false" HeaderStyle-Width="40px">
                             </telerik:GridBoundColumn>
 
-                            <telerik:GridTemplateColumn DataField="Url" HeaderText="Distribution Page Link" UniqueName="Download">
+                            <telerik:GridTemplateColumn HeaderText="" UniqueName="IconType" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <a href='<%# iif(Eval("Platform") = "iPhone", "https://www.pasconcept.com/Distribution/iphone.aspx", "https://www.pasconcept.com/Distribution/android.aspx") %>' target="_blank"><%#String.Concat("PASconcept Mobile App Distribution page for ", Eval("Platform"))%></a>
+                                    <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("guid").ToString(), Eval("Name"), 32)%>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn DataField="Name" HeaderText="File Name" UniqueName="Name" SortExpression="Name" ItemStyle-Font-Bold="true" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                <ItemTemplate>
+                                            <%# Eval("Name")%>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn DataField="Type" HeaderText="Type" UniqueName="Type" ItemStyle-HorizontalAlign="Center"
+                                HeaderStyle-Width="300px" HeaderStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <%# Eval("nType")%>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn DataField="Date" HeaderText="Date" UniqueName="Date" SortExpression="Date" ItemStyle-HorizontalAlign="Center"
+                                HeaderStyle-Width="180px" HeaderStyle-HorizontalAlign="Center" Aggregate="Count">
+                                <ItemTemplate>
+                                    <%# Eval("Date", "{0:d}")%>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                         </Columns>
+
                     </MasterTableView>
+
                 </telerik:RadGrid>
             </telerik:RadWizardStep>
         </WizardSteps>
@@ -283,7 +327,7 @@
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="EmployyeOthersSettings_SELECT" SelectCommandType="StoredProcedure"
-        UpdateCommand="UPDATE Employees SET MyHomePage = @MyHomePage, FilterJob_Year = @FilterJob_Year, FilterJob_Month = @FilterJob_Month, FilterJob_Employee = @FilterJob_Employee, FilterJob_Department = @FilterJob_Department, FilterProposal_Year = @FilterProposal_Year, FilterProposal_Month = @FilterProposal_Month, FilterProposal_Department = @FilterProposal_Department WHERE (Id = @Id)">
+        UpdateCommand="UPDATE Employees SET MyHomePage = @MyHomePage, FilterJob_Year = @FilterJob_Year, FilterJob_Month = @FilterJob_Month, FilterJob_Employee = @FilterJob_Employee, FilterJob_Department = @FilterJob_Department, FilterProposal_Year = @FilterProposal_Year, FilterProposal_Month = @FilterProposal_Month, FilterProposal_Department = @FilterProposal_Department, FilterCalendarViewAll=@FilterCalendarViewAll WHERE (Id = @Id)">
         <SelectParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
             <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" Type="Int32" />
@@ -297,6 +341,7 @@
             <asp:Parameter Name="FilterProposal_Year" />
             <asp:Parameter Name="FilterProposal_Month" />
             <asp:Parameter Name="FilterProposal_Department" />
+            <asp:Parameter Name="FilterCalendarViewAll" />
             <asp:ControlParameter ControlID="lblEmployeeId" Name="Id" PropertyName="Text" />
         </UpdateParameters>
     </asp:SqlDataSource>
@@ -315,10 +360,14 @@
         </SelectParameters>
     </asp:SqlDataSource>
 
-    <asp:SqlDataSource ID="SqlDataSourceMobile" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT [Platform]=case when [Platform]=1 then 'iPhone' else 'Android' end ,[VersionNumber],[Url]  FROM [dbo].[MobileAppVersions] WHERE [Latest]=1">
+    <asp:SqlDataSource ID="SqlDataSourceAzureFiles" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="Employee_azureuploads_SELECT" SelectCommandType="StoredProcedure"
+        DeleteCommand="azureuploads_DELETE" DeleteCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblEmployeeId" Name="EmployeeId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
+        </SelectParameters>
     </asp:SqlDataSource>
-
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblCompanyId" runat="server" Text="0" Visible="False"></asp:Label>

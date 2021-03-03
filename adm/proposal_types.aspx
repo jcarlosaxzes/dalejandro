@@ -47,7 +47,7 @@
             <MasterTableView DataSourceID="SqlDataSource1" DataKeyNames="Id">
                 <PagerStyle Mode="Slider" AlwaysVisible="false" />
                 <Columns>
-                    <telerik:GridTemplateColumn DataField="Name" FilterControlAltText="Filter Name column" ItemStyle-HorizontalAlign="Left"
+                    <telerik:GridTemplateColumn DataField="Name" ItemStyle-HorizontalAlign="Left"
                         HeaderText="Name" SortExpression="Name" UniqueName="Name" HeaderStyle-HorizontalAlign="Center">
                         <ItemTemplate>
 
@@ -57,16 +57,7 @@
                             </asp:LinkButton>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="TaskIdList" FilterControlAltText="Filter TaskIdList column"
-                        HeaderText="Related Task ID" SortExpression="TaskIdList" UniqueName="TaskIdList"
-                        HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="300px">
-
-                        <ItemTemplate>
-                            <asp:Label ID="TaskIdListLabel" runat="server" Text='<%# Eval("TaskIdList") %>'></asp:Label>
-                        </ItemTemplate>
-                        <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
-                    </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="PaymentsScheduleList" FilterControlAltText="Filter PaymentsScheduleList column"
+                    <telerik:GridTemplateColumn DataField="PaymentsScheduleList" 
                         HeaderText="Payment Schedule(%)" SortExpression="PaymentsScheduleList" UniqueName="PaymentsScheduleList" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
 
                         <ItemTemplate>

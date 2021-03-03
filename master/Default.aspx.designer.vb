@@ -12,25 +12,7 @@ Option Explicit On
 
 
 Partial Public Class _Default2
-
-    '''<summary>
-    '''FormView1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents FormView1 As Global.System.Web.UI.WebControls.FormView
-
-    '''<summary>
-    '''SqlDataSource1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
-
+    
     '''<summary>
     '''Master property.
     '''</summary>
@@ -39,7 +21,7 @@ Partial Public Class _Default2
     '''</remarks>
     Public Shadows ReadOnly Property Master() As pasconcept20.MasterPage
         Get
-            Return CType(MyBase.Master, pasconcept20.MasterPage)
+            Return CType(MyBase.Master,pasconcept20.MasterPage)
         End Get
     End Property
 End Class

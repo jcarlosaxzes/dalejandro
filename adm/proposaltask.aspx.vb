@@ -29,14 +29,26 @@ Public Class proposaltask
                     btnUpdateAndBack.Text = "Insert and Back"
                     PanelEstimator.Visible = False
                 End If
-                If Not Request.QueryString("fromwizard") Is Nothing Then
-                    lblBackSource.Text = 1
+                'If Not Request.QueryString("fromwizard") Is Nothing Then
+                '    lblBackSource.Text = 1
+                'End If
+
+                If Not Request.QueryString("backpage") Is Nothing Then
+                    Session("proposaltaskbackpage") = Request.QueryString("backpage")
                 End If
 
-                cboPhase.Visible = IIf(LocalAPI.GetProposalPhasesCount(lblproposalId.Text) = 0, False, True)
 
                 btnUpdate.Visible = EnabledProposal()
                 btnUpdateAndBack.Visible = btnUpdate.Visible
+
+                ' Phase settings............
+                PanelPhases.Visible = IIf(LocalAPI.GetProposalPhasesCount(lblproposalId.Text) = 0, False, True)
+                If Not Request.QueryString("phaseId") Is Nothing And PanelPhases.Visible Then
+                    cboPhase.DataBind()
+                    cboPhase.SelectedValue = Request.QueryString("phaseId")
+                    cboPhase.Enabled = (cboPhase.SelectedValue = 0)
+                End If
+
             End If
 
         Catch ex As Exception
@@ -136,20 +148,25 @@ Public Class proposaltask
     Private Sub cboMulticolumnTask_SelectedIndexChanged(sender As Object, e As RadMultiColumnComboBoxSelectedIndexChangedEventArgs) Handles cboMulticolumnTask.SelectedIndexChanged
         If cboMulticolumnTask.Value > 0 Then
             Dim taskId As Integer = cboMulticolumnTask.Value
-            txtName.Text = LocalAPI.GetTaskProperty(taskId, "Description")
-            txtDescriptionPlus.Content = LocalAPI.GetTaskProperty(taskId, "DescriptionPlus")
-            txtTimeSel.Text = LocalAPI.GetTaskProperty(taskId, "Hours")
-            txtRates.Text = LocalAPI.GetTaskProperty(taskId, "Rates")
-            cboBillType.SelectedValue = IIf(LocalAPI.GetTaskProperty(taskId, "HourRatesService") = 0, 1, 2)
+            Dim RasksRecordObject = LocalAPI.GetRecord(taskId, "Proposal_tasks_Record_SELECT")
+
+
+            txtName.Text = RasksRecordObject("Description")
+            txtDescriptionPlus.Content = RasksRecordObject("DescriptionPlus")
+            txtTimeSel.Text = RasksRecordObject("Hours")
+            txtRates.Text = RasksRecordObject("Rates")
+            cboBillType.SelectedValue = IIf(RasksRecordObject("HourRatesService") = 0, 1, 2)
         End If
 
     End Sub
     Private Sub Back()
-        If lblBackSource.Text = 1 Then
-            Response.Redirect("~/adm/proposalnewwizard.aspx?proposalId=" & lblproposalId.Text & "&FeesTab=1")
-        Else
-            Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblproposalId.Text)
-        End If
+        Select Case Session("proposaltaskbackpage")
+            Case "pro_phases", "proposal"
+                Response.Redirect(LocalAPI.GetSharedLink_URL(11006, lblproposalId.Text))
+            Case "proposalnewwizard"
+                Response.Redirect("~/adm/proposalnewwizard.aspx?proposalId=" & lblproposalId.Text & "&FeesTab=1")
+        End Select
+
     End Sub
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         Back()

@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class company
-    
+
     '''<summary>
     '''RadWindowManager1 control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class company
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
-    
+
     '''<summary>
     '''FormView1 control.
     '''</summary>
@@ -30,34 +30,7 @@ Partial Public Class company
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents FormView1 As Global.System.Web.UI.WebControls.FormView
-    
-    '''<summary>
-    '''RadWizard5 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadWizard5 As Global.Telerik.Web.UI.RadWizard
-    
-    '''<summary>
-    '''RadWizardStepsCompanyInfo2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadWizardStepsCompanyInfo2 As Global.Telerik.Web.UI.RadWizardStep
-    
-    '''<summary>
-    '''RadGridHoliday control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadGridHoliday As Global.Telerik.Web.UI.RadGrid
-    
+
     '''<summary>
     '''SqlDataSourceLogo control.
     '''</summary>
@@ -66,16 +39,7 @@ Partial Public Class company
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceLogo As Global.System.Web.UI.WebControls.SqlDataSource
-    
-    '''<summary>
-    '''SqlDataSourceLetterHead control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceLetterHead As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceSign control.
     '''</summary>
@@ -84,7 +48,7 @@ Partial Public Class company
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceSign As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSource1 control.
     '''</summary>
@@ -93,7 +57,7 @@ Partial Public Class company
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceTypes control.
     '''</summary>
@@ -102,16 +66,7 @@ Partial Public Class company
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceTypes As Global.System.Web.UI.WebControls.SqlDataSource
-    
-    '''<summary>
-    '''SqlDataSourceHoliday control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceHoliday As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -120,7 +75,7 @@ Partial Public Class company
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblEmployeeEmail control.
     '''</summary>
@@ -129,7 +84,7 @@ Partial Public Class company
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEmployeeEmail As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''btnActiveTab control.
     '''</summary>
@@ -138,7 +93,7 @@ Partial Public Class company
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnActiveTab As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''Master property.
     '''</summary>
@@ -147,7 +102,7 @@ Partial Public Class company
     '''</remarks>
     Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
         Get
-            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
+            Return CType(MyBase.Master, pasconcept20.ADM_Main_Responsive)
         End Get
     End Property
 End Class

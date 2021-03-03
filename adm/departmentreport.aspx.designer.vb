@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class departmentreport
-    
+
     '''<summary>
     '''pnlFind control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''cboYear control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboYear As Global.Telerik.Web.UI.RadDropDownList
-    
+
     '''<summary>
     '''cboDepartments control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboDepartments As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''btnRefresh control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnRefresh As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''RadGridEmpls control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGridEmpls As Global.Telerik.Web.UI.RadGrid
-    
+
     '''<summary>
     '''FunnelChart1 control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents FunnelChart1 As Global.Telerik.Web.UI.RadHtmlChart
-    
+
     '''<summary>
     '''lblROI control.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblROI As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''PieChart1 control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents PieChart1 As Global.Telerik.Web.UI.RadHtmlChart
-    
+
     '''<summary>
     '''PieChart2 control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents PieChart2 As Global.Telerik.Web.UI.RadHtmlChart
-    
+
     '''<summary>
     '''BoxPlotChartLifeCycle control.
     '''</summary>
@@ -102,7 +102,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents BoxPlotChartLifeCycle As Global.Telerik.Web.UI.RadHtmlChart
-    
+
     '''<summary>
     '''month control.
     '''</summary>
@@ -111,7 +111,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents month As Global.System.Web.UI.WebControls.RadioButton
-    
+
     '''<summary>
     '''year control.
     '''</summary>
@@ -120,7 +120,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents year As Global.System.Web.UI.WebControls.RadioButton
-    
+
     '''<summary>
     '''RadChartFinancialSummary control.
     '''</summary>
@@ -129,7 +129,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadChartFinancialSummary As Global.Telerik.Web.UI.RadHtmlChart
-    
+
     '''<summary>
     '''lblCustomer1 control.
     '''</summary>
@@ -138,7 +138,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCustomer1 As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblCustomer2 control.
     '''</summary>
@@ -147,7 +147,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCustomer2 As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblCustomer3 control.
     '''</summary>
@@ -156,7 +156,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCustomer3 As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblCustomer4 control.
     '''</summary>
@@ -165,7 +165,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCustomer4 As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblCustomer5 control.
     '''</summary>
@@ -174,7 +174,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCustomer5 As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblDepartmentSalarySum control.
     '''</summary>
@@ -183,7 +183,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblDepartmentSalarySum As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblDepartmentSalaryAvg control.
     '''</summary>
@@ -192,7 +192,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblDepartmentSalaryAvg As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblDepartmentOverhead_Direct control.
     '''</summary>
@@ -201,7 +201,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblDepartmentOverhead_Direct As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''RadHtmlChartSalary control.
     '''</summary>
@@ -210,7 +210,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadHtmlChartSalary As Global.Telerik.Web.UI.RadHtmlChart
-    
+
     '''<summary>
     '''RadHtmlChartDepartmentWorkload control.
     '''</summary>
@@ -219,7 +219,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadHtmlChartDepartmentWorkload As Global.Telerik.Web.UI.RadHtmlChart
-    
+
     '''<summary>
     '''RadHtmlChartDepartmmentOverhead control.
     '''</summary>
@@ -228,7 +228,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadHtmlChartDepartmmentOverhead As Global.Telerik.Web.UI.RadHtmlChart
-    
+
     '''<summary>
     '''RadGridDetailedEmployees control.
     '''</summary>
@@ -237,7 +237,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGridDetailedEmployees As Global.Telerik.Web.UI.RadGrid
-    
+
     '''<summary>
     '''SqlDataSourceFunnelChart control.
     '''</summary>
@@ -246,7 +246,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceFunnelChart As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourcePieProposalsChart control.
     '''</summary>
@@ -255,7 +255,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourcePieProposalsChart As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourcePieJobsChart control.
     '''</summary>
@@ -264,7 +264,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourcePieJobsChart As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceDepartments control.
     '''</summary>
@@ -273,7 +273,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceDepartments As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceYear control.
     '''</summary>
@@ -282,7 +282,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceYear As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceEmployees control.
     '''</summary>
@@ -291,7 +291,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceEmployees As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceLifeCycle control.
     '''</summary>
@@ -300,7 +300,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceLifeCycle As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceFinancialSummary control.
     '''</summary>
@@ -309,7 +309,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceFinancialSummary As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceDepartmentSalary control.
     '''</summary>
@@ -318,7 +318,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceDepartmentSalary As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceDepartmmentOverhead control.
     '''</summary>
@@ -327,7 +327,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceDepartmmentOverhead As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceDepartmentWorkload control.
     '''</summary>
@@ -336,7 +336,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceDepartmentWorkload As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceDetailedEmployees control.
     '''</summary>
@@ -345,7 +345,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceDetailedEmployees As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -354,7 +354,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblEmployeeEmail control.
     '''</summary>
@@ -363,7 +363,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEmployeeEmail As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblDatePart control.
     '''</summary>
@@ -372,7 +372,7 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblDatePart As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''Master property.
     '''</summary>
@@ -381,7 +381,7 @@ Partial Public Class departmentreport
     '''</remarks>
     Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
         Get
-            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
+            Return CType(MyBase.Master, pasconcept20.ADM_Main_Responsive)
         End Get
     End Property
 End Class

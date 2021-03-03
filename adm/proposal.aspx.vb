@@ -11,14 +11,17 @@ Public Class proposal
             If (Not Page.IsPostBack) Then
 
                 lblProposalId.Text = Me.Request.QueryString("proposalId")
+                lblProposalNumber.Text = LocalAPI.ProposalNumber(lblProposalId.Text)
+
+                panelViewProposalPage.DataBind()
 
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ProposalsList") Then Response.RedirectPermanent("~/adm/default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ProposalsList") Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
                 lblCompanyId.Text = Session("companyId")
 
 
-                If LocalAPI.IsCompanyViolation(lblProposalId.Text, "Proposal", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/default.aspx")
+                If LocalAPI.IsCompanyViolation(lblProposalId.Text, "Proposal", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
                 If Val(lblCompanyId.Text) = 0 Then
                     ' Link externo de EEG
@@ -44,7 +47,7 @@ Public Class proposal
                 lblEmployeeName.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "EmployeeName")
                 lblEmailDate.Text = Left(LocalAPI.GetProposalProperty(lblProposalId.Text, "EmailDate"), 16)
                 lblSelectedJobId.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "JobId")
-                If Val(lblSelectedJobId.Text) = 0 Then lblSelectedJobId.Text = -1
+                ' error.... If Val(lblSelectedJobId.Text) = 0 Then lblSelectedJobId.Text = -1
 
                 ' Datos de Acceptance
                 Dim sFirmado As String = LocalAPI.GetProposalProperty(lblProposalId.Text, "AceptanceName")
@@ -67,6 +70,16 @@ Public Class proposal
 
                 ConfigUploadPanels()
 
+                ' Phases
+                If LocalAPI.GetCompanyPhasesCount(lblCompanyId.Text) = 0 Then
+                    RadWizardStepPhases.CssClass = "wizardStepHidden"
+                    RadWizardStepPhaseSchedule.CssClass = "wizardStepHidden"
+                Else
+                    If Not Request.QueryString("TabPhase") Is Nothing Then
+                        RadWizardStepPhases.Active = True
+                    End If
+                End If
+
             End If
             'RadWindowDataProcessing.NavigateUrl = "~/ADM/DataProcessing.aspx?ProposalId=" & lblProposalId.Text
             'RadWindowManager2.EnableViewState = False
@@ -88,6 +101,7 @@ Public Class proposal
                 CType(WStep.FindControl("btnGeneratePaymentSchedules"), LinkButton).Visible = True
                 btnNewTask.Visible = True
             End If
+
 
         Catch ex As Exception
             Master.ErrorMessage(ex.Message & " code: " & lblCompanyId.Text)
@@ -114,24 +128,23 @@ Public Class proposal
         btnGridPage.Visible = Not RadListViewFiles.Visible
         btnTablePage.Visible = RadListViewFiles.Visible
 
-        If lblCompanyId.Text = 260962 Then
-            ' EEG 10 Mb
-            RadCloudUpload1.MaxFileSize = 10485760
-        End If
+        RadCloudUpload1.MaxFileSize = LocalAPI.GetCompanyMaxFileSizeForUpload(lblCompanyId.Text)
+        lblMaxSize.Text = $"[Maximum upload size per file: {LocalAPI.FormatByteSize(RadCloudUpload1.MaxFileSize)}]"
 
     End Sub
     Private Sub EnabledProposal()
-        Dim Allow_EditAcceptedProposal As Boolean = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_EditAcceptedProposal")
-        If Allow_EditAcceptedProposal Then
-            btnUpdate1.Enabled = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewProposal")
-            btnDeleteProposal.Enabled = btnUpdate1.Enabled
-        Else
-            btnUpdate1.Enabled = lblOriginalStatus.Text <> 4 And lblOriginalStatus.Text <> 2 ' diferente de Revised
-            btnDeleteProposal.Enabled = lblOriginalStatus.Text <> 2 ' diferente de Acepted
-        End If
+
+        ' If Proposal Acepted, special Permit to change
+        btnUpdateStatus.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_EditAcceptedProposal")
+
+        btnUpdate1.Enabled = (lblOriginalStatus.Text <> 4 And lblOriginalStatus.Text <> 2) ' diferente de Revised
+        btnDeleteProposal.Enabled = (lblOriginalStatus.Text <> 2) ' diferente de Acepted
+
         btnNewTask.Enabled = btnUpdate1.Enabled
         RadGrid1.AllowAutomaticUpdates = btnUpdate1.Enabled
         RadGrid1.AllowAutomaticDeletes = btnUpdate1.Enabled
+        RadGridPhases.AllowAutomaticDeletes = btnUpdate1.Enabled
+
         FormViewTC.Enabled = btnUpdate1.Enabled
 
         ' Otras acciones
@@ -159,21 +172,21 @@ Public Class proposal
 
     Private Function TotalsAnalisis() As Boolean
         Try
-            Dim bTotal As Double = LocalAPI.GetProposalTotal(lblProposalId.Text)
-            Dim bPSTotal As Double = LocalAPI.GetProposalPSTotal(lblProposalId.Text)
+            Dim dTotal As Double = LocalAPI.GetProposalTotal(lblProposalId.Text)
+            Dim dPSTotal As Double = LocalAPI.GetProposalPSTotal(lblProposalId.Text)
             Dim RadWizard1 As RadWizard = CType(FormViewProp1.FindControl("RadWizard1"), RadWizard)
 
             Dim WStep As RadWizardStep = RadWizard1.WizardSteps(1)
 
-            CType(WStep.FindControl("lblProposalTotal"), Label).Text = FormatCurrency(bTotal)
-            CType(WStep.FindControl("lblScheduleTotal"), Label).Text = FormatCurrency(bPSTotal)
+            CType(WStep.FindControl("lblProposalTotal"), Label).Text = FormatCurrency(dTotal)
+            CType(WStep.FindControl("lblScheduleTotal"), Label).Text = FormatCurrency(dPSTotal)
 
-            If bTotal = 0 Then
-                CType(WStep.FindControl("lblTotalAlert"), Label).Text = "It is mandatory that [Proposal Total] is greater than zero !"
+            If dTotal = 0 Then
+                CType(WStep.FindControl("lblTotalAlert"), Label).Text = "Alert. The Project Total is zero !"
                 Return False
             Else
-                If bPSTotal > 0 And (Math.Round(bTotal, 0) <> Math.Round(bPSTotal, 0)) Then
-                    CType(WStep.FindControl("lblTotalAlert"), Label).Text = "It Is mandatory that [Proposal Total] = [Payment Schedule Total] ! "
+                If dPSTotal > 0 And (Math.Round(dTotal, 0) <> Math.Round(dPSTotal, 0)) Then
+                    CType(WStep.FindControl("lblTotalAlert"), Label).Text = $"Your Project Total ({dTotal}) and your Payment Schedule Total ({dPSTotal}) do not match !"
                     Return False
                 Else
                     CType(WStep.FindControl("lblTotalAlert"), Label).Text = ""
@@ -204,7 +217,7 @@ Public Class proposal
 
     Protected Sub btnConfirmDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnConfirmDelete.Click
         LocalAPI.EliminarProposal(lblProposalId.Text)
-        Response.Redirect("~/adm/proposals.aspx")
+        Response.Redirect("~/adm/proposals.aspx?restoreFilter=true")
     End Sub
 
     Protected Sub btnCancelDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCancelDelete.Click
@@ -279,7 +292,7 @@ Public Class proposal
         If cboPayment.SelectedValue > 0 Then
             lblPaymentSchedules.Text = cboPayment.SelectedValue
             GuardarProposal(False)
-            SqlDataSourcePS.Update()
+            SqlDataSourceProposalPSUpdate.Update()
             FormViewProp1.DataBind()
 
             'Update Fees List
@@ -307,13 +320,14 @@ Public Class proposal
     End Sub
 
     Protected Sub SqlDataSourceProp1_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceProp1.Updating
-        If Val(lblSelectedJobId.Text) > 0 Then
-            e.Command.Parameters("@JobId").Value = lblSelectedJobId.Text
-        Else
-            If Val("" & LocalAPI.GetProposalData(lblProposalId.Text, "JobId")) > 0 Then
-                e.Command.Parameters("@JobId").Value = LocalAPI.GetProposalData(lblProposalId.Text, "JobId")
-            End If
-        End If
+        'Allow unlink Job from Proposal
+        'If Val(lblSelectedJobId.Text) > 0 Then
+        e.Command.Parameters("@JobId").Value = Val(lblSelectedJobId.Text)
+        'Else
+        '    If Val("" & LocalAPI.GetProposalData(lblProposalId.Text, "JobId")) > 0 Then
+        '        e.Command.Parameters("@JobId").Value = LocalAPI.GetProposalData(lblProposalId.Text, "JobId")
+        '    End If
+        'End If
     End Sub
 
     Protected Sub SqlDataSourceProp1_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceProp1.Updated
@@ -340,17 +354,17 @@ Public Class proposal
         lblSelectedJobId.Text = cboJobs.SelectedValue
         'PanelJobAsociado()
         GuardarProposal(True)
-        btnModifyJob.Enabled = False
+        'btnModifyJob.Enabled = False
     End Sub
 
     Private Sub RadGrid1_EditCommand(sender As Object, e As GridCommandEventArgs) Handles RadGrid1.EditCommand
         GuardarProposal(False)
     End Sub
     Protected Sub btnNewPhase_Click(sender As Object, e As EventArgs) Handles btnNewPhase.Click
-        Response.Redirect("~/adm/newpropsalphase.aspx?Id=" & lblProposalId.Text)
+        Response.Redirect($"~/adm/proposalphase.aspx?proposalId={lblProposalId.Text}&backpage=proposal")
     End Sub
     Protected Sub btnPivotPhases_Click(sender As Object, e As EventArgs) Handles btnPivotPhases.Click
-        Response.Redirect("~/adm/proposalphases.aspx?Id=" & lblProposalId.Text)
+        Response.Redirect("~/adm/proposalpivotphases.aspx?proposalId=" & lblProposalId.Text)
     End Sub
 
     Protected Sub btnSchedule_Click(sender As Object, e As EventArgs) Handles btnSchedule.Click
@@ -358,13 +372,25 @@ Public Class proposal
     End Sub
 
     Private Sub RadGrid1_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGrid1.ItemCommand
+        Dim statusId As String = LocalAPI.GetProposalData(lblProposalId.Text, "statusId")
         Select Case e.CommandName
             Case "EditTask"
-                Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text & "&detailId=" & e.CommandArgument)
+                Response.Redirect($"~/adm/proposaltask.aspx?proposalId={lblProposalId.Text}&detailId={e.CommandArgument}&backpage=proposal")
             Case "DetailDuplicate"
                 If cboStatus.SelectedValue <= 1 Then
                     lblDetailSelectedId.Text = e.CommandArgument
                     SqlDataSourceProposaldDetailDuplicate.Insert()
+                    RadGrid1.DataBind()
+                End If
+
+            Case "OrderDown"
+                If statusId <= 1 Then
+                    LocalAPI.ProposalDetail_OrderBy_UPDATE(e.CommandArgument, 1)
+                    RadGrid1.DataBind()
+                End If
+            Case "OrderUp"
+                If statusId <= 1 Then
+                    LocalAPI.ProposalDetail_OrderBy_UPDATE(e.CommandArgument, -1)
                     RadGrid1.DataBind()
                 End If
         End Select
@@ -374,7 +400,7 @@ Public Class proposal
     Private Sub RadGridPhases_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridPhases.ItemCommand
         Select Case e.CommandName
             Case "EditPhase"
-                Response.Redirect("~/adm/editproposalphase.aspx?Id=" & e.CommandArgument)
+                Response.Redirect($"~/adm/proposalphase.aspx?Id={e.CommandArgument}&proposalId={lblProposalId.Text}&backpage=proposal")
         End Select
 
     End Sub
@@ -409,16 +435,16 @@ Public Class proposal
     End Sub
 
     Protected Sub btnSaveAs_Click(sender As Object, e As EventArgs) Handles btnSaveAs.Click
-        Response.Redirect("~/adm/saveproposalas.aspx?ProposalId=" & lblProposalId.Text)
+        Response.Redirect($"~/adm/proposal_save_copy.aspx?ProposalId={lblProposalId.Text}&backpage=proposal")
     End Sub
     Protected Sub btnSaveAsTemplate_Click(sender As Object, e As EventArgs) Handles btnSaveAsTemplate.Click
-        Response.Redirect("~/adm/saveproposalastemplate.aspx?ProposalId=" & lblProposalId.Text)
+        Response.Redirect($"~/adm/proposal_save_as_template.aspx?ProposalId={lblProposalId.Text}&backpage=proposal")
     End Sub
     Protected Sub btnNewTask_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewTask.Click
         Try
             GuardarProposal(False)
             'CreateRadWindows("Form", "~/ADM/NewProposalTask.aspx?Id=" & lblProposalId.Text, 1024, 768, False, "OnClientClose")
-            Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text)
+            Response.Redirect($"~/adm/proposaltask.aspx?proposalId={lblProposalId.Text}&backpage=proposal")
         Catch ex As Exception
         End Try
     End Sub
@@ -427,7 +453,7 @@ Public Class proposal
         btnUpdateStatus.Enabled = (cboStatus.SelectedValue <> lblOriginalStatus.Text)
     End Sub
 
-    Private Sub f(sender As Object, e As EventArgs) Handles btnUpdateStatus.Click
+    Private Sub btnUpdateStatus_Click(sender As Object, e As EventArgs) Handles btnUpdateStatus.Click
         If cboStatus.SelectedValue <> lblOriginalStatus.Text Then
             Select Case cboStatus.SelectedValue
 
@@ -473,7 +499,9 @@ Public Class proposal
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         Select Case Session("propsalbackpage")
             Case "job_proposals"
-                Response.Redirect("~/adm/job_proposals.aspx?jobId=" & lblSelectedJobId.Text)
+                Dim sUrl As String = LocalAPI.GetSharedLink_URL(8001, lblSelectedJobId.Text)
+                Response.Redirect(sUrl)
+
             Case Else
                 Response.Redirect("~/adm/proposals.aspx?restoreFilter=true")
         End Select
@@ -707,6 +735,19 @@ Public Class proposal
 
     Private Sub btnSaveUpload_Click(sender As Object, e As EventArgs) Handles btnSaveUpload.Click
         ConfigUploadPanels()
+    End Sub
+
+    Private Sub FormViewProp1_ItemCommand(sender As Object, e As FormViewCommandEventArgs) Handles FormViewProp1.ItemCommand
+        Select Case e.CommandName
+            Case "ViewJob"
+                Dim sUrl As String = LocalAPI.GetSharedLink_URL(8001, e.CommandArgument)
+                Response.Redirect(sUrl)
+
+        End Select
+    End Sub
+
+    Protected Sub btnNewNote_Click(sender As Object, e As EventArgs) Handles btnNewNote.Click
+        RadGridNotes.MasterTableView.InsertItem()
     End Sub
 End Class
 

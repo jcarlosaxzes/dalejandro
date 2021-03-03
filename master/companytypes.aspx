@@ -336,25 +336,25 @@
                                                                 </telerik:RadTextBox>
                                                             </EditItemTemplate>
                                                         </telerik:GridTemplateColumn>
-                                                        <telerik:GridTemplateColumn DataField="TextBegin" Display="False" HeaderText="Proposal Introductory Text"
+                                                        <telerik:GridTemplateColumn DataField="TextBegin" Display="False" HeaderText="Proposal Opening Text"
                                                             SortExpression="TextBegin" UniqueName="TextBegin">
                                                             <ItemTemplate>
                                                                 <asp:Label ID="TextBeginLabel" runat="server" Text='<%# Eval("TextBegin") %>'></asp:Label>
                                                             </ItemTemplate>
                                                             <EditItemTemplate>
                                                                 <telerik:RadTextBox ID="TextBeginTextBox" runat="server" Text='<%# Bind("TextBegin") %>'
-                                                                    TextMode="MultiLine" Rows="4" MaxLength="512" Width="650px">
+                                                                    TextMode="MultiLine" Rows="4" Width="650px">
                                                                 </telerik:RadTextBox>
                                                             </EditItemTemplate>
                                                         </telerik:GridTemplateColumn>
-                                                        <telerik:GridTemplateColumn DataField="TextEnd" Display="False" HeaderText="Proposal Concluding Text"
+                                                        <telerik:GridTemplateColumn DataField="TextEnd" Display="False" HeaderText="Proposal Closing Text"
                                                             SortExpression="TextEnd" UniqueName="TextEnd">
                                                             <ItemTemplate>
                                                                 <asp:Label ID="TextEndLabel" runat="server" Text='<%# Eval("TextEnd") %>'></asp:Label>
                                                             </ItemTemplate>
                                                             <EditItemTemplate>
                                                                 <telerik:RadTextBox ID="TextEndTextBox" runat="server" Height="75px" Text='<%# Bind("TextEnd") %>'
-                                                                    TextMode="MultiLine" Rows="4" MaxLength="512" Width="650px">
+                                                                    TextMode="MultiLine" Rows="4" Width="650px">
                                                                 </telerik:RadTextBox>
                                                             </EditItemTemplate>
                                                         </telerik:GridTemplateColumn>

@@ -7,7 +7,7 @@ Public Class employees
         Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Employees List"
         If (Not Page.IsPostBack) Then
             ' Si no tiene permiso, la dirijo a message
-            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_EmployeesList") Then Response.RedirectPermanent("~/adm/default.aspx")
+            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_EmployeesList") Then Response.RedirectPermanent("~/adm/schedule.aspx")
             ' Si no tiene permiso New, boton.Visible=False
             btnNew.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewEmployee")
 
@@ -16,8 +16,8 @@ Public Class employees
             lblEmployee.Text = Master.UserEmail
             lblCompanyId.Text = Session("companyId")
             cboStatus.DataBind()
-            RadSchedulerVacation.SelectedDate = CDate("01/01/" & Date.Today.Year)
-            RadSchedulerLive.SelectedDate = CDate("01/01/" & Date.Today.Year)
+
+            ActivateTechnicalSupportButton()
 
         End If
         RadWindowManager1.EnableViewState = False
@@ -50,7 +50,11 @@ Public Class employees
 
     Protected Sub btnConfirmDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnConfirmDelete.Click
         Dim CurrentInactive As Integer = IIf(LocalAPI.GetEmployeeProperty(lblSelected.Text, "Inactive"), 1, 0)
+        Dim EmployeeName As String = LocalAPI.GetEmployeeProperty(lblSelected.Text, "FullName")
         If LocalAPI.EliminarEmployee(CInt(lblSelected.Text)) Then
+
+            LocalAPI.sys_log_Nuevo(Master.UserEmail, LocalAPI.sys_log_AccionENUM.DeleteEmployee, lblCompanyId.Text, "Delete Employee: " & EmployeeName)
+
             OcultarConfirmDelete()
             Master.InfoMessage("The employee was deleted.")
             lblSelected.Text = ""
@@ -79,14 +83,6 @@ Public Class employees
     End Sub
 
 
-    Protected Sub cboYear_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboYear.SelectedIndexChanged
-        RadSchedulerVacation.SelectedDate = CDate("01/01/" & cboYear.SelectedValue)
-    End Sub
-
-    Protected Sub cboYear2_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboYear2.SelectedIndexChanged
-        RadSchedulerLive.SelectedDate = CDate("01/01/" & cboYear2.SelectedValue)
-    End Sub
-
     Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
         Dim sUrl As String = ""
         Select Case e.CommandName
@@ -107,12 +103,14 @@ Public Class employees
                 End If
 
             Case "Permits"
-                sUrl = "~/ADM/Employee_Permissions_form.aspx?employeeId=" & e.CommandArgument & "&Entity=Employee"
-                CreateRadWindows(e.CommandName, sUrl, 960, 800, False)
+                Response.Redirect($"~/ADM/Employee_Permissions_form.aspx?employeeId={e.CommandArgument}&Entity=Employee&backpage=employees")
 
             Case "UpdateStatus"
                 sUrl = "~/ADM/Employee_Status_form.aspx?employeeId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 800, 650, True)
+
+            Case "Uploads"
+                Response.Redirect("~/ADM/employee_files?employee=" & e.CommandArgument)
 
         End Select
     End Sub
@@ -178,5 +176,39 @@ Public Class employees
         End If
 
     End Function
+
+    Private Sub btnTechnicalSupport_Click(sender As Object, e As EventArgs) Handles btnTechnicalSupport.Click
+        If btnTechnicalSupport.Text = "Activate Technical Support" Then
+            RadToolTipTechnicalSupport.Visible = True
+            RadToolTipTechnicalSupport.Show()
+        Else
+            ' Deactivate Employee of Technical Support
+            LocalAPI.DeactivateTechnicalSupportEmployee(Master.UserEmail, lblCompanyId.Text)
+            RadGrid1.DataBind()
+            ActivateTechnicalSupportButton()
+        End If
+    End Sub
+
+    Private Sub btnConfirmActivateTechnicalSupport_Click(sender As Object, e As EventArgs) Handles btnConfirmActivateTechnicalSupport.Click
+        If (Page.IsValid) Then
+            LocalAPI.ActivateTechnicalSupportEmployee(Master.UserEmail, lblCompanyId.Text)
+            RadGrid1.DataBind()
+            ActivateTechnicalSupportButton()
+        End If
+    End Sub
+
+    Private Sub ActivateTechnicalSupportButton()
+        If LocalAPI.IsTechnicalSupportEmployee(lblCompanyId.Text) Then
+            btnTechnicalSupport.Text = "Deactivate Technical Support"
+            btnTechnicalSupport.ToolTip = "Deactivate Employee of Technical Support"
+        Else
+            btnTechnicalSupport.Text = "Activate Technical Support"
+            btnTechnicalSupport.ToolTip = "Activate Employee for Technical Support"
+        End If
+    End Sub
+
+    Protected Sub CheckBoxRequired_ServerValidate(sender As Object, e As ServerValidateEventArgs)
+        e.IsValid = chkAuthorizeTS.Checked
+    End Sub
 
 End Class

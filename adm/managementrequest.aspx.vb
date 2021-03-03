@@ -4,6 +4,7 @@ Public Class managementrequest
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
+            lblCompanyId.Text = Session("companyId")
             Master.PageTitle = "Management Request"
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Management Request"
             lblEmployeeEmail.Text = Master.UserEmail
@@ -80,5 +81,39 @@ Public Class managementrequest
 
     Private Sub SqlDataSource1_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSource1.Updating
         e.Command.Parameters(2).Value = CType(RadDataForm1.Items(0).FindControl("txtExplanation"), RadTextBox).Text
+    End Sub
+
+    Protected Sub RadScheduler1_AppointmentDataBound(sender As Object, e As SchedulerEventArgs)
+        Select Case e.Appointment.Description
+            Case "Request Time"
+                e.Appointment.CssClass = "rsCategoryBlue"
+                e.Appointment.Font.Size = 10
+                e.Appointment.ForeColor = System.Drawing.Color.White
+            Case "Non Productive Time"
+                e.Appointment.CssClass = "rsCategoryPink"
+                e.Appointment.Font.Size = 10
+                e.Appointment.ForeColor = System.Drawing.Color.White
+
+            Case "Holiday"
+                e.Appointment.CssClass = "rsCategoryGreen"
+                e.Appointment.Font.Size = 10
+                e.Appointment.ForeColor = System.Drawing.Color.White
+        End Select
+    End Sub
+
+    Private Sub RadDataForm1_ItemCreated(sender As Object, e As RadDataFormItemEventArgs) Handles RadDataForm1.ItemCreated
+
+        If e.Item.ItemType = RadDataFormItemType.DataItem Then
+            Dim item As RadDataFormDataItem = TryCast(e.Item, RadDataFormDataItem)
+            Dim scheduler As RadScheduler = CType(item.FindControl("RadScheduler1"), RadScheduler)
+            If Not Request.QueryString("Id") Is Nothing Then
+                Dim timeRequest = LocalAPI.GetRecordFromQuery($"select * from Employees_NonRegularHours_Request where Id = {Request.QueryString("Id")}")
+                Dim dateFrom As DateTime = timeRequest("DateFrom")
+                scheduler.SelectedDate = dateFrom
+            End If
+
+
+
+        End If
     End Sub
 End Class

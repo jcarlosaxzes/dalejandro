@@ -98,13 +98,13 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="text-align: right">Employee Head:
+                            <td style="text-align: right">Head Employee:
                             </td>
                             <td>
                                 <telerik:RadComboBox runat="server" ID="cboHead" DataValueField="Id" Width="100%" Height="250px"
                                     DataTextField="Name" DataSourceID="SqlDataSourceEmployees" AppendDataBoundItems="true">
                                     <Items>
-                                        <telerik:RadComboBoxItem Text="(Select Employee Head...)" Value="0" />
+                                        <telerik:RadComboBoxItem Text="(Select Head Employee...)" Value="0" />
                                     </Items>
                                 </telerik:RadComboBox>
                             </td>
@@ -162,7 +162,7 @@
                         </tr>
                         <tr>
                             <td colspan="2" style="text-align: center">
-                                <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false" CausesValidation="true">
+                                <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" CausesValidation="true">
                                                 Update
                                 </asp:LinkButton>
 

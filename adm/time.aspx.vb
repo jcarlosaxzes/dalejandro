@@ -9,7 +9,7 @@ Public Class time
                 ' Si no tiene permiso, la dirijo a message
                 lblCompanyId.Text = Session("companyId")
                 lblEmployeeId.Text = Master.UserId
-                If Not LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProjectTimeEntries") Then Response.RedirectPermanent("~/adm/default.aspx")
+                If Not LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProjectTimeEntries") Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
                 Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Time Entries"
 
@@ -75,6 +75,14 @@ Public Class time
                 RadDatePickerFrom.DbSelectedDate = "01/01/2000"
                 RadDatePickerTo.DbSelectedDate = "12/31/" & Today.Year
 
+            Case 16  ' (This Month)
+                RadDatePickerFrom.DbSelectedDate = Today.Month & "/01/" & Today.Year
+                RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Day, -1, DateAdd(DateInterval.Month, 1, RadDatePickerFrom.DbSelectedDate))
+            Case 17  ' (Past Month)
+                RadDatePickerFrom.DbSelectedDate = Today.Month & "/01/" & Today.Year
+                RadDatePickerFrom.DbSelectedDate = DateAdd(DateInterval.Month, -1, RadDatePickerFrom.DbSelectedDate)
+                RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Day, -1, DateAdd(DateInterval.Month, 1, RadDatePickerFrom.DbSelectedDate))
+
             Case 30, 60, 90, 120, 180, 365 '   days....
                 RadDatePickerTo.DbSelectedDate = Date.Today
                 RadDatePickerFrom.DbSelectedDate = DateAdd(DateInterval.Day, 0 - nPeriodo, RadDatePickerTo.DbSelectedDate)
@@ -83,11 +91,15 @@ Public Class time
                 RadDatePickerFrom.DbSelectedDate = "01/01/" & Date.Today.Year
                 RadDatePickerTo.DbSelectedDate = "12/31/" & Date.Today.Year
 
+            Case 99   'Custom
+                RadDatePickerFrom.Focus()
+                ' Allow RadDatePicker user Values...
         End Select
         cboPeriod.SelectedValue = nPeriodo
     End Sub
     Private Sub RefrescarDatos()
         Try
+            IniciaPeriodo(cboPeriod.SelectedValue)
             btnNew.Visible = (cboJob.SelectedValue > 0)
 
             RadGrid1.DataBind()
@@ -148,7 +160,12 @@ Public Class time
             Case "NewHrInvoice"
                 lblTimeId.Text = e.CommandArgument
                 txtTimeSel.DbValue = LocalAPI.GetTimeProperty(lblTimeId.Text, "Time")
-                txtRate.DbValue = LocalAPI.GetTimeProperty(lblTimeId.Text, "HourRate")
+
+                'txtRate.DbValue = LocalAPI.GetTimeProperty(lblTimeId.Text, "HourRate")
+                Dim emloyeeId As Integer = LocalAPI.GetTimeProperty(lblTimeId.Text, "Employee")
+                Dim jobId As Integer = LocalAPI.GetTimeProperty(lblTimeId.Text, "Job")
+                txtRate.DbValue = LocalAPI.GetEmployeeAssignedHourRate(jobId, emloyeeId)
+
                 txtTimeDescription.Text = LocalAPI.GetTimeProperty(lblTimeId.Text, "Description")
                 ConfirmInsertDlg("New Invoice", "Create New (hr) Invoice from Time record")
 

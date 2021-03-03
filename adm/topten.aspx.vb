@@ -4,7 +4,7 @@
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If (Not Page.IsPostBack) Then
             ' Si no tiene permiso, la dirijo a message
-            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Analytics") Then Response.RedirectPermanent("~/adm/default.aspx")
+            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Analytics") Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Top Ten"
             Master.PageTitle = "Analytics/Most Important Clients"

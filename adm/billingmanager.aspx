@@ -28,6 +28,7 @@
         <span style="float: right; vertical-align: middle;">
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                 <i class="fas fa-filter"></i>&nbsp;Filter
+           
             </button>
         </span>
 
@@ -38,19 +39,22 @@
             <div class="pasconcept-bar">
 
                 <telerik:RadComboBox ID="cboClients" runat="server" AppendDataBoundItems="true" DataSourceID="SqlDataSourceClient" ToolTip="Clients"
-                    DataTextField="Name" DataValueField="Id" Filter="Contains" Height="250px" MarkFirstMatch="True" Width="350px" >
+                    DataTextField="Name" DataValueField="Id" Filter="Contains" Height="250px" MarkFirstMatch="True" Width="350px">
                     <Items>
                         <telerik:RadComboBoxItem runat="server" Selected="true" Text="(All Clients...)" Value="-1" />
                     </Items>
                 </telerik:RadComboBox>
 
                 &nbsp;
+               
                 <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id" ToolTip="Departments"
                     Width="250px" CheckBoxes="true" Height="300px" EnableCheckAllItemsCheckBox="true" MarkFirstMatch="True" Filter="Contains" EmptyMessage="(All Departments...)">
                     <Localization AllItemsCheckedString="All Items Checked" CheckAllString="Check All..." ItemsCheckedString="departments checked"></Localization>
                 </telerik:RadComboBox>
 
                 &nbsp;
+
+               
 
                 <telerik:RadComboBox ID="cboStatus" runat="server" DataSourceID="SqlDataSourceJobStatus" DataTextField="Name" DataValueField="Id"
                     Width="150px" AppendDataBoundItems="true" ToolTip="Job Status">
@@ -60,6 +64,7 @@
                 </telerik:RadComboBox>
 
                 &nbsp;
+               
                 <telerik:RadComboBox ID="cboPasDueStatus" runat="server" ToolTip="Past Due Status"
                     Width="250px" CheckBoxes="true" Height="300px" EnableCheckAllItemsCheckBox="true" MarkFirstMatch="True" Filter="Contains">
                     <Localization AllItemsCheckedString="All Past Due Checked" CheckAllString="Check All..." ItemsCheckedString="PastDue status checked"></Localization>
@@ -75,10 +80,13 @@
 
                 &nbsp;
 
+               
+
                 <telerik:RadTextBox ID="txtFind" runat="server" EmptyMessage="Search for Invoice Number, Job Name, Client Name, ..."
                     Width="150px" x-webkit-speech="x-webkit-speech">
                 </telerik:RadTextBox>
                 &nbsp;&nbsp;&nbsp;
+               
                 <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                     <i class="fas fa-search"></i> Filter/Search
                 </asp:LinkButton>
@@ -141,6 +149,7 @@
                                     Groupable="False" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
                                     <ItemTemplate>
                                         <%# Eval("recordtypetitle")%>:
+                                       
                                         <a href='<%# LocalAPI.GetSharedLink_URL(Eval("recordtypeId"),Eval("sourceId"))%>' target="_blank" title="view Invoice/statement"><%# Eval("InvoiceNumber")%></a>
                                         <br />
                                         <%# Eval("AmountDue", "{0:C2}")%>
@@ -187,8 +196,10 @@
 
 
                                                 &nbsp;&nbsp;&nbsp;
-                                                <asp:LinkButton ID="btnUpdate" Text="Update" runat="server" CommandName="Update"></asp:LinkButton>&nbsp;
-                                                <asp:LinkButton ID="btnCancel" Text="Cancel" runat="server" CausesValidation="False" CommandName="Cancel"></asp:LinkButton>
+                                               
+                                                <asp:LinkButton ID="btnUpdate" Text="Update" runat="server" CommandName="Update" CssClass="btn btn-success btn-lg"></asp:LinkButton>&nbsp;
+                                               
+                                                <asp:LinkButton ID="btnCancel" Text="Cancel" runat="server" CausesValidation="False" CommandName="Cancel" CssClass="btn btn-secondary btn-lg"></asp:LinkButton>
 
                                             </td>
 
@@ -201,57 +212,40 @@
                 </div>
             </telerik:RadWizardStep>
             <telerik:RadWizardStep runat="server" Title="Invoices">
-                <table style="width: 100%">
-                    <tr class="noprint">
-                        <td style="width: 120px">
-
-                            <asp:LinkButton ID="btnEmail" runat="server" ToolTip="Send Email with Invoice information to selected records" Width="100px"
-                                CssClass="btn btn-info btn" UseSubmitBehavior="false">
+                <div class="pasconcept-bar noprint">
+                    <span style="float: right; vertical-align: middle;">
+                        <asp:LinkButton ID="btnEmail" runat="server" ToolTip="Send Email with Invoice information to selected records" Width="100px"
+                            CssClass="btn btn-info btn" UseSubmitBehavior="false">
                                     <i class="far fa-envelope"></i> Email
                             </asp:LinkButton>
-                        </td>
-                        <td style="width: 120px">
-
-                            <asp:LinkButton ID="btnBadDebt" runat="server" ToolTip="Mark selected records like BadDebt" Width="100px"
-                                CssClass="btn btn-danger btn" UseSubmitBehavior="false">
+                        <asp:LinkButton ID="btnBadDebt" runat="server" ToolTip="Mark selected records like BadDebt"
+                            CssClass="btn btn-danger btn" UseSubmitBehavior="false">
                                     <i class="far fa-thumbs-down"></i> BadDebt
                             </asp:LinkButton>
-                        </td>
-                        <td style="width: 120px">
-                            <asp:LinkButton ID="btnReceivePayment" runat="server" ToolTip="Receive Payment to selected records" Width="100px"
-                                CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+                        <asp:LinkButton ID="btnReceivePayment" runat="server" ToolTip="Receive Payment to selected records" 
+                            CssClass="btn btn-primary btn" UseSubmitBehavior="false">
                                     <i class="fas fa-dollar-sign"></i> Payment
                             </asp:LinkButton>
-                        </td>
-                        <td style="width: 120px">
-                            <asp:LinkButton ID="btnStatement" runat="server" ToolTip="Convert to Statement the selected records" Width="100px"
-                                CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+                        <asp:LinkButton ID="btnStatement" runat="server" ToolTip="Convert to Statement the selected records" 
+                            CssClass="btn btn-primary btn" UseSubmitBehavior="false">
                                     <i class="far fa-list-alt"></i> Statement
                             </asp:LinkButton>
-                        </td>
-                        <td style="width: 180px">
-                            <telerik:RadNumericTextBox ID="txtEmissionRecurrenceDays" runat="server" Value="15" Width="30px" MaxLength="2" MinValue="0" MaxValue="99" ToolTip="Frequency days of automated email reccurence (Schedule)">
-                                <NumberFormat DecimalDigits="0" />
-                            </telerik:RadNumericTextBox>
-                            <asp:LinkButton ID="btnSchedule" runat="server" ToolTip="Create recuring invoice emmisions every period (days)" Width="100px"
-                                CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+                        <telerik:RadNumericTextBox ID="txtEmissionRecurrenceDays" runat="server" Value="15" Width="30px" MaxLength="2" MinValue="0" MaxValue="99" ToolTip="Frequency days of automated email reccurence (Schedule)">
+                            <NumberFormat DecimalDigits="0" />
+                        </telerik:RadNumericTextBox>
+                        <asp:LinkButton ID="btnSchedule" runat="server" ToolTip="Create recuring invoice emmisions every period (days)"
+                            CssClass="btn btn-primary btn" UseSubmitBehavior="false">
                                     <i class="far fa-calendar-alt"></i> Schedule
                             </asp:LinkButton>
-                        </td>
-                        <td style="width: 120px">
-                            <asp:LinkButton ID="btnClientInvoicesUnhide" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Show all hidden clients " Width="80px">
+                        <asp:LinkButton ID="btnClientInvoicesUnhide" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Show all hidden clients ">
                                         <i class="far fa-eye"></i>Unhide
                             </asp:LinkButton>
-                        </td>
-                        <td style="text-align: right">
-                            <asp:LinkButton ID="btnExportInvoices" runat="server" ToolTip="Export records to Excel" Width="100px"
-                                CssClass="btn btn-secondary btn" UseSubmitBehavior="false">
+                        <asp:LinkButton ID="btnExportInvoices" runat="server" ToolTip="Export records to Excel" 
+                            CssClass="btn btn-secondary btn" UseSubmitBehavior="false">
                                     <i class="fas fa-download"></i> Export
                             </asp:LinkButton>
-                        </td>
-
-                    </tr>
-                </table>
+                    </span>
+                </div>
                 <div style="padding-top: 5px">
                     <telerik:RadGrid ID="RadGridInvoices" runat="server" Skin="Bootstrap" AutoGenerateColumns="False" Height="650px"
                         DataSourceID="SqlDataSourceMainInvoice" AllowSorting="True"
@@ -315,9 +309,12 @@
                                         </div>
                                         <div>
                                             <i class="fas fa-phone"></i></a>
+                                           
                                             <%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("ClientPhone"))%>
                                             &nbsp;
+                                           
                                             <i class="fas fa-mobile-alt"></i></a>
+                                           
                                             <%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("ClientCellular"))%>
                                         </div>
                                     </ItemTemplate>
@@ -502,9 +499,12 @@
                                         </div>
                                         <div>
                                             <i class="fas fa-phone"></i></a>
+                                           
                                             <%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("ClientPhone"))%>
                                             &nbsp;
+                                           
                                             <i class="fas fa-mobile-alt"></i></a>
+                                           
                                             <%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("ClientCellular"))%>
                                         </div>
 
@@ -566,6 +566,7 @@
                     </asp:LinkButton>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;
+                   
                     <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
                                     Cancel
                     </asp:LinkButton>
@@ -594,6 +595,7 @@
                     </asp:LinkButton>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;
+                   
                     <asp:LinkButton ID="btnCancelStatementDlg" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
                                     Cancel
                     </asp:LinkButton>
@@ -639,6 +641,7 @@
                                     <i class="fas fa-check"></i> Insert
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;&nbsp;
+                   
                     <asp:LinkButton ID="btnCancelPayment" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
                                      Cancel
                     </asp:LinkButton>
@@ -685,6 +688,7 @@
                                     <i class="fas fa-check"></i> Insert
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;&nbsp;
+                   
                     <asp:LinkButton ID="btnCancelStatementPayments" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
                                      Cancel
                     </asp:LinkButton>
@@ -788,6 +792,7 @@
                                     <i class="fas fa-check"></i> Update
             </asp:LinkButton>
             &nbsp;&nbsp;&nbsp;&nbsp;
+           
             <asp:LinkButton ID="btnCancelInvoice" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="120px">
                             Cancel
             </asp:LinkButton>
@@ -892,6 +897,7 @@
                                     <i class="fas fa-check"></i> Insert Remainder
             </asp:LinkButton>
             &nbsp;&nbsp;&nbsp;&nbsp;
+           
             <asp:LinkButton ID="btnCancelRemaider" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="120px">
                             Cancel
             </asp:LinkButton>
@@ -989,6 +995,7 @@
                                     <i class="fas fa-check"></i> Insert Remainder
             </asp:LinkButton>
             &nbsp;&nbsp;&nbsp;&nbsp;
+           
             <asp:LinkButton ID="btnCancelStatementReminder" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="120px">
                             Cancel
             </asp:LinkButton>

@@ -44,18 +44,20 @@
                             <telerik:RadComboBoxItem Text="Last 120 days" Value="120" />
                             <telerik:RadComboBoxItem Text="Last 180 days" Value="180" />
                             <telerik:RadComboBoxItem Text="Last 365 days" Value="365" />
-                            <telerik:RadComboBoxItem Text="(This year...)" Value="14" />
-                            <telerik:RadComboBoxItem Text="(Last year...)" Value="15" />
+                                <telerik:RadComboBoxItem Text="This year" Value="14" />
+                                <telerik:RadComboBoxItem Text="This month" Value="16" />
+                                <telerik:RadComboBoxItem Text="Last year" Value="15" />
+                                <telerik:RadComboBoxItem Text="Last month" Value="17" />
                             <telerik:RadComboBoxItem Text="(All years...)" Value="13" />
                             <telerik:RadComboBoxItem Text="Custom Range..." Value="99" />
                         </Items>
                     </telerik:RadComboBox>
                 </td>
                 <td style="width: 350px;">
-                    <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="130px" Culture="en-US">
+                    <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="150px" Culture="en-US">
                     </telerik:RadDatePicker>
                     &nbsp;To
-                                <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="130px" Culture="en-US">
+                                <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="150px" Culture="en-US">
                                 </telerik:RadDatePicker>
                     &nbsp;&nbsp;Slot Width:
                                 <telerik:RadComboBox ID="cboSlotWidth" runat="server" Width="80px" AppendDataBoundItems="true" ToolTip="Slot Width (px)">

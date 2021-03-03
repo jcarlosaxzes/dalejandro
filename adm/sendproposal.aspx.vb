@@ -24,12 +24,8 @@ Public Class sendproposal
                 SMS_Init()
                 Dim clientId As Integer = LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId")
 
-                If (lblCompanyId.Text = 260962) Then
-                    cboAgile.Visible = True
-                Else
-                    cboAgile.SelectedValue = 0
-                    cboAgile.Enabled = False
-                End If
+                PanelAgile.Visible = (lblCompanyId.Text = 260962)
+
                 cboNotification.SelectedValue = 1
                 If Not LocalAPI.IsCompanySMSservice(lblCompanyId.Text) Then
                     cboNotification.Enabled = False
@@ -53,19 +49,32 @@ Public Class sendproposal
         End If
     End Sub
     Private Sub TotalsAnalisis()
-        Dim bTotal As Double = LocalAPI.GetProposalTotal(lblProposalId.Text)
-        Dim bPSTotal As Double = LocalAPI.GetProposalPSTotal(lblProposalId.Text)
-        lblProposalTotal.Text = FormatCurrency(bTotal)
-        lblScheduleTotal.Text = FormatCurrency(bPSTotal)
-        If bTotal = 0 Then
-            lblTotalAlert.Text = "It is mandatory that [Proposal Total] is greater than zero !"
-            RadWizard1.DisplayNavigationButtons = False
+        Dim dTotal As Double = LocalAPI.GetProposalTotal(lblProposalId.Text)
+        Dim dPSTotal As Double = LocalAPI.GetProposalPSTotal(lblProposalId.Text)
+
+        If dTotal = 0 Then
+            PanelTotals.Visible = True
+            lblTotalAlert.Text = "Alert. The Project Total is zero !"
         Else
-            If bPSTotal > 0 And (Math.Round(bTotal, 0) <> Math.Round(bPSTotal, 0)) Then
-                lblTotalAlert.Text = "It Is mandatory that [Proposal Total] = [Payment Schedule Total] ! "
-                RadWizard1.DisplayNavigationButtons = False
+            If (Math.Round(dTotal, 0) <> Math.Round(dPSTotal, 0)) Then
+                PanelTotals.Visible = True
+                lblTotalAlert.Text = $"Your Project Total ({FormatCurrency(dTotal)}) and your Payment Schedule Total ({FormatCurrency(dPSTotal)}) do not match !"
+            Else
+                PanelTotals.Visible = False
             End If
         End If
+
+        'lblProposalTotal.Text = FormatCurrency(bTotal)
+        'lblScheduleTotal.Text = FormatCurrency(bPSTotal)
+        'If bTotal = 0 Then
+        '    lblTotalAlert.Text = "It is mandatory that [Proposal Total] is greater than zero !"
+        '    RadWizard1.DisplayNavigationButtons = False
+        'Else
+        '    If bPSTotal > 0 And (Math.Round(bTotal, 0) <> Math.Round(bPSTotal, 0)) Then
+        '        lblTotalAlert.Text = "It Is mandatory that [Proposal Total] = [Payment Schedule Total] ! "
+        '        RadWizard1.DisplayNavigationButtons = False
+        '    End If
+        'End If
 
     End Sub
 #Region "RadWizard Step Buttons"
@@ -138,7 +147,7 @@ Public Class sendproposal
             If cboNotification.SelectedValue = 1 Or cboNotification.SelectedValue = 2 Then
 
                 If LocalAPI.ValidEmail(txtTo.Text) Then
-                    txtBody.Content = txtBody.Content & LocalAPI.GetPASSign()
+                    'txtBody.Content = txtBody.Content & LocalAPI.GetPASSign()
                     LocalAPI.ProposalStatus2Emitted(lblProposalId.Text)
                     Dim HeadDepartmentEmail As String = LocalAPI.GetHeadDepartmentEmailFromProposal(lblProposalId.Text)
 
@@ -164,9 +173,10 @@ Public Class sendproposal
                 End If
 
             End If
-
-            If cboAgile.SelectedValue = 1 Then
-                LocalAPI.ProposalToAgile(lblProposalId.Text, lblCompanyId.Text)
+            If PanelAgile.Visible Then
+                If cboAgile.SelectedValue = 1 Then
+                    LocalAPI.ProposalToAgile(lblProposalId.Text, lblCompanyId.Text)
+                End If
             End If
 
             If Len(sInfo) > 0 Then InfoMessage(sInfo)
@@ -180,15 +190,13 @@ Public Class sendproposal
     Private Sub SMS_Init()
         If LocalAPI.IsCompanySMSservice(lblCompanyId.Text) Then
             Dim clientId As Integer = LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId")
-            If Not LocalAPI.IsClientDenySMS(clientId) Then
+            If Not LocalAPI.IsClientAllowSMS(clientId) Then
                 txtCellular.Text = LocalAPI.GetClientProperty(clientId, "Cellular")
                 'chkSMS.Checked = Len(txtCellular.Text) >= 10
                 Dim ProjectName As String = LocalAPI.GetProposalProperty(lblProposalId.Text, "ProjectName")
                 Dim sURL As String = LocalAPI.GetSharedLink_URL(11, lblProposalId.Text) & " "
 
-                txtSMS.Text = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Name") & " notification" & vbCrLf &
-                            "Click the following link To review/accept the proposal " & ProjectName & "    " &
-                sURL
+                txtSMS.Text = "You have received a proposal from " & LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Name") & " click below to review/accept: " & vbCrLf & sURL
 
 
             End If
@@ -200,7 +208,7 @@ Public Class sendproposal
 
             Dim sCellPhone As String = txtCellular.Text
             If SMS.IsValidPhone(sCellPhone) Then
-                If SMS.SendSMS(sCellPhone, txtSMS.Text, lblCompanyId.Text) Then
+                If SMS.SendSMS(Master.UserId, sCellPhone, txtSMS.Text, lblCompanyId.Text) Then
                     Return True
                 End If
             Else
@@ -231,15 +239,17 @@ Public Class sendproposal
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         Select Case lblBackSource.Text
-            Case "proposal"
-                Response.RedirectPermanent("~/adm/proposal.aspx?proposalId=" & lblProposalId.Text)
+            Case "pro_proposal", "proposal"
+                Response.Redirect(LocalAPI.GetSharedLink_URL(11001, lblProposalId.Text))
             Case "job_proposals"
                 Dim jobId As Integer = LocalAPI.GetProposalProperty(lblProposalId.Text, "JobId")
-                Response.Redirect("~/adm/job_proposals.aspx?jobId=" & jobId)
+                Dim sUrl As String = LocalAPI.GetSharedLink_URL(8004, jobId)
+                Response.Redirect(sUrl)
+
             Case "proposalnewwizard"
                 Response.RedirectPermanent("~/adm/proposals.aspx?restoreFilter=true")
             Case Else
-                Response.RedirectPermanent("~/adm/proposals.aspx?restoreFilter=true")
+                Response.Redirect(LocalAPI.GetSharedLink_URL(11001, lblProposalId.Text))
         End Select
     End Sub
 End Class

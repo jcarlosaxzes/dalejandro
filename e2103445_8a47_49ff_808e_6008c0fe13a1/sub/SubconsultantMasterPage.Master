@@ -175,7 +175,7 @@
                         <telerik:LayoutColumn Span="8">
                             <p class="small" style="text-align: right">
                                 <br />
-                                &copy; 2009-2020 - All rights reserved - <b>PASconcept</b> is a trademark property of <a href="https://www.axzes.com/" target="_blank">Axzes llc</a>
+                                &copy; 2009-<%: DateTime.Now.Year %> - All rights reserved - <b>PASconcept</b> is a trademark property of <a href="https://www.axzes.com/" target="_blank">Axzes llc</a>
                             </p>
                         </telerik:LayoutColumn>
                     </Columns>

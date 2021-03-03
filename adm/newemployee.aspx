@@ -223,7 +223,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align: right">Hourly Rate:
+                <td style="text-align: right">Pay Rate ($/hour):
                 </td>
                 <td>
                     <telerik:RadNumericTextBox ID="txtHourRate" runat="server" MinValue="0" MaxValue="999" Width="180px"

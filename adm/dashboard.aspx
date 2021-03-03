@@ -32,156 +32,66 @@
         <span class="pasconcept-pagetitle">Company Insights</span>
     </div>
     <table class="table-sm pas-container" style="width: 100%; text-align: center">
+        
         <tr>
-            <td style="width: 50%">
-                <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSourcePropJobs" Layout="Stock" Width="90%">
-                    <ChartTitle Text="Proposal vs Jobs">
+            <td colspan="2">
+
+                <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSourceCompanyHistory" Height="600px" Width="100%">
+                    <ChartTitle Text="Production History">
                         <Appearance Align="Center" Position="Top">
                             <TextStyle Bold="true" FontSize="20px" Color="#317eac" />
                         </Appearance>
                     </ChartTitle>
                     <PlotArea>
-                        <XAxis AxisCrossingValue="0" Color="#aaaaaa" DataLabelsField="DateValue" Type="Date" MinorTickType="None">
-                            <LabelsAppearance RotationAngle="0" Skip="0">
-                                <TextStyle Color="#666666" />
-                                <DateFormats MonthsFormat="MMM-yy" WeeksFormat="MMM-dd" DaysFormat="M-dd" YearsFormat="yyyy-MM" />
-                            </LabelsAppearance>
-                            <MajorGridLines Visible="false"></MajorGridLines>
-                            <MinorGridLines Visible="false"></MinorGridLines>
-                            <TitleAppearance Position="Center" RotationAngle="0" Text="Date">
-                                <TextStyle Color="#555555" />
-                            </TitleAppearance>
-                        </XAxis>
-                        <YAxis Name="LeftAxis" AxisCrossingValue="0" Color="#aaaaaa" MajorTickType="Outside" MajorTickSize="4" MinorTickType="None" MinorTickSize="0" Reversed="false">
-                            <LabelsAppearance DataFormatString="{0:N0}" Skip="0" Step="2">
-                                <TextStyle Color="#666666" />
-                            </LabelsAppearance>
-                            <MajorGridLines Visible="true" Color="#efefef" Width="1"></MajorGridLines>
-                            <MinorGridLines Visible="true" Width="0"></MinorGridLines>
-                            <TitleAppearance Text="$" Position="Center" RotationAngle="0">
-                                <TextStyle Color="#555555" />
-                            </TitleAppearance>
-                        </YAxis>
                         <Series>
-                            <telerik:AreaSeries DataFieldY="JobBudget" Name="Job Budgets" AxisName="LeftAxis">
-                                <LabelsAppearance Visible="false" DataFormatString="{0:N0}">
-                                </LabelsAppearance>
-                                <Appearance>
-                                    <FillStyle BackgroundColor="#5184c4" />
-                                </Appearance>
-                                <TooltipsAppearance DataFormatString="{0:N0}"></TooltipsAppearance>
-                            </telerik:AreaSeries>
-                            <telerik:AreaSeries DataFieldY="PropBudget" Name="Proposal Budgets" AxisName="LeftAxis">
-                                <LabelsAppearance Visible="false" DataFormatString="{0:N0}">
-                                </LabelsAppearance>
-                                <Appearance>
-                                    <FillStyle BackgroundColor="OrangeRed" />
-                                </Appearance>
-                                <TooltipsAppearance DataFormatString="{0:N0}"></TooltipsAppearance>
+                            <telerik:AreaSeries DataFieldY="ProposalTotal" Name="Proposal Value">
+                                <Appearance FillStyle-BackgroundColor="Blue"></Appearance>
+                                <LabelsAppearance DataFormatString="{0:N0}"></LabelsAppearance>
+                                <TooltipsAppearance DataFormatString="{0:N0}" Color="White"></TooltipsAppearance>
                             </telerik:AreaSeries>
                         </Series>
+                        <Series>
+                            <telerik:AreaSeries DataFieldY="JobsTotal" Name="Jobs Budget">
+                                <Appearance FillStyle-BackgroundColor="Red"></Appearance>
+                                <LabelsAppearance Visible="false"></LabelsAppearance>
+                                <TooltipsAppearance DataFormatString="{0:N0}" Color="White"></TooltipsAppearance>
+                            </telerik:AreaSeries>
+                        </Series>
+                        <Series>
+                            <telerik:LineSeries DataFieldY="PaymentsTotal" Name="Payment Collected">
+                                <LabelsAppearance Visible="false" DataFormatString="{0:C0}">
+                                </LabelsAppearance>
+                                <Appearance>
+                                    <FillStyle BackgroundColor="Green" />
+                                </Appearance>
+                                <LineAppearance LineStyle="Smooth" Width="3" />
+                                <TooltipsAppearance DataFormatString="{0:N0}" Color="White"></TooltipsAppearance>
+                                <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
+                            </telerik:LineSeries>
+                        </Series>
+                        <YAxis Name="LeftAxis" MajorTickSize="4" MajorTickType="Outside" Width="3">
+                            <TitleAppearance Text="$"></TitleAppearance>
+                            <LabelsAppearance DataFormatString="{0:N0}"></LabelsAppearance>
+                            <MinorGridLines Visible="false"></MinorGridLines>
+                        </YAxis>
+                        <XAxis DataLabelsField="Year">
+                            <TitleAppearance Text="Year"></TitleAppearance>
+                            <MinorGridLines Visible="false"></MinorGridLines>
+                            <AxisCrossingPoints>
+                                <telerik:AxisCrossingPoint Value="0" />
+                                <telerik:AxisCrossingPoint Value="9999" />
+                            </AxisCrossingPoints>
+                        </XAxis>
                     </PlotArea>
                     <Legend>
                         <Appearance Visible="True" Position="Top"></Appearance>
                     </Legend>
-                    <Navigator Visible="true">
-                        <SelectionHint Visible="true" DataFormatString="From {0:d} to {1:d}" />
-                        <Series>
-                            <telerik:AreaSeries DataFieldY="JobBudget">
-                                <Appearance>
-                                    <FillStyle BackgroundColor="#5184c4"></FillStyle>
-                                </Appearance>
-                            </telerik:AreaSeries>
-                            <telerik:AreaSeries DataFieldY="PropBudget">
-                                <Appearance>
-                                    <FillStyle BackgroundColor="LightSalmon"></FillStyle>
-                                </Appearance>
-                            </telerik:AreaSeries>
-                        </Series>
-                        <XAxis>
-                            <LabelsAppearance>
-                                <TextStyle Color="#666666" FontSize="8px" />
-                            </LabelsAppearance>
-                        </XAxis>
-                    </Navigator>
                 </telerik:RadHtmlChart>
             </td>
-            <td>
-                <telerik:RadHtmlChart ID="RadHtmlChartBillCollected" runat="server" DataSourceID="SqlDataSourceBillCollected" Layout="Stock" Width="90%">
-                    <ChartTitle Text="Bill vs Collected">
-                        <Appearance Align="Center" Position="Top">
-                            <TextStyle Bold="true" FontSize="20px" Color="#317eac" />
-                        </Appearance>
-                    </ChartTitle>
-                    <PlotArea>
-                        <XAxis AxisCrossingValue="0" Color="#aaaaaa" DataLabelsField="DateValue" Type="Date" MinorTickType="None">
-                            <LabelsAppearance RotationAngle="0" Skip="0">
-                                <TextStyle Color="#666666" />
-                                <DateFormats MonthsFormat="MMM-yy" WeeksFormat="MMM-dd" DaysFormat="M-dd" YearsFormat="yyyy-MM" />
-                            </LabelsAppearance>
-                            <MajorGridLines Visible="false"></MajorGridLines>
-                            <MinorGridLines Visible="false"></MinorGridLines>
-                            <TitleAppearance Position="Center" RotationAngle="0" Text="Date">
-                                <TextStyle Color="#555555" />
-                            </TitleAppearance>
-                        </XAxis>
-                        <YAxis Name="LeftAxis" AxisCrossingValue="0" Color="#aaaaaa" MajorTickType="Outside" MajorTickSize="4" MinorTickType="None" MinorTickSize="0" Reversed="false">
-                            <LabelsAppearance DataFormatString="{0:N0}" Skip="0" Step="2">
-                                <TextStyle Color="#666666" />
-                            </LabelsAppearance>
-                            <MajorGridLines Visible="true" Color="#efefef" Width="1"></MajorGridLines>
-                            <MinorGridLines Visible="true" Width="0"></MinorGridLines>
-                            <TitleAppearance Text="$" Position="Center" RotationAngle="0">
-                                <TextStyle Color="#555555" />
-                            </TitleAppearance>
-                        </YAxis>
-                        <Series>
-                            <telerik:ColumnSeries DataFieldY="Bill" Name="Bill" AxisName="LeftAxis">
-                                <LabelsAppearance Visible="false" DataFormatString="{0:N0}">
-                                </LabelsAppearance>
-                                <Appearance>
-                                    <FillStyle BackgroundColor="#990000" />
-                                </Appearance>
-                                <TooltipsAppearance DataFormatString="{0:N0}"></TooltipsAppearance>
-                            </telerik:ColumnSeries>
-                            <telerik:ColumnSeries DataFieldY="Collected" Name="Collected" AxisName="LeftAxis">
-                                <LabelsAppearance Visible="false" DataFormatString="{0:N0}">
-                                </LabelsAppearance>
-                                <Appearance>
-                                    <FillStyle BackgroundColor="#006600" />
-                                </Appearance>
-                                <TooltipsAppearance DataFormatString="{0:N0}"></TooltipsAppearance>
-                            </telerik:ColumnSeries>
-                        </Series>
-                    </PlotArea>
-                    <Legend>
-                        <Appearance Visible="True" Position="Top"></Appearance>
-                    </Legend>
-                    <Navigator Visible="true">
-                        <SelectionHint Visible="true" DataFormatString="From {0:d} to {1:d}" />
-                        <Series>
-                            <telerik:LineSeries DataFieldY="Bill">
-                                <Appearance>
-                                    <FillStyle BackgroundColor="#990000"></FillStyle>
-                                </Appearance>
-                            </telerik:LineSeries>
-                            <telerik:LineSeries DataFieldY="Collected">
-                                <Appearance>
-                                    <FillStyle BackgroundColor="#006600"></FillStyle>
-                                </Appearance>
-                            </telerik:LineSeries>
-                        </Series>
-                        <XAxis>
-                            <LabelsAppearance>
-                                <TextStyle Color="#666666" FontSize="8px" />
-                            </LabelsAppearance>
-                        </XAxis>
-                    </Navigator>
-                </telerik:RadHtmlChart>
-            </td>
+
         </tr>
         <tr>
-            <td>
+            <td style="width: 50%">
                 <telerik:RadHtmlChart ID="RadHtmlChartSector" runat="server" DataSourceID="SqlDataSourceJobsBySector" Width="90%">
                     <ChartTitle Text="% Budget By Sectors">
                         <Appearance Align="Center" Position="Top">
@@ -312,8 +222,8 @@
     </table>
 
 
-    <asp:SqlDataSource ID="SqlDataSourcePropJobs" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="YearStadistic_PROPOSALS_JOBS3" SelectCommandType="StoredProcedure">
+    <asp:SqlDataSource ID="SqlDataSourceCompanyHistory" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="CompanyTimeLine_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </SelectParameters>

@@ -8,7 +8,7 @@ Public Class timesheet
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Timesheet"
             If (Not Page.IsPostBack) Then
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Timesheet") Then Response.RedirectPermanent("~/adm/default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Timesheet") Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
                 Master.PageTitle = "Employees/Timesheet"
                 Master.Help = "http://blog.pasconcept.com/2012/07/employees-periodic-timesheet.html"
@@ -103,8 +103,8 @@ Public Class timesheet
         Dim sUrl As String = ""
         Select Case e.CommandName
             Case "EditJob"
-                sUrl = "~/ADM/Job_job.aspx?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 820, True, False)
+                sUrl = LocalAPI.GetSharedLink_URL(8001, e.CommandArgument)
+                Response.Redirect(sUrl)
 
         End Select
     End Sub

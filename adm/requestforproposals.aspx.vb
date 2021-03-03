@@ -8,7 +8,7 @@ Public Class requestforproposals
             ' Si no tiene permiso, la dirijo a message
             lblCompanyId.Text = Session("companyId")
             Dim EmployeeId As Integer = Master.UserId
-            If Not LocalAPI.GetEmployeePermission(EmployeeId, "Deny_RequestsProposalsList") Then Response.RedirectPermanent("~/adm/default.aspx")
+            If Not LocalAPI.GetEmployeePermission(EmployeeId, "Deny_RequestsProposalsList") Then Response.RedirectPermanent("~/adm/schedule.aspx")
             ' Si no tiene permiso New, boton.Visible=False
             btnNew.Visible = LocalAPI.GetEmployeePermission(EmployeeId, "Deny_NewRequestProposals")
 
@@ -43,6 +43,14 @@ Public Class requestforproposals
                 RadDatePickerFrom.DbSelectedDate = "01/01/2000"
                 RadDatePickerTo.DbSelectedDate = "12/31/" & Today.Year
 
+            Case 16  ' (This Month)
+                RadDatePickerFrom.DbSelectedDate = Today.Month & "/01/" & Today.Year
+                RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Day, -1, DateAdd(DateInterval.Month, 1, RadDatePickerFrom.DbSelectedDate))
+            Case 17  ' (Past Month)
+                RadDatePickerFrom.DbSelectedDate = Today.Month & "/01/" & Today.Year
+                RadDatePickerFrom.DbSelectedDate = DateAdd(DateInterval.Month, -1, RadDatePickerFrom.DbSelectedDate)
+                RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Day, -1, DateAdd(DateInterval.Month, 1, RadDatePickerFrom.DbSelectedDate))
+
             Case 30, 60, 90, 120, 180, 365 '   days....
                 RadDatePickerTo.DbSelectedDate = Date.Today
                 RadDatePickerFrom.DbSelectedDate = DateAdd(DateInterval.Day, 0 - nPeriodo, RadDatePickerTo.DbSelectedDate)
@@ -50,7 +58,9 @@ Public Class requestforproposals
             Case 14  ' This year...
                 RadDatePickerFrom.DbSelectedDate = "01/01/" & Date.Today.Year
                 RadDatePickerTo.DbSelectedDate = "12/31/" & Date.Today.Year
-            Case 99 ' Custom
+            Case 99   'Custom
+                RadDatePickerFrom.Focus()
+                ' Allow RadDatePicker user Values...
 
         End Select
         cboPeriod.SelectedValue = nPeriodo
@@ -92,9 +102,8 @@ Public Class requestforproposals
                     RadToolTipAccept.Show()
 
                 Case "ViewJobPage"
-                    sUrl = "~/adm/Job_rfps.aspx?JobId=" & e.CommandArgument
-                    CreateRadWindows(e.CommandName, sUrl, 960, 820, False)
-
+                    sUrl = LocalAPI.GetSharedLink_URL(8005, e.CommandArgument) & "&backpage=requestforproposals"
+                    Response.Redirect(sUrl)
 
             End Select
         Catch ex As Exception
@@ -293,6 +302,13 @@ Public Class requestforproposals
 #End Region
     Private Sub btnTreePage_Click(sender As Object, e As EventArgs) Handles btnTreePage.Click
         Response.RedirectPermanent("~/ADM/rfps.aspx")
+    End Sub
+    Private Sub SqlDataSourceRFP_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceRFP.Deleting
+        Try
+            LocalAPI.sys_log_Nuevo(Master.UserEmail, LocalAPI.sys_log_AccionENUM.DeleteRFP, lblCompanyId.Text, "Delete RFP: " & LocalAPI.RFPNumber(e.Command.Parameters("@Id").Value))
+        Catch ex As Exception
+        End Try
+
     End Sub
 
 End Class

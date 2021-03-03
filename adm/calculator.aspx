@@ -29,7 +29,7 @@
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />
     <div class="pasconcept-bar">
         <table class="table-sm">
             <tr>
@@ -99,7 +99,7 @@
                 <table class=" table-condensed Formulario" style="width: 100%">
                     <tr>
                         <td style="width: 130px">
-                            <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" Width="100%" Culture="en-US" ToolTip="Date From for filter">
+                            <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" Culture="en-US" ToolTip="Date From for filter">
                             </telerik:RadDatePicker>
                         </td>
                         <td colspan="2">

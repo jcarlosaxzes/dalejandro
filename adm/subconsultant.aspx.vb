@@ -8,7 +8,7 @@
                 lblCompanyId.Text = Session("companyId")
                 lblSubconsultantId.Text = Request.QueryString("SubconsultantId")
 
-                If LocalAPI.IsCompanyViolation(lblSubconsultantId.Text, "SubConsultans", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/default.aspx")
+                If LocalAPI.IsCompanyViolation(lblSubconsultantId.Text, "SubConsultans", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
                 If Not Request.QueryString("fromcontacts") Is Nothing Then
                     lblBackSource.Text = 1

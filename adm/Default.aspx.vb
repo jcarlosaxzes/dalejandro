@@ -12,8 +12,10 @@ Public Class _Default1
                 Master.Help = "http://blog.pasconcept.com/2015/04/home.html"
                 Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Control Panel"
                 lblCompanyId.Text = Session("companyId")
-                lblEmployeeId.Text = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
+
                 lblUserEmail.Text = Master.UserEmail
+
+                lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblUserEmail.Text, lblCompanyId.Text)
 
                 If LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Analytics") Then
                     ' User con Permiso al Administrator PORTAL
@@ -59,19 +61,23 @@ Public Class _Default1
 
 
     Private Sub RadGridHeader(RadGrid1 As RadGrid)
-        Dim Y0 As Integer = Today.Year
-        Dim StartYear As Integer = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "StartYear")
-        RadGrid1.MasterTableView.GetColumn("year").HeaderText = Y0
-        For i = 1 To 4
-            Y0 = Y0 - 1
-            If Y0 >= StartYear Then
-                RadGrid1.MasterTableView.GetColumn("year-" & i).HeaderText = Y0
-            Else
-                RadGrid1.MasterTableView.GetColumn("year-" & i).Visible = False
-            End If
-        Next
-        RadGrid1.MasterTableView.DataBind()
+        Try
+            Dim Y0 As Integer = Today.Year
+            Dim StartYear As Integer = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "StartYear")
+            RadGrid1.MasterTableView.GetColumn("year").HeaderText = Y0
+            For i = 1 To 4
+                Y0 = Y0 - 1
+                If Y0 >= StartYear Then
+                    RadGrid1.MasterTableView.GetColumn("year-" & i).HeaderText = Y0
+                Else
+                    RadGrid1.MasterTableView.GetColumn("year-" & i).Visible = False
+                End If
+            Next
+            RadGrid1.MasterTableView.DataBind()
 
+        Catch ex As Exception
+            Master.ErrorMessage("Error. " & ex.Message)
+        End Try
     End Sub
 
     Private Sub RadDockProposals_Command(sender As Object, e As DockCommandEventArgs) Handles RadDockProposals.Command
@@ -145,15 +151,5 @@ Public Class _Default1
         e.Command.CommandTimeout = 0
     End Sub
 
-    Private Sub SqlDataSourceProposalEmployeeStatistics_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceProposalEmployeeStatistics.Selecting
-        e.Command.CommandTimeout = 0
-    End Sub
 
-    Private Sub SqlDataSourceProposalJobs_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceProposalJobs.Selecting
-        e.Command.CommandTimeout = 0
-    End Sub
-
-    Private Sub SqlDataSourceSubConsultants_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceSubConsultants.Selecting
-        e.Command.CommandTimeout = 0
-    End Sub
 End Class

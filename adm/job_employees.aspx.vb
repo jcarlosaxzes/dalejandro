@@ -7,8 +7,9 @@ Public Class job_employees
 
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
-                lblJobId.Text = Request.QueryString("JobId")
+                lblJobId.Text = LocalAPI.GetJobIdFromGUID(Request.QueryString("guid"))
                 Master.ActiveTab(2)
+                'btnPrivate.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_PrivateMode")
             End If
 
             RadWindowManager1.EnableViewState = False
@@ -17,8 +18,25 @@ Public Class job_employees
             Master.ErrorMessage(ex.Message & " code: " & lblCompanyId.Text)
         End Try
     End Sub
+
+    'Protected Sub RadGrid1_PreRender(sender As Object, e As EventArgs) Handles RadGrid1.PreRender
+    '    RadGrid1.MasterTableView.GetColumn("HourRate").Visible = (btnPrivate.Text = "Private")
+    'End Sub
+    'Private Sub btnPrivate_Click(sender As Object, e As EventArgs) Handles btnPrivate.Click
+    '    Select Case btnPrivate.Text
+    '        Case "Private Mode"
+    '            RadGrid1.MasterTableView.GetColumn("HourRate").Visible = True
+    '            btnPrivate.Text = "Public Mode"
+    '        Case "Public Mode"
+    '            RadGrid1.MasterTableView.GetColumn("HourRate").Visible = False
+    '            btnPrivate.Text = "Private Mode"
+    '    End Select
+    '    RadGrid1.DataBind()
+    'End Sub
     Protected Sub btnSetEmployee_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSetEmployee.Click
-        CreateRadWindows("SetEmployee", "~/ADM/JobAssignEmployee.aspx?JobId=" & lblJobId.Text, 750, 450, False, "OnClientClose")
+        Dim sUrl As String = LocalAPI.GetSharedLink_URL(8014, lblJobId.Text)
+        Response.Redirect(sUrl)
+
     End Sub
 
     Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer, Maximize As Boolean, OnClientCloseFn As String)
@@ -61,7 +79,7 @@ Public Class job_employees
             Return True
         End If
     End Function
-    Protected Sub RadGridAssignedEmployees_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGridAssignedEmployees.ItemCommand
+    Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
         Dim sUrl As String = ""
         Select Case e.CommandName
             Case "NotifyEmployee"
@@ -72,16 +90,23 @@ Public Class job_employees
 
                 NotifyEmployee(employeeId, JobCodeName, nHours)
 
+            Case "AddTime"
+                Session("employeefortime") = e.CommandArgument
+                Response.Redirect("~/adm/employeenewtime.aspx?JobId=" & lblJobId.Text & "&backpage=job_employees&HideMenu=1")
+
         End Select
     End Sub
     Protected Sub NotifyEmployee(employeeId As Integer, JobCodeName As String, dHourds As Double)
         Dim sFullBody As New System.Text.StringBuilder
-        sFullBody.Append("You had been assigned Job " & JobCodeName)
+        sFullBody.Append("You have been assigned Job " & JobCodeName)
         sFullBody.Append("<br />")
-        sFullBody.Append("Hours (remaining): " & dHourds)
+        sFullBody.Append("Hours (remaining) :  " & dHourds)
         sFullBody.Append("<br />")
 
-        LocalAPI.EmailToEmployee(employeeId, "Job: '" & JobCodeName & "' asigned", sFullBody, lblCompanyId.Text)
+        LocalAPI.EmailToEmployee(employeeId, "Job: '" & JobCodeName & "' assigned", sFullBody, lblCompanyId.Text)
     End Sub
 
+    Private Sub SqlDataSourceAssignedEmployees_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAssignedEmployees.Updating
+        Dim e1 As String = e.Command.Parameters(0).Value
+    End Sub
 End Class

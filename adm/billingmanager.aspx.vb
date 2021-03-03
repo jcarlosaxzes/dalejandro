@@ -12,7 +12,7 @@ Public Class billingmanager
                 lblEmployeeEmail.Text = Master.UserEmail
                 lblEmployeeName.Text = LocalAPI.GetEmployeeName(lblEmployeeId.Text)
 
-                If Not LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_BillingManager") Then Response.RedirectPermanent("~/adm/default.aspx")
+                If Not LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_BillingManager") Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
                 Master.PageTitle = "Billing/Assistant"
                 Master.Help = "http://blog.pasconcept.com/2012/05/billing-invoices-list-page.html"
@@ -114,35 +114,35 @@ Public Class billingmanager
     Private Sub RadGridInvoices_ItemDataBound(sender As Object, e As GridItemEventArgs) Handles RadGridInvoices.ItemDataBound
         Try
 
-            If TypeOf e.Item Is GridDataItem Then
-                Dim item As GridDataItem = DirectCast(e.Item, GridDataItem)
-                Dim Label1 As Label = DirectCast(item.FindControl("lblAmountDue"), Label)
-                If DirectCast(item.FindControl("lblAmountDue"), Label).Text > 0 Then
-                    Dim jobId As Integer = item("Id").Text
-                    Dim lEmitted As Integer = LocalAPI.GetInvoiceEmmited(jobId)
-                    Select Case lEmitted
-                        Case 0  '"~/Images/Toolbar/white_circle.png"
-                            Label1.BackColor = System.Drawing.Color.Blue
-                            Label1.ToolTip = "Blue. Amount Due<>0 and Emitted=0"
+            'If TypeOf e.Item Is GridDataItem Then
+            '    Dim item As GridDataItem = DirectCast(e.Item, GridDataItem)
+            '    Dim Label1 As Label = DirectCast(item.FindControl("lblAmountDue"), Label)
+            '    If DirectCast(item.FindControl("lblAmountDue"), Label).Text > 0 Then
+            '        Dim jobId As Integer = item("Id").Text
+            '        Dim lEmitted As Integer = LocalAPI.GetInvoiceEmmited(jobId)
+            '        Select Case lEmitted
+            '            Case 0  '"~/Images/Toolbar/white_circle.png"
+            '                Label1.BackColor = System.Drawing.Color.Blue
+            '                Label1.ToolTip = "Blue. Amount Due<>0 and Emitted=0"
 
-                        Case 1  '"~/Images/Toolbar/green_circle.png"
-                            Label1.BackColor = System.Drawing.Color.Green
-                            Label1.ToolTip = "Green. Amount Due<>0 and Emitted=1"
+            '            Case 1  '"~/Images/Toolbar/green_circle.png"
+            '                Label1.BackColor = System.Drawing.Color.Green
+            '                Label1.ToolTip = "Green. Amount Due<>0 and Emitted=1"
 
-                        Case 2  '"~/Images/Toolbar/yellow_circle.png"
-                            Label1.BackColor = System.Drawing.Color.Orange
-                            Label1.ToolTip = "Orange. Amount Due<>0 and Emitted=2"
+            '            Case 2  '"~/Images/Toolbar/yellow_circle.png"
+            '                Label1.BackColor = System.Drawing.Color.Orange
+            '                Label1.ToolTip = "Orange. Amount Due<>0 and Emitted=2"
 
-                        Case Else   '"~/Images/Toolbar/red_circle.png"
-                            Label1.BackColor = System.Drawing.Color.OrangeRed
-                            Label1.ToolTip = "OrangeRed. Amount Due<>0 and Emitted>=3"
-                    End Select
-                Else
-                    ' AmountDue = 0
-                    Label1.BackColor = System.Drawing.Color.Black
-                    Label1.ToolTip = "Black. Close, Amount Due = 0"
-                End If
-            End If
+            '            Case Else   '"~/Images/Toolbar/red_circle.png"
+            '                Label1.BackColor = System.Drawing.Color.OrangeRed
+            '                Label1.ToolTip = "OrangeRed. Amount Due<>0 and Emitted>=3"
+            '        End Select
+            '    Else
+            '        ' AmountDue = 0
+            '        Label1.BackColor = System.Drawing.Color.Black
+            '        Label1.ToolTip = "Black. Close, Amount Due = 0"
+            '    End If
+            'End If
         Catch ex As Exception
 
         End Try
@@ -356,23 +356,41 @@ Public Class billingmanager
                     statementId = dataItem("Id").Text
                     Subject = ""
                     Body = ""
-                    If LocalAPI.LeerStatementTemplate(statementId, lblCompanyId.Text, Subject, Body) Then
-                        LocalAPI.ActualizarEmittedStatetment(statementId)
-                        LocalAPI.SetInvoiceEmittedFromStatement(statementId)
 
-                        Dim clientId As Integer = LocalAPI.GetStatementProperty(statementId, "clientId")
-                        emailTo = LocalAPI.GetClientEmail(clientId)
-                        Dim AccountantEmail As String = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "AccountantEmail")
-                        If Not LocalAPI.ValidEmail(AccountantEmail) Then
-                            AccountantEmail = AccountantEmail
-                        End If
+                    Dim clientId As Integer = LocalAPI.GetStatementProperty(statementId, "clientId")
+                    Dim sClienteName = LocalAPI.GetStatementProperty(statementId, "[Clients].[Name]")
+                    Dim sSign As String = LocalAPI.GetEmployeesSign(lblEmployeeId.Text)
+                    Dim statementNumber As String = LocalAPI.GetStatementNumber(statementId)
+                    Dim sURL As String = LocalAPI.GetSharedLink_URL(5555, statementId)
 
-                        SendGrid.Email.SendMail(emailTo, "", AccountantEmail, Subject, Body, lblCompanyId.Text, clientId, 0,, lblEmployeeName.Text, lblEmployeeEmail.Text, lblEmployeeName.Text)
+                    Dim DictValues As Dictionary(Of String, String) = New Dictionary(Of String, String)
+                    DictValues.Add("[Client_Name]", sClienteName)
+                    DictValues.Add("[Sign]", sSign)
+                    DictValues.Add("[Statement_Number]", statementNumber)
+                    DictValues.Add("[PASSign]", LocalAPI.GetPASSign())
+                    DictValues.Add("[StatementUrl]", sURL)
 
-                        LocalAPI.NewAutomaticStatementReminderFromEmitted(statementId, lblEmployeeId.Text, lblCompanyId.Text)
+                    ' Leer subjet y body template
+                    Subject = LocalAPI.GetMessageTemplateSubject("Statement", lblCompanyId.Text, DictValues)
+                    Body = LocalAPI.GetMessageTemplateBody("Statement", lblCompanyId.Text, DictValues)
 
-                        dataItem.Selected = False
+                    LocalAPI.ActualizarEmittedStatetment(statementId)
+                    LocalAPI.SetInvoiceEmittedFromStatement(statementId)
+
+
+                    emailTo = LocalAPI.GetClientEmail(clientId)
+                    Dim AccountantEmail As String = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "AccountantEmail")
+                    If Not LocalAPI.ValidEmail(AccountantEmail) Then
+                        AccountantEmail = AccountantEmail
                     End If
+
+                    SendGrid.Email.SendMail(emailTo, "", AccountantEmail, Subject, Body, lblCompanyId.Text, clientId, 0,, lblEmployeeName.Text, lblEmployeeEmail.Text, lblEmployeeName.Text)
+
+                    LocalAPI.NewAutomaticStatementReminderFromEmitted(statementId, lblEmployeeId.Text, lblCompanyId.Text)
+
+                    dataItem.Selected = False
+
+
                 End If
 
             Next

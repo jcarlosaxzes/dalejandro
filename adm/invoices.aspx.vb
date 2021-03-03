@@ -1,16 +1,33 @@
 ﻿Imports Intuit.Ipp.Data
 Imports Intuit.Ipp.DataService
 Imports Intuit.Ipp.QueryFilter
+Imports PASconcept.DataAccess.Repositories.Abstract
+Imports PASconcept.Domain.Model
 Imports Telerik.Web.UI
+Imports Newtonsoft.Json
 Public Class invoices
     Inherits System.Web.UI.Page
+
+    Private ReadOnly qbOperationLogRepository As IQBOperationLogRepository
+
+    Private ReadOnly invoiceRepository As IInvoiceRepository
+
+    Public Sub New(ByVal qbOperationLogRepository As IQBOperationLogRepository, ByVal invoiceRepo As IInvoiceRepository)
+        Try
+
+            Me.qbOperationLogRepository = qbOperationLogRepository
+            Me.invoiceRepository = invoiceRepo
+        Catch ex As Exception
+
+        End Try
+    End Sub
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Invoices"
             If (Not Page.IsPostBack) Then
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_InvoicesList") Then Response.RedirectPermanent("~/adm/default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_InvoicesList") Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
                 Master.PageTitle = "Billing/Invoices"
                 Master.Help = "http://blog.pasconcept.com/2012/05/billing-invoices-list-page.html"
@@ -34,10 +51,8 @@ Public Class invoices
 
                 RefrescarRecordset()
 
-                If lblCompanyId.Text = 260962 Then
-                    ' EEG 10 Mb
-                    RadCloudUpload1.MaxFileSize = 10485760
-                End If
+                RadCloudUpload1.MaxFileSize = LocalAPI.GetCompanyMaxFileSizeForUpload(lblCompanyId.Text)
+                lblMaxSize.Text = $"[Maximum upload size per file: {LocalAPI.FormatByteSize(RadCloudUpload1.MaxFileSize)}]"
 
             End If
 
@@ -62,6 +77,14 @@ Public Class invoices
                 RadDatePickerFrom.DbSelectedDate = "01/01/2000"
                 RadDatePickerTo.DbSelectedDate = "12/31/" & Today.Year
 
+            Case 16  ' (This Month)
+                RadDatePickerFrom.DbSelectedDate = Today.Month & "/01/" & Today.Year
+                RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Day, -1, DateAdd(DateInterval.Month, 1, RadDatePickerFrom.DbSelectedDate))
+            Case 17  ' (Past Month)
+                RadDatePickerFrom.DbSelectedDate = Today.Month & "/01/" & Today.Year
+                RadDatePickerFrom.DbSelectedDate = DateAdd(DateInterval.Month, -1, RadDatePickerFrom.DbSelectedDate)
+                RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Day, -1, DateAdd(DateInterval.Month, 1, RadDatePickerFrom.DbSelectedDate))
+
             Case 30, 60, 90, 120, 180, 365 '   days....
                 RadDatePickerTo.DbSelectedDate = Date.Today
                 RadDatePickerFrom.DbSelectedDate = DateAdd(DateInterval.Day, 0 - nPeriodo, RadDatePickerTo.DbSelectedDate)
@@ -69,6 +92,10 @@ Public Class invoices
             Case 14  ' This year...
                 RadDatePickerFrom.DbSelectedDate = "01/01/" & Date.Today.Year
                 RadDatePickerTo.DbSelectedDate = "12/31/" & Date.Today.Year
+
+            Case 99   'Custom
+                RadDatePickerFrom.Focus()
+                ' Allow RadDatePicker user Values...
 
         End Select
         cboPeriod.SelectedValue = nPeriodo
@@ -121,10 +148,6 @@ Public Class invoices
     '    End While
     'End Sub
 
-
-
-
-
     Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer, Maximize As Boolean)
         RadWindowManager1.Windows.Clear()
         Dim window1 As RadWindow = New RadWindow()
@@ -164,7 +187,21 @@ Public Class invoices
         Try
             RadGrid1.DataBind()
             RadToolTipInsertPayment.Visible = False
-            Master.ErrorMessage("The payment has been confirmed successfully!!!")
+            'sync with QuickBooks
+            If qbAPI.IsValidAccessOrRefreshToken(lblCompanyId.Text) Then
+                System.Threading.Thread.Sleep(3000)
+                Dim paymentId As Integer = e.Command.Parameters("@paymentId").Value
+                Dim invoice = LocalAPI.GetRecordFromQuery($"Select isNull(max(qbInvoiceId),0) as qbInvoiceId ,  isNull(max(Jobs.Client),0) as clientId from [dbo].[Invoices] left join Jobs on (Jobs.id = [Invoices].JobId) where Invoices.Id= {lblInvoiceId.Text}")
+                If invoice("qbInvoiceId") > 0 Then
+                    Dim qbClietId As String = LocalAPI.GetClientProperty(invoice("clientId"), "qbCustomerId")
+                    If Val(qbClietId) > 0 Then
+                        Dim qbPaymentId = qbAPI.CreatePayment(lblCompanyId.Text, txtAmountPayment.Text, qbClietId, invoice("qbInvoiceId"), PaymentTypeEnum.Other, DateTime.Now, txtPaymentNotes.Text)
+                        LocalAPI.ExecuteNonQuery($"update Invoices_payments set qbpaymentId = {qbPaymentId} where id = {paymentId}")
+                    End If
+                End If
+            End If
+
+                Master.ErrorMessage("The payment has been confirmed successfully!!!")
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)
         End Try
@@ -224,9 +261,15 @@ Public Class invoices
             Select Case e.CommandName
                 Case "EditInvoice"
                     lblInvoiceId.Text = e.CommandArgument
-                    FormViewInvoice.DataBind()
-                    RadToolTipEditInvoice.Visible = True
-                    RadToolTipEditInvoice.Show()
+                    If LocalAPI.GetInvoiceProperty(lblInvoiceId.Text, "InvoiceType") = 3 Then
+                        ' Progress Invoice
+                        Dim JobId As Integer = LocalAPI.GetInvoiceProperty(lblInvoiceId.Text, "JobId")
+                        Response.Redirect($"~/adm/invoicesprogress?jobId={JobId}&invoiceId={lblInvoiceId.Text}&backpage=invoices")
+                    Else
+                        FormViewInvoice.DataBind()
+                        RadToolTipEditInvoice.Visible = True
+                        RadToolTipEditInvoice.Show()
+                    End If
 
                 Case "InvoiceRDLC7"
                     'sUrl = "~/ADMCLI/InvoiceRDLC.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=7"
@@ -255,10 +298,9 @@ Public Class invoices
                         Master.ErrorMessage("You do not have permission to Invoice BadDebt!!!")
                     End If
 
-
-                Case "EditJob"
-                    sUrl = "~/adm/Job_job.aspx?JobId=" & e.CommandArgument
-                    CreateRadWindows(e.CommandName, sUrl, 850, 820, True)
+                Case "EditJobBilling"
+                    sUrl = LocalAPI.GetSharedLink_URL(8002, e.CommandArgument) & "&backpage=invoices"
+                    Response.Redirect(sUrl)
 
                 Case "PDF"
                     lblInvoiceId.Text = e.CommandArgument
@@ -273,13 +315,36 @@ Public Class invoices
                         Dim ids As String() = CType(e.CommandArgument, String).Split(",")
                         lblInvoiceId.Text = ids(0)
                         LocalAPI.SetInvoiceQBRef(lblInvoiceId.Text, -1, lblEmployeeId.Text)
+                        'Save QB Operation Log
+                        Dim invoiceEntity = invoiceRepository.SingleOrDefault(lblInvoiceId.Text)
+                        Dim operation As QBOperationLog = New QBOperationLog() With {
+                            .LogDate = DateTime.Now,
+                            .OperationData = JsonConvert.SerializeObject(invoiceEntity),
+                            .OperationType = "Desktop:SyncInvoice",
+                            .ResutlStatus = ""
+                         }
+                        qbOperationLogRepository.Add(operation)
+                        qbOperationLogRepository.SaveChanges()
+
                         RadGrid1.Rebind()
                     Else
-                        If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+                        If qbAPI.IsValidAccessOrRefreshToken(lblCompanyId.Text) Then
+                            System.Threading.Thread.Sleep(3000)
                             Dim ids As String() = CType(e.CommandArgument, String).Split(",")
                             Dim qbCustomerId As Integer = ids(1)
                             lblInvoiceId.Text = ids(0)
                             qbAPI.SendInvoiceToQuickBooks(lblInvoiceId.Text, qbCustomerId, lblEmployeeId.Text, lblCompanyId.Text)
+
+                            Dim invoiceEntity = invoiceRepository.SingleOrDefault(lblInvoiceId.Text)
+                            Dim operation As QBOperationLog = New QBOperationLog() With {
+                                .LogDate = DateTime.Now,
+                                .OperationData = JsonConvert.SerializeObject(invoiceEntity),
+                                .OperationType = "Online:SyncInvoice",
+                                .ResutlStatus = ""
+                             }
+                            qbOperationLogRepository.Add(operation)
+                            qbOperationLogRepository.SaveChanges()
+
                             RadGrid1.Rebind()
                         Else
                             Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=invoices")

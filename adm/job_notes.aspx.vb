@@ -8,7 +8,7 @@ Public Class job_notes
 
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
-                lblJobId.Text = Request.QueryString("JobId")
+                lblJobId.Text = LocalAPI.GetJobIdFromGUID(Request.QueryString("guid"))
 
                 lblEmployeeId.Text = Master.UserId
                 Master.ActiveTab(5)
@@ -20,8 +20,7 @@ Public Class job_notes
         End Try
     End Sub
     Protected Sub btnNewNote_Click(sender As Object, e As EventArgs) Handles btnNewNote.Click
-        SqlDataSourceNotes.Insert()
-        RadGridNotes.DataBind()
+        RadGridNotes.MasterTableView.InsertItem()
     End Sub
     Protected Sub btnFindMessages_Click(sender As Object, e As EventArgs)
         RadGridMessages.DataBind()

@@ -14,7 +14,9 @@
 
     </script>
     <div class="container">
-
+        <div class="pasconcept-bar">
+            <span class="pasconcept-pagetitle">Invoices/Payments</span>
+        </div>
         <div class="row">
             <div class="col-12">
                 <asp:FormView ID="FormViewClientBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceClientBalance" Width="100%">
@@ -22,10 +24,10 @@
 
                         <table class="table-sm" style="width: 100%">
                             <tr>
-                                <td style="text-align: left; vertical-align: top; width: 33%">
-                                    <h3 style="margin: 0; text-align: center">
-                                        <span class="navbar navbar-expand-md bg-dark text-white">Client</span>
-                                    </h3>
+                                <td style="text-align: left; vertical-align: top; width: 33%; border: solid; border-width: thin; border-color: gainsboro">
+                                    <h4 style="margin: 0;">
+                                        <span class="navbar navbar-expand-md bg-light">Client</span>
+                                    </h4>
                                     <table class="table-sm" style="width: 100%">
                                         <tr>
                                             <td>
@@ -49,32 +51,36 @@
                                         </tr>
                                     </table>
                                 </td>
-                                <td style="width: 33%; text-align: center; vertical-align: top">
-                                    <h3 style="margin: 0; text-align: center"><span class="navbar navbar-expand-md bg-dark text-white">Projects</span></h3>
-                                    </h3>
-                                        <table class="table-sm" style="width: 100%">
-                                            <tr>
-                                                <td style="text-align: right"># Pending Proposals:</td>
-                                                <td style="width: 120px; text-align: right">
-                                                    <b><%# Eval("NumberPendingProposal", "{0:N0}") %></b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right">Accepted Proposals:</td>
-                                                <td style="text-align: right">
-                                                    <b><%# Eval("ProposalAmount", "{0:C2}") %></b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">Jobs Total Amount:</td>
-                                                <td style="text-align: right">
-                                                    <b><%# Eval("ContractAmount", "{0:C2}") %></b>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                <td style="width: 33%; text-align: center; vertical-align: top; border: solid; border-width: thin; border-color: gainsboro">
+                                    <h4 style="margin: 0; text-align: center">
+                                        <span class="navbar navbar-expand-md bg-light">Projects</span>
+                                    </h4>
+
+                                    <table class="table-sm" style="width: 100%">
+                                        <tr>
+                                            <td style="text-align: right"># Pending Proposals:</td>
+                                            <td style="width: 120px; text-align: right">
+                                                <b><%# Eval("NumberPendingProposal", "{0:N0}") %></b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: right">Accepted Proposals:</td>
+                                            <td style="text-align: right">
+                                                <b><%# Eval("ProposalAmount", "{0:C2}") %></b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: right;">Jobs Total Amount:</td>
+                                            <td style="text-align: right">
+                                                <b><%# Eval("ContractAmount", "{0:C2}") %></b>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
-                                <td style="text-align: right; vertical-align: top">
-                                    <h3 style="margin: 0; text-align: center"><span class="navbar navbar-expand-md bg-dark text-white">Balance</span></h3>
+                                <td style="text-align: right; vertical-align: top; border: solid; border-width: thin; border-color: gainsboro">
+                                    <h4 style="margin: 0; text-align: center">
+                                        <span class="navbar navbar-expand-md bg-light">Balance</span>
+                                    </h4>
                                     <table class="table-sm" style="width: 100%">
                                         <tr>
                                             <td style="text-align: right;">Amount Paid:</td>
@@ -140,7 +146,7 @@
             <div class="col-12">
 
                 <div class="pasconcept-bar noprint">
-                    <span style="font-size: 24px; font-weight: 500; margin: 0">Invoices(s)&nbsp;&nbsp;&nbsp;&nbsp; </span>
+                    <span style="font-size: 24px; font-weight: 500; margin: 0">Receivable Invoices(s)&nbsp;&nbsp;&nbsp;&nbsp; </span>
                     <span style="vertical-align: middle;">Invoices Filter:
                         <telerik:RadComboBox ID="cboInvoiceFilterCode" runat="server" Width="300px" RenderMode="Lightweight" AutoPostBack="true">
                             <Items>
@@ -167,6 +173,9 @@
                         </asp:LinkButton>
                         <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-primary btn-sm" UseSubmitBehavior="false" CausesValidation="false" ToolTip="Add Invoice Simple Charge">
                                                                      Add Invoice
+                        </asp:LinkButton>
+                        <asp:LinkButton ID="btnNewProgressInvoice" runat="server" CssClass="btn btn-primary btn-sm" UseSubmitBehavior="false" CausesValidation="false" ToolTip="Add Progress Invoice">
+                                                                     Add Progress Invoice
                         </asp:LinkButton>
 
                         <asp:LinkButton ID="btnDiscount" runat="server" CssClass="btn btn-danger btn-sm" UseSubmitBehavior="false" CausesValidation="false">
@@ -268,14 +277,8 @@
                                     </div>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn DataField="InvoiceType" DataType="System.Int32" ReadOnly="true"
-                                FilterControlAltText="Filter InvoiceType column" HeaderText="Type" SortExpression="InvoiceType"
-                                UniqueName="InvoiceType"
-                                ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="20px">
-                                <ItemTemplate>
-                                    <asp:Label ID="typeLabelInv" runat="server" Text='<%#IIf(Eval("InvoiceType") = 1, "hr", "sc") %>'></asp:Label>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
+                            <telerik:GridBoundColumn DataField="InvoiceTypeLabel" ReadOnly="true" HeaderText="Type" SortExpression="InvoiceTypeLabel" UniqueName="InvoiceTypeLabel" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="20px">
+                            </telerik:GridBoundColumn>
                             <telerik:GridDateTimeColumn DataField="InvoiceDate" DataFormatString="{0:MM/dd/yy}"
                                 FilterControlAltText="Filter InvoiceDate column" HeaderText="Date Created" SortExpression="InvoiceDate" Display="false"
                                 UniqueName="InvoiceDate" ItemStyle-HorizontalAlign="Right">
@@ -300,9 +303,8 @@
                             <telerik:GridTemplateColumn HeaderText="Invoice Description" UniqueName="InvoiceNotes"
                                 DataField="InvoiceNotes" SortExpression="InvoiceNotes">
                                 <ItemTemplate>
-                                    <asp:Label ID="InvoiceNotesLabelInv" runat="server" Text='<%# Eval("InvoiceNotes") %>'></asp:Label>
+                                    <%# Eval("InvoiceNotes") %>
                                 </ItemTemplate>
-                                <HeaderStyle HorizontalAlign="Center" />
                             </telerik:GridTemplateColumn>
 
                             <telerik:GridCheckBoxColumn DataField="BadDebt" HeaderText="Bad Debt" UniqueName="BadDebt" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
@@ -317,8 +319,10 @@
                                     <span title="Number of times the Client has visited your Invoice Page" class="badge badge-pill badge-warning">
                                         <%#Eval("clientvisits")%>
                                     </span>
-                                    <span title="Invoice Synced with QuickBooks" style='<%# IIf(Eval("qbInvoiceId ") = 0,"display:none","display:normal")%>'>
+                                    <span title="Invoice Synced with QuickBooks" style='<%# IIf(Eval("qbInvoiceId ") <= 0,"display:none","display:normal")%>'>
                                         <img src="../Images/C2QB_green_btn_sm_default.png" height="14" />
+                                    </span>
+                                    <span title="Invoice Pending Synced with QuickBooks" style='<%# "color:red;" & IIf(Eval("qbInvoiceId ") = -1,"display:normal","display:none")%>'>qb
                                     </span>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
@@ -336,7 +340,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <h4>&nbsp;&nbsp;Payment(s)</h4>
+                <h4>&nbsp;&nbsp;Receivable Payment(s)</h4>
                 <telerik:RadGrid ID="RadGridPayments" runat="server" AllowAutomaticDeletes="True" HeaderStyle-HorizontalAlign="Center"
                     AutoGenerateColumns="False" DataSourceID="SqlDataSourcePayments" ShowFooter="True">
                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePayments" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-Font-Bold="true">
@@ -373,7 +377,7 @@
                                                 <%# Eval("CollectedNotes")%>
                                             </td>
                                             <td>
-                                                <asp:Panel ID="PanelUpload" runat="server" Visible='<%# len(Eval("Download_url"))>0 %>'>
+                                                <asp:Panel ID="PanelUploadButon" runat="server" Visible='<%# len(Eval("Download_url"))>0 %>'>
                                                     &nbsp;<a class="fas fa-cloud-download-alt" href='<%# Eval("Download_url")%>' target="_blank"></a>
                                                 </asp:Panel>
                                             </td>
@@ -382,7 +386,7 @@
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn DataField="ReconciledBank" HeaderText="R" SortExpression="ReconciledBank" UniqueName="ReconciledBank" HeaderStyle-Width="40px" ItemStyle-HorizontalAlign="Center">
+                            <telerik:GridTemplateColumn DataField="ReconciledBank" HeaderText="R" SortExpression="ReconciledBank" UniqueName="ReconciledBank" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="btnReconciledBank" runat="server" UseSubmitBehavior="false" ToolTip="Payment is reconciled with bank statement"
                                         CommandName="ReconciledBank" CommandArgument='<%# Eval("Id")%>'>
@@ -478,7 +482,7 @@
                         <p style="text-align: center; vertical-align: middle; padding-top: 50px;">
                             <i style="font-size: 96px" class="fas fa-cloud-upload-alt"></i>
                             <br />
-                            <span style="font-size: 36px">Drag & Drop Files here, or
+                            <span style="font-size: 36px">Drop Files here, or
                             </span>
                             <br />
                             <br />
@@ -493,6 +497,10 @@
                                 </telerik:RadCloudUpload>
                             </span>
                         </p>
+                        <p style="text-align: center; margin: 0">
+                            <asp:Label runat="server" ID="lblMaxSize" ForeColor="Gray" Font-Size="Small" Text="[Maximum upload size per file: 1MB]"></asp:Label>
+                        </p>
+
                     </asp:Panel>
                 </td>
             </tr>

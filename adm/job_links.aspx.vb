@@ -8,23 +8,15 @@ Public Class job_links
 
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
-                lblJobId.Text = Request.QueryString("JobId")
+                lblJobId.Text = LocalAPI.GetJobIdFromGUID(Request.QueryString("guid"))
                 lblClientId.Text = LocalAPI.GetJobProperty(lblJobId.Text, "Client")
 
                 lblproposalId.Text = LocalAPI.GetJobProperty(lblJobId.Text, "proposalId")
                 Master.ActiveTab(7)
 
-                RadListViewFiles.Visible = False
-                RadGridFiles.Visible = Not RadListViewFiles.Visible
-                btnGridPage.Visible = Not RadListViewFiles.Visible
-                btnTablePage.Visible = RadListViewFiles.Visible
-
                 ConfigUploadPanels()
 
             End If
-
-            RadWindowManager2.EnableViewState = False
-            RadWindowDropBox.NavigateUrl = "~/ADMCLI/DropboxChooser.aspx?Origen=1&JobId=" & lblJobId.Text
 
         Catch ex As Exception
             Master.ErrorMessage(ex.Message & " code: " & lblCompanyId.Text)
@@ -32,7 +24,7 @@ Public Class job_links
     End Sub
 
     Protected Sub ConfigUploadPanels()
-        Dim ExistingFiles As Integer = LocalAPI.GetEntityAzureFilesCount(lblJobId.Text, "Jobs")
+        Dim ExistingFiles As Integer = LocalAPI.GetAzureFilesCount(lblClientId.Text, lblproposalId.Text, lblJobId.Text)
 
         If ExistingFiles = 0 Then
             RadWizardStepUpload.Active = True
@@ -40,10 +32,11 @@ Public Class job_links
             RadListViewFiles.Visible = False
             RadGridFiles.Visible = False
         Else
+            RadWizardStepUpload.Active = False
             RadWizardStepFiles.Active = True
             PanelUpload.Visible = False
             RadListViewFiles.Visible = False
-            RadGridFiles.Visible = Not RadListViewFiles.Visible
+            RadGridFiles.Visible = True
             RadGridFiles.DataBind()
             RadListViewFiles.DataBind()
         End If
@@ -51,10 +44,8 @@ Public Class job_links
         btnGridPage.Visible = Not RadListViewFiles.Visible
         btnTablePage.Visible = RadListViewFiles.Visible
 
-        If lblCompanyId.Text = 260962 Then
-            ' EEG 10 Mb
-            RadCloudUpload1.MaxFileSize = 10485760
-        End If
+        RadCloudUpload1.MaxFileSize = LocalAPI.GetCompanyMaxFileSizeForUpload(lblCompanyId.Text)
+        lblMaxSize.Text = $"[Maximum upload size per file: {LocalAPI.FormatByteSize(RadCloudUpload1.MaxFileSize)}]"
 
     End Sub
 

@@ -1,4 +1,6 @@
 ﻿Imports System.Threading.Tasks
+Imports Telerik.Web.UI
+
 Public Class singproposalsign
     Inherits System.Web.UI.Page
 
@@ -219,8 +221,6 @@ Public Class singproposalsign
                 NoJobEmail(proposalId, companyId, pdfUrl)
             End If
 
-
-
             Master.DisplayMsg("The Proposal has been Accepted", "A notification has been sent to our employee in charge. Thank you")
             ' Then Redirect
             RedirectToThanksPage()
@@ -292,38 +292,43 @@ Public Class singproposalsign
     Private Function NoJobEmail(lProposalId As Integer, ByVal companyid As Integer, ProposalPdfURL As String) As Boolean
         Try
             '
-            Dim sAceptedDate As String = LocalAPI.GetProposalData(lProposalId, "AceptedDate")
-            Dim ProposalNumber As String = LocalAPI.ProposalNumber(lblProposalId.Text)
+            Dim jobId = LocalAPI.GetProposalProperty(lProposalId, "JobId")
 
-            Dim DictValues As Dictionary(Of String, String) = New Dictionary(Of String, String)
-            DictValues.Add("[RFPNumber]", ProposalNumber)
-            DictValues.Add("[AceptedDate]", sAceptedDate)
-            DictValues.Add("[ProposalPdfURL]", ProposalPdfURL)
-            DictValues.Add("[PASSign]", LocalAPI.GetPASSign())
+            If jobId <= 0 Then
 
-            Dim sSubject As String = LocalAPI.GetMessageTemplateSubject("Sign_Proposal_No_Job", lblCompanyId.Text, DictValues)
-            Dim sBody As String = LocalAPI.GetMessageTemplateBody("Sign_Proposal_No_Job", lblCompanyId.Text, DictValues)
+                Dim sAceptedDate As String = LocalAPI.GetProposalData(lProposalId, "AceptedDate")
+                Dim ProposalNumber As String = LocalAPI.ProposalNumber(lblProposalId.Text)
 
-            Dim sCC As String = ""
-            Dim sProjectManagerEmail As String = ""
-            Dim sCCO As String = ""
-            sProjectManagerEmail = LocalAPI.GetProjectManagerEmailFromProposal(lProposalId)
-            sCC = sProjectManagerEmail & IIf(Len(sProjectManagerEmail) > 0, ",", "") & LocalAPI.GetCompanyProperty(companyid, "webEmailProfitWarningCC")
-            sCCO = "jcarlos@axzes.com," & LocalAPI.GetHeadDepartmentEmailFromProposal(lProposalId)
+                Dim DictValues As Dictionary(Of String, String) = New Dictionary(Of String, String)
+                DictValues.Add("[RFPNumber]", ProposalNumber)
+                DictValues.Add("[AceptedDate]", sAceptedDate)
+                DictValues.Add("[ProposalPdfURL]", ProposalPdfURL)
+                DictValues.Add("[PASSign]", LocalAPI.GetPASSign())
 
-            Dim sProjectManagerName As String = ""
-            If Len(sProjectManagerEmail) > 0 Then
-                sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail, companyid)
+                Dim sSubject As String = LocalAPI.GetMessageTemplateSubject("Sign_Proposal_No_Job", lblCompanyId.Text, DictValues)
+                Dim sBody As String = LocalAPI.GetMessageTemplateBody("Sign_Proposal_No_Job", lblCompanyId.Text, DictValues)
+
+                Dim sCC As String = ""
+                Dim sProjectManagerEmail As String = ""
+                Dim sCCO As String = ""
+                sProjectManagerEmail = LocalAPI.GetProjectManagerEmailFromProposal(lProposalId)
+                sCC = sProjectManagerEmail & IIf(Len(sProjectManagerEmail) > 0, ",", "") & LocalAPI.GetCompanyProperty(companyid, "webEmailProfitWarningCC")
+                sCCO = "jcarlos@axzes.com," & LocalAPI.GetHeadDepartmentEmailFromProposal(lProposalId)
+
+                Dim sProjectManagerName As String = ""
+                If Len(sProjectManagerEmail) > 0 Then
+                    sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail, companyid)
+                End If
+                Dim ProposalObject = LocalAPI.GetRecord(lProposalId, "ProposalRecord_SELECT")
+                Dim ClientId = ProposalObject("ClientId")
+
+                SendGrid.Email.SendMail(sProjectManagerEmail, sCC, sCCO, sSubject, sBody, companyid, ClientId, 0,,, sProjectManagerEmail, sProjectManagerName)
+
+                Dim sProposalURL As String = "https://www.pasconcept.com/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & LocalAPI.GetProposalProperty(lProposalId, "guid")
+                Dim recipientEmailSent As String = sCC & IIf(Len(sProjectManagerEmail) > 0, "," & sProjectManagerEmail, "")
+                recipientEmailSent = recipientEmailSent & "," & sCCO
+                OneSignalNotification.SendNotification(recipientEmailSent, "Proposal accepted Alert!!!", "Proposal " & ProposalNumber & " has accepted and Job was not created!!!", sProposalURL, companyid)
             End If
-            Dim ProposalObject = LocalAPI.GetRecord(lProposalId, "ProposalRecord_SELECT")
-            Dim ClientId = ProposalObject("ClientId")
-
-            SendGrid.Email.SendMail(sProjectManagerEmail, sCC, sCCO, sSubject, sBody, companyid, ClientId, 0,,, sProjectManagerEmail, sProjectManagerName)
-
-            Dim sProposalURL As String = "https://www.pasconcept.com/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & LocalAPI.GetProposalProperty(lProposalId, "guid")
-            Dim recipientEmailSent As String = sCC & IIf(Len(sProjectManagerEmail) > 0, "," & sProjectManagerEmail, "")
-            recipientEmailSent = recipientEmailSent & "," & sCCO
-            OneSignalNotification.SendNotification(recipientEmailSent, "Proposal accepted Alert!!!", "Proposal " & ProposalNumber & " has accepted and Job was not created!!!", sProposalURL, companyid)
 
         Catch ex As Exception
             Master.DisplayMsg("NoJob Email", ex.Message.ToString(), "error")
@@ -488,10 +493,24 @@ Public Class singproposalsign
         Response.Redirect(url, False)
     End Sub
 
-    Protected  Sub btnPrint_Click(sender As Object, e As EventArgs)
+    Protected Sub btnPrint_Click(sender As Object, e As EventArgs)
         Dim ProposalUrl = LocalAPI.GetSharedLink_URL(11, lblProposalId.Text)
         Session("PrintUrl") = ProposalUrl
         Session("PrintName") = "Proposal_" & LocalAPI.ProposalNumber(lblProposalId.Text) & ".pdf"
         Response.Redirect("~/ADM/pdf_print.aspx")
+    End Sub
+
+    Public Sub rptrPhases_ItemDataBound(sender As Object, e As RepeaterItemEventArgs)
+        'Dim e1 As String = DataBinder.Eval(e.Item.DataItem, "phaseId")
+        If e.Item.ItemType = ListItemType.Item OrElse e.Item.ItemType = ListItemType.AlternatingItem Then
+            Dim ADSChild As SqlDataSource = e.Item.FindControl("SqlDataSourceScopeOfWorkByPhase")
+            ADSChild.SelectParameters(2).DefaultValue = DataBinder.Eval(e.Item.DataItem, "phaseId")
+        End If
+
+    End Sub
+
+    Public Sub RadGridFees_PreRender(sender As Object, e As EventArgs)
+        Dim masterTable As GridTableView = (CType(sender, RadGrid)).MasterTableView
+        masterTable.GetColumn("Phase").Display = IIf(LocalAPI.GetProposalPhasesCount(lblProposalId.Text) = 0, False, True)
     End Sub
 End Class

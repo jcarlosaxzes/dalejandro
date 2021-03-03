@@ -22,6 +22,7 @@ Public Class proposalnewwizard
 
                 If Request.QueryString("proposalId") Is Nothing Then
                     ' New Proposal.....................
+                    panelProposalCreated.Visible = False
                     SqlDataSourceClient.DataBind()
 
                     SqlDataSourceEmployees.DataBind()
@@ -47,6 +48,8 @@ Public Class proposalnewwizard
                 Else
                     ' Edit Proposal....................
                     lblProposalId.Text = Request.QueryString("proposalId")
+                    panelProposalCreated.Visible = True
+                    panelProposalCreated.DataBind()
                     lblClientId.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId")
 
                     ReadPaymentSchedule()
@@ -66,13 +69,13 @@ Public Class proposalnewwizard
                         'FeesTab
                         RadWizardStepFees.Active = True
                     End If
-                    Dim statusId As String = LocalAPI.GetProposalData(lblProposalId.Text, "statusId")
-                    If statusId > 1 Then
+                    lblProposalStatus.Text = LocalAPI.GetProposalData(lblProposalId.Text, "statusId")
+                    If lblProposalStatus.Text > 1 Then
                         btnNewFeeOk.Visible = False
                         cboPaymentSchedules.Visible = False
                         btnUpdatePS.Visible = False
                     Else
-                        btnNewFeeOk.Visible = True
+                        btnNewFeeOk.Visible = (LocalAPI.GetProposalPhasesCount(lblProposalId.Text) = 0)
                         cboPaymentSchedules.Visible = True
                         btnUpdatePS.Visible = True
                     End If
@@ -92,6 +95,15 @@ Public Class proposalnewwizard
                 RadGridFiles.Visible = Not RadListViewFiles.Visible
                 btnGridPage.Visible = Not RadListViewFiles.Visible
                 btnTablePage.Visible = RadListViewFiles.Visible
+
+                ' Phases Panel
+                If LocalAPI.GetCompanyPhasesCount(lblCompanyId.Text) > 0 Then
+                    PanelPhases.Visible = True
+                    btnNewPhase.Visible = (lblProposalStatus.Text <> 4 And lblProposalStatus.Text <> 2)
+                    RadGridPhases.Enabled = btnNewPhase.Visible
+                Else
+                    PanelPhases.Visible = False
+                End If
 
             End If
             RadWindowManagerJob.EnableViewState = False
@@ -122,11 +134,8 @@ Public Class proposalnewwizard
         btnGridPage.Visible = Not RadListViewFiles.Visible
         btnTablePage.Visible = RadListViewFiles.Visible
 
-        If lblCompanyId.Text = 260962 Then
-            ' EEG 10 Mb
-            RadCloudUpload1.MaxFileSize = 10485760
-        End If
-
+        RadCloudUpload1.MaxFileSize = LocalAPI.GetCompanyMaxFileSizeForUpload(lblCompanyId.Text)
+        lblMaxSize.Text = $"[Maximum upload size per file: {LocalAPI.FormatByteSize(RadCloudUpload1.MaxFileSize)}]"
     End Sub
 
     Private Sub ReadPaymentSchedule()
@@ -168,8 +177,6 @@ Public Class proposalnewwizard
 
             ReadProposal(lblProposalId.Text)
 
-            SqlDataSourceProposal_Step1.DataBind()
-
             RadGridFees.DataBind()
 
             RefreshRatios()
@@ -182,39 +189,50 @@ Public Class proposalnewwizard
 
             RadGridFiles.DataBind()
 
-            iframeViewProposal.Src = LocalAPI.GetSharedLink_URL(111, lblProposalId.Text) & "&IsReadOnly=1&FromWizard=1"
+            iframeViewProposal.Src = LocalAPI.GetSharedLink_URL(111, lblProposalId.Text) & "&IsReadOnly=1&backpage=proposalnewwizard"
 
         End If
     End Sub
 
     Private Function NewProposal() As Boolean
-        ' INSERT NEW PROPOSAL
-        If Not LocalAPI.IsProposalOrJobName(txtProposalName.Text, lblCompanyId.Text) Then
-            lblProposalId.Text = LocalAPI.CreateProposal(cboType.SelectedValue, txtProposalName.Text, cboEmployee.SelectedValue, lblCompanyId.Text, lblEmployeeId.Text,
-                                                         cboSector.SelectedValue, cboUse.SelectedValue, cboUse2.SelectedValue,
-                                                      cboDepartment.SelectedValue, 0,
-                                                         txtProjectAddressLine.Text, txtUnit.DbValue, cboMeasure.SelectedValue, cboProjectType.SelectedValue, cboClients.SelectedValue, cboProjectManagerId.SelectedValue)
+        Try
+            ' INSERT NEW PROPOSAL
+            If Not LocalAPI.IsProposalOrJobName(txtProposalName.Text, lblCompanyId.Text) Then
+                lblProposalId.Text = LocalAPI.Proposal_Wizard_INSERT(cboType.SelectedValue, txtProposalName.Text, cboEmployee.SelectedValue, lblCompanyId.Text, lblEmployeeId.Text, cboSector.SelectedValue, cboUse.SelectedValue, cboUse2.SelectedValue, cboDepartment.SelectedValue, 0, txtProjectAddressLine.Text, txtUnit.DbValue, cboMeasure.SelectedValue, cboProjectType.SelectedValue, cboClients.SelectedValue, cboProjectManagerId.SelectedValue, TextBoxOwner.Text, radEditorBegin.Content, radEditorEnd.Content)
 
-            ' UPDATE PROPOSAL, aunque sea despues de NEW para incluir todos los Campos adicionales
-            SqlDataSourceProposal_Step1.Update()
+                ' Update proposalId si viene de PreProject
+                If lblPreProjectId.Text > 0 Then
+                    LocalAPI.SetPreProject_proposalId(lblPreProjectId.Text, lblProposalId.Text)
+                End If
 
-            ' Update proposalId si viene de PreProject
-            If lblPreProjectId.Text > 0 Then
-                LocalAPI.SetPreProject_proposalId(lblPreProjectId.Text, lblProposalId.Text)
+                UpdatePS()
+
+                ProposalItemsDataBind()
+
+                ReadPaymentSchedule()
+
+                panelProposalCreated.Visible = (lblProposalId.Text > 0)
+                panelProposalCreated.DataBind()
+
+                Return (lblProposalId.Text > 0)
+            Else
+                RadWizard1.ActiveStepIndex = 1
+                lblMsg.Text = "'" & txtProposalName.Text & "' is the name of other proposal or job. Change this property."
+                txtProposalName.Focus()
             End If
-
-
-            ProposalItemsDataBind()
-
-            ReadPaymentSchedule()
-
-            Return (lblProposalId.Text > 0)
-        Else
-            RadWizard1.ActiveStepIndex = 1
-            lblMsg.Text = "'" & txtProposalName.Text & "' is the name of other proposal or job. Change this property."
-            txtProposalName.Focus()
-        End If
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
     End Function
+
+    Private Sub UpdateProposal()
+        Try
+            LocalAPI.Proposal_Wizard_UPDATE(lblProposalId.Text, cboClients.SelectedValue, cboType.SelectedValue, cboProjectType.SelectedValue, txtProposalName.Text, txtProjectAddressLine.Text, cboSector.SelectedValue, cboUse.SelectedValue, cboUse2.SelectedValue, cboDepartment.SelectedValue, cboEmployee.SelectedValue, txtUnit.DbValue, cboMeasure.SelectedValue, TextBoxOwner.Text, cboProjectManagerId.SelectedValue, lblEmployeeId.Text, radEditorBegin.Content, radEditorEnd.Content)
+
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
+    End Sub
 
 #Region "RadWizard Step Buttons"
     Protected Sub RadWizard1_NextButtonClick(sender As Object, e As WizardEventArgs) Handles RadWizard1.NextButtonClick
@@ -234,19 +252,20 @@ Public Class proposalnewwizard
 
                 Else
                     ' UPDATE PROPOSAL
-                    SqlDataSourceProposal_Step1.Update()
+                    UpdateProposal()
+
                     RefreshRatios()
                 End If
-
-                'RadWizard1.WizardSteps(2).Enabled = (lblProposalId.Text) > 0
-                'RadWizard1.WizardSteps(3).Enabled = (lblProposalId.Text) > 0
-                'RadWizard1.WizardSteps(4).Enabled = (lblProposalId.Text) > 0
-                'RadWizard1.WizardSteps(5).Enabled = (lblProposalId.Text) > 0
-                'RadWizard1.WizardSteps(6).Enabled = (lblProposalId.Text) > 0
 
             Case "RadWizardStepFees"
                 e.NextStep.Enabled = True
                 FormViewTC.DataBind()
+
+            Case "Payment"
+
+                e.NextStep.Enabled = True
+                RadGridPS.DataBind()
+                TotalsAnalisis()
 
             Case "TC"
                 e.NextStep.Enabled = True
@@ -257,13 +276,6 @@ Public Class proposalnewwizard
                 HideTCtoolbar()
                 RadListViewFiles.DataBind()
                 RadGridFiles.DataBind()
-
-                TotalsAnalisis()
-
-            Case "Payment"
-
-                e.NextStep.Enabled = True
-                RadGridPS.DataBind()
 
             Case "RadWizardStepAttachments"
                 e.NextStep.Enabled = True
@@ -287,14 +299,15 @@ Public Class proposalnewwizard
             Case "Fees"
                 ReadProposal(lblProposalId.Text)
 
-            Case "TC"
+            Case "Payment"
                 RadGridFees.DataBind()
 
-            Case "Payment"
-                FormViewTC.DataBind()
+
+            Case "TC"
+                RadGridPS.DataBind()
 
             Case "RadWizardStepAttachments"
-                RadGridPS.DataBind()
+                FormViewTC.DataBind()
 
             Case "Preview"
                 RadListViewFiles.DataBind()
@@ -306,7 +319,7 @@ Public Class proposalnewwizard
 
     Private Sub RadWizard1_FinishButtonClick(sender As Object, e As WizardEventArgs) Handles RadWizard1.FinishButtonClick
         If lblProposalId.Text > 0 Then
-            Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblProposalId.Text)
+            Response.Redirect(LocalAPI.GetSharedLink_URL(11001, lblProposalId.Text) & "&backpage=proposals")
         End If
 
     End Sub
@@ -392,6 +405,9 @@ Public Class proposalnewwizard
             If ProposalObject("ProjectManagerId") > 0 Then cboProjectManagerId.SelectedValue = ProposalObject("ProjectManagerId")
 
             chkLumpSum.Checked = IIf(ProposalObject("LumpSum") = 0, False, True)
+
+            radEditorBegin.Content = ProposalObject("TextBegin")
+            radEditorEnd.Content = ProposalObject("TextEnd")
         End If
     End Sub
 #End Region
@@ -399,14 +415,14 @@ Public Class proposalnewwizard
 #Region "Fees_Step2"
 
     Private Sub btnNewFeeOk_Click(sender As Object, e As EventArgs) Handles btnNewFeeOk.Click
-        Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text & "&fromwizard=1")
+        Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text & "&backpage=proposalnewwizard")
     End Sub
 
     Private Sub RadGridFees_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridFees.ItemCommand
         Dim statusId As String = LocalAPI.GetProposalData(lblProposalId.Text, "statusId")
         Select Case e.CommandName
             Case "EditTask"
-                Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text & "&detailId=" & e.CommandArgument & "&fromwizard=1")
+                Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text & "&detailId=" & e.CommandArgument & "&backpage=proposalnewwizard")
             Case "OrderDown"
                 If statusId <= 1 Then
                     LocalAPI.ProposalDetail_OrderBy_UPDATE(e.CommandArgument, 1)
@@ -468,24 +484,26 @@ Public Class proposalnewwizard
 
     Private Sub btnUpdatePS_Click(sender As Object, e As EventArgs) Handles btnUpdatePS.Click
         ' New code 6-3-2020
-        SqlDataSourcePS.Update()
+        UpdatePS
+    End Sub
+    Private Sub UpdatePS()
+        SqlDataSourceProposalPSUpdate.Update()
         RadGridPS.DataBind()
         RadGridFees.DataBind()
         TotalsAnalisis()
-        SqlDataSourceProposal_Step1.Update()
         RefreshRatios()
     End Sub
 
     Private Sub TotalsAnalisis()
-        Dim bTotal As Double = LocalAPI.GetProposalTotal(lblProposalId.Text)
-        Dim bPSTotal As Double = LocalAPI.GetProposalPSTotal(lblProposalId.Text)
-        lblProposalTotal.Text = FormatCurrency(bTotal)
-        lblScheduleTotal.Text = FormatCurrency(bPSTotal)
-        If bTotal = 0 Then
-            lblTotalAlert.Text = "It is mandatory that [Proposal Total] is greater than zero !"
+        Dim dTotal As Double = LocalAPI.GetProposalTotal(lblProposalId.Text)
+        Dim dPSTotal As Double = LocalAPI.GetProposalPSTotal(lblProposalId.Text)
+        lblProposalTotal.Text = FormatCurrency(dTotal)
+        lblScheduleTotal.Text = FormatCurrency(dPSTotal)
+        If dTotal = 0 Then
+            lblTotalAlert.Text = "Alert. The Project Total is zero !"
         Else
-            If bPSTotal > 0 And (Math.Round(bTotal, 0) <> Math.Round(bPSTotal, 0)) Then
-                lblTotalAlert.Text = "It Is mandatory that [Proposal Total] = [Payment Schedule Total] ! "
+            If dPSTotal > 0 And (Math.Round(dTotal, 0) <> Math.Round(dPSTotal, 0)) Then
+                lblTotalAlert.Text = $"Your Project Total ({FormatCurrency(dTotal)}) and your Payment Schedule Total ({FormatCurrency(dPSTotal)}) do not match !"
             Else
                 lblTotalAlert.Text = ""
             End If
@@ -736,12 +754,8 @@ Public Class proposalnewwizard
         AzureStorageApi.DeleteFile(KeyName)
     End Sub
 
-    Private Sub SqlDataSourceProposal_Step1_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceProposal_Step1.Updating
-        Dim e1 As String = e.Command.Parameters("@ProjectSector").Value
-    End Sub
-
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Response.Redirect("~/adm/proposals.aspx")
+        Response.Redirect("~/adm/proposals.aspx?restoreFilter=true")
     End Sub
 
     Private Sub SqlDataSourcePS_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourcePS.Updating
@@ -750,6 +764,7 @@ Public Class proposalnewwizard
     End Sub
 
     Private Sub RadGridFees_PreRender(sender As Object, e As EventArgs) Handles RadGridFees.PreRender
+        RadGridFees.MasterTableView.GetColumn("phaseId").Display = IIf(LocalAPI.GetProposalPhasesCount(lblProposalId.Text) = 0, False, True)
         If lblCompanyId.Text = 260962 Then
             ' 6/9/2020 Fernando y Raissa ddefinen que no es visible en EEG
             RadGridFees.MasterTableView.GetColumn("Estimated").Visible = False
@@ -765,10 +780,15 @@ Public Class proposalnewwizard
         RefreshRatios()
     End Sub
     Private Sub RefreshRatios()
-        RadGridRatios.DataBind()
-        '!!!RadHtmlChartRatios.DataBind()
-        lblMeasureAndUnits.Text = cboProjectType.Text & ": " & IIf(txtUnit.Text > 0, FormatNumber(txtUnit.Text, 2), "(Units Pending!)") & " " & IIf(Len(cboMeasure.Text) > 0, cboMeasure.Text, "(Measure Pending!)")
-        CalculateFromRatio(txtRatio.DbValue, txtRatio.Label)
+        Try
+
+            RadGridRatios.DataBind()
+            '!!!RadHtmlChartRatios.DataBind()
+            lblMeasureAndUnits.Text = cboProjectType.Text & ": " & IIf(txtUnit.Text > 0, FormatNumber(txtUnit.Text, 2), "(Units Pending!)") & " " & IIf(Len(cboMeasure.Text) > 0, cboMeasure.Text, "(Measure Pending!)")
+            CalculateFromRatio(txtRatio.DbValue, txtRatio.Label)
+        Catch ex As Exception
+
+        End Try
     End Sub
     Private Sub SqlDataSourceRatios_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceRatios.Selecting
         If cboClientRatios.SelectedValue = 0 Then
@@ -797,8 +817,8 @@ Public Class proposalnewwizard
     Private Sub RadGridRatios_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridRatios.ItemCommand
         Select Case e.CommandName
             Case "EditJob"
-                Dim sUrl = "~/ADM/Job_job.aspx?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 820, True, True)
+                Dim sUrl As String = LocalAPI.GetSharedLink_URL(8001, e.CommandArgument)
+                Response.Redirect(sUrl)
 
             Case "RemoveRow"
                 lblExcludeJobsList.Text = lblExcludeJobsList.Text & IIf(Len(lblExcludeJobsList.Text) > 0, ",", "") & e.CommandArgument
@@ -843,4 +863,49 @@ Public Class proposalnewwizard
     Private Sub btnSaveUpload_Click(sender As Object, e As EventArgs) Handles btnSaveUpload.Click
         ConfigUploadPanels()
     End Sub
+
+    Private Sub btnNewPhase_Click(sender As Object, e As EventArgs) Handles btnNewPhase.Click
+        Response.Redirect($"~/adm/proposalphase.aspx?proposalId={lblProposalId.Text}&backpage=proposalnewwizard")
+    End Sub
+    Private Sub RadGridPhases_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridPhases.ItemCommand
+        Select Case e.CommandName
+            Case "EditPhase"
+                Response.Redirect($"~/adm/proposalphase.aspx?Id={e.CommandArgument}&proposalId={lblProposalId.Text}&backpage=proposalnewwizard")
+            Case "AddTaskInPhase"
+                Response.Redirect($"~/adm/proposaltask.aspx?proposalId={lblProposalId.Text}&backpage=proposalnewwizard&phaseId={e.CommandArgument}")
+        End Select
+
+    End Sub
+
+    Private Sub SqlDataSourcePhases_Deleted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourcePhases.Deleted
+        RadGridFees.DataBind()
+    End Sub
+
+    Private Sub RadGridPS_PreRender(sender As Object, e As EventArgs) Handles RadGridPS.PreRender
+        RadGridPS.MasterTableView.GetColumn("EditCommandColumn").Display = (lblProposalStatus.Text <> 4 And lblProposalStatus.Text <> 2)
+    End Sub
+
+    Protected Sub btnSaveAs_Click(sender As Object, e As EventArgs) Handles btnSaveAs.Click
+        Response.Redirect($"~/adm/proposal_save_copy.aspx?ProposalId={lblProposalId.Text}&backpage=proposalnewwizard")
+    End Sub
+    Protected Sub btnSaveAsTemplate_Click(sender As Object, e As EventArgs) Handles btnSaveAsTemplate.Click
+        Response.Redirect($"~/adm/proposal_save_as_template.aspx?ProposalId={lblProposalId.Text}&backpage=proposalnewwizard")
+    End Sub
+
+    Private Sub cboType_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboType.SelectedIndexChanged
+        Try
+
+            If cboType.SelectedValue > 0 Then
+                Dim ProposalObject = LocalAPI.GetRecord(cboType.SelectedValue, "Proposal_types_Record_SELECT")
+
+                radEditorBegin.Content = ProposalObject("TextBegin")
+                radEditorEnd.Content = ProposalObject("TextEnd")
+
+                cboPaymentSchedules.SelectedValue = ProposalObject("paymentscheduleId")
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
 End Class

@@ -1,8 +1,29 @@
-﻿<%@ Page Title="Invoices" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="invoices.aspx.vb" Inherits="pasconcept20.invoices" %>
+﻿<%@ Page Title="Receivable Invoices" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="invoices.aspx.vb" Inherits="pasconcept20.invoices" %>
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <%@ Import Namespace="pasconcept20" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <%-- <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+        <AjaxSettings>
+            <telerik:AjaxSetting AjaxControlID="RadGrid1">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadWindowManager1"></telerik:AjaxUpdatedControl>
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+            <telerik:AjaxSetting AjaxControlID="btnRefresh">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+        </AjaxSettings>
+    </telerik:RadAjaxManager>
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />--%>
+
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
+    </telerik:RadWindowManager>
+
     <script type="text/javascript">
         function onClientUploadFailed(sender, eventArgs) {
             alert(eventArgs.get_message())
@@ -13,24 +34,8 @@
         }
     </script>
 
-    <%-- <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
-        <AjaxSettings>
-            <telerik:AjaxSetting AjaxControlID="RadGrid1">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="RadWindowManager1"></telerik:AjaxUpdatedControl>
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-        </AjaxSettings>
-    </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />--%>
-
-    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
-    </telerik:RadWindowManager>
-
-
     <div class="pasconcept-bar noprint">
-        <span class="pasconcept-pagetitle">Invoices</span>
+        <span class="pasconcept-pagetitle">Receivable Invoices</span>
 
         <span style="float: right; vertical-align: middle;">
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
@@ -58,14 +63,18 @@
                     <td style="width: 200px">
                         <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%">
                             <Items>
-                                <telerik:RadComboBoxItem Text="(Last 30 days)" Value="30" />
-                                <telerik:RadComboBoxItem Text="(Last 60 days)" Value="60" />
-                                <telerik:RadComboBoxItem Text="(Last 90 days)" Value="90" />
-                                <telerik:RadComboBoxItem Text="(Last 120 days)" Value="120" />
-                                <telerik:RadComboBoxItem Text="(Last 180 days)" Value="180" />
-                                <telerik:RadComboBoxItem Text="(Last 365 days)" Value="365" />
-                                <telerik:RadComboBoxItem Text="(This year)" Value="14" />
+                                <telerik:RadComboBoxItem Text="Last 30 days" Value="30" />
+                                <telerik:RadComboBoxItem Text="Last 60 days" Value="60" />
+                                <telerik:RadComboBoxItem Text="Last 90 days" Value="90" />
+                                <telerik:RadComboBoxItem Text="Last 120 days" Value="120" />
+                                <telerik:RadComboBoxItem Text="Last 180 days" Value="180" />
+                                <telerik:RadComboBoxItem Text="Last 365 days" Value="365" />
+                                <telerik:RadComboBoxItem Text="This year" Value="14" />
+                                <telerik:RadComboBoxItem Text="This month" Value="16" />
+                                <telerik:RadComboBoxItem Text="Last year" Value="15" />
+                                <telerik:RadComboBoxItem Text="Last month" Value="17" />
                                 <telerik:RadComboBoxItem Text="(All years...)" Value="13" Selected="true" />
+                                <telerik:RadComboBoxItem Text="Custom Range..." Value="99" />
                             </Items>
                         </telerik:RadComboBox>
                     </td>
@@ -243,17 +252,26 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <asp:LinkButton ID="LinkButton2" runat="server" UseSubmitBehavior="false" CommandName="SendInvoice" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
-                                                            <i class="far fa-envelope"></i>&nbsp;&nbsp;Send Invoice Email to Client
+                                                <asp:LinkButton ID="LinkButton1" runat="server" UseSubmitBehavior="false" CommandName="EditJobBilling" CommandArgument='<%# Eval("JobId")%>' CssClass="dropdown-item">
+                                                            <i class="fas fa-dollar-sign"></i>&nbsp;&nbsp;View/Edit Job's Billing
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <%--<asp:LinkButton ID="btnPrintInvoice" runat="server" UseSubmitBehavior="false" ToolTip="Print Invoice"
-                                                    CommandName="PDF" CommandArgument='<%# Eval("Id")%>' Visible="false">
-                                                        <i class="far fa-file-pdf"></i></a>
-                                                </asp:LinkButton>--%>
+                                                <div class="dropdown-divider"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="LinkButton6" runat="server" UseSubmitBehavior="false" CommandName="SendInvoice" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item"
+                                                    Visible='<%#IIf(Eval("qbCustomerId") <> 0 And Eval("qbInvoiceId ") <> 0, False, True) %>'>
+                                                        <i class="far fa-envelope"></i>&nbsp;&nbsp;Send Invoice Email to Client
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
                                                 <a href='<%# LocalAPI.GetSharedLink_URL(44, Eval("Id"), True)%>' target="_blank" class="dropdown-item">
                                                     <i class="fas fa-print"></i>&nbsp;&nbsp;Print Invoice Page
                                                 </a>
@@ -264,6 +282,11 @@
                                                 <a href='<%# LocalAPI.GetSharedLink_URL(44, Eval("Id"), False)%>' target="_blank" class="dropdown-item">
                                                     <i class="far fa-share-square"></i>&nbsp;&nbsp;View/Share Invoice Page
                                                 </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="dropdown-divider"></div>
                                             </td>
                                         </tr>
                                         <tr>
@@ -322,20 +345,29 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="MaturityDate" DataType="System.DateTime" HeaderText="Insights"
-                        SortExpression="MaturityDate" UniqueName="Date" HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center">
+                        SortExpression="MaturityDate" UniqueName="Date" HeaderStyle-Width="200px" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
-                            <asp:Label ID="lblEmitted" runat="server" Text='<%# Eval("FirstEmission", "{0:d}") %>'></asp:Label>
-                            <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary">
-                                <%#Eval("Emitted")%>
-                            </span>
-                            <span title="Number of times the Client has visited your Invoice Page" class="badge badge-pill badge-warning">
-                                <%#Eval("clientvisits")%>
-                            </span>
-                            <span title="Invoice Synced with QuickBooks" style='<%# IIf(Eval("qbInvoiceId ") = 0,"display:none","display:normal")%>'>
-                                <img src="../Images/C2QB_green_btn_sm_default.png" height="14" />
-                            </span>
-                            <br />
-                            <div title="Past Due Status" style="font-size: 12px; width: 100%" class='<%# LocalAPI.GetInvoicePastDueLabelCSS(Eval("pastdue_status")) %>'><%# Eval("pastdue_status") %></div>
+                            <table style="width: 100%">
+                                <tr>
+                                    <td style="text-align: right; width: 60px">
+                                        <span style="font-size: x-small" title="First Emission Date"><%# Eval("FirstEmission", "{0:d}")%></span>
+                                    </td>
+                                    <td style="text-align: center; width: 30px">
+                                        <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary"><%#Eval("Emitted")%></span>
+                                    </td>
+                                    <td style="text-align: center; width: 30px">
+                                        <span title="Number of times the Client has visited your Invoice Page" class="badge badge-pill badge-warning"><%#Eval("clientvisits")%></span>
+                                    </td>
+                                    <td style="text-align: center; width: 50px">
+                                        <span title="Invoice Synced with QuickBooks" style='<%# IIf(Eval("qbInvoiceId ") <= 0,"display:none","display:normal")%>'>
+                                            <img src="../Images/C2QB_green_btn_sm_default.png" height="14" /></span>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <span title="Invoice Pending Synced with QuickBooks" style='<%# "color:red;" & IIf(Eval("qbInvoiceId ") = -1,"display:normal","display:none")%>'>qb</span>
+                                    </td>
+                                </tr>
+                            </table>
+                            <span title="Past Due Status" style="font-size: 12px; width: 100%" class='<%# LocalAPI.GetInvoicePastDueLabelCSS(Eval("pastdue_status")) %>'><%# Eval("pastdue_status") %></span>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridBoundColumn DataField="InvoiceNotes" HeaderText="Invoice Description" SortExpression="InvoiceNotes" ItemStyle-Font-Size="X-Small"
@@ -348,45 +380,6 @@
                 </Columns>
             </MasterTableView>
         </telerik:RadGrid>
-
-        <%--        <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="lblBillingContact" RelativeTo="Element"
-            Position="MiddleLeft" RenderInPageRoot="true" Modal="True" Title="<b>Billing Contact Information</b>" ShowEvent="OnClick"
-            HideDelay="300" HideEvent="LeaveTargetAndToolTip" IgnoreAltAttribute="true">
-            <table>
-                <tr>
-                    <td>Billing Contact:&nbsp;<b><%# Eval("BillingContact")%></b></td>
-                </tr>
-                <tr>
-                    <td>Client Name:&nbsp;<b><%# Eval("ClientName")%></b></td>
-                </tr>
-                <tr>
-                    <td>Phone:&nbsp;<b><%# Eval("Phone")%></b></td>
-                </tr>
-                <tr>
-                    <td>Cellular:&nbsp;<b><%# Eval("Cellular")%></b></td>
-                </tr>
-                <tr>
-                    <td>Email:&nbsp;<b><%# Eval("Email")%></b></td>
-                </tr>
-            </table>
-        </telerik:RadToolTip>
-
-        <telerik:RadToolTip ID="RadToolTipEmitted" runat="server" TargetControlID="lblEmitted" RelativeTo="Element"
-            Position="MiddleLeft" RenderInPageRoot="true" Modal="True" Title="<b>Emitted Information</b>" ShowEvent="OnClick"
-            HideDelay="300" HideEvent="LeaveTargetAndToolTip" IgnoreAltAttribute="true">
-            <table>
-                <tr>
-                    <td>Emitted:&nbsp;<b><%# Eval("Emitted")%></b>&nbsp;time(s)
-                    </td>
-                </tr>
-                <tr>
-                    <td>First time:&nbsp;<b><%# Eval("FirstEmission", "{0:d}")%></b></td>
-                </tr>
-                <tr>
-                    <td>Last time:&nbsp;<b><%# Eval("LatestEmission", "{0:d}")%></b></td>
-                </tr>
-            </table>
-        </telerik:RadToolTip>--%>
     </div>
 
     <telerik:RadToolTip ID="RadToolTipInsertPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
@@ -447,7 +440,7 @@
             <tr>
                 <td colspan="2">
                     <asp:Panel ID="PanelUpload" runat="server" class="uploadfiles-canvas">
-                        <%-- <span style="font-size: 36px">Drag & Drop Files here, or
+                        <%-- <span style="font-size: 36px">Drop Files here, or
                         </span>
                         <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" MultipleFileSelection="Disabled" OnClientUploadFailed="onClientUploadFailed"
                             OnFileUploaded="RadCloudUpload1_FileUploaded" ProviderType="Azure"
@@ -458,7 +451,7 @@
                         <p style="text-align: center; vertical-align: middle; padding-top: 50px;">
                             <i style="font-size: 96px" class="fas fa-cloud-upload-alt"></i>
                             <br />
-                            <span style="font-size: 36px">Drag & Drop Files here, or
+                            <span style="font-size: 36px">Drop Files here, or
                             </span>
                             <br />
                             <br />
@@ -473,6 +466,10 @@
                                 </telerik:RadCloudUpload>
                             </span>
                         </p>
+                        <p style="text-align: center; margin: 0">
+                            <asp:Label runat="server" ID="lblMaxSize" ForeColor="Gray" Font-Size="Small" Text="[Maximum upload size per file: 1MB]"></asp:Label>
+                        </p>
+
                     </asp:Panel>
                 </td>
             </tr>
@@ -700,7 +697,7 @@
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSourcePayments" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        InsertCommand="INVOICE_PAYMENTS3_INSERT" InsertCommandType="StoredProcedure">
+        InsertCommand="INVOICE_PAYMENTS_v20_INSERT" InsertCommandType="StoredProcedure">
         <InsertParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
             <asp:ControlParameter ControlID="lblInvoiceId" Name="InvoiceId" PropertyName="Text" Type="Int32" />
@@ -713,6 +710,8 @@
             <asp:ControlParameter ControlID="lblKeyName" Name="KeyName" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="lblContentBytes" Name="ContentBytes" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="lblContentType" Name="ContentType" PropertyName="Text" Type="String" />
+            <asp:Parameter Name="paymentId" Direction="Output" Type="Int32" DefaultValue="0" />
+            
         </InsertParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceViewSummary" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
@@ -731,9 +730,9 @@
     </asp:SqlDataSource>
 
 
-    <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" ToolTip="Date From for filter" Visible="false">
+    <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US" ToolTip="Date From for filter" Visible="false">
     </telerik:RadDatePicker>
-    <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" ToolTip="Date To for Filter" Visible="false">
+    <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US" ToolTip="Date To for Filter" Visible="false">
     </telerik:RadDatePicker>
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblInvoiceId" runat="server" Visible="False"></asp:Label>

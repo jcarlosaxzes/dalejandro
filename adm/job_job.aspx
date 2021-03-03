@@ -39,11 +39,19 @@
             }
         </script>
     </telerik:RadCodeBlock>
+    <div class="pasconcept-bar">
+        <span class="pasconcept-pagetitle">View/Edit Job</span>
+        <span style="float: right; vertical-align: middle;">
+            <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ToolTip="Update Active Job" ValidationGroup="JobUpdate">
+                Update
+            </asp:LinkButton>
+        </span>
+    </div>
     <div>
         <asp:ValidationSummary ID="ValidationSummaryJobUpdate" runat="server"
             Font-Size="X-Small" HeaderText="Following error occurs:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true" ValidationGroup="JobUpdate" />
         <div class="row">
-            <div class="col-12" style="padding-top:15px">
+            <div class="col-12" style="padding-top: 15px">
 
                 <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceJob" DefaultMode="Edit" Width="98%">
                     <EditItemTemplate>
@@ -77,29 +85,28 @@
                                 </td>
                             </tr>
                             <tr>
-                                 <td style="text-align: right">Location:
+                                <td style="text-align: right">Location:
                                 </td>
                                 <td>
                                     <telerik:RadTextBox ID="txtProjectLocation" runat="server" Text='<%# Bind("ProjectLocation") %>' Width="100%" MaxLength="80"
                                         CssClass="input-address-2">
                                     </telerik:RadTextBox>
                                 </td>
-                                <td style="text-align: right">
-                                    Allow Open Budget:
+                                <td style="text-align: right">Allow Open Budget:
                                 </td>
                                 <td>
-                                    <telerik:RadCheckBox ID="chkAllowOpenBudget" runat="server" Checked='<%# Bind("AllowOpenBudget") %>' 
+                                    <telerik:RadCheckBox ID="chkAllowOpenBudget" runat="server" Checked='<%# Bind("AllowOpenBudget") %>'
                                         ToolTip="Automatically update the Budget when Invoices are inserted or updated. Budget=SUM(Invoices.Amount)" />
                                 </td>
                             </tr>
                             <tr>
-                               <td style="text-align: right">
+                                <td style="text-align: right">
                                     <asp:CompareValidator runat="server" ID="Comparevalidator2" ValueToCompare="(Select Client...)"
                                         Operator="NotEqual" ControlToValidate="cboCliente" Text="*" ErrorMessage="Define Client" SetFocusOnError="true" ValidationGroup="JobUpdate"> </asp:CompareValidator>
                                     Client:
                                 </td>
                                 <td>
-                                    <telerik:RadComboBox ID="cboCliente" runat="server" SelectedValue='<%# Bind("Client") %>' DataSourceID="SqlDataSourceClientes"
+                                    <telerik:RadComboBox ID="cboCliente" runat="server" SelectedValue='<%# Bind("Client") %>' DataSourceID="SqlDataSourceClientes" Height="300px"
                                         DataTextField="Name" DataValueField="Id" Width="100%" AppendDataBoundItems="True"
                                         MarkFirstMatch="True" Filter="Contains">
                                         <Items>
@@ -121,10 +128,10 @@
                                     <telerik:RadTextBox ID="txtOwnerName" runat="server" Text='<%# Bind("Owner") %>' Width="100%" MaxLength="80">
                                     </telerik:RadTextBox>
                                 </td>
-                                <td style="text-align: right">Opening Date:
+                                <td style="text-align: right">Signed Date:
                                 </td>
                                 <td>
-                                    <telerik:RadDatePicker ID="RadDatePicker1" runat="server" DbSelectedDate='<%# Bind("Open_date") %>' Width="100%">
+                                    <telerik:RadDatePicker ID="RadDatePickerSigned" runat="server" DbSelectedDate='<%# Bind("SignedDate") %>' Width="100%" ToolTip="Signed Date">
                                     </telerik:RadDatePicker>
                                 </td>
                             </tr>
@@ -140,11 +147,12 @@
                                         </Items>
                                     </telerik:RadComboBox>
                                 </td>
-                                <td style="text-align: right">Start Date:
+                                <td style="text-align: right">Opening Date:
                                 </td>
                                 <td>
-                                    <telerik:RadDatePicker ID="RadDatePickerSignedDate" runat="server" DbSelectedDate='<%# Bind("StartDay") %>' Width="100%" ToolTip="Signed Date">
+                                    <telerik:RadDatePicker ID="RadDatePicker1" runat="server" DbSelectedDate='<%# Bind("Open_date") %>' Width="100%">
                                     </telerik:RadDatePicker>
+                                    
                                 </td>
                             </tr>
                             <tr>
@@ -165,10 +173,10 @@
                                         </Items>
                                     </telerik:RadComboBox>
                                 </td>
-                                <td style="text-align: right">Signed Date:
+                                <td style="text-align: right">Start Date:
                                 </td>
                                 <td>
-                                    <telerik:RadDatePicker ID="RadDatePickerSigned" runat="server" DbSelectedDate='<%# Bind("SignedDate") %>' Width="100%" ToolTip="Signed Date">
+                                    <telerik:RadDatePicker ID="RadDatePickerSignedDate" runat="server" DbSelectedDate='<%# Bind("StartDay") %>' Width="100%" ToolTip="Signed Date">
                                     </telerik:RadDatePicker>
                                 </td>
                             </tr>
@@ -227,7 +235,7 @@
                                                 </telerik:RadNumericTextBox></td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align: right">Unit:</td>
+                                            <td style="text-align: right">Quantity:</td>
                                             <td>
                                                 <telerik:RadNumericTextBox ID="txtUnit" runat="server" DbValue='<%# Bind("Unit") %>' Width="100%">
                                                 </telerik:RadNumericTextBox></td>
@@ -236,28 +244,26 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="text-align: right">
-                                    Bill Type:
+                                <td style="text-align: right">Bill Type:
                                 </td>
                                 <td>
                                     <telerik:RadComboBox ID="cboBillType" runat="server" SelectedValue='<%# Bind("BillType") %>' Width="100%">
-                                                    <Items>
-                                                        <telerik:RadComboBoxItem runat="server" Text="Defined Per Task" Value="0" />
-                                                        <telerik:RadComboBoxItem runat="server" Text="Lump Sum" Value="1" />
-                                                        <telerik:RadComboBoxItem runat="server" Text="Hourly" Value="2" />
-                                                    </Items>
-                                                </telerik:RadComboBox>
+                                        <Items>
+                                            <telerik:RadComboBoxItem runat="server" Text="Defined Per Task" Value="0" />
+                                            <telerik:RadComboBoxItem runat="server" Text="Lump Sum" Value="1" />
+                                            <telerik:RadComboBoxItem runat="server" Text="Hourly" Value="2" />
+                                        </Items>
+                                    </telerik:RadComboBox>
                                 </td>
-                                <td style="text-align: right">
-                                    Measure:
+                                <td style="text-align: right">Units
                                 </td>
                                 <td>
                                     <telerik:RadComboBox ID="cboMeasure" runat="server" SelectedValue='<%# Bind("Measure") %>'
-                                                    DataSourceID="SqlDataSourceMeasure" DataTextField="Name" DataValueField="Id" Width="100%" AppendDataBoundItems="True">
-                                                    <Items>
-                                                        <telerik:RadComboBoxItem runat="server" Text="(Not defined...)" Value="0" />
-                                                    </Items>
-                                                </telerik:RadComboBox>
+                                        DataSourceID="SqlDataSourceMeasure" DataTextField="Name" DataValueField="Id" Width="100%" AppendDataBoundItems="True">
+                                        <Items>
+                                            <telerik:RadComboBoxItem runat="server" Text="(Not defined...)" Value="0" />
+                                        </Items>
+                                    </telerik:RadComboBox>
                                 </td>
                             </tr>
                             <tr>
@@ -305,9 +311,14 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="text-align: right"></td>
-                                <td></td>
-                                <td style="text-align: right"></td>
+                                <td style="text-align: right">
+                                    External Reference:
+                                </td>
+                                <td>
+                                    <telerik:RadTextBox ID="RadTextBox2" runat="server" Text='<%# Bind("ExternalReference") %>' MaxLength="80" Width="100%" ToolTip="Link reference used for Integration with other platforms"></telerik:RadTextBox>
+                                </td>
+                                <td style="text-align: right">
+                                </td>
                                 <telerik:RadComboBox ID="cboProposalType" Visible="false" runat="server" SelectedValue='<%# Bind("ProposalType") %>' DataSourceID="SqlDataSourceProposalType" DataTextField="Name"
                                     DataValueField="Id" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True" Filter="Contains" Height="300px">
                                     <Items>
@@ -324,29 +335,28 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <table style="width:98%">
+                <table style="width: 98%">
                     <tr>
-                        <td style="width: 150px; text-align: right;vertical-align:top">
-                            Tags: 
+                        <td style="width: 150px; text-align: right; vertical-align: top">Tags: 
                         </td>
-                        <td style="text-align:left">
+                        <td style="text-align: left">
                             <asp:Label ID="lblTags" runat="server"></asp:Label>
                         </td>
-                        <td style="width:150px;text-align:right;vertical-align:top">
-                             <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ToolTip="Update Active Job" ValidationGroup="JobUpdate">
-                                 Update
-                            </asp:LinkButton>
+                        <td>
+
                         </td>
                     </tr>
                 </table>
-               <br /><br /><br />
+                <br />
+                <br />
+                <br />
             </div>
         </div>
     </div>
 
     <asp:SqlDataSource ID="SqlDataSourceJob" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="JOB_JOB_SELECT" SelectCommandType="StoredProcedure"
-        UpdateCommand="JOB_JOB_UPDATE" UpdateCommandType="StoredProcedure">
+        SelectCommand="JOB_JOB_v21_SELECT" SelectCommandType="StoredProcedure"
+        UpdateCommand="JOB_JOB_v21_UPDATE" UpdateCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblJobId" Name="Id" PropertyName="Text" />
         </SelectParameters>
@@ -378,6 +388,9 @@
             <asp:Parameter Name="Workdays" Type="Int32" />
             <asp:Parameter Name="AllowOpenBudget" />
             <asp:Parameter Name="BillType" />
+
+            <asp:Parameter Name="ExternalReference" />
+
             <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="lblJobId" Name="Id" PropertyName="Text" />
         </UpdateParameters>

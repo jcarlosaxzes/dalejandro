@@ -5,131 +5,196 @@
     <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
         <script type="text/javascript">
             function OnClientClose(sender, args) {
-                var masterTable = $find("<%= RadGridAssignedEmployees.ClientID%>").get_masterTableView();
+                var masterTable = $find("<%= RadGrid1.ClientID%>").get_masterTableView();
                 masterTable.rebind();
             }
+            $(document).on("click", ".toggle-on", function (event) {
+                var masterTableView = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
+                //var columnIndex = masterTableView.getColumnByUniqueName("HourRate").get_element().cellIndex;
+                //masterTableView.hideColumn(columnIndex);
+                columnIndex = masterTableView.getColumnByUniqueName("BudgetUsed").get_element().cellIndex;
+                masterTableView.hideColumn(columnIndex);
+            });
+
+            $(document).on("click", ".toggle-off", function (event) {
+              var masterTableView = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
+                //var columnIndex = masterTableView.getColumnByUniqueName("HourRate").get_element().cellIndex;
+                //masterTableView.showColumn(columnIndex);
+                columnIndex = masterTableView.getColumnByUniqueName("BudgetUsed").get_element().cellIndex;
+                masterTableView.showColumn(columnIndex);
+            });
         </script>
     </telerik:RadCodeBlock>
     <div class="container">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td>
-                    <asp:LinkButton ID="btnSetEmployee" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Assin Employees">
-                                    Add Employee
-                    </asp:LinkButton>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <telerik:RadGrid ID="RadGridAssignedEmployees" runat="server" DataSourceID="SqlDataSourceAssignedEmployees" GridLines="None"
-                        AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" CellSpacing="0" ShowFooter="true" HeaderStyle-HorizontalAlign="Center"
-                        ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" HeaderStyle-Font-Size="Small" FooterStyle-Font-Size="X-Small">
-                        <MasterTableView AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSourceAssignedEmployees">
-                            <Columns>
-                                <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="ID" ReadOnly="True" SortExpression="Id" UniqueName="Id" Display="False">
-                                </telerik:GridBoundColumn>
-                                <telerik:GridTemplateColumn DataField="employeeId" DataType="System.Int32" HeaderText="Employee" SortExpression="employeeId" UniqueName="employeeId" Aggregate="Count"
-                                    FooterAggregateFormatString="{0:N0}" ReadOnly="true">
-                                    <ItemTemplate>
-                                        <asp:LinkButton ID="btnEditEmployee" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Edit Record"
-                                            CommandName="Edit" UseSubmitBehavior="false">
+
+        <div class="pasconcept-bar">
+            <span class="pasconcept-pagetitle">Team Members</span>
+            <span style="float: right; vertical-align: middle;">
+                <asp:LinkButton ID="btnSetEmployee" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Assin Employees">
+                        Add Employee
+                </asp:LinkButton>
+                 <asp:LinkButton ID="btnPrivate" runat="server" UseSubmitBehavior="false" ToolTip="Private/Public Mode" Font-Underline="false" Visible="false">
+                    <input type="checkbox" data-toggle="toggle" data-onstyle="danger" data-style="ios"/>
+            </asp:LinkButton>
+            </span>
+        </div>
+        <div style="padding-top: 10px">
+            <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceAssignedEmployees"
+                AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" ShowFooter="true" HeaderStyle-HorizontalAlign="Center"
+                ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-Font-Bold="true">
+                <MasterTableView AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSourceAssignedEmployees" EditMode="EditForms">
+                    <Columns>
+                        <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="ID" ReadOnly="True" SortExpression="Id" UniqueName="Id" Display="False">
+                        </telerik:GridBoundColumn>
+                        <telerik:GridTemplateColumn HeaderStyle-Width="25px" HeaderText="" ItemStyle-HorizontalAlign="Center" UniqueName="AddTime">
+                            <ItemTemplate>
+                                <asp:LinkButton ID="LinkButton14" runat="server" UseSubmitBehavior="false" CommandName="AddTime" CommandArgument='<%# Eval("employeeId")%>' ToolTip="Add Time">
+                                    <i class="fas fa-user-clock"></i>
+                                </asp:LinkButton>
+                            </ItemTemplate>
+                        </telerik:GridTemplateColumn>
+                        <telerik:GridTemplateColumn DataField="employeeId" DataType="System.Int32" HeaderText="Employee" SortExpression="employeeId" UniqueName="employeeId" Aggregate="Count"
+                            FooterAggregateFormatString="{0:N0}" ReadOnly="true">
+                            <ItemTemplate>
+                                <asp:LinkButton ID="btnEditEmployee" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Edit Record"
+                                    CommandName="Edit" UseSubmitBehavior="false">
                                             <%#Eval("Employee")%> 
+                                </asp:LinkButton>
+                            </ItemTemplate>
+                        </telerik:GridTemplateColumn>
+                        <telerik:GridCheckBoxColumn  DataField="IsProjectManager" HeaderText="Job PM" UniqueName="IsProjectManager" HeaderTooltip="Job's Porject Manager"
+                            HeaderStyle-Width="100px"  ItemStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Center">
+                        </telerik:GridCheckBoxColumn>
+
+                        <telerik:GridBoundColumn UniqueName="Position" HeaderText="Position" DataField="Position">
+                        </telerik:GridBoundColumn>
+                        <%--                        <telerik:GridTemplateColumn DataField="HourRate" HeaderStyle-Width="120px" HeaderText="Position Rate" ItemStyle-HorizontalAlign="Center" SortExpression="HourRate" UniqueName="HourRate" Visible="false">
+                                                    <ItemTemplate>
+                                                        <%# Eval("HourRate", "{0:N2}") %>
+                                                    </ItemTemplate>
+                                                </telerik:GridTemplateColumn>--%>
+                        <telerik:GridBoundColumn DataField="Scope" HeaderText="Scope of Work" SortExpression="Scope" UniqueName="Scope">
+                        </telerik:GridBoundColumn>
+                        <telerik:GridNumericColumn  DataField="Hours" HeaderText="Assigned Hours" UniqueName="Hours" HeaderTooltip="Assigned Hours"
+                            HeaderStyle-Width="150px" FooterStyle-Font-Bold="true" DataFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Center">
+                        </telerik:GridNumericColumn>
+                        <telerik:GridBoundColumn DataField="WorkedHours" HeaderText="Worked Hours" ReadOnly="True" SortExpression="WorkedHours" UniqueName="WorkedHours"
+                            DataFormatString="{0:N1}" FooterAggregateFormatString="{0:N1}" FooterStyle-Font-Bold="true" HeaderTooltip="Hours Worked"
+                             FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
+                        </telerik:GridBoundColumn>
+                        <telerik:GridBoundColumn DataField="BudgetAssigned" HeaderText="Budget Assigned" ReadOnly="True" SortExpression="BudgetAssigned" UniqueName="BudgetAssigned" Display="false" 
+                            DataFormatString="{0:N2}" FooterAggregateFormatString="{0:N2}"
+                             FooterStyle-HorizontalAlign="Right"  HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
+                        </telerik:GridBoundColumn>
+                        <telerik:GridBoundColumn DataField="BudgetUsed" HeaderText="Budget Used" ReadOnly="True" SortExpression="BudgetUsed" UniqueName="BudgetUsed" Display="false"
+                            DataFormatString="{0:N2}" FooterAggregateFormatString="{0:N2}"
+                             FooterStyle-HorizontalAlign="Right"  HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
+                        </telerik:GridBoundColumn>
+                        <telerik:GridBoundColumn DataField="Profit" HeaderText="Budget Efficiency" ReadOnly="True" SortExpression="Profit" UniqueName="Profit" 
+                            DataFormatString="{0:P2}" FooterAggregateFormatString="{0:P2}"
+                             FooterStyle-HorizontalAlign="Right"  HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
+                        </telerik:GridBoundColumn>
+                        <telerik:GridBoundColumn DataField="TimeEfficiency" HeaderText="Time Efficiency" ReadOnly="True" SortExpression="TimeEfficiency" UniqueName="TimeEfficiency" 
+                            DataFormatString="{0:P2}" FooterAggregateFormatString="{0:P2}"
+                             FooterStyle-HorizontalAlign="Right"  HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
+                        </telerik:GridBoundColumn>
+                        <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="To delete row, H.Worked must be '0'. Delete this row?"
+                            ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
+                            UniqueName="DeleteColumn" HeaderText=""
+                            ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="60px">
+                        </telerik:GridButtonColumn>
+                    </Columns>
+                    <EditFormSettings CaptionFormatString="Edit Assigned Employee" EditFormType="Template" FormStyle-Width="600px">
+                        <FormTemplate>
+                            <br />
+                            <table style="width: 100%; font-size: small">
+                                <tr>
+                                    <td style="width: 180px; text-align: right">Position:
+                                    </td>
+                                    <td>
+                                        <telerik:RadComboBox ID="cboPosition" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourcePosition"
+                                            DataTextField="Name" DataValueField="Id" SelectedValue='<%# Bind("positionId")%>'
+                                            Width="100%" MarkFirstMatch="True" Filter="Contains" Height="400px">
+                                            <Items>
+                                                <telerik:RadComboBoxItem runat="server" Selected="True" Text="(Select Position...)" Value="0" />
+                                            </Items>
+                                        </telerik:RadComboBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right">Is Project Manager (of Job):
+                                    </td>
+                                    <td>
+                                        <telerik:RadCheckBox ID="RadCheckBox1" runat="server" Checked='<%# Bind("IsProjectManager")%>'>
+                                        </telerik:RadCheckBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right">Hours:
+                                    </td>
+                                    <td>
+                                        <telerik:RadNumericTextBox ID="RadNumericTextBox2" runat="server" Width="200px" DbValue='<%# Bind("Hours")%>'>
+                                        </telerik:RadNumericTextBox>
+                                    </td>
+                                </tr>
+                               <%-- <tr>
+                                    <td style="text-align: right">Hourly Rate:
+                                    </td>
+                                    <td>
+                                        <telerik:RadTextBox ID="txtRate" runat="server" Width="200px" Text='<%# Bind("HourRate")%>' TextMode="Password">
+                                        </telerik:RadTextBox>
+                                    </td>
+                                </tr>--%>
+                                <tr>
+                                    <td style="text-align: right">Scope:
+                                    </td>
+                                    <td>
+                                        <telerik:RadTextBox ID="txtScope" runat="server" Width="100%" Text='<%# Bind("Scope") %>' MaxLength="128">
+                                        </telerik:RadTextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center" colspan="2">
+                                        <br />
+                                        <asp:LinkButton ID="btnInsert" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" CommandName="Update">
+                                                Update
                                         </asp:LinkButton>
-                                    </ItemTemplate>
-                                </telerik:GridTemplateColumn>
-                                <telerik:GridDropDownColumn UniqueName="positionId" ListTextField="Name" ListValueField="Id" DataSourceID="SqlDataSourcePosition" HeaderText="Position"
-                                    DataField="positionId" DropDownControlType="RadComboBox" AllowSorting="true">
-                                </telerik:GridDropDownColumn>
-                                <telerik:GridBoundColumn DataField="Scope" HeaderText="Scope of Work" SortExpression="Scope" UniqueName="Scope"
-                                    >
-                                </telerik:GridBoundColumn>
-                                <telerik:GridNumericColumn Aggregate="Sum" DataField="Hours" HeaderText="Est. Hours" UniqueName="Freight" HeaderTooltip="Estimared Hours"
-                                    HeaderStyle-Width="120px" FooterStyle-Font-Bold="true" DataFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Center">
-                                </telerik:GridNumericColumn>
-                                <telerik:GridBoundColumn DataField="HoursWorked" HeaderText="H. Worked" ReadOnly="True" SortExpression="HoursWorked" UniqueName="HoursWorked"
-                                    DataFormatString="{0:N1}" FooterAggregateFormatString="{0:N1}" FooterStyle-Font-Bold="true" HeaderTooltip="Hours Worked"
-                                    Aggregate="Sum" FooterStyle-HorizontalAlign="Center"  HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Center">
-                                </telerik:GridBoundColumn>
+                                        &nbsp;&nbsp;&nbsp;
+                                           
+                                        <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary btn-lg" UseSubmitBehavior="false" CausesValidation="False" CommandName="Cancel" >
+                                                Cancel
+                                            </asp:LinkButton>
 
-                                <%--                            <telerik:GridTemplateColumn DataField="HourRate" FilterControlAltText="Filter HourRate column" FooterAggregateFormatString="{0:N2}" ReadOnly="true"
-                                 HeaderStyle-Width="120px" HeaderText="Hour Rate" ItemStyle-HorizontalAlign="Right" SortExpression="HourRate" UniqueName="HourRate">
-                                <ItemTemplate>
-                                    <asp:Label ID="HourRateLabel_paym" runat="server" Text='<%# Eval("HourRate", "{0:N2}") %>'>
-                                    </asp:Label>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-                            <telerik:GridBoundColumn DataField="EstimatedTotal" HeaderText="Estimated Total" ReadOnly="True" SortExpression="EstimatedTotal" UniqueName="EstimatedTotal"
-                                DataFormatString="{0:C2}" FooterAggregateFormatString="{0:C2}"
-                                Aggregate="Sum" FooterStyle-HorizontalAlign="Right" FooterStyle-Width="120px"  HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
-                            </telerik:GridBoundColumn>--%>
-                                <telerik:GridTemplateColumn DataField="PercentET" HeaderText="E.Total Used(%)" ReadOnly="True" SortExpression="PercentET" UniqueName="PercentET"
-                                    FooterAggregateFormatString="{0:N1}"
-                                    Aggregate="Avg" FooterStyle-HorizontalAlign="Right" FooterStyle-Width="130px"  HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Right">
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblPercentET" runat="server" Text='<%# Eval("PercentET", "{0:N1}") %>' ForeColor='<%# GetPercentETForeColor(Eval("PercentET"))%>' Font-Bold='<%# GetPercentETFontBold(Eval("PercentET"))%>'>
-                                        </asp:Label>
-                                    </ItemTemplate>
-                                </telerik:GridTemplateColumn>
-                                <telerik:GridBoundColumn DataField="BudgetUsed" HeaderText="Budget Used" ReadOnly="True" SortExpression="BudgetUsed" UniqueName="BudgetUsed"
-                                    DataFormatString="{0:C2}" FooterAggregateFormatString="{0:C2}"
-                                    Aggregate="Sum" FooterStyle-HorizontalAlign="Right" FooterStyle-Width="120px"  HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
-                                </telerik:GridBoundColumn>
-                                <telerik:GridBoundColumn DataField="FTE" HeaderText="FTE(%)" ReadOnly="True" SortExpression="FTE" UniqueName="FTE"
-                                    DataFormatString="{0:N1}" FooterAggregateFormatString="{0:N1}"
-                                    Aggregate="Sum" FooterStyle-HorizontalAlign="Right" FooterStyle-Width="120px"  HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
-                                </telerik:GridBoundColumn>
-                                <telerik:GridBoundColumn DataField="PercentBU" HeaderText="Budget Used(%)" ReadOnly="True" SortExpression="PercentBU" UniqueName="PercentBU"
-                                    DataFormatString="{0:N1}" FooterAggregateFormatString="{0:N1}"
-                                    Aggregate="Sum" FooterStyle-HorizontalAlign="Right" FooterStyle-Width="130px"  HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Right">
-                                </telerik:GridBoundColumn>
-                                <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="To delete row, H.Worked must be '0'. Delete this row?"
-                                    ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
-                                    UniqueName="DeleteColumn" HeaderText="" 
-                                    ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="60px">
-                                </telerik:GridButtonColumn>
-                            </Columns>
-                            <EditFormSettings>
-                                <EditColumn FilterControlAltText="Filter EditCommandColumn1 column" ButtonType="PushButton"
-                                    UniqueName="EditCommandColumn1">
-                                </EditColumn>
-                            </EditFormSettings>
-                        </MasterTableView>
-                    </telerik:RadGrid>
-                </td>
-            </tr>
-
-        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br />
+                        </FormTemplate>
+                    </EditFormSettings>
+                </MasterTableView>
+            </telerik:RadGrid>
+        </div>
 
     </div>
-    <br />
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
     <asp:SqlDataSource ID="SqlDataSourceAssignedEmployees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="Jobs_Employees_assigned_DELETE" DeleteCommandType="StoredProcedure"
-        SelectCommand="Jobs_Employees_assigned_SELECT" SelectCommandType="StoredProcedure"
-        InsertCommand="Jobs_Employees_assigned_INSERT" InsertCommandType="StoredProcedure"
-        UpdateCommand="UPDATE [Jobs_Employees_assigned] SET  [Scope] = @Scope, [positionId] = @positionId, [Hours] = @Hours WHERE [Id] = @Id">
+        SelectCommand="Job_Employees_assigned_SELECT" SelectCommandType="StoredProcedure"
+        UpdateCommand="Jobs_Employees_v21_assigned_UPDATE" UpdateCommandType="StoredProcedure">
         <DeleteParameters>
             <asp:Parameter Name="Id" Type="Int32" />
         </DeleteParameters>
         <SelectParameters>
             <asp:ControlParameter ControlID="lblJobId" Name="jobId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
-        <InsertParameters>
-            <asp:ControlParameter ControlID="lblId" Name="jobId" PropertyName="Text" Type="Int32" />
-            <asp:Parameter Name="employeeId" Type="Int32" />
-            <asp:Parameter Name="positionId" Type="Int32" />
-            <asp:Parameter Name="Scope" Type="String" />
-            <asp:Parameter Name="Hours" Type="Double" />
-            <asp:Parameter Name="HourRate" Type="Double" />
-        </InsertParameters>
         <UpdateParameters>
-            <asp:Parameter Name="employeeId" Type="Int32" />
+            <asp:Parameter Name="IsProjectManager" />
             <asp:Parameter Name="positionId" Type="Int32" />
             <asp:Parameter Name="Scope" Type="String" />
             <asp:Parameter Name="Hours" Type="Double" />
-            <asp:Parameter Name="HourRate" Type="Double" />
+            <asp:Parameter Name="HourRate" Type="Double" DefaultValue="0" />
             <asp:Parameter Name="Id" Type="Int32" />
         </UpdateParameters>
     </asp:SqlDataSource>

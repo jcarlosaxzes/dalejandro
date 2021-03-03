@@ -9,7 +9,7 @@ Public Class transmittals
             If (Not Page.IsPostBack) Then
 
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_TransmittalList") Then Response.RedirectPermanent("~/adm/default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_TransmittalList") Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
                 Master.PageTitle = "Jobs/Transmittals"
                 Master.Help = "http://blog.pasconcept.com/2015/04/jobstransmittal-letter.html"
@@ -18,7 +18,6 @@ Public Class transmittals
                 lblEmployeeName.Text = LocalAPI.GetEmployeeName(lblEmployeeId.Text)
                 lblEmployeeEmail.Text = Master.UserEmail
 
-                LocalAPI.RefreshYearsList()
                 lblCompanyId.Text = Session("companyId")
 
                 cboPeriod.DataBind()
@@ -58,6 +57,14 @@ Public Class transmittals
                 RadDatePickerFrom.DbSelectedDate = "01/01/" & Today.Year - 1
                 RadDatePickerTo.DbSelectedDate = "12/31/" & Today.Year - 1
 
+            Case 16  ' (This Month)
+                RadDatePickerFrom.DbSelectedDate = Today.Month & "/01/" & Today.Year
+                RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Day, -1, DateAdd(DateInterval.Month, 1, RadDatePickerFrom.DbSelectedDate))
+            Case 17  ' (Past Month)
+                RadDatePickerFrom.DbSelectedDate = Today.Month & "/01/" & Today.Year
+                RadDatePickerFrom.DbSelectedDate = DateAdd(DateInterval.Month, -1, RadDatePickerFrom.DbSelectedDate)
+                RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Day, -1, DateAdd(DateInterval.Month, 1, RadDatePickerFrom.DbSelectedDate))
+
             Case 30, 60, 90, 120, 180, 365 '   days....
                 RadDatePickerTo.DbSelectedDate = Date.Today
                 RadDatePickerFrom.DbSelectedDate = DateAdd(DateInterval.Day, 0 - nPeriodo, RadDatePickerTo.DbSelectedDate)
@@ -70,6 +77,9 @@ Public Class transmittals
                 RadDatePickerFrom.DbSelectedDate = "01/01/" & Today.Year
                 RadDatePickerTo.DbSelectedDate = "12/31/" & Today.Year
 
+            Case 99   'Custom
+                RadDatePickerFrom.Focus()
+                ' Allow RadDatePicker user Values...
         End Select
     End Sub
 
@@ -90,7 +100,7 @@ Public Class transmittals
                 End If
 
             Case "EditClient"
-                sUrl = "~/adm/client.aspx?clientId=" & e.CommandArgument
+                sUrl = $"~/ADM/Client.aspx?clientId={e.CommandArgument}&Dialog=1"
                 CreateRadWindows("ClientW", sUrl, 970, 750, False)
 
             Case "EmailDeliveryTransmittalDigital"

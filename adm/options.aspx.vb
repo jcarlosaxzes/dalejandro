@@ -21,7 +21,7 @@ Public Class options
                 lblEmployeeEmail.Text = Master.UserEmail
 
                 Master.Help = "http://blog.pasconcept.com/2015/08/othersmy-account.html"
-                Image1.ImageUrl = LocalAPI.GetEmployeePhotoURL(Email:=lblEmployeeEmail.Text)
+                Image1.ImageUrl = LocalAPI.GetEmployeePhotoURL(lblEmployeeEmail.Text)
             End If
 
         Catch ex As Exception
@@ -69,5 +69,8 @@ Public Class options
             Label1.Text = ex.Message
         End Try
     End Sub
+    Public Function FormatSource(source As String)
+        Return source.Replace("1.-", "").Replace("2.-", "").Replace("3.-", "")
+    End Function
 
 End Class

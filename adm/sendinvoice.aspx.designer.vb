@@ -110,7 +110,7 @@ Partial Public Class sendinvoice
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtEmissionRecurrenceDays As Global.Telerik.Web.UI.RadNumericTextBox
+    Protected WithEvents txtEmissionRecurrenceDays As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
     '''cboAttached control.

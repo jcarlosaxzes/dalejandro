@@ -61,10 +61,8 @@ Public Class transmittal1
         btnGridPage.Visible = Not RadListViewFiles.Visible
         btnTablePage.Visible = RadListViewFiles.Visible
 
-        If lblCompanyId.Text = 260962 Then
-            ' EEG 10 Mb
-            RadCloudUpload1.MaxFileSize = 10485760
-        End If
+        RadCloudUpload1.MaxFileSize = LocalAPI.GetCompanyMaxFileSizeForUpload(lblCompanyId.Text)
+        lblMaxSize.Text = $"[Maximum upload size per file: {LocalAPI.FormatByteSize(RadCloudUpload1.MaxFileSize)}]"
 
     End Sub
     Protected Sub RadAjaxManager1_AjaxRequest(sender As Object, e As Telerik.Web.UI.AjaxRequestEventArgs)
@@ -152,7 +150,9 @@ Public Class transmittal1
             Case "transmittals"
                 Response.Redirect("~/adm/transmittals.aspx")
             Case "job_transmittals"
-                Response.Redirect("~/adm/job_transmittals.aspx?jobId=" & lblJobId.Text)
+                Dim sUrl As String = LocalAPI.GetSharedLink_URL(8012, lblJobId.Text)
+                Response.Redirect(sUrl)
+
         End Select
 
     End Sub

@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class Job_job
-    
+
     '''<summary>
     '''RadCodeBlock control.
     '''</summary>
@@ -21,34 +21,7 @@ Partial Public Class Job_job
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadCodeBlock As Global.Telerik.Web.UI.RadCodeBlock
-    
-    '''<summary>
-    '''ValidationSummaryJobUpdate control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ValidationSummaryJobUpdate As Global.System.Web.UI.WebControls.ValidationSummary
-    
-    '''<summary>
-    '''FormView1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents FormView1 As Global.System.Web.UI.WebControls.FormView
-    
-    '''<summary>
-    '''lblTags control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblTags As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''btnUpdate control.
     '''</summary>
@@ -57,7 +30,34 @@ Partial Public Class Job_job
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnUpdate As Global.System.Web.UI.WebControls.LinkButton
-    
+
+    '''<summary>
+    '''ValidationSummaryJobUpdate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ValidationSummaryJobUpdate As Global.System.Web.UI.WebControls.ValidationSummary
+
+    '''<summary>
+    '''FormView1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents FormView1 As Global.System.Web.UI.WebControls.FormView
+
+    '''<summary>
+    '''lblTags control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTags As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
     '''SqlDataSourceJob control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class Job_job
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceJob As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceClientes control.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class Job_job
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceClientes As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceEmployee control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class Job_job
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceEmployee As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceMeasure control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class Job_job
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceMeasure As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceJobStatus control.
     '''</summary>
@@ -102,7 +102,7 @@ Partial Public Class Job_job
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceJobStatus As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceProjectSector control.
     '''</summary>
@@ -111,7 +111,7 @@ Partial Public Class Job_job
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceProjectSector As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceProjectUse control.
     '''</summary>
@@ -120,7 +120,7 @@ Partial Public Class Job_job
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceProjectUse As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceDepartments control.
     '''</summary>
@@ -129,7 +129,7 @@ Partial Public Class Job_job
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceDepartments As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceProposalType control.
     '''</summary>
@@ -138,7 +138,7 @@ Partial Public Class Job_job
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceProposalType As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceType control.
     '''</summary>
@@ -147,7 +147,7 @@ Partial Public Class Job_job
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceType As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -156,7 +156,7 @@ Partial Public Class Job_job
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblJobId control.
     '''</summary>
@@ -165,7 +165,7 @@ Partial Public Class Job_job
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblJobId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblEmployeeId control.
     '''</summary>
@@ -174,7 +174,7 @@ Partial Public Class Job_job
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblEmployeeEmail control.
     '''</summary>
@@ -183,7 +183,7 @@ Partial Public Class Job_job
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEmployeeEmail As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''Master property.
     '''</summary>
@@ -192,7 +192,7 @@ Partial Public Class Job_job
     '''</remarks>
     Public Shadows ReadOnly Property Master() As pasconcept20.MasterJOB
         Get
-            Return CType(MyBase.Master,pasconcept20.MasterJOB)
+            Return CType(MyBase.Master, pasconcept20.MasterJOB)
         End Get
     End Property
 End Class

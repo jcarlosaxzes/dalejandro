@@ -40,11 +40,11 @@
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>--%>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" EnableEmbeddedSkins="false" />
 
     <div class="pasconcept-bar noprint">
 
-        <span class="pasconcept-pagetitle">Time By Periods</span>
+        <span class="pasconcept-pagetitle">Time By Period</span>
 
         <span style="float: right; vertical-align: middle;">
             <table class="table-sm">
@@ -53,22 +53,23 @@
                         <telerik:RadDropDownList ID="cboPeriod" runat="server" AutoPostBack="true" Width="150px">
                             <Items>
                                 <telerik:DropDownListItem Text="By Periods" Value="0" />
-                                <telerik:DropDownListItem Text="By Moths" Value="1" />
+                                <telerik:DropDownListItem Text="By Months" Value="1" />
                                 <telerik:DropDownListItem Text="By Years" Value="2" />
+                                <telerik:DropDownListItem Text="Custom" Value="3" />
                             </Items>
                         </telerik:RadDropDownList>
                     </td>
                     <td>From:
                     </td>
                     <td>
-                        <telerik:RadDateInput ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" ReadOnly="True" Width="120px">
-                        </telerik:RadDateInput>
+                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" Width="130px">
+                        </telerik:RadDatePicker>
                     </td>
                     <td>To:
                     </td>
                     <td>
-                        <telerik:RadDateInput ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" ReadOnly="True" Width="120px">
-                        </telerik:RadDateInput>
+                        <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" Width="130px">
+                        </telerik:RadDatePicker>
                     </td>
                     <td>
                         <telerik:RadComboBox ID="cboDepartments" runat="server" AppendDataBoundItems="true"
@@ -82,6 +83,9 @@
                     <td>
                         <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" Width="120px">
                                     <i class="fas fa-backward"></i>&nbsp;Previous
+                        </asp:LinkButton>
+                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Width="120px" Visible="false">
+                                    <i class="fas fa-search"></i>&nbsp;Refresh
                         </asp:LinkButton>
                     </td>
                     <td>
@@ -110,22 +114,22 @@
                 <CommandItemSettings ExportToPdfText="Export to PDF"></CommandItemSettings>
                 <ColumnGroups>
                     <telerik:GridColumnGroup Name="Production" HeaderText="Production"
-                         HeaderStyle-Font-Bold="true" />
+                        HeaderStyle-Font-Bold="true" />
                     <telerik:GridColumnGroup Name="Administrative" HeaderText="Administrative"
-                         HeaderStyle-Font-Bold="true" />
+                        HeaderStyle-Font-Bold="true" />
                     <telerik:GridColumnGroup Name="Benefits" HeaderText="Benefits"
-                         HeaderStyle-Font-Bold="true" />
+                        HeaderStyle-Font-Bold="true" />
                 </ColumnGroups>
                 <Columns>
                     <telerik:GridBoundColumn DataField="Id" HeaderText="Id" SortExpression="Id" UniqueName="Id" DataType="System.Int32" ReadOnly="True" Display="false">
                     </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="Name2" HeaderText="Employee" SortExpression="Name2" UniqueName="Name2" >
+                    <telerik:GridBoundColumn DataField="Name2" HeaderText="Employee" SortExpression="Name2" UniqueName="Name2">
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="Total" DataType="System.Double" HeaderText="Total" SortExpression="Total" UniqueName="Total" ReadOnly="True"
-                        ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" FooterStyle-Width="100px" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="100px"  Aggregate="Sum" DataFormatString="{0:N1}" FooterAggregateFormatString="{0:N1}">
+                        ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" FooterStyle-Width="100px" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" Aggregate="Sum" DataFormatString="{0:N1}" FooterAggregateFormatString="{0:N1}">
                     </telerik:GridBoundColumn>
                     <telerik:GridTemplateColumn DataField="Salary" DataType="System.Double" HeaderText="Salary" SortExpression="Salary" UniqueName="Salary" ReadOnly="True"
-                        ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Right" FooterStyle-Width="100px" FooterStyle-HorizontalAlign="Right" HeaderStyle-Width="100px"  Aggregate="Sum" FooterAggregateFormatString="{0:N1}" Display="false">
+                        ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Right" FooterStyle-Width="100px" FooterStyle-HorizontalAlign="Right" HeaderStyle-Width="100px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" Display="false">
                         <ItemTemplate>
                             <asp:LinkButton ID="lnkSalary" runat="server" CommandName="Salary" Text='<%# Eval("Salary", "{0:N2}")%>' CommandArgument='<%# Eval("Id") %>' ToolTip="Click to edit Salary"
                                 CssClass='<%# IIf(Eval("Salary") = 0, "ApagarCSS", "SalaryCSS")%>'>
@@ -133,11 +137,11 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridBoundColumn DataField="Jobs" DataType="System.Double" FilterControlAltText="Filter Jobs column" HeaderText="Jobs" ReadOnly="True" SortExpression="Jobs" UniqueName="Jobs"
-                        ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" FooterStyle-Width="100px" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="100px"  Aggregate="Sum" DataFormatString="{0:N1}" FooterAggregateFormatString="{0:N1}"
+                        ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" FooterStyle-Width="100px" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" Aggregate="Sum" DataFormatString="{0:N1}" FooterAggregateFormatString="{0:N1}"
                         ColumnGroupName="Production">
                     </telerik:GridBoundColumn>
                     <telerik:GridTemplateColumn DataField="Over_Time" DataType="System.Double" FilterControlAltText="Filter Over_Time column" HeaderText="Over Time" ReadOnly="True" SortExpression="Over_Time" UniqueName="Over_Time"
-                        ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" FooterStyle-Width="100px" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="100px"  Aggregate="Sum" FooterAggregateFormatString="{0:N1}"
+                        ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" FooterStyle-Width="100px" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}"
                         ColumnGroupName="Production">
                         <ItemTemplate>
                             <asp:LinkButton ID="LinkButton1" runat="server" CommandName="1" Text='<%# Eval("Over_Time", "{0:N1}")%>' CommandArgument='<%# Eval("Id") %>' ToolTip="Click to add Over_Time time"
@@ -146,7 +150,7 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="Administration" DataType="System.Double" FilterControlAltText="Filter Administration column" HeaderText="Administration" ReadOnly="True" SortExpression="Administration" UniqueName="Administration"
-                        ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" FooterStyle-Width="100px" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="100px"  Aggregate="Sum" FooterAggregateFormatString="{0:N1}"
+                        ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" FooterStyle-Width="100px" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}"
                         ColumnGroupName="Administrative">
                         <ItemTemplate>
                             <asp:LinkButton ID="LinkButton3" runat="server" CommandName="3" Text='<%# Eval("Administration", "{0:N1}")%>' CommandArgument='<%# Eval("Id") %>' ToolTip="Click to add Administration time"
@@ -155,7 +159,7 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="Accounting" DataType="System.Double" FilterControlAltText="Filter Accounting column" HeaderText="Accounting" ReadOnly="True" SortExpression="Accounting" UniqueName="Accounting"
-                        ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" FooterStyle-Width="100px" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="100px"  Aggregate="Sum" FooterAggregateFormatString="{0:N1}"
+                        ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" FooterStyle-Width="100px" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}"
                         ColumnGroupName="Administrative">
                         <ItemTemplate>
                             <asp:LinkButton ID="LinkButton8" runat="server" CommandName="8" Text='<%# Eval("Accounting", "{0:N1}")%>' CommandArgument='<%# Eval("Id") %>' ToolTip="Click to add Accounting time"
@@ -164,7 +168,7 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="Marketing" DataType="System.Double" FilterControlAltText="Filter Marketing column" HeaderText="Marketing" ReadOnly="True" SortExpression="Marketing" UniqueName="Marketing"
-                        ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" FooterStyle-Width="100px" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="100px"  Aggregate="Sum" FooterAggregateFormatString="{0:N1}"
+                        ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" FooterStyle-Width="100px" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}"
                         ColumnGroupName="Administrative">
                         <ItemTemplate>
                             <asp:LinkButton ID="LinkButton4" runat="server" CommandName="4" Text='<%# Eval("Marketing", "{0:N1}")%>' CommandArgument='<%# Eval("Id") %>' ToolTip="Click to add Marketing time"
@@ -173,7 +177,7 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="Sick" DataType="System.Double" FilterControlAltText="Filter Sick column" HeaderText="Sick" ReadOnly="True" SortExpression="Sick" UniqueName="Sick"
-                        ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" FooterStyle-Width="100px" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="100px"  Aggregate="Sum" FooterAggregateFormatString="{0:N1}"
+                        ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" FooterStyle-Width="100px" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}"
                         ColumnGroupName="Benefits">
                         <ItemTemplate>
                             <asp:LinkButton ID="LinkButton5" runat="server" CommandName="5" Text='<%# Eval("Sick", "{0:N1}")%>' CommandArgument='<%# Eval("Id") %>' ToolTip="Click to add Sick time"
@@ -182,7 +186,7 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="Vacation" DataType="System.Double" FilterControlAltText="Filter Vacation column" HeaderText="Vacation" ReadOnly="True" SortExpression="Vacation" UniqueName="Vacation"
-                        ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" FooterStyle-Width="100px" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="100px"  Aggregate="Sum" FooterAggregateFormatString="{0:N1}"
+                        ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" FooterStyle-Width="100px" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}"
                         ColumnGroupName="Benefits">
                         <ItemTemplate>
                             <asp:LinkButton ID="LinkButton7" runat="server" CommandName="7" Text='<%# Eval("Vacation", "{0:N1}")%>' CommandArgument='<%# Eval("Id") %>' ToolTip="Click to add Vacation time"
@@ -191,7 +195,7 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="Holiday" DataType="System.Double" FilterControlAltText="Filter Holiday column" HeaderText="Holiday" ReadOnly="True" SortExpression="Holiday" UniqueName="Holiday"
-                        ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" FooterStyle-Width="100px" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="100px"  Aggregate="Sum" FooterAggregateFormatString="{0:N1}"
+                        ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" FooterStyle-Width="100px" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}"
                         ColumnGroupName="Benefits">
                         <ItemTemplate>
                             <asp:LinkButton ID="LinkButton2" runat="server" CommandName="2" Text='<%# Eval("Holiday", "{0:N1}")%>' CommandArgument='<%# Eval("Id") %>' ToolTip="Click to add Holiday time"
@@ -200,7 +204,7 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="Personal" DataType="System.Double" FilterControlAltText="Filter Personal column" HeaderText="Personal" ReadOnly="True" SortExpression="Personal" UniqueName="Personal"
-                        ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" FooterStyle-Width="100px" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="100px"  Aggregate="Sum" FooterAggregateFormatString="{0:N1}"
+                        ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" FooterStyle-Width="100px" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}"
                         ColumnGroupName="Benefits">
                         <ItemTemplate>
                             <asp:LinkButton ID="LinkButton6" runat="server" CommandName="6" Text='<%# Eval("Personal", "{0:N1}")%>' CommandArgument='<%# Eval("Id") %>' ToolTip="Click to add Personal time"
@@ -233,7 +237,7 @@
                                 HeaderText="Edit" HeaderStyle-Width="40px">
                             </telerik:GridEditCommandColumn>
                             <telerik:GridTemplateColumn DataField="SalaryDate" HeaderStyle-Width="150px" HeaderText="Date"
-                                SortExpression="SalaryDate" UniqueName="SalaryDate"  ItemStyle-HorizontalAlign="Right">
+                                SortExpression="SalaryDate" UniqueName="SalaryDate" ItemStyle-HorizontalAlign="Right">
                                 <ItemTemplate>
                                     <%# Eval("SalaryDate", "{0:d}") %>
                                 </ItemTemplate>
@@ -242,17 +246,17 @@
                                     </telerik:RadDatePicker>
                                 </EditItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridNumericColumn DataField="NetAmount" HeaderStyle-Width="150px" HeaderText="Net Amount"  ItemStyle-HorizontalAlign="Right"
+                            <telerik:GridNumericColumn DataField="NetAmount" HeaderStyle-Width="150px" HeaderText="Net Amount" ItemStyle-HorizontalAlign="Right"
                                 SortExpression="NetAmount" UniqueName="NetAmount" DataFormatString="{0:C2}">
                             </telerik:GridNumericColumn>
-                            <telerik:GridNumericColumn DataField="GrossAmount" HeaderStyle-Width="150px" HeaderText="Gross Amount"  ItemStyle-HorizontalAlign="Right"
+                            <telerik:GridNumericColumn DataField="GrossAmount" HeaderStyle-Width="150px" HeaderText="Gross Amount" ItemStyle-HorizontalAlign="Right"
                                 SortExpression="GrossAmount" UniqueName="GrossAmount" DataFormatString="{0:C2}">
                             </telerik:GridNumericColumn>
                             <telerik:GridNumericColumn DataField="Hours" HeaderStyle-Width="100px" HeaderText="Hours"
-                                SortExpression="Hours" UniqueName="Hours" DataFormatString="{0:N0}"  ItemStyle-HorizontalAlign="Right">
+                                SortExpression="Hours" UniqueName="Hours" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Right">
                             </telerik:GridNumericColumn>
                             <telerik:GridButtonColumn ConfirmText="Delete this record?" ConfirmDialogType="Classic"
-                                ConfirmTitle="Delete" HeaderText="Delete" HeaderStyle-Width="50px" 
+                                ConfirmTitle="Delete" HeaderText="Delete" HeaderStyle-Width="50px"
                                 CommandName="Delete" Text="Delete" UniqueName="DeleteColumn">
                             </telerik:GridButtonColumn>
                         </Columns>
@@ -401,7 +405,7 @@
 
     <asp:SqlDataSource ID="SqlDataSourceSalary" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT Id, SalaryDate, NetAmount, Hours,GrossAmount FROM Employee_Payroll WHERE employeeId=@employeeId and SalaryDate between @From and @To ORDER BY SalaryDate DESC"
-        InsertCommand="Employee_Payroll_INSERT" InsertCommandType="StoredProcedure"
+        InsertCommand="Employee_Payroll_prev_INSERT" InsertCommandType="StoredProcedure"
         DeleteCommand="DELETE FROM Employee_Payroll WHERE Id=@Id"
         UpdateCommand="UPDATE Employee_Payroll SET SalaryDate=@SalaryDate, NetAmount=@NetAmount, GrossAmount=@GrossAmount, Hours=@Hours WHERE Id=@Id">
         <SelectParameters>

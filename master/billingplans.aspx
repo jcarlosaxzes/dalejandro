@@ -4,19 +4,34 @@
 <%@ MasterType VirtualPath="~/master/MasterPage.Master" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <table width="100%">
-        <tr>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td>
-                <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticDeletes="True" AllowAutomaticInserts="True"
+        <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Billing Plans</span>
+
+        <span style="float: right; vertical-align: middle;">
+            <asp:LinkButton ID="btnNewPlan" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+                    Add Plan
+            </asp:LinkButton>
+        </span>
+
+
+    </div>
+    <div style="padding-bottom:10px">
+        Status: 
+        <telerik:RadComboBox ID="cboStatus" runat="server" Width="250px" AppendDataBoundItems="true" AutoPostBack="true">
+                    <Items>
+                        <telerik:RadComboBoxItem runat="server" Text="Active Plans" Value="0" Selected="true" />
+                        <telerik:RadComboBoxItem runat="server" Text="Inactive Plans" Value="1" />
+                        <telerik:RadComboBoxItem runat="server" Text="(All Plans...)" Value="-1" />
+                    </Items>
+                </telerik:RadComboBox>
+        
+    </div>
+<div>
+    <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticDeletes="True" AllowAutomaticInserts="True"
                     AllowAutomaticUpdates="True" AllowSorting="True" AutoGenerateColumns="False"
                     DataSourceID="SqlDataSource1" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" AlternatingItemStyle-HorizontalAlign="Center"
                     HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" >
-                    <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1" CommandItemDisplay="Top">
-                        <CommandItemSettings ExportToPdfText="Export to PDF" ShowAddNewRecordButton="True"
-                            ShowExportToCsvButton="True"></CommandItemSettings>
+                    <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1">
                         <Columns>
                             <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
                             </telerik:GridEditCommandColumn>
@@ -127,9 +142,7 @@
                     <FilterMenu EnableImageSprites="False">
                     </FilterMenu>
                 </telerik:RadGrid>
-            </td>
-        </tr>
-    </table>
+</div>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="Billing_plans_DELETE" DeleteCommandType="StoredProcedure"
         InsertCommand="Billing_plans_INSERT" InsertCommandType="StoredProcedure"
@@ -154,7 +167,12 @@
             <asp:Parameter Name="billing_baseusers" />
             <asp:Parameter Name="billing_otheruser" Type="Double" />
             <asp:Parameter Name="billing_period_Id" />
+            <asp:Parameter Name="Custom" Type="Boolean" />
+            <asp:Parameter Name="Inactive" Type="Boolean" />
         </InsertParameters>
+        <SelectParameters>
+            <asp:ControlParameter ControlID="cboStatus" Name="StatusId" PropertyName="SelectedValue" Type="Int32" />
+        </SelectParameters>
     </asp:SqlDataSource>
     
     <asp:SqlDataSource ID="SqlDataSourcePeriod" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"

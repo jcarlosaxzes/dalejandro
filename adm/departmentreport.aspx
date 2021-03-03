@@ -35,9 +35,8 @@
 
                     </td>
                     <td style="width: 150px; text-align: right">
-                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false"
-                            ToolTip="Refresh data" CausesValidation="false">
-                            <i class="fas fa-redo"></i> Refresh
+                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
                     </td>
                 </tr>
@@ -55,10 +54,10 @@
                 <MasterTableView DataSourceID="SqlDataSourceEmployees" DataKeyNames="EmployeeId">
                     <PagerStyle Mode="Slider" AlwaysVisible="false" />
                     <Columns>
-                        <telerik:GridTemplateColumn HeaderText="" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="60px">
+                        <telerik:GridTemplateColumn HeaderText="" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px">
                             <ItemTemplate>
                                 <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%# LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("EmployeeId"))%>'
-                                    runat="server" Width="45" CssClass="img-thumbnail"></asp:Image>
+                                    runat="server" CssClass="photo50"></asp:Image>
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
                         <telerik:GridTemplateColumn DataField="EmployeeName" HeaderText="Employee" SortExpression="" Aggregate="Count"
@@ -74,7 +73,7 @@
                         <telerik:GridTemplateColumn DataField="Department" HeaderText="Department" SortExpression="Department"
                             UniqueName="Department" HeaderStyle-HorizontalAlign="Center">
                             <ItemTemplate>
-                                <asp:Label ID="lblCompanyId" runat="server"
+                                <asp:Label ID="lblDepartmentColumn" runat="server"
                                     Text='<%# Eval("Department")%>'
                                     Font-Bold='<%# Eval("IsHead")%>'
                                     Font-Italic='<%# Eval("DD")=0 %>'>
@@ -158,22 +157,13 @@
             </telerik:RadHtmlChart>
         </div>
     </div>
+    <div class="row pasconcept-bar">
+        <div class="col-md-12">
+            <h3>Average Project Life-cycle</h3>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
-            <h4>Average Project Life-cycle:</h4>
-            <%--[Insert Graph, Graph should contain the following]
-            Average Project Life-cycle:
-            Proposal Acceptance: [Average time]
-            Job Completion: [Average time]
-            Invoice from Emmited to Paid: [Average time]--%>
-            <%--             DataLowerField="lower"
-                        DataQ1Field="q1"
-                        DataMedianField="median"
-                        DataQ3Field="q3"
-                        DataMeanField="mean"
-                        DataUpperField="upper"
-                        DataOutliersField="outliers--%>
-
             <telerik:RadHtmlChart runat="server" ID="BoxPlotChartLifeCycle" DataSourceID="SqlDataSourceLifeCycle" Width="100%" Height="250px">
                 <PlotArea>
                     <Series>
@@ -194,9 +184,9 @@
 
         </div>
     </div>
-    <div class="row">
+    <div class="row pasconcept-bar">
         <div class="col-md-12">
-            <h2>Financial Summary</h2>
+            <h3>Financial Summary</h3>
         </div>
     </div>
     <div class="row">
@@ -269,41 +259,54 @@
             </telerik:RadHtmlChart>
         </div>
     </div>
-    <div class="row">
+    <div class="row pasconcept-bar">
         <div class="col-md-12">
-            <h2>Customer/Client Summary</h2>
+            <h3>Customer/Client Summary</h3>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-3">
-            <h4>Average Customer Value:</h4>
-            <h5>
-                <asp:Label ID="lblCustomer1" runat="server" ToolTip="Total dollar value of all jobs related to this department divided by the total number of department customers"></asp:Label></h5>
-        </div>
-        <div class="col-md-3">
-            <h4>Average Customer Revenue:</h4>
-            <h5>
-                <asp:Label ID="lblCustomer2" runat="server" ToolTip="Total dollar value of all collected inviced related to this department divided by the total number of department customers"></asp:Label></h5>
-        </div>
-        <div class="col-md-2">
-            <h4>Total Number of Customer:</h4>
-            <h5>
-                <asp:Label ID="lblCustomer3" runat="server" ToolTip="Total number of customers of department"></asp:Label></h5>
-        </div>
-        <div class="col-md-2">
-            <h4>Total Number of New Clients: </h4>
-            <h5>
-                <asp:Label ID="lblCustomer4" runat="server" ToolTip="Total number of new customers of department" Text="0"></asp:Label></h5>
-        </div>
-        <div class="col-md-2">
-            <h4>Total Number of Recurrent Customers:</h4>
-            <h5>
-                <asp:Label ID="lblCustomer5" runat="server" ToolTip="Total number of recurrent customers of department" Text="0"></asp:Label></h5>
-        </div>
+    <div>
+        <table class="table-sm" style="width: 100%; text-align: center">
+            <tr>
+                <td>
+                    <h4>Average Customer Value</h4>
+                </td>
+                <td>
+                    <h4>Average Customer Revenue</h4>
+                </td>
+                <td>
+                    <h4>Total Number of Customer</h4>
+                </td>
+                <td>
+                    <h4>Total Number of New Clients</h4>
+                </td>
+                <td>
+                    <h4>Total Number of Recurrent Customers</h4>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCustomer1" runat="server" Font-Size="Larger" ToolTip="Total dollar value of all jobs related to this department divided by the total number of department customers"></asp:Label>
+                </td>
+                <td>
+                    <asp:Label ID="lblCustomer2" runat="server" Font-Size="Larger" ToolTip="Total dollar value of all collected inviced related to this department divided by the total number of department customers"></asp:Label></h5>
+                </td>
+                <td>
+                    <asp:Label ID="lblCustomer3" runat="server" Font-Size="Larger" ToolTip="Total number of customers of department"></asp:Label>
+                </td>
+                <td>
+                    <asp:Label ID="lblCustomer4" runat="server" Font-Size="Larger" ToolTip="Total number of new customers of department" Text="0"></asp:Label>
+                </td>
+                <td>
+                    <asp:Label ID="lblCustomer5" runat="server" Font-Size="Larger" ToolTip="Total number of recurrent customers of department" Text="0"></asp:Label>
+                </td>
+            </tr>
+
+        </table>
     </div>
-    <div class="row">
+
+    <div class="row pasconcept-bar">
         <div class="col-md-12">
-            <h2>Department Breakout</h2>
+            <h3>Department Breakout</h3>
         </div>
     </div>
     <div class="row">
@@ -403,197 +406,155 @@
                 </Legend>
             </telerik:RadHtmlChart>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <h4>Detailed Employees</h4>
-                <%--[Same as standard employee chart but filtered to this department]--%>
-                <telerik:RadGrid ID="RadGridDetailedEmployees" runat="server" DataSourceID="SqlDataSourceDetailedEmployees" PageSize="10" AllowPaging="True"
-                    GridLines="None" AllowSorting="True" AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
-                    <ClientSettings>
-                        <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
-                    </ClientSettings>
-                    <MasterTableView DataSourceID="SqlDataSourceDetailedEmployees" DataKeyNames="EmployeeId">
-                        <PagerStyle Mode="Slider" AlwaysVisible="false" />
-                        <Columns>
-                            <telerik:GridTemplateColumn HeaderText="Photo" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="70px" ReadOnly="true">
-                                <ItemTemplate>
-                                    <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%# LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("EmployeeId"))%>'
-                                        runat="server" Width="45" Height="50" AlternateText='<%# Eval("EmployeeName", "{0} photo") %>'></asp:Image>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-                            <telerik:GridBoundColumn DataField="EmployeeName" HeaderText="Employee" SortExpression="EmployeeName" Aggregate="Count"
-                                UniqueName="EmployeeName" HeaderStyle-HorizontalAlign="Center"
-                                FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Center" ReadOnly="true">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Jobs_Count" HeaderText="Jobs (#)"
-                                ReadOnly="True" SortExpression="Jobs_Count" UniqueName="Jobs_Count" DataFormatString="{0:N0}"
-                                ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="60px"
-                                Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Center">
-                            </telerik:GridBoundColumn>
-
-                            <telerik:GridBoundColumn DataField="Uptime" HeaderText="Uptime" HeaderTooltip="Total amount of employee productive time dedicated towards the completion of a job/project"
-                                ReadOnly="True" SortExpression="Uptime" UniqueName="Uptime" DataFormatString="{0:N0}"
-                                ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="70px"
-                                Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Center">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Downtime" HeaderText="Downtime" HeaderTooltip="Total amount of employee miscellaneous time dedicated to tasks not related to a specific job/project"
-                                ReadOnly="True" SortExpression="Downtime" UniqueName="Downtime" DataFormatString="{0:N0}"
-                                ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px"
-                                Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Center">
-                            </telerik:GridBoundColumn>
-
-                            <telerik:GridBoundColumn DataField="ConsistencyPercent" DataType="System.Double" HeaderText="Consistency (%)" HeaderStyle-Width="100px"
-                                ReadOnly="True" SortExpression="ConsistencyPercent" UniqueName="ConsistencyPercent" DataFormatString="{0:N2}" HeaderTooltip="Simple average of % Budget Used disregarding individual job/project budget weight with respect to Revenue per employee"
-                                ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="EfficiencyPercent" DataType="System.Double" HeaderText="Efficiency (%)" HeaderStyle-Width="100px"
-                                ReadOnly="True" SortExpression="EfficiencyPercent" UniqueName="EfficiencyPercent" DataFormatString="{0:N2}" HeaderTooltip="Weighted average of % Budget Used based on individual job/project budget weight with respect to Revenue per employee"
-                                ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Revenue" HeaderText="Revenue" HeaderTooltip="Gross financial income as per contract agreement, including outsourcing"
-                                ReadOnly="True" SortExpression="Revenue" UniqueName="Revenue" DataFormatString="{0:N2}" HeaderStyle-Width="100px"
-                                ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"
-                                Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Right">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="BudgetUsed" HeaderText="Budget Used" HeaderStyle-Width="100px" HeaderTooltip="Amount utilized from available budget"
-                                ReadOnly="True" SortExpression="BudgetUsed" UniqueName="BudgetUsed" DataFormatString="{0:N2}"
-                                ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"
-                                Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Right">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Profit" HeaderText="Profit" HeaderStyle-Width="100px" HeaderTooltip="Net financial gain; difference between amount earned (Revenue) and amount spent (Budget Used)"
-                                ReadOnly="True" SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:N2}"
-                                ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"
-                                Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Right">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridTemplateColumn DataField="EmployeeHR" HeaderText="Employee HR" SortExpression="EmployeeHR" UniqueName="EmployeeHR" HeaderStyle-Width="100px"
-                                HeaderTooltip="Value of 'Hourly Rate' in employee profile"
-                                ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Center">
-                                <ItemTemplate>
-                                    <asp:Label ID="lnkEdit" runat="server" Text='<%# Eval("EmployeeHR", "{0:N2}")%>'></asp:Label>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-                            <telerik:GridBoundColumn DataField="ProductionHR" HeaderText="Production HR" HeaderTooltip="The sum of the Revenue generated by an employee divided by the sum of production time (Uptime)"
-                                ReadOnly="True" SortExpression="ProductionHR" UniqueName="ProductionHR" DataFormatString="{0:N2}"
-                                ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="100px"
-                                Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Center">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="HourlyRate" HeaderText="Hourly Rate" HeaderTooltip="The sum of the Revenue generated by an employee divided by the sum of total time (Uptime and Downtime)"
-                                ReadOnly="True" SortExpression="HourlyRate" UniqueName="HourlyRate" DataFormatString="{0:N2}"
-                                ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="100px"
-                                Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Center">
-                            </telerik:GridBoundColumn>
-                        </Columns>
-                    </MasterTableView>
-                </telerik:RadGrid>
-            </div>
+    <div class="row pasconcept-bar">
+        <div class="col-md-12">
+            <h3>Statistics per Employee</h3>
         </div>
-        <asp:SqlDataSource ID="SqlDataSourceFunnelChart" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-            SelectCommand="YearStadistic_DepartmentFunnelChart" SelectCommandType="StoredProcedure">
-            <SelectParameters>
-                <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
-                <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />
-                <asp:ControlParameter ControlID="cboDepartments" DefaultValue="" Name="dptoId" PropertyName="SelectedValue" Type="Int32" />
-            </SelectParameters>
-        </asp:SqlDataSource>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <%--[Same as standard employee chart but filtered to this department]--%>
+            <telerik:RadGrid ID="RadGridDetailedEmployees" runat="server" DataSourceID="SqlDataSourceDetailedEmployees" PageSize="10" AllowPaging="True" HeaderStyle-HorizontalAlign="Center"
+                GridLines="None" AllowSorting="True" AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
+                <ClientSettings>
+                    <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
+                </ClientSettings>
+                <MasterTableView DataSourceID="SqlDataSourceDetailedEmployees" DataKeyNames="Id">
+                    <PagerStyle Mode="Slider" AlwaysVisible="false" />
+                    <Columns>
+                        <telerik:GridTemplateColumn HeaderText="" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px">
+                            <ItemTemplate>
+                                <asp:Image ID="ImageEmployeePhoto2" ImageUrl='<%# LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("Id"))%>'
+                                    runat="server" CssClass="photo50"></asp:Image>
+                            </ItemTemplate>
+                        </telerik:GridTemplateColumn>
+                        <telerik:GridBoundColumn DataField="EmployeeName" HeaderText="Employee" SortExpression="EmployeeName" Aggregate="Count"
+                            UniqueName="EmployeeName" HeaderStyle-HorizontalAlign="Center"
+                            FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Center" ReadOnly="true">
+                        </telerik:GridBoundColumn>
+                        <telerik:GridBoundColumn DataField="Jobs" UniqueName="Jobs" HeaderText="Jobs" HeaderStyle-Width="250px" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Total Jobs assigned as member team">
+                        </telerik:GridBoundColumn>
+                        <telerik:GridBoundColumn DataField="Workload" UniqueName="Workload" HeaderText="Workload" HeaderStyle-Width="250px" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Total Hours assigned to active projects">
+                        </telerik:GridBoundColumn>
+                        <telerik:GridBoundColumn DataField="ProductivityRate" UniqueName="ProductivityRate" HeaderText="Productivity Rate" HeaderStyle-Width="250px" DataFormatString="{0:P2}" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Productive Time vs Personal/Vacations/Non-Productive Time">
+                        </telerik:GridBoundColumn>
+                        <telerik:GridBoundColumn DataField="Efficiency" UniqueName="Efficiency" HeaderText="Budget Efficiency" HeaderStyle-Width="250px" DataFormatString="{0:P2}" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Net financial gain; rate between Budget Assigned and amount spent (Budget Used)">
+                        </telerik:GridBoundColumn>
+                        <telerik:GridBoundColumn DataField="TimeEfficiency" UniqueName="TimeEfficiency" HeaderText="Time Efficiency" HeaderStyle-Width="250px" DataFormatString="{0:P2}" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Net financial gain; rate between Hours Assigned and amount used (Worked Hours)">
+                        </telerik:GridBoundColumn>
+                    </Columns>
+                </MasterTableView>
+            </telerik:RadGrid>
+        </div>
+    </div>
+    <asp:SqlDataSource ID="SqlDataSourceFunnelChart" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="YearStadistic_DepartmentFunnelChart" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+            <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="cboDepartments" DefaultValue="" Name="dptoId" PropertyName="SelectedValue" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
 
 
-        <asp:SqlDataSource ID="SqlDataSourcePieProposalsChart" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-            SelectCommand="YearStadistic_DepartmentPieChart" SelectCommandType="StoredProcedure">
-            <SelectParameters>
-                <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
-                <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />
-                <asp:Parameter DefaultValue="1" Name="compareferomId" Type="Int32" />
-                <asp:ControlParameter ControlID="cboDepartments" DefaultValue="" Name="dptoId" PropertyName="SelectedValue" Type="Int32" />
-            </SelectParameters>
-        </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourcePieProposalsChart" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="YearStadistic_DepartmentPieChart" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+            <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />
+            <asp:Parameter DefaultValue="1" Name="compareferomId" Type="Int32" />
+            <asp:ControlParameter ControlID="cboDepartments" DefaultValue="" Name="dptoId" PropertyName="SelectedValue" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
 
 
-        <asp:SqlDataSource ID="SqlDataSourcePieJobsChart" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-            SelectCommand="YearStadistic_DepartmentPieChart" SelectCommandType="StoredProcedure">
-            <SelectParameters>
-                <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
-                <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />
-                <asp:Parameter DefaultValue="2" Name="compareferomId" Type="Int32" />
-                <asp:ControlParameter ControlID="cboDepartments" DefaultValue="" Name="dptoId" PropertyName="SelectedValue" Type="Int32" />
-            </SelectParameters>
-        </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourcePieJobsChart" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="YearStadistic_DepartmentPieChart" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+            <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />
+            <asp:Parameter DefaultValue="2" Name="compareferomId" Type="Int32" />
+            <asp:ControlParameter ControlID="cboDepartments" DefaultValue="" Name="dptoId" PropertyName="SelectedValue" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
 
-        <asp:SqlDataSource ID="SqlDataSourceDepartments" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-            SelectCommand="SELECT [Id], [Name] FROM [Company_Department] WHERE companyId=@companyId and isnull(Productive,0)=1 ORDER BY [Name]">
-            <SelectParameters>
-                <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
-            </SelectParameters>
-        </asp:SqlDataSource>
-        <asp:SqlDataSource ID="SqlDataSourceYear" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-            SelectCommand="SELECT [Year], nYear FROM Years ORDER BY [Year] DESC"></asp:SqlDataSource>
-
-
-        <asp:SqlDataSource ID="SqlDataSourceEmployees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-            SelectCommand="YearStadistic_DepartmentEmployeesList" SelectCommandType="StoredProcedure">
-            <SelectParameters>
-                <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
-                <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />
-                <asp:ControlParameter ControlID="cboDepartments" DefaultValue="" Name="dptoId" PropertyName="SelectedValue" Type="Int32" />
-            </SelectParameters>
-        </asp:SqlDataSource>
-
-        <asp:SqlDataSource ID="SqlDataSourceLifeCycle" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-            SelectCommand="YearStadistic_DepartmentAvgProjectLifeCycle" SelectCommandType="StoredProcedure">
-            <SelectParameters>
-                <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
-                <asp:ControlParameter ControlID="cboDepartments" DefaultValue="" Name="dptoId" PropertyName="SelectedValue" Type="Int32" />
-                <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />
-            </SelectParameters>
-        </asp:SqlDataSource>
-
-        <asp:SqlDataSource ID="SqlDataSourceFinancialSummary" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-            SelectCommand="YearStadistic_DepartmentExpencesRevenueProfit" SelectCommandType="StoredProcedure">
-            <SelectParameters>
-                <asp:ControlParameter ControlID="cboDepartments" DefaultValue="" Name="dptoId" PropertyName="SelectedValue" Type="Int32" />
-                <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />
-                <asp:ControlParameter ControlID="lblDatePart" Name="datepart" PropertyName="Text" Type="String" />
-                <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
-            </SelectParameters>
-        </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceDepartments" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="SELECT [Id], [Name] FROM [Company_Department] WHERE companyId=@companyId and isnull(Productive,0)=1 ORDER BY [Name]">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceYear" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="SELECT [Year], nYear FROM Years ORDER BY [Year] DESC"></asp:SqlDataSource>
 
 
-        <asp:SqlDataSource ID="SqlDataSourceDepartmentSalary" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-            SelectCommand="YearStadistic_DepartmentSalary" SelectCommandType="StoredProcedure">
-            <SelectParameters>
-                <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />
-                <asp:ControlParameter ControlID="cboDepartments" DefaultValue="" Name="dptoId" PropertyName="SelectedValue" Type="Int32" />
-            </SelectParameters>
-        </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceEmployees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="YearStadistic_DepartmentEmployeesList" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+            <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="cboDepartments" DefaultValue="" Name="dptoId" PropertyName="SelectedValue" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
 
-        <asp:SqlDataSource ID="SqlDataSourceDepartmmentOverhead" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-            SelectCommand="YearStadistic_DepartmmentOverhead" SelectCommandType="StoredProcedure">
-            <SelectParameters>
-                <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />
-                <asp:ControlParameter ControlID="cboDepartments" DefaultValue="" Name="dptoId" PropertyName="SelectedValue" Type="Int32" />
-                <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
-            </SelectParameters>
-        </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceLifeCycle" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="YearStadistic_DepartmentAvgProjectLifeCycle" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+            <asp:ControlParameter ControlID="cboDepartments" DefaultValue="" Name="dptoId" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
 
-        <asp:SqlDataSource ID="SqlDataSourceDepartmentWorkload" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-            SelectCommand="YearStadistic_DepartmentWorkload" SelectCommandType="StoredProcedure">
-            <SelectParameters>
-                <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />
-                <asp:ControlParameter ControlID="cboDepartments" DefaultValue="" Name="dptoId" PropertyName="SelectedValue" Type="Int32" />
-            </SelectParameters>
-        </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceFinancialSummary" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="YearStadistic_DepartmentExpencesRevenueProfit" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="cboDepartments" DefaultValue="" Name="dptoId" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="lblDatePart" Name="datepart" PropertyName="Text" Type="String" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+        </SelectParameters>
+    </asp:SqlDataSource>
 
-        <asp:SqlDataSource ID="SqlDataSourceDetailedEmployees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-            SelectCommand="YearStadistic_DepartmentEMPLOYEES_Profit" SelectCommandType="StoredProcedure">
-            <SelectParameters>
-                <asp:ControlParameter ControlID="cboYear" Name="Year" PropertyName="SelectedValue" />
-                <asp:ControlParameter ControlID="cboDepartments" DefaultValue="" Name="DepartmentId" PropertyName="SelectedValue" Type="Int32" />
-                <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
-            </SelectParameters>
-        </asp:SqlDataSource>
 
-        <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
-        <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
-        <asp:Label ID="lblDatePart" runat="server" Visible="False" Text="month"></asp:Label>
+    <asp:SqlDataSource ID="SqlDataSourceDepartmentSalary" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="YearStadistic_DepartmentSalary" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="cboDepartments" DefaultValue="" Name="dptoId" PropertyName="SelectedValue" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+
+    <asp:SqlDataSource ID="SqlDataSourceDepartmmentOverhead" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="YearStadistic_DepartmmentOverhead" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="cboDepartments" DefaultValue="" Name="dptoId" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+
+    <asp:SqlDataSource ID="SqlDataSourceDepartmentWorkload" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="YearStadistic_DepartmentWorkload" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="cboDepartments" DefaultValue="" Name="dptoId" PropertyName="SelectedValue" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+
+    <asp:SqlDataSource ID="SqlDataSourceDetailedEmployees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="EmployeeStatisticsExt_SELECT" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="cboYear" Name="Year" PropertyName="SelectedValue" />
+            <asp:ControlParameter ControlID="cboDepartments"  Name="departmentId" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+
+    <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblDatePart" runat="server" Visible="False" Text="month"></asp:Label>
 </asp:Content>
 

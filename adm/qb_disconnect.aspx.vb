@@ -11,7 +11,7 @@
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Response.Redirect("~/adm/client_sync_qb")
+        Response.Redirect("~/adm/" & Session("QBAuthBackPage") & IIf(Len(Session("QBAuthBackPageJobId")) > 0, "?JobId=" & Session("QBAuthBackPageJobId"), ""))
     End Sub
 
     Private Sub btnDisconnect_Click(sender As Object, e As EventArgs) Handles btnDisconnect.Click

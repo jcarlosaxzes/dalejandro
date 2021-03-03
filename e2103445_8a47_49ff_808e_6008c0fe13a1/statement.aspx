@@ -45,7 +45,7 @@
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="uxLoadingPanel" runat="server"></telerik:RadAjaxLoadingPanel>
+    <telerik:RadAjaxLoadingPanel ID="uxLoadingPanel" runat="server" EnableEmbeddedSkins="false"></telerik:RadAjaxLoadingPanel>
     <%-- Modals and the like --%>
     <div class="modal fade" id="modal-card">
         <div class="modal-dialog" role="document">
@@ -277,7 +277,7 @@
                 </ItemTemplate>
             </asp:FormView>
             <%-- Fixed Btns --%>
-            <asp:Panel ID="pnlSideTools" runat="server" CssClass="row hidden-print" Visible="false">
+            <asp:Panel ID="pnlSideTools" runat="server" CssClass="row hidden-print noprint" Visible="false">
                 <div class="col-lg-12" style="margin-top: 10px">
                     <div class="row">
                         <div class="col-lg-6 col-lg-offset-6">

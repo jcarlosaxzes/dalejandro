@@ -6,9 +6,20 @@ Public Class MasterJOB
     Private Sub MasterJOB_Init(sender As Object, e As EventArgs) Handles Me.Init
         Try
 
-            lblCompanyId.Text = Session("companyId")
+            ' Para evitar perdida de session....
             lblEmployeeEmail.Text = Context.User.Identity.GetUserName()
+            If Session("companyId") Is Nothing Then
+                'Session("companyId") = LocalAPI.GetCompanyDefault(lblEmployeeEmail.Text)
+                'Session("LastPage") = ""
+                Response.Redirect("~/Account/login.aspx")
+            End If
+
+            lblCompanyId.Text = Session("companyId")
             lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployeeEmail.Text, lblCompanyId.Text)
+
+            If Not Request.QueryString("backpage") Is Nothing Then
+                Session("jobmasterpageback") = Request.QueryString("backpage")
+            End If
 
         Catch ex As Exception
             '!!! Posible perdida de session
@@ -16,11 +27,32 @@ Public Class MasterJOB
         End Try
     End Sub
 
+    Private Sub RestoreLostVariables()
+        ' PARCHE.... Perdida de session, error!!!!, recuperar companyId desde Job
+        lblCompanyId.Text = LocalAPI.GetJobProperty(lblJobId.Text, "companyId")
+        Session("companyId") = lblCompanyId.Text
+        lblEmployeeEmail.Text = Context.User.Identity.GetUserName()
+        lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployeeEmail.Text, lblCompanyId.Text)
+    End Sub
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If (Not Page.IsPostBack) Then
-            lblJobId.Text = Request.QueryString("jobId")
-            If LocalAPI.IsCompanyViolation(lblJobId.Text, "Jobs", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/default.aspx")
-            Page.Title = LocalAPI.GetJobCodeName(lblJobId.Text)
+
+            If Not Request.QueryString("guid") Is Nothing Then
+                lblJobId.Text = LocalAPI.GetJobIdFromGUID(Request.QueryString("guid"))
+            Else
+                Back()
+            End If
+
+            lblJobName.Text = LocalAPI.GetJobCodeName(lblJobId.Text)
+
+            ' Restore session value
+            If Val(lblCompanyId.Text) = 0 Then
+                RestoreLostVariables()
+            End If
+
+            If LocalAPI.IsCompanyViolation(lblJobId.Text, "Jobs", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/schedule.aspx")
+            Page.Title = lblJobName.Text
             If Session("LastPage") <> HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path) Then
                 Session("LastPage") = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path)
                 Task.Run(Function() LocalAPI.EmployeePageTracking(UserId, Session("LastPage")))
@@ -28,6 +60,36 @@ Public Class MasterJOB
 
         End If
     End Sub
+
+    Public Function GetJobId()
+        Return lblJobId.Text
+    End Function
+    Private Sub Back()
+        'What is this ?
+        'Session("jobmasterpageback") = ""
+        Select Case "" & Session("jobmasterpageback")
+            Case "jobs"
+                Response.Redirect("~/adm/jobs?restoreFilter=1")
+            Case "proposals"
+                Response.Redirect("~/adm/proposals?restoreFilter=1")
+            Case "invoices"
+                Response.Redirect("~/adm/invoices")
+            Case "requestforproposals"
+                Response.Redirect("~/adm/requestforproposals")
+            Case "rfps"
+                Response.Redirect("~/adm/rfps")
+            Case "client"
+                Dim clientId As Integer = LocalAPI.GetJobProperty(lblJobId.Text, "Client")
+                Response.Redirect($"~/adm/client?clientId={clientId}")
+            Case Else
+                Response.Redirect("~/adm/jobs?restoreFilter=1")
+        End Select
+
+    End Sub
+    Private Sub btnMasterClose_Click(sender As Object, e As EventArgs) Handles btnMasterClose.Click
+        Back()
+    End Sub
+
 
     Public Property UserId() As Integer
         Get

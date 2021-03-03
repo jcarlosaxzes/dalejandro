@@ -9,6 +9,6 @@
 <body>
     <form id="form1" runat="server">
     </form>
-
+    <asp:Label ID="lblJobId" runat="server" Visible="False" Text="0"></asp:Label>
 </body>
 </html>

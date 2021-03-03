@@ -4,18 +4,17 @@
 <%@ MasterType VirtualPath="~/ADM/MasterJOB.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container">
-
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td>
-                    <asp:LinkButton ID="btnNewPropsal" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+        <div class="pasconcept-bar">
+            <span class="pasconcept-pagetitle">Proposals</span>
+            <span style="float: right; vertical-align: middle;">
+                <asp:LinkButton ID="btnNewPropsal" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
                                                             Add Proposal (Change Order)
                     </asp:LinkButton>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <telerik:RadGrid ID="RadGridProposals" runat="server" AllowAutomaticDeletes="True" AutoGenerateColumns="False" DataSourceID="SqlDataSourceProposals" GridLines="None" ShowFooter="True">
+            </span>
+        </div>
+
+      <div>
+          <telerik:RadGrid ID="RadGridProposals" runat="server" AllowAutomaticDeletes="True" AutoGenerateColumns="False" DataSourceID="SqlDataSourceProposals" GridLines="None" ShowFooter="True">
                         <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceProposals" HeaderStyle-HorizontalAlign="Center"
                             ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small" FooterStyle-Font-Size="Small">
                             <Columns>
@@ -104,16 +103,23 @@
 
                                 <telerik:GridTemplateColumn HeaderText="Insights" UniqueName="Insights" AllowFiltering="False" ItemStyle-HorizontalAlign="Left" HeaderStyle-Width="150px">
                                     <ItemTemplate>
-                                        <spa style="font-size: x-small" title="Emitted Date"><%# Eval("EmailDate", "{0:d}") %></spa>
-                                        <span title="Number of files uploaded" class="badge badge-pill badge-light" style='<%# IIf(Eval("ProposalUploadFiles")=0,"display:none","display:normal")%>'>
-                                            <%#Eval("ProposalUploadFiles")%>
-                                        </span>
-                                        <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("Emitted")=0,"display:none;vertical-align:middle","display:normal;vertical-align:middle")%>'>
-                                            <%#Eval("Emitted")%>
-                                        </span>
-                                        <span title="Number of times the Client has visited your Proposal Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
-                                            <%#Eval("clientvisits")%>
-                                        </span>
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td style="text-align:right;width: 60px">
+                                                <spa style="font-size: x-small" title="Emitted Date"><%# Eval("EmailDate", "{0:d}") %></spa>
+                                            </td>
+                                            <td style="text-align:center;width: 30px">
+                                                <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("Emitted")=0,"display:none;vertical-align:middle","display:normal;vertical-align:middle")%>'>
+                                                    <%#Eval("Emitted")%>
+                                                </span>
+                                            </td>
+                                            <td style="text-align:center;">
+                                                <span title="Number of times the Client has visited your Proposal Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
+                                                    <%#Eval("clientvisits")%>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </table>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
 
@@ -124,9 +130,8 @@
                             </Columns>
                         </MasterTableView>
                     </telerik:RadGrid>
-                </td>
-            </tr>
-        </table>
+      </div>
+              
 
         <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
         </telerik:RadWindowManager>

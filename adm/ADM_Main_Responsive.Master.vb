@@ -19,6 +19,7 @@ Public Class ADM_Main_Responsive
                 Session("LastPage") = ""
             End If
 
+
             Dim versionId As Integer = LocalAPI.sys_VersionId(Session("companyId"))
             Session("Version") = versionId
 
@@ -52,11 +53,23 @@ Public Class ADM_Main_Responsive
 
     Private Function CheckbillingExpirationDate(companyId As Integer) As Boolean
         '!!!! Check Billing Expiracion Date
-        If LocalAPI.GetCompanybillingExpirationDate(companyId) <= Date.Today Then
+        Dim record = LocalAPI.GetRecordFromQuery($"select Name, billingExpirationDate , ISNULL( AlertMasterSubscriptionExpired, 0) as AlertMasterSubscriptionExpired, isnull(BlockSubcriptionExpired, 0 ) as BlockSubcriptionExpired from company where companyId = {companyId}")
+        Dim companyName As String = record("Name")
+        Dim billingExpirationDate As Date = record("billingExpirationDate")
+        Dim AlertMasterSubscriptionExpired As Boolean = record("AlertMasterSubscriptionExpired")
+        Dim BlockSubcriptionExpired As Boolean = record("BlockSubcriptionExpired")
 
+        'Send notifications to Masters 30 days before Subscription Expired
+        If billingExpirationDate <= Date.Today.AddDays(30) And Not AlertMasterSubscriptionExpired Then
+
+            SendGrid.Email.SendMail("axzesllc@gmail.com", "jcarlo@axzes.com", "", "PASconcept Subscription Expired", $" Subscription Expire for Company {companyName}", companyId, 0, 0)
+            LocalAPI.ExecuteNonQuery($"update Company set AlertMasterSubscriptionExpired = 1 where companyId = {companyId}")
+        End If
+
+        If billingExpirationDate <= Date.Today And BlockSubcriptionExpired Then
             If LocalAPI.GetCompanyBillingAmount(companyId) > 0 Then
                 ' Payment subscriptor Page
-                Response.Redirect("~/adm/subscribe/pro.aspx")
+                Response.Redirect("~/adm/subscribe/subscriptionexpired.aspx")
             Else
                 ' If Free Plan (Amount=0), extend 'Expiracion Date'
                 LocalAPI.CompanyExpirationDateUpdate(companyId, DateAdd(DateInterval.Year, 1, Date.Today))
@@ -73,7 +86,7 @@ Public Class ADM_Main_Responsive
             If Not LocalAPI.IAgree(UserEmail) And Val("" & Session("ReadLater")) <> "1" Then
                 Response.RedirectPermanent("~/adm/useragree.aspx")
             Else
-                lblCompanyName.Text = LocalAPI.GetCompanyName(Companyp)
+                btnCompanyName.Text = LocalAPI.GetCompanyName(Companyp)
             End If
             If cboCompany.SelectedValue <> Session("companyId") Then
                 cboCompany.SelectedValue = Session("companyId")
@@ -83,6 +96,8 @@ Public Class ADM_Main_Responsive
                 Session("LastPage") = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path)
                 Task.Run(Function() LocalAPI.EmployeePageTracking(UserId, Session("LastPage")))
             End If
+
+            btnCompanyName.Enabled = (LocalAPI.GetCompanyBySubDomain() = 0)
         End If
     End Sub
 
@@ -198,14 +213,17 @@ Public Class ADM_Main_Responsive
 
     End Function
     Public Sub btnSwitchCompany_Click(sender As Object, e As EventArgs)
-        RadToolTipSwitchCompany.Visible = True
-        RadToolTipSwitchCompany.Show()
+        If btnCompanyName.Enabled Then
+            RadToolTipSwitchCompany.Visible = True
+            RadToolTipSwitchCompany.Show()
+        Else
+            ErrorMessage("Current subdomain does not allow switch company!")
+        End If
     End Sub
 
     Private Sub btnSwitchCompanyConfirm_Click(sender As Object, e As EventArgs) Handles btnSwitchCompanyConfirm.Click
         ' Clear session Permissions
         Session.Contents.RemoveAll()
-
         Session("companyId") = cboCompany.SelectedValue
         lblCompanyId.Text = cboCompany.SelectedValue
         Companyp = cboCompany.SelectedValue
@@ -216,7 +234,7 @@ Public Class ADM_Main_Responsive
         LocalAPI.SetLastCompanyId(lblEmployeeId.Text, cboCompany.SelectedValue)
 
         Session("Version") = LocalAPI.sys_VersionId(Session("companyId"))
-        lblCompanyName.Text = LocalAPI.GetCompanyName(cboCompany.SelectedValue)
+        btnCompanyName.Text = LocalAPI.GetCompanyName(cboCompany.SelectedValue)
 
         ' Navegate Default Page
         Response.RedirectPermanent("~/adm/Start.aspx")
@@ -230,9 +248,15 @@ Public Class ADM_Main_Responsive
     End Function
 
     Protected Sub Unnamed_LoggingOut(sender As Object, e As LoginCancelEventArgs)
-        Context.GetOwinContext().Authentication.SignOut()
-        Session.Contents.RemoveAll()
-        Session.Abandon()
+        Try
+            Session.Contents.RemoveAll()
+            Session.Abandon()
+            Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie)
+            'Context.GetOwinContext().Authentication.SignOut()
+            Response.Redirect("~/Account/login.aspx")
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Public Function HideMasterMenu() As Boolean

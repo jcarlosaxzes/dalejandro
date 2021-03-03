@@ -83,10 +83,14 @@
                 height: auto;
                 width: auto;
             }
+
+            .wizardStepHidden {
+                height: 100%;
+                display: none !important;
+            }
         </style>
 
     </telerik:RadCodeBlock>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"></telerik:RadAjaxLoadingPanel>
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook"></telerik:RadWindowManager>
     <telerik:RadWindowManager ID="RadWindowManager2" runat="server">
         <Windows>
@@ -106,9 +110,8 @@
                        Back to List
             </asp:LinkButton>
             Proposal
+            <asp:Label ID="lblProposalNumber" runat="server"></asp:Label>
         </span>
-
-
         <span style="float: right; vertical-align: middle;">
             <asp:LinkButton ID="btnUpdate1" runat="server" CssClass="btn btn-success" ValidationGroup="Proposal" UseSubmitBehavior="false" ToolTip="Update Proposal">
                              Update
@@ -126,15 +129,21 @@
             </asp:LinkButton>
             <asp:LinkButton ID="btnPrintProposal" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="Proposal"
                 ToolTip="Print/Send Email with Proposal Information">
-                             View/Send
+                             Send to Client
             </asp:LinkButton>
             <asp:LinkButton ID="btnPdf" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="Proposal"
                 ToolTip="Export PDF">
-                             Export PDF
+                             PDF
             </asp:LinkButton>
             <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false">
                        View Summary
             </asp:LinkButton>
+            &nbsp;
+            <asp:Panel runat="server" ID="panelViewProposalPage" Style="float: right; vertical-align: middle;">
+                <a href='<%# LocalAPI.GetSharedLink_URL(111, lblProposalId.Text, False)%>' target="_blank" class="btn btn-primary">
+                    <i class="far fa-share-square"></i>&nbsp;&nbsp;View Proposal
+                </a>
+            </asp:Panel>
         </span>
     </div>
     <div id="collapseTotals">
@@ -204,7 +213,8 @@
                                                 </td>
                                                 <td style="width: 75px; text-align: right">Job:</td>
                                                 <td>
-                                                    <asp:HyperLink ID="lnkRelatedJob" runat="server" CssClass="Normal" NavigateUrl='<%# Eval("jobId", "~/ADM/Job_job.aspx?JobId={0}")%>' Text='<%# Eval("JobCode")%>'></asp:HyperLink>
+                                                    <asp:LinkButton ID="btnViewJob" runat="server" Visible='<%# Len(Eval("JobCode")) > 0 %>' CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false" CommandName="ViewJob" CommandArgument='<%# Eval("JobId")%>'
+                                                        ToolTip="View Job of Proposal" Text='<%#  Eval("JobCode")%>'></asp:LinkButton>
                                                 </td>
                                             </tr>
                                         </table>
@@ -264,7 +274,7 @@
 
 
 
-                                    <td style="text-align: right">Units:
+                                    <td style="text-align: right">Quantity:
                                     </td>
                                     <td>
                                         <telerik:RadNumericTextBox ID="txtUnit" runat="server" Width="200px" Text='<%# Bind("Unit")%>' ToolTip='<%# Eval("ProjectArea")%>'>
@@ -283,7 +293,7 @@
 
 
 
-                                    <td style="text-align: right">Measure:
+                                    <td style="text-align: right">Units
                                     </td>
                                     <td>
                                         <telerik:RadComboBox ID="cboMeasure" runat="server" DataSourceID="SqlDataSourceMeasure" DataTextField="Name" DataValueField="Id"
@@ -424,14 +434,7 @@
 
 
                                 <tr>
-                                    <td style="text-align: right;">
-                                        <asp:CompareValidator runat="server" ID="Comparevalidator7" SetFocusOnError="true" Text="*" Operator="NotEqual"
-                                            ControlToValidate="cboProjectManager"
-                                            ErrorMessage="Proposal by is required"
-                                            ValueToCompare="(Not Defined...)"
-                                            ValidationGroup="Proposal">
-                                        </asp:CompareValidator>
-                                        Proposal by:
+                                    <td style="text-align: right;">Proposal by:
                                     </td>
                                     <td>
                                         <telerik:RadComboBox ID="cboProjectManager" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceEmployee"
@@ -441,9 +444,32 @@
                                                 <telerik:RadComboBoxItem runat="server" Text="(Not Defined...)" Value="0" />
                                             </Items>
                                         </telerik:RadComboBox>
-                                        <asp:CompareValidator runat="server" ID="Comparevalidator2" ValueToCompare="(Not Defined...)"
-                                            Operator="NotEqual" ControlToValidate="cboProjectManager" Text="*" ErrorMessage="<span><b>Proposal by</b> is required</span>" ValidationGroup="Proposal">
-                                        </asp:CompareValidator>
+
+                                    </td>
+
+                                    <td style="text-align: right;">Prepared by:
+                                    </td>
+                                    <td>
+                                        <telerik:RadComboBox ID="cboPreparedBy" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceEmployee"
+                                            DataTextField="Name" DataValueField="Id" Height="400px"
+                                            SelectedValue='<%# Bind("EmployeeAprovedId")%>' Width="350px" MarkFirstMatch="True" Filter="Contains">
+                                            <Items>
+                                                <telerik:RadComboBoxItem runat="server" Text="(Not Defined...)" Value="0" />
+                                            </Items>
+                                        </telerik:RadComboBox>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td style="text-align: right;">Retainer:
+                                    </td>
+                                    <td>
+                                        <telerik:RadCheckBox ID="chkRetainer" runat="server" Checked='<%# Bind("Retainer")%>'
+                                            Text="On acceptance, the first invoice will be emitted"
+                                            ToolTip="If selected, upon the clients acceptance of the proposal, the first invoice of the payment schedule will be sent to the client"
+                                            AutoPostBack="false">
+                                        </telerik:RadCheckBox>
 
                                     </td>
 
@@ -457,15 +483,8 @@
                                 </tr>
 
                                 <tr>
-                                    <td style="text-align: right;">Retainer:</td>
-                                    <td>
-                                        <telerik:RadCheckBox ID="chkRetainer" runat="server" Checked='<%# Bind("Retainer")%>'
-                                            Text="On acceptance, the first invoice will be emitted"
-                                            ToolTip="If selected, upon the clients acceptance of the proposal, the first invoice of the payment schedule will be sent to the client"
-                                            AutoPostBack="false">
-                                        </telerik:RadCheckBox>
-
-                                    </td>
+                                    <td style="text-align: right;"></td>
+                                    <td></td>
                                     <td style="text-align: right;">Lump Sum:</td>
                                     <td>
                                         <telerik:RadCheckBox ID="chkLumpSum" runat="server" Text="Detail Totals" Checked='<%# Bind("LumpSum")%>'
@@ -476,6 +495,32 @@
                                 </tr>
 
                             </table>
+
+                            <div>
+
+                                <asp:CompareValidator runat="server" ID="Comparevalidator7" SetFocusOnError="true" Text="*" Operator="NotEqual" Display="None"
+                                    ControlToValidate="cboProjectManager"
+                                    ErrorMessage="Proposal by is required"
+                                    ValueToCompare="(Not Defined...)"
+                                    ValidationGroup="Proposal">
+                                </asp:CompareValidator>
+
+
+                                <asp:CompareValidator runat="server" ID="Comparevalidator8" SetFocusOnError="true" Text="*" Operator="NotEqual"
+                                    ControlToValidate="cboProjectManager"
+                                    ErrorMessage="Prepared by is required"
+                                    ValueToCompare="(Not Defined...)"
+                                    ValidationGroup="Proposal">
+                                </asp:CompareValidator>
+
+                                <asp:CompareValidator runat="server" ID="Comparevalidator2" ValueToCompare="(Not Defined...)"
+                                    Operator="NotEqual" ControlToValidate="cboProjectManager" Text="*" ErrorMessage="<span><b>Proposal by</b> is required</span>" ValidationGroup="Proposal">
+                                </asp:CompareValidator>
+
+                                <asp:CompareValidator runat="server" ID="Comparevalidator9" ValueToCompare="(Not Defined...)"
+                                    Operator="NotEqual" ControlToValidate="cboPreparedBy" Text="*" ErrorMessage="<span><b>Prepared by</b> is required</span>" ValidationGroup="Proposal">
+                                </asp:CompareValidator>
+                            </div>
                         </telerik:RadWizardStep>
 
                         <%--Payment Schedules--%>
@@ -508,25 +553,37 @@
                                 CellSpacing="0" Width="100%">
                                 <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePS" ShowFooter="true">
                                     <Columns>
-                                        <telerik:GridBoundColumn DataField="Id" HeaderText="ID" SortExpression="Id" UniqueName="Id" Display="False">
+                                        <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
+                                            HeaderText="" HeaderStyle-Width="50px">
+                                        </telerik:GridEditCommandColumn>
+                                        <telerik:GridBoundColumn DataField="Id" HeaderText="ID" SortExpression="Id" UniqueName="Id" Display="False" ReadOnly="true">
                                         </telerik:GridBoundColumn>
 
-                                        <telerik:GridBoundColumn DataField="Order" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center"
+                                        <telerik:GridBoundColumn DataField="Order" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center" ReadOnly="true"
                                             HeaderText="Order" SortExpression="Order" UniqueName="Order">
                                         </telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn DataField="Percentage" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center"
+                                        <telerik:GridTemplateColumn DataField="Description" HeaderText="Description" SortExpression="Description" UniqueName="Description">
+                                            <ItemTemplate>
+                                                <%# Eval("Description") %>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <telerik:RadTextBox Width="960px" ID="txtPSDescrip" runat="server" MaxLength="512" RenderMode="Lightweight" TextMode="MultiLine" Rows="2" Text='<%# Bind("Description") %>'>
+                                                </telerik:RadTextBox>
+                                            </EditItemTemplate>
+                                        </telerik:GridTemplateColumn>
+                                        <telerik:GridBoundColumn DataField="Percentage" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center" ReadOnly="true"
                                             HeaderText="(%)" SortExpression="Percentage" UniqueName="Percentage">
                                         </telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn DataField="Description"
-                                            HeaderText="Description" SortExpression="Description" UniqueName="Description">
-                                        </telerik:GridBoundColumn>
-
                                         <telerik:GridBoundColumn DataField="Amount" HeaderText="Total" ReadOnly="True"
                                             SortExpression="Amount" DataFormatString="{0:N2}" UniqueName="Amount" Aggregate="Sum"
                                             FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right"
                                             HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
                                         </telerik:GridBoundColumn>
                                     </Columns>
+                                    <EditFormSettings EditColumn-ItemStyle-Width="900px">
+                                        <EditColumn ButtonType="PushButton" UpdateText="Update" UniqueName="EditCommandColumn1" CancelText="Cancel">
+                                        </EditColumn>
+                                    </EditFormSettings>
                                 </MasterTableView>
                             </telerik:RadGrid>
 
@@ -563,22 +620,24 @@
                         </telerik:RadWizardStep>
 
                         <%--Begin and Concluding Text--%>
-                        <telerik:RadWizardStep runat="server" ID="RadWizardStep3" Title="Begin and Concluding Text" StepType="Step">
+                        <telerik:RadWizardStep runat="server" ID="RadWizardStep3" Title="Opening and Closing Text" StepType="Step">
                             <table class="table-sm" style="width: 100%;">
                                 <tr>
                                     <td>
-                                        <h4>Introductory Text:</h4>
-                                        <telerik:RadTextBox ID="RadTextBoxBegin" runat="server" Text='<%# Bind("TextBegin") %>'
-                                            TextMode="MultiLine" Rows="6" MaxLength="1024" Width="100%">
-                                        </telerik:RadTextBox>
+                                        <h4>Opening Text:</h4>
+                                        <telerik:RadEditor ID="RadTextBoxBegin" runat="server" Content='<%# Bind("TextBegin") %>' Height="250px" 
+                                            ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design,Preview" RenderMode="Auto" Width="100%">
+                                        </telerik:RadEditor>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <h4>Concluding Text:</h4>
-                                        <telerik:RadTextBox ID="RadTextBoxEnd" runat="server" Text='<%# Bind("TextEnd") %>'
-                                            TextMode="MultiLine" Rows="6" MaxLength="1024" Width="100%">
-                                        </telerik:RadTextBox>
+                                        <h4>Closing Text:</h4>
+                                        <telerik:RadEditor ID="radEditorEnd" runat="server" Content='<%# Bind("TextEnd") %>'
+                                            Height="250px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design,Preview" RenderMode="Auto"
+                                            Width="100%">
+                                        </telerik:RadEditor>
+
                                     </td>
                                 </tr>
                                 <tr>
@@ -600,12 +659,12 @@
         <telerik:RadWizard ID="RadWizard2" runat="server" DisplayCancelButton="false" DisplayProgressBar="false" DisplayNavigationButtons="false" RenderMode="Lightweight" Skin="Silk">
             <WizardSteps>
                 <%--Task Compemsation--%>
-                <telerik:RadWizardStep runat="server" ID="RadWizardStep21" Title="Task Compensation" StepType="Step">
+                <telerik:RadWizardStep runat="server" ID="RadWizardStep21" Title="Task Compensation / Notes" StepType="Step">
                     <table class="table-sm" style="width: 100%;">
                         <tr>
                             <td>
                                 <asp:LinkButton ID="btnNewTask" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ValidationGroup="ProposalDetail">
-                                   Add Fee
+                                   Add Task
                                 </asp:LinkButton>
 
                             </td>
@@ -614,44 +673,22 @@
                             <td style="padding-top: 10px; padding-bottom: 10px">
                                 <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticDeletes="True" AutoGenerateColumns="False" DataSourceID="SqlDataSourceProposalDetails"
                                     CellSpacing="0" ValidationGroup="ProposalDetail" HeaderStyle-HorizontalAlign="Center"
-                                    ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
+                                    ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small">
                                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceProposalDetails" ShowFooter="true" CommandItemDisplay="None">
                                         <BatchEditingSettings EditType="Cell" />
                                         <Columns>
                                             <telerik:GridBoundColumn DataField="Id" HeaderText="ID" ReadOnly="True" SortExpression="Id" UniqueName="Id" Display="False">
                                             </telerik:GridBoundColumn>
-                                            <telerik:GridTemplateColumn DataField="phaseId" FilterControlAltText="Filter PhaseCode column"
-                                                HeaderText="Phase" SortExpression="PhaseCode" UniqueName="phaseId" HeaderStyle-Width="80px">
+                                            <telerik:GridTemplateColumn DataField="phaseId" HeaderText="Phase" SortExpression="PhaseCode" UniqueName="phaseId" HeaderStyle-Width="80px">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblphaseId" runat="server" Text='<%# Eval("PhaseCode") %>' ToolTip='<%# Eval("PhaseName") %>'></asp:Label>
                                                 </ItemTemplate>
-                                                <EditItemTemplate>
-                                                    <div>
-                                                        <telerik:RadDropDownList runat="server" ID="PhaseDropDown" DataValueField="Id" Width="95%" DataTextField="Code" DataSourceID="SqlDataSourcePhases"
-                                                            AppendDataBoundItems="true" DropDownWidth="150px">
-                                                            <Items>
-                                                                <telerik:DropDownListItem Text="?" Value="0" />
-                                                            </Items>
-                                                        </telerik:RadDropDownList>
-                                                    </div>
-                                                </EditItemTemplate>
                                             </telerik:GridTemplateColumn>
 
-                                            <telerik:GridTemplateColumn DataField="positionId" FilterControlAltText="Filter positionCode column" Display="false"
-                                                HeaderText="Position" SortExpression="positionCode" UniqueName="positionId" HeaderStyle-Width="100px">
+                                            <telerik:GridTemplateColumn DataField="positionId" Display="false" HeaderText="Position" SortExpression="positionCode" UniqueName="positionId" HeaderStyle-Width="100px">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblpositionId" runat="server" Text='<%# Eval("Position") %>'></asp:Label>
                                                 </ItemTemplate>
-                                                <EditItemTemplate>
-                                                    <div>
-                                                        <telerik:RadDropDownList runat="server" ID="positionDropDown" DataValueField="Id" Width="95%" DataTextField="Name" DataSourceID="SqlDataSourcePositions"
-                                                            AppendDataBoundItems="true" DropDownWidth="400px">
-                                                            <Items>
-                                                                <telerik:DropDownListItem Text="?" Value="0" />
-                                                            </Items>
-                                                        </telerik:RadDropDownList>
-                                                    </div>
-                                                </EditItemTemplate>
                                             </telerik:GridTemplateColumn>
 
                                             <telerik:GridTemplateColumn DataField="taskcode" HeaderText="Task" ReadOnly="True" SortExpression="taskcode"
@@ -659,7 +696,17 @@
                                                 <ItemTemplate>
                                                     <asp:LinkButton ID="lnkDetailId" runat="server" CommandName="EditTask" CommandArgument='<%# Eval("Id") %>' ValidationGroup="ProposalDetail" UseSubmitBehavior="false"
                                                         Text='<%# Eval("taskcode")%>' ToolTip="Click to Edit detail"></asp:LinkButton>
-
+                                                    &nbsp;
+                                                        <asp:LinkButton ID="btnOrderDown" runat="server" CommandName="OrderDown" CommandArgument='<%# Eval("Id") %>' CausesValidation="false"
+                                                            ToolTip="Click to Order Down">
+                                                                <i class="fas fa-arrow-down"></i>
+                                                        </asp:LinkButton>
+                                                    &nbsp;
+                                                        <asp:LinkButton ID="btnOrderUp" runat="server" CommandName="OrderUp" CommandArgument='<%# Eval("Id") %>' CausesValidation="false"
+                                                            ToolTip="Click to Order Up">
+                                                                <i class="fas fa-arrow-up"></i>
+                                                        </asp:LinkButton>
+                                                    &nbsp;
                                                     <asp:LinkButton ID="btnDuplicate" runat="server" CommandName="DetailDuplicate" CommandArgument='<%# Eval("Id") %>' UseSubmitBehavior="false"
                                                         ToolTip="Click to duplicate record">
                                                     <i class="far fa-clone"></i>
@@ -671,13 +718,14 @@
                                             <telerik:GridTemplateColumn DataField="Description" FilterControlAltText="Filter Description column"
                                                 HeaderText="Name" SortExpression="Description" UniqueName="Description" ItemStyle-HorizontalAlign="Left">
                                                 <ItemTemplate>
-                                                    <asp:Label ID="lblDescrip" runat="server" Text='<%# Eval("Description") %>' ToolTip='<%# Eval("DescriptionPlus") %>'></asp:Label>
+                                                    <asp:LinkButton ID="lnklblDescrip" runat="server" CommandName="EditTask" CommandArgument='<%# Eval("Id") %>' UseSubmitBehavior="false"
+                                                        Text='<%# Eval("Description")%>' ToolTip="Click to Edit detail"></asp:LinkButton>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="Amount" DataType="System.Double" HeaderText="Qty"
                                                 SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right">
                                                 <ItemTemplate>
-                                                    <asp:Label ID="lblAmount" runat="server" Text='<%# Eval("Amount", "{0:N2}") %>'></asp:Label>
+                                                    <asp:Label ID="lblAmount" runat="server" Text='<%# Eval("Amount", "{0:N4}") %>'></asp:Label>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="Hours" DataType="System.Double" HeaderText="Hours"
@@ -726,13 +774,68 @@
                                 </telerik:RadGrid>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <hr />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:LinkButton ID="btnNewNote" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                                    Add Note
+                                </asp:LinkButton>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <telerik:RadGrid ID="RadGridNotes" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" AllowAutomaticInserts="true"
+                                    AutoGenerateColumns="False" DataSourceID="SqlDataSourceNotes" HeaderStyle-HorizontalAlign="Center">
+                                    <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceNotes" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small">
+                                        <Columns>
+                                            <telerik:GridEditCommandColumn ButtonType="ImageButton" HeaderText="" HeaderStyle-Width="50px" UniqueName="EditCommandColumn">
+                                            </telerik:GridEditCommandColumn>
+                                            <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" Display="False" HeaderText="ID" ReadOnly="True" SortExpression="Id" UniqueName="Id">
+                                            </telerik:GridBoundColumn>
+                                            <telerik:GridDateTimeColumn DataField="Date" DataFormatString="{0:MM/dd/yyyy}" ReadOnly="true" HeaderText="Date" SortExpression="Date" UniqueName="Date" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
+                                            </telerik:GridDateTimeColumn>
+                                            <telerik:GridTemplateColumn DataField="Note" HeaderText="Note" SortExpression="Note"
+                                                UniqueName="Note">
+                                                <EditItemTemplate>
+                                                    <telerik:RadTextBox ID="NoteTextBox" runat="server" MaxLength="1024" Text='<%# Bind("Note") %>'
+                                                        TextMode="MultiLine" Rows="8" Width="800px">
+                                                    </telerik:RadTextBox>
+                                                </EditItemTemplate>
+                                                <ItemTemplate>
+                                                    <%# Eval("Note") %>
+                                                </ItemTemplate>
+                                            </telerik:GridTemplateColumn>
+                                            <telerik:GridTemplateColumn DataField="NoteBy" HeaderText="Note By" SortExpression="NoteBy" UniqueName="NoteBy" ReadOnly="true">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="NoteByLabel" runat="server" Text='<%# Eval("NoteBy") %>'></asp:Label>
+                                                </ItemTemplate>
+                                            </telerik:GridTemplateColumn>
+                                            <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this note?"
+                                                ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
+                                                UniqueName="DeleteColumn" HeaderText="" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
+                                            </telerik:GridButtonColumn>
+                                        </Columns>
+                                         <EditFormSettings >
+                                            <EditColumn ButtonType="PushButton">
+                                            </EditColumn>
+                                        </EditFormSettings>
+                                    </MasterTableView>
+                                </telerik:RadGrid>
+                            </td>
+                        </tr>
                     </table>
+
+
                 </telerik:RadWizardStep>
                 <%--Documents--%>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep4" Title="Documents" StepType="Step">
                     <div class="pas-container" style="width: 100%">
                         <asp:Panel ID="PanelUpload" runat="server">
-                            <table class="table-sm pasconcept-bar noprint" style="width:100%">
+                            <table class="table-sm pasconcept-bar noprint" style="width: 100%">
                                 <tr>
                                     <td style="width: 550px; text-align: right">
                                         <asp:LinkButton ID="btnListFiles" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Table view" OnClick="btnListFiles_Click">
@@ -766,26 +869,29 @@
                                                 </tr>
                                             </table>
                                             <div class="uploadfiles-canvas">
-                                               <%-- <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" OnFileUploaded="RadCloudUpload1_FileUploaded" CssClass="fileUploadRad" DropZones=".uploadfiles-canvas,#UploadPanel" ProviderType="Azure" MaxFileSize="1048576" >
+                                                <%-- <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" OnFileUploaded="RadCloudUpload1_FileUploaded" CssClass="fileUploadRad" DropZones=".uploadfiles-canvas,#UploadPanel" ProviderType="Azure" MaxFileSize="1048576" >
                                                     <FileListPanelSettings PanelContainerSelector=".uploadfiles-canvas" />
                                                 </telerik:RadCloudUpload>
                                                 <p style="text-align:center;vertical-align:middle;padding-top:100px;font-size:36px">Upload your files</p>--%>
                                                 <p style="text-align: center; vertical-align: middle; padding-top: 150px;">
                                                     <i style="font-size: 96px" class="fas fa-cloud-upload-alt"></i>
                                                     <br />
-                                                    <span style="font-size: 36px">Drag & Drop Files here, or
+                                                    <span style="font-size: 36px">Drop Files here, or
                                                     </span>
                                                     <br />
                                                     <br />
                                                     <br />
                                                     <span style="font-size: 36px">
                                                         <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" ProviderType="Azure" MaxFileSize="1048576"
-                                                            OnFileUploaded="RadCloudUpload1_FileUploaded" 
-                                                            CssClass="fileUploadRad" 
+                                                            OnFileUploaded="RadCloudUpload1_FileUploaded"
+                                                            CssClass="fileUploadRad"
                                                             DropZones=".uploadfiles-canvas,#UploadPanel">
                                                             <Localization SelectButtonText="Select Files" />
                                                         </telerik:RadCloudUpload>
                                                     </span>
+                                                </p>
+                                                <p style="text-align: center; margin: 0">
+                                                    <asp:Label runat="server" ID="lblMaxSize" ForeColor="Gray" Font-Size="Small" Text="[Maximum upload size per file: 1MB]"></asp:Label>
                                                 </p>
 
                                             </div>
@@ -797,7 +903,7 @@
                                 <telerik:RadWizardStep runat="server" ID="RadWizardStepFiles" Title="Files" StepType="Step">
                                     <div>
                                         <asp:Panel ID="pnlFind" runat="server">
-                                            <table class="table-sm pasconcept-bar noprint" style="width:100%">
+                                            <table class="table-sm pasconcept-bar noprint" style="width: 100%">
                                                 <tr>
                                                     <td style="width: 550px; text-align: right">
                                                         <asp:LinkButton ID="btnTablePage" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Table view" OnClick="btnTablePage_Click">
@@ -846,7 +952,7 @@
                                                             <table style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                                                 <tr>
                                                                     <td style="height: 108px; padding: 0px;">
-                                                                        <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 96)%>
+                                                                        <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("guid").ToString(), Eval("Name"), 96)%>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -857,7 +963,8 @@
                                                                 <tr>
                                                                     <td style="font-size: 12px; padding: 0;">
                                                                         <%# Eval("Date", "{0:d}")%>,&nbsp;&nbsp;
-                                                                             <%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%>
+                                                                            
+                                                                        <%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -899,7 +1006,7 @@
                                                             <table style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                                                 <tr>
                                                                     <td style="height: 108px; padding: 0px;">
-                                                                        <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 96)%>
+                                                                        <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("guid").ToString(), Eval("Name"), 96)%>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -911,7 +1018,8 @@
                                                                 <tr>
                                                                     <td style="font-size: 12px; padding: 0;">
                                                                         <%# Eval("Date", "{0:d}")%>,&nbsp;&nbsp;
-                                                                         <%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%>
+                                                                        
+                                                                        <%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -949,8 +1057,9 @@
                                                     <telerik:GridTemplateColumn DataField="Name" HeaderText="FileName" UniqueName="Name" SortExpression="Name" ItemStyle-HorizontalAlign="Left"
                                                         HeaderStyle-Width="300px" HeaderStyle-HorizontalAlign="Left">
                                                         <ItemTemplate>
-                                                            <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 16)%>
+                                                            <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("guid").ToString(), Eval("Name"), 16)%>
                                                             &nbsp;&nbsp;
+                                                           
                                                             <%# Eval("Name")%>
                                                         </ItemTemplate>
                                                     </telerik:GridTemplateColumn>
@@ -1028,48 +1137,50 @@
                     </div>
                 </telerik:RadWizardStep>
                 <%--Phases--%>
-                <telerik:RadWizardStep runat="server" ID="RadWizardStep22" Title="Phases" StepType="Step">
+                <telerik:RadWizardStep runat="server" ID="RadWizardStepPhases" Title="Phases" StepType="Step">
                     <div style="width: 100%; padding-left: 18px; padding-top: 12px">
-                        <asp:LinkButton ID="btnNewPhase" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add Phase">
-                                   <i class="fas fa-plus"></i> Phase
+                        <asp:LinkButton ID="btnNewPhase" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Phase for Proposal">
+                                   Add Phase
                         </asp:LinkButton>
 
                         &nbsp;&nbsp;&nbsp;
-                        <asp:LinkButton ID="btnPivotPhases" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Add Phase">
-                                   <i class="fas fa-plus"></i> Project Phases
+                       
+                        <asp:LinkButton ID="btnPivotPhases" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false">
+                                   Pivot Phases View
                         </asp:LinkButton>
                     </div>
                     <div style="padding-top: 12px; padding-left: 18px; padding-bottom: 10px">
                         <telerik:RadGrid ID="RadGridPhases" runat="server" DataSourceID="SqlDataSourcePhases" GridLines="None" AllowAutomaticDeletes="true"
-                            AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true"
+                            AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true" HeaderStyle-HorizontalAlign="Center"
                             HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                             <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePhases">
                                 <PagerStyle Mode="Slider" AlwaysVisible="false" />
                                 <BatchEditingSettings EditType="Cell" />
                                 <CommandItemSettings ShowAddNewRecordButton="false" />
                                 <Columns>
-                                    <telerik:GridTemplateColumn DataField="Code" HeaderStyle-Width="100px"
-                                        FilterControlAltText="Filter Code column" HeaderText="Code" SortExpression="Code" UniqueName="Code" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left">
+                                    <telerik:GridBoundColumn DataField="nOrder" HeaderStyle-Width="100px" HeaderText="Order" SortExpression="nOrder" UniqueName="nOrder" ItemStyle-HorizontalAlign="Center">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridTemplateColumn DataField="Code" HeaderStyle-Width="100px" HeaderText="Code" SortExpression="Code" UniqueName="Code">
                                         <ItemTemplate>
                                             <asp:LinkButton ID="lnkPhaseEdit" runat="server" CommandName="EditPhase" CommandArgument='<%# Eval("Id") %>'
                                                 Text='<%# Eval("Code")%>' ToolTip="Click to Edit Phase"></asp:LinkButton>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
-                                    <telerik:GridBoundColumn DataField="Name"
-                                        FilterControlAltText="Filter Name column" HeaderText="Name" SortExpression="Name" UniqueName="Name" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="300px">
-                                        <ColumnValidationSettings EnableRequiredFieldValidation="true">
-                                            <RequiredFieldValidator ForeColor="Red" Text="*" Display="Dynamic">
-                                            </RequiredFieldValidator>
-                                        </ColumnValidationSettings>
+                                    <telerik:GridBoundColumn DataField="Name" HeaderText="Name" SortExpression="Name" UniqueName="Name">
                                     </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="Period" HeaderStyle-Width="180px"
-                                        FilterControlAltText="Filter Period column" HeaderText="Period" SortExpression="Period" UniqueName="Period" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left">
+                                    <telerik:GridBoundColumn DataField="Period" HeaderStyle-Width="180px" HeaderText="Period" SortExpression="Period" UniqueName="Period" ItemStyle-HorizontalAlign="Left" Display="false">
                                     </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="Task" HeaderText="Task" ReadOnly="True" SortExpression="Task" DataFormatString="{0:N0}" UniqueName="Task" Aggregate="Sum"
-                                        FooterAggregateFormatString="{0:N0}" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
+                                    <telerik:GridBoundColumn DataField="DateFrom" HeaderText="DateFrom" SortExpression="DateFrom" UniqueName="DateFrom" DataFormatString="{0:d}" HeaderStyle-Width="100px">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="DateTo" HeaderText="DateTo" SortExpression="DateTo" UniqueName="DateTo" DataFormatString="{0:d}" HeaderStyle-Width="100px">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="Progress" HeaderText="Progress" SortExpression="Progress" DataFormatString="{0:N0}" UniqueName="Progress" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="Task" HeaderText="Task" SortExpression="Task" DataFormatString="{0:N0}" UniqueName="Task" Aggregate="Sum"
+                                        FooterAggregateFormatString="{0:N0}" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
                                     </telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="Total" HeaderText="Total" ReadOnly="True" SortExpression="Total" DataFormatString="{0:N2}" UniqueName="Total" Aggregate="Sum"
-                                        FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
+                                        FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
                                     </telerik:GridBoundColumn>
                                     <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this phase?"
                                         ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
@@ -1083,7 +1194,7 @@
 
                 </telerik:RadWizardStep>
                 <%--Schedule--%>
-                <telerik:RadWizardStep runat="server" ID="RadWizardStep23" Title="Schedule" StepType="Step">
+                <telerik:RadWizardStep runat="server" ID="RadWizardStepPhaseSchedule" Title="Schedule" StepType="Step" Visible='<%#IIf(LocalAPI.GetCompanyPhasesCount(lblCompanyId.Text) > 0, True, False)%>'>
                     <div style="width: 100%; padding-left: 18px; padding-top: 12px">
                         <asp:LinkButton ID="btnSchedule" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false">
                              Project Schedule
@@ -1110,7 +1221,7 @@
                                     </telerik:GridBoundColumn>
                                     <telerik:GridTemplateColumn DataField="DateFrom" HeaderText="Date From" SortExpression="DateFrom" UniqueName="DateFrom" HeaderStyle-Width="150px" HeaderStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
-                                            <asp:Label ID="lblDateFrom" runat="server" Text='<%# Eval("DateFrom", "{0:d}")%>'></asp:Label>
+                                            <%# Eval("DateFrom", "{0:d}")%>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
 
@@ -1150,9 +1261,10 @@
                                                     Update
                                                     </asp:LinkButton>
                                                     &nbsp;&nbsp;
-                                                <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary" CommandName="Cancel" CausesValidation="False">
+                                               
+                                                    <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary" CommandName="Cancel" CausesValidation="False">
                                                     Cancel
-                                                </asp:LinkButton>
+                                                    </asp:LinkButton>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1212,16 +1324,16 @@
                     </div>
 
                 </telerik:RadWizardStep>
-                <%--Term & Conditions--%>
-                <telerik:RadWizardStep runat="server" ID="RadWizardStep24" Title="Term & Conditions" StepType="Step">
+                <%--Terms & Conditions--%>
+                <telerik:RadWizardStep runat="server" ID="RadWizardStep24" Title="Terms & Conditions" StepType="Step">
                     <table class="table-sm" style="width: 100%;">
                         <tr>
                             <td>
                                 <asp:FormView ID="FormViewTC" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourcePropTC" Width="100%" EnableViewState="false">
                                     <ItemTemplate>
                                         <div style="padding-bottom: 5px">
-                                            <asp:LinkButton ID="btnEditTyC" runat="server" CssClass="btn btn-success" UseSubmitBehavior="false" CommandName="Edit" ToolTip="Edit Term & Conditions" CausesValidation="false">
-                                                 Term & Conditions
+                                            <asp:LinkButton ID="btnEditTyC" runat="server" CssClass="btn btn-success" UseSubmitBehavior="false" CommandName="Edit" ToolTip="Edit Terms & Conditions" CausesValidation="false">
+                                                 Terms & Conditions
                                             </asp:LinkButton>
 
                                         </div>
@@ -1341,7 +1453,7 @@
                                 </telerik:RadComboBox>
                             </td>
                             <td>
-                                <asp:LinkButton ID="btnModifyJob" runat="server" CssClass="btn btn-success" Enabled="False" UseSubmitBehavior="false" ToolTip="Set Assigned Job" CausesValidation="false">
+                                <asp:LinkButton ID="btnModifyJob" runat="server" CssClass="btn btn-success" Enabled="True" UseSubmitBehavior="false" ToolTip="Set Assigned Job" CausesValidation="false">
                                      Update
                                 </asp:LinkButton>
 
@@ -1406,6 +1518,7 @@
                              Delete Proposal
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;&nbsp;
+                   
                     <asp:LinkButton ID="btnCancelDelete" runat="server" CssClass="btn btn-secondary" Width="150px" UseSubmitBehavior="false">
                              Cancel
                     </asp:LinkButton>
@@ -1442,6 +1555,7 @@
                                     <i class="fas fa-check"></i> Update
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;&nbsp;
+                   
                     <asp:LinkButton ID="btnCance" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="120px">
                                      Cancel
                     </asp:LinkButton>
@@ -1466,6 +1580,7 @@
                              Delete 
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;&nbsp;
+                   
                     <asp:LinkButton ID="btnCancelDeleteFiles" runat="server" CssClass="btn btn-secondary" Width="150px" UseSubmitBehavior="false">
                              Cancel
                     </asp:LinkButton>
@@ -1477,7 +1592,7 @@
 
     <asp:SqlDataSource ID="SqlDataSourceProp1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="PROPOSAL_SIN_TC_SELECT" SelectCommandType="StoredProcedure"
-        UpdateCommand="PROPOSAL_v20_UPDATE" UpdateCommandType="StoredProcedure">
+        UpdateCommand="PROPOSAL_v21_UPDATE" UpdateCommandType="StoredProcedure">
         <UpdateParameters>
             <asp:Parameter Name="RETURN_VALUE" Type="Int32" Direction="ReturnValue" />
             <asp:Parameter Name="ClientId" Type="Int32" />
@@ -1524,6 +1639,7 @@
             <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" Type="Int32" />
             <asp:Parameter Name="paymentscheduleId" Type="Int32" />
             <asp:Parameter Name="LumpSum" Type="Boolean" />
+            <asp:Parameter Name="EmployeeAprovedId" Type="Int32" />
             <asp:Parameter Name="Id" Type="Int32" />
         </UpdateParameters>
         <SelectParameters>
@@ -1706,18 +1822,48 @@
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
             <asp:ControlParameter ControlID="lblClientId" Name="ClientId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
-
     </asp:SqlDataSource>
+
     <asp:SqlDataSource ID="SqlDataSourcePS" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="Proposal_PaymentSchedule_SELECT" SelectCommandType="StoredProcedure"
-        UpdateCommand="Proposal_PS_v20_UPDATE" UpdateCommandType="StoredProcedure">
+        UpdateCommand="Proposal_PaymentScheduleDescription_UPDATE" UpdateCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
         <UpdateParameters>
+            <asp:Parameter Name="Description" />
+            <asp:Parameter Name="Id" Type="Int32" />
+        </UpdateParameters>
+    </asp:SqlDataSource>
+
+    <asp:SqlDataSource ID="SqlDataSourceProposalPSUpdate" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        UpdateCommand="Proposal_PS_v20_UPDATE" UpdateCommandType="StoredProcedure">
+        <UpdateParameters>
             <asp:ControlParameter ControlID="lblPaymentSchedules" Name="paymentscheduleId" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="lblProposalId" Name="Id" PropertyName="Text" Type="Int32" />
         </UpdateParameters>
+    </asp:SqlDataSource>
+
+    <asp:SqlDataSource ID="SqlDataSourceNotes" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        DeleteCommand="DELETE FROM [Proposal_notes] WHERE [Id] = @Id"
+        SelectCommand="SELECT [Proposal_notes].Id, ProposalId, Date, Note, Employees.Name as NoteBy FROM [Proposal_notes] left outer join Employees on [Proposal_notes].employeeId=Employees.Id WHERE ([ProposalId] = @ProposalId) ORDER BY [Proposal_notes].[Id] desc"
+        UpdateCommand="UPDATE [Proposal_notes] SET  [Note] = @Note WHERE [Id] = @Id"
+        InsertCommand="INSERT INTO Proposal_notes([ProposalId],[Date],[Note], [employeeId]) VALUES(@ProposalId, dbo.CurrentTime(),@Note, @employeeId)">
+        <DeleteParameters>
+            <asp:Parameter Name="Id" Type="Int32" />
+        </DeleteParameters>
+        <UpdateParameters>
+            <asp:Parameter Name="Id" Type="Int32" />
+            <asp:Parameter Name="Note" />
+        </UpdateParameters>
+        <InsertParameters>
+            <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" />
+            <asp:Parameter Name="Note" />
+            <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />
+        </InsertParameters>
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblProposalId" DefaultValue="0" Name="ProposalId" PropertyName="Text" Type="Int32" />
+        </SelectParameters>
     </asp:SqlDataSource>
 
     <telerik:RadButton ID="btnDataProcecing" runat="server" Text="Processing" OnClientClicked="DataProcessing" AutoPostBack="false" UseSubmitBehavior="false" CausesValidation="false" Width="120px" Visible="false">

@@ -32,7 +32,7 @@
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
@@ -65,8 +65,10 @@
                                 <telerik:RadComboBoxItem Text="Last 120 days" Value="120" />
                                 <telerik:RadComboBoxItem Text="Last 180 days" Value="180" />
                                 <telerik:RadComboBoxItem Text="Last 365 days" Value="365" />
-                                <telerik:RadComboBoxItem Text="(This year...)" Value="14" />
-                                <telerik:RadComboBoxItem Text="(Last year...)" Value="15" />
+                                <telerik:RadComboBoxItem Text="This year" Value="14" />
+                                <telerik:RadComboBoxItem Text="This month" Value="16" />
+                                <telerik:RadComboBoxItem Text="Last year" Value="15" />
+                                <telerik:RadComboBoxItem Text="Last month" Value="17" />
                                 <telerik:RadComboBoxItem Text="(All years...)" Value="13" />
                                 <telerik:RadComboBoxItem Text="Custom Range..." Value="99" />
                             </Items>
@@ -264,8 +266,7 @@
                     <telerik:GridTemplateColumn DataField="nStatus" HeaderText="Status" SortExpression="nStatus" ReadOnly="true"
                         UniqueName="nStatus" ItemStyle-HorizontalAlign="Center" AllowFiltering="true" HeaderStyle-Width="150px">
                         <ItemTemplate>
-                            <div style="font-size: 12px; width: 100%"
-                                class='<%# LocalAPI.GetTransmittalStatusLabelCSS(Eval("Status")) %>'>
+                            <div style="font-size: 12px; width: 100%" class='<%# LocalAPI.GetTransmittalStatusLabelCSS(Eval("Status")) %>'>
                                 <%# Eval("nStatus") %>
                             </div>
                         </ItemTemplate>
@@ -285,24 +286,16 @@
                             <%# Eval("RecordBy_Code")%>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn HeaderText="Insights" UniqueName="Insights" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center">
+                    <telerik:GridTemplateColumn HeaderText="Insights" UniqueName="Insights" HeaderStyle-Width="140px" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
-                            <div>
-                                
-                                <span title="Number of Packages" class="badge badge-pill badge-light" style='<%# IIf(Eval("PackageContent")=0,"display:none","display:normal")%>'>
-                                    <%#Eval("PackageContent")%>
-                                </span>
-                                <span title="Package Signed And Sealed Items" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("PackageContent")=0,"display:none","display:normal")%>'>
-                                    <%#Eval("SignedAndSealed")%>
-                                </span>
-                                <span title="Digital Package Items" class="badge badge-pill badge-dark" style='<%# IIf(Eval("DigitalPackage")=0,"display:none","display:normal")%>'>
-                                    <%#Eval("DigitalPackage")%>
-                                </span>
-                                <span title="Number of times the Client has visited the your Transmittal Page" class="badge badge-pill badge-warning">
-                                    <%#Eval("clientvisits")%>
-                                </span>
-
-                            </div>
+                            <table style="width: 100%">
+                                <tr>
+                                    <td style="text-align: center; width: 30px"><span title="Number of Packages" class="badge badge-pill badge-light"><%#Eval("PackageContent")%></span></td>
+                                    <td style="text-align: center; width: 30px"><span title="Package Signed And Sealed Items" class="badge badge-pill badge-secondary"><%#Eval("SignedAndSealed")%></span></td>
+                                    <td style="text-align: center; width: 30px"><span title="Digital Package Items" class="badge badge-pill badge-dark"><%#Eval("DigitalPackage")%></span></td>
+                                    <td style="text-align: center;"><span title="Number of times the Client has visited the your Transmittal Page" class="badge badge-pill badge-warning"><%#Eval("clientvisits")%></span></td>
+                                </tr>
+                            </table>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <%-- <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
@@ -338,7 +331,7 @@
                                     </asp:LinkButton>
                                     &nbsp;&nbsp;&nbsp;
                                             <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" CausesValidation="False" CommandName="Cancel">
-                                                <i class="fas fa-plus"></i>&nbsp;Cancel
+                                                &nbsp;Cancel
                                             </asp:LinkButton>
                                 </td>
                             </tr>
@@ -403,9 +396,9 @@
     <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeName" runat="server" Visible="False"></asp:Label>
-    <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="120px" Culture="en-US" Visible="false">
+    <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US" Visible="false">
     </telerik:RadDatePicker>
-    <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="120px" Culture="en-US" Visible="false">
+    <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy"  Culture="en-US" Visible="false">
     </telerik:RadDatePicker>
 
 </asp:Content>

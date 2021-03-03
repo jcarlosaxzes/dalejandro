@@ -7,14 +7,25 @@ Public Class companymultiplier
 
             If Not IsPostBack() Then
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Multiplier") Then Response.RedirectPermanent("~/adm/default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Multiplier") Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
                 Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Company Multiplier"
                 Master.PageTitle = "Company/Multiplier"
                 lblCompanyId.Text = Session("companyId")
 
                 cboYear.DataBind()
-                cboYear.SelectedValue = Year(Now())
+                If Not Request.QueryString("year") Is Nothing Then
+                    cboYear.SelectedValue = Request.QueryString("year")
+                Else
+                    cboYear.SelectedValue = Year(Now())
+                End If
+
+                cboDepartments.DataBind()
+                If Not Request.QueryString("departmentId") Is Nothing Then
+                    cboDepartments.SelectedValue = Request.QueryString("departmentId")
+                    RadWizardStepEmployeeHourlyWage.Active = True
+                End If
+
 
                 SqlDataSourceDptoTarget.DataBind()
                 'ReadCompanyRates()
@@ -27,56 +38,17 @@ Public Class companymultiplier
 
         End Try
     End Sub
-    Protected Sub btnCalculateMultiplier_Click(sender As Object, e As EventArgs) Handles btnCalculateMultiplier.Click
-        txtMultiplierYear.Text = cboYear.SelectedValue
-        If cboYear.SelectedValue = Year(Today) Then
-            cboMonth.SelectedValue = Month(Today)
-        Else
-            cboMonth.SelectedValue = 1
-        End If
-
-        RadToolTipCalculateMultiplier.Visible = True
-        RadToolTipCalculateMultiplier.Show()
-    End Sub
 
     Private Sub btnNewMultiplier_Click(sender As Object, e As EventArgs) Handles btnNewMultiplier.Click
-        RadGridMultiplier.MasterTableView.InsertItem()
-    End Sub
-
-    Private Sub btnInitialize_Click(sender As Object, e As EventArgs) Handles btnInitialize.Click
-        txtInitializeYear.Text = cboYear.SelectedValue
-        RadToolTipInitialize.Visible = True
-        RadToolTipInitialize.Show()
-    End Sub
-
-    Private Sub btnInitializeOk_Click(sender As Object, e As EventArgs) Handles btnInitializeOk.Click
-        Try
-            SqlDataSourceEmployees.Insert()
-            cboYear.SelectedValue = txtInitializeYear.Text
-            Master.InfoMessage("Hourly Wage for Selected Year Updated for " & txtInitializeYear.Text)
-            RadGridHourlyWage.DataBind()
-        Catch ex As Exception
-
-        End Try
-    End Sub
-
-    Private Sub btnCalculateMultiplierOk_Click(sender As Object, e As EventArgs) Handles btnCalculateMultiplierOk.Click
-        If txtMultiplierYear.Text > 1999 Then
-            LocalAPI.CompanyCalculateMultiplier(lblCompanyId.Text, txtMultiplierYear.Text)
-            Dim dbMultiplier As Double = LocalAPI.GetCompanyMultiplier(lblCompanyId.Text, cboYear.SelectedValue)
-            LocalAPI.DeparmentBudgetByBaseSalaryForMultiplierFromThisMonth(lblCompanyId.Text, dbMultiplier, cboYear.SelectedValue, cboMonth.SelectedValue)
-            RadGridMultiplier.DataBind()
-            RadGridDptoTarget.DataBind()
-            Master.InfoMessage("Multiplier Updated for " & txtMultiplierYear.Text)
-        Else
-            Master.ErrorMessage("Define Year before Calculate")
-        End If
+        '!!!RadGridMultiplier.MasterTableView.InsertItem()
+        Response.Redirect("~/adm/multiplierwizard.aspx")
     End Sub
 
     Private Sub RadGridHourlyWage_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridHourlyWage.ItemCommand
         Select Case e.CommandName
             Case "EditHourlyWage"
-                CreateRadWindows(e.CommandName, "~/ADM/Employee_HourlyWageHistory.aspx?employeeId=" & e.CommandArgument & "&year=" & cboYear.SelectedValue, 850, 700, "OnClientClose")
+                Dim guid As String = LocalAPI.GetEmployeeProperty(e.CommandArgument, "guid")
+                Response.Redirect($"~/adm/employeehourlywage.aspx?guid={guid}&year={cboYear.SelectedValue}&departmentId={cboDepartments.SelectedValue}&backpage=companymultiplier")
         End Select
 
     End Sub
@@ -99,7 +71,8 @@ Public Class companymultiplier
     Private Sub RadGridMonthlySalaryCalculation_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridMonthlySalaryCalculation.ItemCommand
         Select Case e.CommandName
             Case "EditHourlyWage"
-                CreateRadWindows(e.CommandName, "~/ADM/Employee_HourlyWageHistory.aspx?employeeId=" & e.CommandArgument & "&year=" & cboYear.SelectedValue, 850, 700, "OnClientClose1")
+                Dim guid As String = LocalAPI.GetEmployeeProperty(e.CommandArgument, "guid")
+                Response.Redirect($"~/adm/employeehourlywage.aspx?guid={guid}&year={cboYear.SelectedValue}&departmentId={cboDepartments.SelectedValue}")
         End Select
     End Sub
 
@@ -107,9 +80,21 @@ Public Class companymultiplier
         RadGridMultiplier.DataBind()
         RadGridDptoTarget.DataBind()
         RadGridHourlyWage.DataBind()
+        RadGridMonthlySalaryCalculation.DataBind()
     End Sub
 
     Private Sub btnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
         Refresh()
+    End Sub
+
+    Private Sub RadGridMultiplier_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridMultiplier.ItemCommand
+        Select Case e.CommandName
+            Case "EditMultiplier"
+                Response.Redirect($"~/adm/multiplierwizard.aspx?Id={e.CommandArgument}")
+        End Select
+
+
+
+
     End Sub
 End Class

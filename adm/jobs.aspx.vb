@@ -6,27 +6,22 @@ Public Class jobs
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
 
-            Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Jobs List"
+            Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Jobs"
             If (Not Page.IsPostBack) Then
 
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_JobsList") Then Response.RedirectPermanent("~/adm/default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_JobsList") Then Response.RedirectPermanent("~/adm/schedule.aspx")
                 btnNew.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewJob")
 
                 btnPrivate.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_PrivateMode")
                 spanViewSummary.Visible = btnPrivate.Visible
+                btnExport.Visible = btnPrivate.Visible
 
                 Master.PageTitle = "Jobs/Jobs List"
                 Master.Help = "http://blog.pasconcept.com/2012/04/jobs-jobs-listhome-page.html"
                 lblEmployee.Text = Master.UserEmail
                 lblCompanyId.Text = Session("companyId")
                 lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployee.Text, lblCompanyId.Text)
-
-                LocalAPI.RefreshYearsList()
-
-                cboPeriod.DataBind()
-                cboPeriod.SelectedValue = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "FilterJob_Month")
-                IniciaPeriodo(cboPeriod.SelectedValue)
 
                 cboEmployee.DataBind()
                 If Len(Session("Employee")) Then
@@ -48,19 +43,21 @@ Public Class jobs
                     btnPasteF.Enabled = False
                 End If
 
-                ShowCheckedOneItem(lblDepartmentIdIN_List, cboDepartments)
+
 
                 If Not Request.QueryString("restoreFilter") Is Nothing Then
                     RestoreFilter()
+                Else
+                    DefaultUserAccountFilters()
+                    ShowCheckedOneItem(lblDepartmentIdIN_List, cboDepartments)
                 End If
-
-                If Not Request.QueryString("JobIdInput") Is Nothing Then
-                    lblJobIdInput.Text = Request.QueryString("JobIdInput")
-                End If
+                IniciaPeriodo(cboPeriod.SelectedValue)
 
                 EEGvertical()
 
                 RadGrid1.DataBind()
+
+                SaveFilter()
             End If
 
             'If RadWindowManagerJob.Windows.Count > 0 Then
@@ -73,25 +70,18 @@ Public Class jobs
         End Try
     End Sub
 
+    Private Sub DefaultUserAccountFilters()
+        cboPeriod.DataBind()
+        cboPeriod.SelectedValue = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "FilterJob_Month")
+        If Not Request.QueryString("JobIdInput") Is Nothing Then
+            lblJobIdInput.Text = Request.QueryString("JobIdInput")
+        End If
+    End Sub
     Private Sub EEGvertical()
         If lblCompanyId.Text = 260962 Then
             panelSubbar.Visible = True
         End If
 
-    End Sub
-
-
-    Private Sub jobs_PreRender(sender As Object, e As EventArgs) Handles Me.PreRender
-        If lblJobIdInput.Text > 0 Then
-            Dim sUrl As String
-            If LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_InvoicesList") Then
-                sUrl = "~/adm/Job_accounting.aspx?JobId=" & lblJobIdInput.Text
-            Else
-                sUrl = "~/adm/Job_job.aspx?JobId=" & lblJobIdInput.Text
-            End If
-            lblJobIdInput.Text = "0"
-            CreateRadWindows("Job", sUrl, 960, 820, True, True)
-        End If
     End Sub
 
     Private Sub IniciaPeriodo(nPeriodo As Integer)
@@ -104,6 +94,14 @@ Public Class jobs
             Case 15  ' (Last Years)
                 RadDatePickerFrom.DbSelectedDate = "01/01/" & Today.Year - 1
                 RadDatePickerTo.DbSelectedDate = "12/31/" & Today.Year - 1
+
+            Case 16  ' (This Month)
+                RadDatePickerFrom.DbSelectedDate = Today.Month & "/01/" & Today.Year
+                RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Day, -1, DateAdd(DateInterval.Month, 1, RadDatePickerFrom.DbSelectedDate))
+            Case 17  ' (Past Month)
+                RadDatePickerFrom.DbSelectedDate = Today.Month & "/01/" & Today.Year
+                RadDatePickerFrom.DbSelectedDate = DateAdd(DateInterval.Month, -1, RadDatePickerFrom.DbSelectedDate)
+                RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Day, -1, DateAdd(DateInterval.Month, 1, RadDatePickerFrom.DbSelectedDate))
 
             Case 30, 60, 90, 120, 180, 365 '   days....
                 RadDatePickerTo.DbSelectedDate = Date.Today
@@ -147,7 +145,6 @@ Public Class jobs
     End Sub
 
     Protected Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
-        SaveFilter()
         Refresh()
     End Sub
 
@@ -160,6 +157,7 @@ Public Class jobs
             ShowCheckedOneItemByText(lblTagIN_List, cboFilterTags)
 
             RadGrid1.DataBind()
+            SaveFilter()
 
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)
@@ -168,11 +166,13 @@ Public Class jobs
     End Sub
 
     Private Sub SaveFilter()
+        Session("Filter_Jpbs_cboPeriod") = cboPeriod.SelectedValue
         Session("Filter_Jpbs_RadDatePickerFrom") = RadDatePickerFrom.SelectedDate
         Session("Filter_Jpbs_RadDatePickerTo") = RadDatePickerTo.SelectedDate
         Session("Filter_Jpbs_cboEmployee") = cboEmployee.SelectedValue
         Session("Filter_Jpbs_cboStatus") = cboStatus.SelectedValue
         Session("Filter_Jpbs_cboClients") = cboClients.SelectedValue
+        ShowCheckedOneItem(lblDepartmentIdIN_List, cboDepartments)
         Session("Filter_Jpbs_lblDepartmentIdIN_List") = lblDepartmentIdIN_List.Text
         Session("Filter_Jpbs_cboJobType") = cboJobType.SelectedValue
         Session("Filter_Jpbs_lblExcludeClientId_List") = lblExcludeClientId_List.Text
@@ -183,20 +183,52 @@ Public Class jobs
 
     Private Sub RestoreFilter()
         Try
+            cboPeriod.DataBind()
+            cboPeriod.SelectedValue = Session("Filter_Jpbs_cboPeriod")
             RadDatePickerFrom.SelectedDate = Convert.ToDateTime(Session("Filter_Jpbs_RadDatePickerFrom"))
             RadDatePickerTo.SelectedDate = Convert.ToDateTime(Session("Filter_Jpbs_RadDatePickerTo"))
             cboEmployee.SelectedValue = Session("Filter_Jpbs_cboEmployee")
+            cboStatus.DataBind()
             cboStatus.SelectedValue = Session("Filter_Jpbs_cboStatus")
+            cboClients.DataBind()
             cboClients.SelectedValue = Session("Filter_Jpbs_cboClients")
             lblDepartmentIdIN_List.Text = Session("Filter_Jpbs_lblDepartmentIdIN_List")
+            SetCheckedOneItem(lblDepartmentIdIN_List, cboDepartments)
+            cboJobType.DataBind()
             cboJobType.SelectedValue = Session("Filter_Jpbs_cboJobType")
             lblExcludeClientId_List.Text = Session("Filter_Jpbs_lblExcludeClientId_List")
+            cboBalanceStatus.DataBind()
             cboBalanceStatus.SelectedValue = Session("Filter_Jpbs_cboBalanceStatus")
             lblTagIN_List.Text = Session("Filter_Jpbs_lblTagIN_List")
             txtFind.Text = Session("Filter_Jpbs_txtFind")
+
         Catch ex As Exception
+            Dim e1 As String = ex.Message
         End Try
     End Sub
+
+    Private Sub SetCheckedOneItem(LabelIN_List As Label, Combo1 As RadComboBox)
+        Try
+            If Len(LabelIN_List.Text) > 0 Then
+                Dim sArrValues As String() = Split(LabelIN_List.Text, ",")
+                Dim nValues As Integer = sArrValues.Length
+                Dim collection As IList(Of RadComboBoxItem) = Combo1.Items
+                If (collection.Count <> 0) Then
+                    For Each item As RadComboBoxItem In collection
+                        For i = 0 To nValues - 1
+                            If item.Value = sArrValues(i) Then
+                                item.Checked = True
+                                Exit For
+                            End If
+                        Next
+                    Next
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
     'Protected Sub RadGrid1_BatchEditCommand(sender As Object, e As Telerik.Web.UI.GridBatchEditingEventArgs) Handles RadGrid1.BatchEditCommand
     '    For Each command As GridBatchEditingCommand In e.Commands
     '        If command.Type = GridBatchEditingCommandType.Update Then
@@ -288,20 +320,6 @@ Public Class jobs
         End If
     End Sub
 
-    Public Function GetBudgetUsedCss(ByVal dPercent As Double) As String
-        If dPercent < 25 Then
-            Return "GreenYellowProgressBar"
-        ElseIf dPercent < 50 Then
-            Return "GreenProgressBar"
-        ElseIf dPercent < 75 Then
-            Return "OrangeProgressBar" 'System.Drawing.Color.Orange
-        ElseIf dPercent < 100 Then
-            Return "OrangeRedProgressBar" 'System.Drawing.Color.OrangeRed
-        Else
-            Return "RedProgressBar" 'System.Drawing.Color.DarkRed
-        End If
-    End Function
-
     Public Function GetCollectedPercent(ByVal dBudget As Double, dCollected As Double) As Double
         Dim dPercent As Double
         If dBudget > 0 Then
@@ -348,10 +366,15 @@ Public Class jobs
     End Function
 
     Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
-        Dim sUrl As String = ""
+
         Select Case e.CommandName
-            Case "View/Edit Info", "View/Edit Billing", "View/Edit Client Profile", "View/Edit Employees", "View/Edit Proposal(s)", "View/Edit Expenses", "View/Edit Notes", "View/Edit Time Entries", "View/Edit Files", "View Schedule", "View/Edit Revisions", "View/Edit Transmittals", "Update Status", "Add Time"
+            Case "View/Edit Info", "View/Edit Billing", "View/Edit Client Profile", "View/Edit Employees", "View/Edit Proposal(s)", "View/Edit Expenses", "View/Edit Notes", "View/Edit Time Entries", "View/Edit Files", "View Schedule", "View/Edit Revisions", "View/Edit Tickets", "View/Edit Transmittals", "Update Status", "Add Time"
                 FireJobCommand(e.CommandName, e.CommandArgument)
+            Case "AddCalendar"
+                Response.Redirect($"~/adm/appointment?Id=&EntityType=Job&EntityId={e.CommandArgument}&backpage=Jobs")
+
+            Case "AddNotifications"
+                Response.Redirect($"~/adm/notificationsnew.aspx?AppointmentId=&EntityType=Job&EntityId={e.CommandArgument}&backpage=Jobs")
 
             Case "Hide Client"
                 Dim ClientId As Integer = e.CommandArgument
@@ -361,6 +384,11 @@ Public Class jobs
                     Refresh()
                 End If
 
+            Case "AddActivity"
+                lblSelectedJobId.Text = e.CommandArgument
+                lblSelectedClientId.Text = LocalAPI.GetJobProperty(lblSelectedJobId.Text, "Client")
+                NewClientActivityDlg(True)
+
         End Select
     End Sub
 
@@ -369,52 +397,55 @@ Public Class jobs
             Dim sUrl As String
             Select Case CommandName
                 Case "View/Edit Info"
-                    sUrl = "~/ADM/Job_job.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, True)
+                    sUrl = LocalAPI.GetSharedLink_URL(8001, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Billing"
-                    sUrl = "~/ADM/Job_accounting.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, True)
+                    sUrl = LocalAPI.GetSharedLink_URL(8002, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Employees"
-                    sUrl = "~/ADM/Job_employees.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, True)
+                    sUrl = LocalAPI.GetSharedLink_URL(8003, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Proposal(s)"
-                    sUrl = "~/ADM/job_proposals.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8004, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Expenses"
-                    sUrl = "~/ADM/job_rfps.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8005, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Notes"
-                    sUrl = "~/ADM/Job_notes.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8006, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Time Entries"
-                    sUrl = "~/ADM/Job_times.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8007, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Files"
-                    sUrl = "~/ADM/Job_links.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8008, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View Schedule"
-                    sUrl = "~/ADM/job_schedule.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8009, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Revisions"
-                    sUrl = "~/ADM/job_reviews.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8010, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
+
+                Case "View/Edit Tickets"
+                    Response.Redirect($"~/adm/JobTickets.aspx?JobId={JobId}")
 
                 Case "View/Edit Tags"
-                    sUrl = "~/ADM/Job_tags.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8011, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Transmittals"
-                    sUrl = "~/ADM/job_transmittals.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8012, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "Update Status"
                     lblSelectedJobId.Text = JobId
@@ -424,7 +455,7 @@ Public Class jobs
 
                 Case "View/Edit Client Profile"
                     Dim ClientId As Integer = LocalAPI.GetJobProperty(JobId, "Client")
-                    sUrl = "~/ADM/Client.aspx?clientId=" & ClientId
+                    sUrl = $"~/ADM/Client.aspx?clientId={ClientId}&Dialog=1"
                     CreateRadWindows(CommandName, sUrl, 970, 750, False, False)
 
                 Case "Job Print View"
@@ -444,8 +475,11 @@ Public Class jobs
                     If cboEmployee.SelectedValue > 0 Then
                         Session("employeefortime") = cboEmployee.SelectedValue
                     End If
-                    sUrl = "~/ADM/EmployeeNewTime.aspx?JobId=" & JobId & "&Dialog=1"
-                    CreateRadWindows(CommandName, sUrl, 1024, 820, True, False)
+                    sUrl = "~/ADM/EmployeeNewTime.aspx?JobId=" & JobId & "&backpage=jobs"
+                    Response.Redirect(sUrl)
+
+
+
 
             End Select
         Catch ex As Exception
@@ -453,10 +487,19 @@ Public Class jobs
         End Try
     End Sub
 
+    Private Sub ConfigureExport_csv()
+        RadGridToPrint.AllowPaging = False
+        RadGridToPrint.ExportSettings.FileName = "PASConcept_Jobs_" & Format(Date.Today, "MM-dd-yyyy")
+        RadGridToPrint.ExportSettings.ExportOnlyData = True
+        RadGridToPrint.ExportSettings.IgnorePaging = True
+        RadGridToPrint.ExportSettings.OpenInNewWindow = True
+    End Sub
 
-    Protected Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
-        CopyFilterToEmployeeClipboard(lblEmployeeId.Text)
-        PrintPopUp()
+    Protected Sub btnExport_Click(sender As Object, e As EventArgs) Handles btnExport.Click
+
+        ConfigureExport_csv()
+        RadGridToPrint.MasterTableView.ExportToCSV()
+
     End Sub
 
     Private Sub PrintPopUp()
@@ -687,4 +730,44 @@ Public Class jobs
 
     End Sub
 
+    Private Sub SqlDataSourceJobs_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceJobs.Deleting
+        Try
+            Dim jobId As Integer = e.Command.Parameters("@Id").Value
+            Dim Notes As String = LocalAPI.GetJobCodeName(jobId)
+            LocalAPI.sys_log_Nuevo(Master.UserEmail, LocalAPI.sys_log_AccionENUM.DeleteProposal, lblCompanyId.Text, "Delete Job: " & Notes)
+        Catch ex As Exception
+        End Try
+    End Sub
+
+#Region "Activity"
+    Private Sub NewClientActivityDlg(bInitDlg As Boolean)
+        If bInitDlg Then
+            cboActivityEmployees.SelectedValue = lblEmployeeId.Text
+            RadDateTimePickerActivityDueDate.DbSelectedDate = DateAdd(DateInterval.Hour, 24, Now)
+            cboActivityType.SelectedValue = -1
+            lblClientName.Text = LocalAPI.GetClientProperty(lblSelectedClientId.Text, "Client")
+            txtActivitySubject.Text = ""
+        End If
+
+        RadToolTipNewActivity.Visible = True
+        RadToolTipNewActivity.Show()
+    End Sub
+
+    Private Sub btnAddActivity_Click(sender As Object, e As EventArgs) Handles btnAddActivity.Click
+        Try
+            ' Insert new Activity
+            Dim EndDate As DateTime = DateAdd(DateInterval.Minute, CInt(cboActivityDuration.SelectedValue), RadDateTimePickerActivityDueDate.DbSelectedDate)
+            Dim ActivityId As Integer = LocalAPI.Activity_INSERT(txtActivitySubject.Text, RadDateTimePickerActivityDueDate.DbSelectedDate, EndDate, cboActivityType.SelectedValue, cboActivityEmployees.SelectedValue, lblSelectedClientId.Text, 0, 0, lblSelectedJobId.Text, lblCompanyId.Text, 1, txtActivityDescription.Text)
+            If chkMoreOptions.Checked Then
+                Response.Redirect($"~/adm/appointment?Id={ActivityId}&EntityType=Jobs&EntityId={lblSelectedJobId.Text}&backpage=Jobs")
+            Else
+                Master.InfoMessage("The Activity was inserted successfully!")
+            End If
+
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
+    End Sub
+
+#End Region
 End Class

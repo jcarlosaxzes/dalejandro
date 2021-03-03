@@ -1,27 +1,51 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="schedule.aspx.vb" Inherits="pasconcept20.schedule" %>
+﻿<%@ Page Title="Activity Calendar" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="schedule.aspx.vb" Inherits="pasconcept20.schedule" %>
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
+<%@ Import Namespace="pasconcept20" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+
+    <%-- <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadScheduler1">
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadScheduler1" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
                     <telerik:AjaxUpdatedControl ControlID="RadToolTipSend"></telerik:AjaxUpdatedControl>
+                    <telerik:AjaxUpdatedControl ControlID="RadGridPending"></telerik:AjaxUpdatedControl>
                 </UpdatedControls>
             </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="btnCRM">
+            <telerik:AjaxSetting AjaxControlID="RadGridPending">
                 <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadToolTipCRM" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
+                    <telerik:AjaxUpdatedControl ControlID="RadGridPending" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
+                    <telerik:AjaxUpdatedControl ControlID="RadScheduler1"></telerik:AjaxUpdatedControl>
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+            <telerik:AjaxSetting AjaxControlID="btnRefresh">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadScheduler1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadGridPending"></telerik:AjaxUpdatedControl>
+                    <telerik:AjaxUpdatedControl ControlID="cboEmployee"></telerik:AjaxUpdatedControl>
+                    <telerik:AjaxUpdatedControl ControlID="lblTitle"></telerik:AjaxUpdatedControl>
                 </UpdatedControls>
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server">
-    </telerik:RadAjaxLoadingPanel>
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" EnableEmbeddedSkins="false">
+    </telerik:RadAjaxLoadingPanel>--%>
+
+
+    <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
+        <script type="text/javascript">
+            function RedirectPage(url) {
+                window.location = url;
+            }
+        </script>
+    </telerik:RadCodeBlock>
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
+    </telerik:RadWindowManager>
 
     <div class="pasconcept-bar noprint">
-        <span class="pasconcept-pagetitle">Calendar</span>
+        <span class="pasconcept-pagetitle">Activity Calendar</span>
 
         <span style="float: right; vertical-align: middle;">
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
@@ -31,11 +55,11 @@
             <asp:LinkButton ID="btnOutlook" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
                         <i class="far fa-calendar-alt"></i>&nbsp; Export to Outlook
             </asp:LinkButton>
-            <asp:LinkButton ID="btnPDF" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
+            <asp:LinkButton ID="btnPDF" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" Visible="false">
                         Export to PDF
             </asp:LinkButton>
 
-            <asp:LinkButton ID="btnCRM" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Insert a record of client activity (phone call, meeting, quote, ...)">
+            <asp:LinkButton ID="btnAddEvent" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add new Activity">
                             Add Activity
             </asp:LinkButton>
         </span>
@@ -47,24 +71,29 @@
         <asp:Panel ID="pnlFind" runat="server" class="pasconcept-bar" DefaultButton="btnRefresh">
             <table class="table-sm" style="width: 100%">
                 <tr>
-                    <td>
+                    <td style="width: 300px">
+                        <telerik:RadComboBox ID="cboEmployee" runat="server" DropDownAutoWidth="Enabled"
+                            DataSourceID="SqlDataSourceEmployees" DataTextField="Name" DataValueField="Id" MarkFirstMatch="true" Filter="Contains"
+                            Width="100%" Height="300px" AppendDataBoundItems="true">
+                                <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(All Employees...)" Value="0" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td style="width: 300px">
+                        <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient" DropDownAutoWidth="Enabled"
+                            DataTextField="Name" DataValueField="Id" Width="100%" MarkFirstMatch="True"
+                            Filter="Contains" Height="300px" EmptyMessage="(All Clients...)">
+                        </telerik:RadComboBox>
+                    </td>
+                    <td style="width: 300px;">
                         <telerik:RadComboBox ID="cboJob" runat="server" DataSourceID="SqlDataSourceJob" DropDownAutoWidth="Enabled"
-                            DataTextField="JobName" DataValueField="Id" Width="250px" MarkFirstMatch="True" Filter="Contains"
+                            DataTextField="JobName" DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains"
                             Height="300px" EmptyMessage="(All Jobs...)">
                         </telerik:RadComboBox>
-                        &nbsp;
-                                <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient" DropDownAutoWidth="Enabled"
-                                    DataTextField="Name" DataValueField="Id" Width="250px" MarkFirstMatch="True"
-                                    Filter="Contains" Height="300px" EmptyMessage="(All Clients...)">
-                                </telerik:RadComboBox>
-                        &nbsp;
-                                <telerik:RadComboBox ID="cboEmployee" runat="server" DropDownAutoWidth="Enabled"
-                                    DataSourceID="SqlDataSourceEmployees" DataTextField="Name" DataValueField="Id" MarkFirstMatch="true" Filter="Contains"
-                                    Width="250px" Height="300px" EmptyMessage="(All calendar...)">
-                                </telerik:RadComboBox>
 
                     </td>
-                    <td style="width: 150px; text-align:right">
+                    <td style="text-align: right">
                         <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                     <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
@@ -76,196 +105,225 @@
 
     </div>
 
+    <table class="table-sm" style="width: 100%; padding-top: 5px">
+        <tr>
+            <td style="width: 35%; vertical-align: top">
+                Pending Activities for <asp:Label ID="lblTitle" runat="server" Font-Bold="true" Text="all employees"></asp:Label>
+                <div style="margin-top: 10px">
+                    <telerik:RadGrid ID="RadGridPending" runat="server" DataSourceID="SqlDataSourcePending" AutoGenerateColumns="False" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" RenderMode="Lightweight" Width="100%" Skin="Material" ShowHeader="false">
+                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePending">
+                            <NoRecordsTemplate>
+                                No Pending Activities for Records
+                            </NoRecordsTemplate>
+                            <Columns>
+                                <telerik:GridBoundColumn DataField="Id" Display="False" UniqueName="Id" HeaderStyle-Width="50px">
+                                </telerik:GridBoundColumn>
+
+                                <telerik:GridTemplateColumn UniqueName="Subject">
+                                    <ItemTemplate>
+                                        <div style="font-weight: bold">
+                                            <asp:Label ID="lblEmployeeName" runat="server" Text='<%# Eval("DueDate", "{0:d}") %>' ForeColor='<%# GetDueDateColor(Eval("DueDate")) %>'></asp:Label>
+                                            - <%# Eval("ActivityType") %> - <%# Eval("Subject") %>
+                                        </div>
+                                        <div>
+                                            <%# Eval("EmployeeName") %>,
+                                            <asp:HyperLink ID="InitialsLabel" runat="server" NavigateUrl="javascript:void(0);"><%# Eval("ClientandCompany") %></asp:HyperLink>
+                                            <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="InitialsLabel" RelativeTo="Element"
+                                                RenderMode="Lightweight" EnableViewState="true" ShowCallout="false" RenderInPageRoot="true"
+                                                Position="BottomCenter" Modal="True" Title="" ShowEvent="OnClick"
+                                                HideDelay="300" HideEvent="ManualClose" IgnoreAltAttribute="true">
+                                                <table class="table-sm">
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <asp:LinkButton ID="btnEditCli" runat="server" CommandArgument='<%# Eval("clientId") %>'
+                                                                CommandName="EditClient" Text='<%# Eval("ClientName")%>' UseSubmitBehavior="false" Font-Size="Medium"
+                                                                CssClass="badge badge-info ">
+                                                            </asp:LinkButton>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2" style="margin-top: 10px">
+                                                            <%# Eval("Company") %>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 60px">Phone:
+                                                        </td>
+                                                        <td>
+                                                            <telerik:RadMaskedTextBox ID="PhoneTextBox" runat="server" ReadOnly="true"
+                                                                Text='<%# LocalAPI.GetClientProperty(Eval("ClientId"), "Phone")%>' Mask="(###) ###-####" BorderStyle="None" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Cellular:
+                                                        </td>
+                                                        <td>
+                                                            <telerik:RadMaskedTextBox ID="RadMaskedTextBox1" runat="server" ReadOnly="true"
+                                                                Text='<%# LocalAPI.GetClientProperty(Eval("ClientId"), "Cellular")%>' Mask="(###) ###-####" BorderStyle="None" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Email:
+                                                        </td>
+                                                        <td>
+                                                            <a href='<%#String.Concat("mailto:", Eval("Email")) %>' title="Mail to"><%#Eval("Email") %></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </telerik:RadToolTip>
+
+                                        </div>
+                                        <div>
+                                            <a href='<%# LocalAPI.GetSharedLink_URL(Eval("SharedLink_URLId"), Eval("AdditionalEntityId")) %>' target="_blank">
+                                                <%# Eval("AdditionalEntityName") %>
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <%# Eval("Description") %>
+                                        </div>
+                                        <div>
+                                    </ItemTemplate>
+                                </telerik:GridTemplateColumn>
+
+
+                                <telerik:GridTemplateColumn HeaderText="" UniqueName="EditActivity" HeaderStyle-Width="32px" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="LinkButton2" runat="server" UseSubmitBehavior="false" CommandName="EditActivity" CommandArgument='<%# Eval("Id")%>' ToolTip="Edit Activity">
+                                            <i style="color:dimgray" class="fas fa-pencil-alt"></i>
+                                        </asp:LinkButton>
+                                    </ItemTemplate>
+                                </telerik:GridTemplateColumn>
+
+                                <telerik:GridTemplateColumn HeaderText="" UniqueName="Complete" HeaderStyle-Width="32px" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="LinkButton1" runat="server" UseSubmitBehavior="false" CommandName="Complete" CommandArgument='<%# Eval("Id")%>' ToolTip="Complete this Activity">
+                                            <i style="color:dimgray" class="fas fa-check"></i>
+                                        </asp:LinkButton>
+                                    </ItemTemplate>
+                                </telerik:GridTemplateColumn>
+
+                            </Columns>
+                        </MasterTableView>
+                    </telerik:RadGrid>
+                </div>
+            </td>
+
+            <td style="vertical-align: top">
+                <telerik:RadScheduler ID="RadScheduler1" runat="server" Culture="en-US" RenderMode="Auto" OverflowBehavior="Auto"
+                    DataDescriptionField="Description" Skin="Material"
+                    DataEndField="End"
+                    DataKeyField="Id"
+                    Font-Size="Smaller"
+                    DataRecurrenceField="RecurrenceRule"
+                    DataRecurrenceParentKeyField="RecurrenceParentID"
+                    DataReminderField="Reminder"
+                    DataSourceID="SqlDataSourceAppointments"
+                    DataStartField="Start"
+                    DataSubjectField="Subject"
+                    DayEndTime="21:00:00"
+                    EditFormDateFormat="MM/dd/yyyy"
+                    Height="700px"
+                    WorkDayEndTime="23:59:59"
+                    FirstDayOfWeek="Monday"
+                    LastDayOfWeek="Sunday"
+                    StartInsertingInAdvancedForm="False"
+                    StartEditingInAdvancedForm="False"
+                    CustomAttributeNames="Location"
+                    OnFormCreating="RadScheduler1_FormCreating">
+                    <ResourceTypes>
+                        <telerik:ResourceType KeyField="ID" Name="Activity Type" TextField="Name" ForeignKeyField="ActivityId" DataSourceID="SqlDataSourceType"></telerik:ResourceType>
+                        <telerik:ResourceType KeyField="ID" Name="Assign to User" TextField="Name" ForeignKeyField="EmployeeId" DataSourceID="SqlDataSourceEmployees"></telerik:ResourceType>
+                        <telerik:ResourceType KeyField="ID" Name="Client" TextField="Name" ForeignKeyField="ClientId" DataSourceID="SqlDataSourceClient"></telerik:ResourceType>
+                        <telerik:ResourceType KeyField="ID" Name="Job" TextField="JobName" ForeignKeyField="JobId" DataSourceID="SqlDataSourceJob"></telerik:ResourceType>
+                    </ResourceTypes>
+                    <ResourceStyles>
+                        <telerik:ResourceStyleMapping Type="Activity Type" Text="Appointment" ApplyCssClass="rsCategoryBlue"></telerik:ResourceStyleMapping>
+                        <telerik:ResourceStyleMapping Type="Activity Type" Text="Meeting" ApplyCssClass="rsCategoryOrange"></telerik:ResourceStyleMapping>
+                        <telerik:ResourceStyleMapping Type="Activity Type" Text="Site Visit" ApplyCssClass="rsCategoryGreen"></telerik:ResourceStyleMapping>
+                        <telerik:ResourceStyleMapping Type="Activity Type" Text="Vacation" ApplyCssClass="rsCategoryRed"></telerik:ResourceStyleMapping>
+                    </ResourceStyles>
+                    <ExportSettings FileName="SchedulerExport" OpenInNewWindow="True">
+                        <Pdf Author="PASconcept" />
+                    </ExportSettings>
+                    <AdvancedForm DateFormat="MM/dd/yyyy" Modal="true" Width="800px" EnableCustomAttributeEditing="true" EnableResourceEditing="true" />
+                    <DayView UserSelectable="True" />
+                    <WeekView UserSelectable="True" />
+                    <MonthView UserSelectable="True" MinimumRowHeight="5" />
+                    <TimelineView UserSelectable="True" />
+                    <MultiDayView UserSelectable="True" />
+                    <AgendaView UserSelectable="True" TimeColumnWidth="150px" DateColumnWidth="150px" ResourceMarkerType="Bar" />
+                    <Reminders Enabled="true"></Reminders>
+
+                </telerik:RadScheduler>
+            </td>
+
+        </tr>
+
+    </table>
+
     <div>
-        <telerik:RadScheduler ID="RadScheduler1" runat="server" Culture="en-US" RenderMode="Auto" OverflowBehavior="Auto"
-            DataDescriptionField="Description"
-            DataEndField="End"
-            DataKeyField="Id"
-            DataRecurrenceField="RecurrenceRule"
-            DataRecurrenceParentKeyField="RecurrenceParentID"
-            DataReminderField="Reminder"
-            DataSourceID="SqlDataSourceAppointments"
-            DataStartField="Start"
-            DataSubjectField="Subject"
-            DayEndTime="21:00:00"
-            EditFormDateFormat="MM/dd/yyyy"
-            Height="600px"
-            WorkDayEndTime="23:59:59"
-            FirstDayOfWeek="Monday"
-            LastDayOfWeek="Sunday"
-            StartInsertingInAdvancedForm="True"
-            CustomAttributeNames="Location">
-            <ResourceTypes>
-                <telerik:ResourceType KeyField="ID" Name="Activity Type" TextField="Name" ForeignKeyField="ActivityId" DataSourceID="SqlDataSourceType"></telerik:ResourceType>
-                <telerik:ResourceType KeyField="ID" Name="Assign to User" TextField="Name" ForeignKeyField="EmployeeId" DataSourceID="SqlDataSourceEmployees"></telerik:ResourceType>
-                <telerik:ResourceType KeyField="ID" Name="Client" TextField="Name" ForeignKeyField="ClientId" DataSourceID="SqlDataSourceClient"></telerik:ResourceType>
-                <telerik:ResourceType KeyField="ID" Name="Job" TextField="JobName" ForeignKeyField="JobId" DataSourceID="SqlDataSourceJob"></telerik:ResourceType>
-            </ResourceTypes>
-            <ResourceStyles>
-                <telerik:ResourceStyleMapping Type="Activity Type" Text="Appointment" ApplyCssClass="rsCategoryBlue"></telerik:ResourceStyleMapping>
-                <telerik:ResourceStyleMapping Type="Activity Type" Text="Meeting" ApplyCssClass="rsCategoryOrange"></telerik:ResourceStyleMapping>
-                <telerik:ResourceStyleMapping Type="Activity Type" Text="Site Visit" ApplyCssClass="rsCategoryGreen"></telerik:ResourceStyleMapping>
-                <telerik:ResourceStyleMapping Type="Activity Type" Text="Vacation" ApplyCssClass="rsCategoryRed"></telerik:ResourceStyleMapping>
-            </ResourceStyles>
-            <ExportSettings FileName="SchedulerExport" OpenInNewWindow="True">
-                <Pdf Author="PASconcept" />
-            </ExportSettings>
-            <AdvancedForm DateFormat="MM/dd/yyyy" Modal="true" Width="800px" EnableCustomAttributeEditing="true" EnableResourceEditing="true" />
-            <DayView UserSelectable="True" />
-            <WeekView UserSelectable="True" />
-            <MonthView UserSelectable="True" AdaptiveRowHeight="true" />
-            <TimelineView UserSelectable="True" />
-            <MultiDayView UserSelectable="True" />
-            <AgendaView UserSelectable="True" TimeColumnWidth="150px" DateColumnWidth="150px" ResourceMarkerType="Bar" />
-            <Reminders Enabled="true"></Reminders>
+        <telerik:RadToolTip ID="RadToolTipComplete" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
 
-        </telerik:RadScheduler>
-    </div>
-
-
-    <telerik:RadToolTip ID="RadToolTipSend" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; color: white; width: 650px">
-            <span class="navbar navbar-expand-md bg-dark text-white">Proposal Task & Share Event
-            </span>
-        </h2>
-        <asp:Panel runat="server" ID="panelProposalTask">
-            <table class="table-sm" style="width: 650px">
-
+            <table class="table-sm" style="width: 600px">
                 <tr>
-                    <td style="width: 180px">Proposal Task:
+                    <td colspan="2">
+                        <h3 style="margin: 0; text-align: center; color: white; width: 600px">
+                            <span class="navbar navbar-expand-md bg-dark text-white">Complete Activity</span>
+                        </h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <asp:Label ID="lblActivitySubject" runat="server" Visible="False"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 180px; text-align: right">Completed Date:
                     </td>
                     <td>
-                        <telerik:RadComboBox ID="cboTask" runat="server" DataSourceID="SqlDataSourceProposalTask" ZIndex="50001" Sort="Descending"
-                            DataTextField="Description" DataValueField="Id" Width="100%" CausesValidation="false">
+                        <telerik:RadDateTimePicker ID="RadDateTimePickerCompletedDate" runat="server" Width="250px" ZIndex="50001">
+                        </telerik:RadDateTimePicker>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right">Duration:
+                    </td>
+                    <td>
+                        <telerik:RadComboBox ID="cboDuration" runat="server" Width="100%" ZIndex="50001" AppendDataBoundItems="True">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="15 Mins" Value="15" />
+                                <telerik:RadComboBoxItem runat="server" Text="30 Mins" Value="30" />
+                                <telerik:RadComboBoxItem runat="server" Text="45 Mins" Value="45" />
+                                <telerik:RadComboBoxItem runat="server" Text="1 Hr" Value="60" />
+                                <telerik:RadComboBoxItem runat="server" Text="2 Hrs" Value="120" />
+                                <telerik:RadComboBoxItem runat="server" Text="4 Hrs" Value="240" />
+                                <telerik:RadComboBoxItem runat="server" Text="8 Hrs" Value="480" />
+                            </Items>
                         </telerik:RadComboBox>
                     </td>
                 </tr>
+                <tr>
+                    <td colspan="2" style="text-align: right">
+                        <br /><br />
+                        <asp:LinkButton ID="btnCompleteActivity" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ValidationGroup="vActivity">
+                                    <i class="far fa-calendar"></i>&nbsp;Complete Activity
+                        </asp:LinkButton>
+                    </td>
+                </tr>
             </table>
-        </asp:Panel>
+        </telerik:RadToolTip>
+    </div>
 
-        <table class="table-sm" style="width: 650px">
-            <tr>
-                <td style="width: 180px">Employees for notify this event:
-                </td>
-                <td>
-                    <telerik:RadComboBox ID="cboMultiEmployees" runat="server" DataSourceID="SqlDataSourceEmployees" DataTextField="Name" DataValueField="Id" ZIndex="50001"
-                        Width="100%" CheckBoxes="true" Height="200px" EnableCheckAllItemsCheckBox="false" MarkFirstMatch="True" Filter="Contains">
-                    </telerik:RadComboBox>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" style="text-align: right; padding-right: 10px; padding-top: 200px">
-                    <asp:LinkButton ID="btnSendCalendar" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                        Accept
-                    </asp:LinkButton>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                     <asp:LinkButton ID="btnCancelSendCalendar" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" CausesValidation="false">
-                                     Cancel
-                     </asp:LinkButton>
-                </td>
-
-            </tr>
-        </table>
-    </telerik:RadToolTip>
-
-    <telerik:RadToolTip ID="RadToolTipCRM" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; color: white; width: 600px">
-            <span class="navbar navbar-expand-md bg-dark text-white">New Client Activity Record
-            </span>
-        </h2>
-        <table class="table-sm" style="width: 600px">
-            <tr>
-                <td>
-                    <telerik:RadComboBox ID="cboActivityType" runat="server" DataSourceID="SqlDataSourceType" ZIndex="50001"
-                        DataTextField="Name" DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px" AppendDataBoundItems="true">
-                        <Items>
-                            <telerik:RadComboBoxItem Text="(Select Activity Type...)" Value="-1" />
-                        </Items>
-                    </telerik:RadComboBox>
-                    <asp:CompareValidator runat="server" ID="Comparevalidator2" ValueToCompare="(Select Activity Type...)" ValidationGroup="NewClientActivity"
-                        Operator="NotEqual" ControlToValidate="cboActivityType" ErrorMessage="(*) You must select activity type!">
-                    </asp:CompareValidator>
-
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <telerik:RadComboBox ID="cboClient" runat="server" DataSourceID="SqlDataSourceClients" ZIndex="50001"
-                        DataTextField="Name" DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px" AppendDataBoundItems="true">
-                        <Items>
-                            <telerik:RadComboBoxItem Text="(Select Clients...)" Value="-1" />
-                        </Items>
-                    </telerik:RadComboBox>
-                    <asp:CompareValidator runat="server" ID="Comparevalidator1" ValueToCompare="(Select Clients...)" ValidationGroup="NewClientActivity"
-                        Operator="NotEqual" ControlToValidate="cboClient" ErrorMessage="(*) You must select client!">
-                    </asp:CompareValidator>
-
-                </td>
-            </tr>
-            <tr>
-                <td style="height: 45px; vertical-align: top">
-                    <telerik:RadComboBox ID="cboEmployees" runat="server" DataSourceID="SqlDataSourceEmployees" DataTextField="Name" DataValueField="Id" ZIndex="50001"
-                        Width="100%" CheckBoxes="true" Height="300px" EnableCheckAllItemsCheckBox="true" MarkFirstMatch="True" Filter="Contains" EmptyMessage="(Select CC...)">
-                        <Localization AllItemsCheckedString="All Items Checked" CheckAllString="Check All..." ItemsCheckedString="items checked"></Localization>
-                    </telerik:RadComboBox>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <telerik:RadTextBox ID="txtSubject" runat="server" EmptyMessage="Subject" Width="100%" MaxLength="255">
-                    </telerik:RadTextBox>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtSubject" ValidationGroup="NewClientActivity"
-                        ErrorMessage="(*) Subject is required"></asp:RequiredFieldValidator>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <telerik:RadTextBox ID="txtDescription" runat="server" EmptyMessage="Description" Width="100%" MaxLength="1024" TextMode="MultiLine" Rows="6">
-                    </telerik:RadTextBox>
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: right; padding-right: 25px; padding-top: 15px">
-                    <telerik:RadButton ID="btnCRMOk" runat="server" Text="Insert" Width="125px" ValidationGroup="NewClientActivity">
-                        <Icon PrimaryIconCssClass="rbAdd" PrimaryIconLeft="4" PrimaryIconTop="4"></Icon>
-                    </telerik:RadButton>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <telerik:RadButton ID="btnCancel" runat="server" Text="Cancel" Width="125px" CausesValidation="false">
-                        <Icon PrimaryIconCssClass="rbCancel" PrimaryIconLeft="4" PrimaryIconTop="4"></Icon>
-                    </telerik:RadButton>
-                </td>
-            </tr>
-        </table>
-    </telerik:RadToolTip>
     <asp:Label runat="server" ID="AppointmentsCount" Font-Size="Small"></asp:Label>
 
     <asp:SqlDataSource ID="SqlDataSourceAppointments" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="Appointment_DELETE" DeleteCommandType="StoredProcedure"
-        InsertCommand="Appointment_INSERT" InsertCommandType="StoredProcedure"
-        UpdateCommand="Appointment_UPDATE" UpdateCommandType="StoredProcedure"
+        UpdateCommand="Appointment_DragAndDrop_UPDATE" UpdateCommandType="StoredProcedure"
         SelectCommand="Appointments_SELECT" SelectCommandType="StoredProcedure">
         <DeleteParameters>
             <asp:Parameter Name="Id" Type="Int32" />
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
         </DeleteParameters>
-        <InsertParameters>
-            <asp:Parameter Name="Subject" Type="String" />
-            <asp:Parameter Name="Description" Type="String" />
-            <asp:Parameter Name="Start" Type="DateTime" />
-            <asp:Parameter Name="End" Type="DateTime" />
-            <asp:Parameter Name="RecurrenceRule" Type="String" />
-            <asp:Parameter Name="RecurrenceParentID" Type="Int32" />
-            <asp:Parameter Name="Reminder" Type="String" />
-            <asp:Parameter Name="Annotations" />
-            <asp:Parameter Name="ActivityId" Type="Int16" />
-            <asp:Parameter Name="ClientId" Type="Int32" />
-            <asp:Parameter Name="JobId" Type="Int32" />
-            <asp:Parameter Name="EmployeeId" Type="String" />
-            <asp:Parameter Name="Location" Type="String" />
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text"
-                Type="Int32" />
-            <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
-        </InsertParameters>
         <SelectParameters>
             <asp:Parameter Name="RangeStart" Type="DateTime" DefaultValue="1900/1/1"></asp:Parameter>
             <asp:Parameter Name="RangeEnd" Type="DateTime" DefaultValue="2900/1/1"></asp:Parameter>
@@ -277,22 +335,12 @@
         </SelectParameters>
         <UpdateParameters>
             <asp:Parameter Name="RETURN_VALUE" Type="Int32" Direction="ReturnValue" />
-            <asp:Parameter Name="Subject" Type="String" />
-            <asp:Parameter Name="Description" Type="String" />
             <asp:Parameter Name="Start" Type="DateTime" />
             <asp:Parameter Name="End" Type="DateTime" />
-            <asp:Parameter Name="RecurrenceRule" Type="String" />
-            <asp:Parameter Name="RecurrenceParentID" Type="Int32" />
-            <asp:Parameter Name="Reminder" Type="String" />
-            <asp:Parameter Name="Annotations" Type="String" />
-            <asp:Parameter Name="ActivityId" Type="Int16" />
-            <asp:Parameter Name="ClientId" Type="Int32" />
-            <asp:Parameter Name="JobId" Type="Int32" />
-            <asp:Parameter Name="EmployeeId" Type="Int32" />
-            <asp:Parameter Name="Location" Type="String" />
             <asp:Parameter Name="Id" Type="Int32" />
         </UpdateParameters>
     </asp:SqlDataSource>
+
     <asp:SqlDataSource ID="SqlDataSourceEmployees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT [Id], [FullName] as Name FROM [Employees] WHERE companyId=@companyId and isnull(Inactive,0)=0 ORDER BY [Name]">
         <SelectParameters>
@@ -319,23 +367,14 @@
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
-    <asp:SqlDataSource ID="SqlDataSourceClientActivity" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        InsertCommand="Appointment_client_INSERT" InsertCommandType="StoredProcedure">
-        <InsertParameters>
-            <asp:ControlParameter ControlID="cboActivityType" Name="ActivityId" PropertyName="SelectedValue" Type="Int16" />
-            <asp:ControlParameter ControlID="cboClient" Name="ClientId" PropertyName="SelectedValue" Type="Int32" />
-            <asp:ControlParameter ControlID="txtSubject" Name="Subject" PropertyName="Text" />
-            <asp:ControlParameter ControlID="txtDescription" Name="Description" PropertyName="Text" />
-            <asp:ControlParameter ControlID="lblEmployee" Name="EmployeeId" PropertyName="Text" Type="Int32" />
+
+
+    <asp:SqlDataSource ID="SqlDataSourcePending" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="Appointments_Pending_SELECT" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="cboEmployee" Name="employeeId" PropertyName="SelectedValue" Type="Int32" DefaultValue="-1" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
-        </InsertParameters>
-    </asp:SqlDataSource>
-
-    <asp:SqlDataSource ID="SqlDataSourceProposalTask" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="ProposalTaskAppoitment_SELECT" SelectCommandType="StoredProcedure">
-        <SelectParameters>
-            <asp:ControlParameter ControlID="lblSelectedJob" Name="JobId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
 
@@ -345,6 +384,8 @@
     <asp:Label ID="lblSelectedJob" runat="server" Visible="False"></asp:Label>
 
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
-    <asp:Label ID="lblEmployee" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
+
+
 </asp:Content>
 

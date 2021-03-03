@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class employee_permissions
-    
+
     '''<summary>
     '''btnExport control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class employee_permissions
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnExport As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''cboStatus control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class employee_permissions
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboStatus As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''cboSourceRole control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class employee_permissions
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboSourceRole As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''btnApply control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class employee_permissions
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnApply As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''txtIPv4 control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class employee_permissions
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtIPv4 As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''btnApplyIPv4toRole control.
     '''</summary>
@@ -66,16 +66,7 @@ Partial Public Class employee_permissions
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnApplyIPv4toRole As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''RadCodeBlock1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadCodeBlock1 As Global.Telerik.Web.UI.RadCodeBlock
-    
+
     '''<summary>
     '''RadGrid1 control.
     '''</summary>
@@ -84,7 +75,7 @@ Partial Public Class employee_permissions
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
-    
+
     '''<summary>
     '''ExportPanel control.
     '''</summary>
@@ -93,7 +84,7 @@ Partial Public Class employee_permissions
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ExportPanel As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''RadGridToPrint control.
     '''</summary>
@@ -102,7 +93,7 @@ Partial Public Class employee_permissions
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGridToPrint As Global.Telerik.Web.UI.RadGrid
-    
+
     '''<summary>
     '''RadWindowManager1 control.
     '''</summary>
@@ -111,7 +102,7 @@ Partial Public Class employee_permissions
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
-    
+
     '''<summary>
     '''SqlDataSource1 control.
     '''</summary>
@@ -120,7 +111,7 @@ Partial Public Class employee_permissions
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceRoles control.
     '''</summary>
@@ -129,7 +120,7 @@ Partial Public Class employee_permissions
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceRoles As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''lblRoleId control.
     '''</summary>
@@ -138,7 +129,7 @@ Partial Public Class employee_permissions
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblRoleId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -147,7 +138,7 @@ Partial Public Class employee_permissions
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblSelectedEmpl control.
     '''</summary>
@@ -156,7 +147,7 @@ Partial Public Class employee_permissions
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblSelectedEmpl As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''Master property.
     '''</summary>
@@ -165,7 +156,7 @@ Partial Public Class employee_permissions
     '''</remarks>
     Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
         Get
-            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
+            Return CType(MyBase.Master, pasconcept20.ADM_Main_Responsive)
         End Get
     End Property
 End Class

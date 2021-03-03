@@ -14,6 +14,24 @@ Option Explicit On
 Partial Public Class billingplans
 
     '''<summary>
+    '''btnNewPlan control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnNewPlan As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''cboStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboStatus As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
     '''RadGrid1 control.
     '''</summary>
     '''<remarks>

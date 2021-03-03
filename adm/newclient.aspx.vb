@@ -18,7 +18,7 @@ Public Class newclient
 
 
             ' Si no tiene permiso, la dirijo a message
-            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewClient") Then Response.RedirectPermanent("~/adm/default.aspx")
+            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewClient") Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
                 Me.Title = ConfigurationManager.AppSettings("Titulo") & ". New Client"
                 Master.PageTitle = "Clients/New Client"

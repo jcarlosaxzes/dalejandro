@@ -7,7 +7,7 @@ Public Class company
 
             If Not IsPostBack() Then
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_CompanyProfile") Then Response.RedirectPermanent("~/adm/default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_CompanyProfile") Then Response.RedirectPermanent("~/adm/schedule.aspx")
                 lblEmployeeEmail.Text = Master.UserEmail
 
                 Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Company Profile"
@@ -23,14 +23,12 @@ Public Class company
                             CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 2
                         Case "3", "Paypal"
                             CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 3
-                        Case "4", "Logo"
+                        Case "4"
                             CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 4
-                        Case "5"
-                            CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 4
+                        Case "5", "Logo"
+                            CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 5
                     End Select
                 End If
-
-
 
             End If
             RadWindowManager1.EnableViewState = False
@@ -52,17 +50,17 @@ Public Class company
         End Try
     End Sub
 
-    Protected Sub btnSMS_Click(sender As Object, e As EventArgs)
+    Protected Sub SendTestSMS()
         Try
-            If LocalAPI.IsCompanySMSservice(lblCompanyId.Text) Then
+            If LocalAPI.IsCompanyTwilio(lblCompanyId.Text) Then
                 Dim sCellPhone As String = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Movile")
-                'If SMS.IsValidPhone(sCellPhone) Then
-                '    If SMS.SendSMS(sCellPhone, "Test SMS from PASconcept", lblCompanyId.Text) Then
-                '        Master.InfoMessage("The TEST SMS was sent")
-                '    End If
-                'Else
-                '    Master.ErrorMessage("SMS Error. Telephone format must be 10-digit number, eg.: 3058889999")
-                'End If
+                If SMS.IsValidPhone(sCellPhone) Then
+                    If SMS.SendSMS(Master.UserId, sCellPhone, "Test message sent from PASconcept", lblCompanyId.Text) Then
+                        Master.InfoMessage("The TEST SMS was sent")
+                    End If
+                Else
+                    Master.ErrorMessage("SMS Error. Telephone format must be 10-digit number, eg.: 3058889999")
+                End If
             Else
                 Master.ErrorMessage("To hire the notification service by SMS to Customers and Employees, contact AXZES.")
             End If
@@ -108,6 +106,9 @@ Public Class company
 
             Case "SendTestEmail"
                 SendTestEmail()
+
+            Case "SendTestSMS"
+                SendTestSMS()
 
         End Select
 

@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class position
-    
+
     '''<summary>
     '''RadAjaxManager1 control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class position
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadAjaxManager1 As Global.Telerik.Web.UI.RadAjaxManager
-    
+
     '''<summary>
     '''RadAjaxLoadingPanel1 control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class position
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
-    
+
     '''<summary>
     '''btnNew control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class position
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnNew As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''RadGrid1 control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class position
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
-    
+
     '''<summary>
     '''SqlDataSource1 control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class position
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class position
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''Master property.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class position
     '''</remarks>
     Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
         Get
-            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
+            Return CType(MyBase.Master, pasconcept20.ADM_Main_Responsive)
         End Get
     End Property
 End Class

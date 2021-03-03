@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class job_schedule
-    
+
     '''<summary>
     '''RadAjaxManager1 control.
     '''</summary>
@@ -21,7 +21,16 @@ Partial Public Class job_schedule
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadAjaxManager1 As Global.Telerik.Web.UI.RadAjaxManager
-    
+
+    '''<summary>
+    '''RadCodeBlock1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadCodeBlock1 As Global.Telerik.Web.UI.RadCodeBlock
+
     '''<summary>
     '''RadAjaxLoadingPanel1 control.
     '''</summary>
@@ -30,7 +39,16 @@ Partial Public Class job_schedule
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
-    
+
+    '''<summary>
+    '''btnAddEvent control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnAddEvent As Global.System.Web.UI.WebControls.LinkButton
+
     '''<summary>
     '''RadScheduler1 control.
     '''</summary>
@@ -39,7 +57,7 @@ Partial Public Class job_schedule
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadScheduler1 As Global.Telerik.Web.UI.RadScheduler
-    
+
     '''<summary>
     '''SqlDataSourceAppointments control.
     '''</summary>
@@ -48,7 +66,7 @@ Partial Public Class job_schedule
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceAppointments As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceType control.
     '''</summary>
@@ -57,7 +75,7 @@ Partial Public Class job_schedule
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceType As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceEmployees control.
     '''</summary>
@@ -66,7 +84,7 @@ Partial Public Class job_schedule
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceEmployees As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''lblEmployeeId control.
     '''</summary>
@@ -75,7 +93,7 @@ Partial Public Class job_schedule
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblJobId control.
     '''</summary>
@@ -84,7 +102,7 @@ Partial Public Class job_schedule
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblJobId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -93,7 +111,7 @@ Partial Public Class job_schedule
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''Master property.
     '''</summary>
@@ -102,7 +120,7 @@ Partial Public Class job_schedule
     '''</remarks>
     Public Shadows ReadOnly Property Master() As pasconcept20.MasterJOB
         Get
-            Return CType(MyBase.Master,pasconcept20.MasterJOB)
+            Return CType(MyBase.Master, pasconcept20.MasterJOB)
         End Get
     End Property
 End Class

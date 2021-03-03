@@ -86,25 +86,25 @@ DashboardBackcolorRED {
     font-weight: 700
 }
 
-.element.style, .rcbHovered, .rcbInput, .rcbInputCell, .rcbItem {
+/*.element.style, .rcbHovered, .rcbInput, .rcbInputCell, .rcbItem {
     font-size: small !important
-}
-
+}*/
+/*
 .RadPicker .RadInput > input {
     font-size: small !important
-}
+}*/
 
-.riTextBox {
+/*.riTextBox {
     font-size: small !important
-}
+}*/
 
-.rcbActionButton {
+/*.rcbActionButton {
     font-size: small !important
-}
+}*/
 
-.rddlFakeInput {
+/*.rddlFakeInput {
     font-size: small !important
-}
+}*/
 
 .photo50 {
     box-shadow: inset 0 0 30px rgba(0,0,0,.3);
@@ -126,6 +126,14 @@ DashboardBackcolorRED {
     background-size: 100%;
     background-repeat: no-repeat;
     display: inline-block
+}
+
+.box-photo {
+    box-shadow: inset 0 0 30px rgba(0,0,0,.3);
+    border: 0;
+    width: 250px;
+    max-height: 250px;
+    overflow: hidden;
 }
 
 .demo-container .rocViewPort {
@@ -167,3 +175,12 @@ html .RadOrgChart .rocNodeFields .rocItemField {
     text-align: center;
     margin-top: -50px
 }
+.wizardStepHidden {
+    height: 100%;
+    display: none !important;
+}
+.RadGrid {
+    border-radius: 10px;
+    overflow: hidden;
+}
+

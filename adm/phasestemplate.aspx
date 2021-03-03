@@ -16,7 +16,7 @@
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />
 
     <div class="pasconcept-bar noprint">
         <span class="pasconcept-pagetitle">Phase Templates</span>
@@ -60,7 +60,7 @@
                         HeaderStyle-Width="150px">
                         <EditItemTemplate>
                             <div style="text-align: left">
-                                <telerik:RadTextBox ID="CodeTextBox" runat="server" Text='<%# Bind("Code") %>' MaxLength="3"></telerik:RadTextBox>
+                                <telerik:RadTextBox ID="CodeTextBox" runat="server" Text='<%# Bind("Code") %>' MaxLength="8"></telerik:RadTextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="CodeTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
                             </div>
                         </EditItemTemplate>
@@ -102,7 +102,7 @@
     </div>
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        DeleteCommand="DELETE FROM Proposal_phases_template WHERE (Id = @Id)" DeleteCommandType="StoredProcedure"
+        DeleteCommand="DELETE FROM Proposal_phases_template WHERE (Id = @Id)" 
         InsertCommand="INSERT INTO Proposal_phases_template(companyId, Code, Name, Description) VALUES (@companyId,  @Code, @Name, @Description)"
         SelectCommand="SELECT Id, Code, Name, Description FROM Proposal_phases_template WHERE (companyId = @companyId) ORDER BY Name"
         UpdateCommand="UPDATE Proposal_phases_template SET Code=@Code, Name = @Name, Description=@Description WHERE (Id = @Id)">

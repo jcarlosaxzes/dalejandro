@@ -6,20 +6,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 
-        <script type="text/javascript">
-!function(T,l,y){var S=T.location,u="script",k="instrumentationKey",D="ingestionendpoint",C="disableExceptionTracking",E="ai.device.",I="toLowerCase",b="crossOrigin",w="POST",e="appInsightsSDK",t=y.name||"appInsights";(y.name||T[e])&&(T[e]=t);var n=T[t]||function(d){var g=!1,f=!1,m={initialize:!0,queue:[],sv:"4",version:2,config:d};function v(e,t){var n={},a="Browser";return n[E+"id"]=a[I](),n[E+"type"]=a,n["ai.operation.name"]=S&&S.pathname||"_unknown_",n["ai.internal.sdkVersion"]="javascript:snippet_"+(m.sv||m.version),{time:function(){var e=new Date;function t(e){var t=""+e;return 1===t.length&&(t="0"+t),t}return e.getUTCFullYear()+"-"+t(1+e.getUTCMonth())+"-"+t(e.getUTCDate())+"T"+t(e.getUTCHours())+":"+t(e.getUTCMinutes())+":"+t(e.getUTCSeconds())+"."+((e.getUTCMilliseconds()/1e3).toFixed(3)+"").slice(2,5)+"Z"}(),iKey:e,name:"Microsoft.ApplicationInsights."+e.replace(/-/g,"")+"."+t,sampleRate:100,tags:n,data:{baseData:{ver:2}}}}var h=d.url||y.src;if(h){function a(e){var t,n,a,i,r,o,s,c,p,l,u;g=!0,m.queue=[],f||(f=!0,t=h,s=function(){var e={},t=d.connectionString;if(t)for(var n=t.split(";"),a=0;a<n.length;a++){var i=n[a].split("=");2===i.length&&(e[i[0][I]()]=i[1])}if(!e[D]){var r=e.endpointsuffix,o=r?e.location:null;e[D]="https://"+(o?o+".":"")+"dc."+(r||"services.visualstudio.com")}return e}(),c=s[k]||d[k]||"",p=s[D],l=p?p+"/v2/track":config.endpointUrl,(u=[]).push((n="SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details)",a=t,i=l,(o=(r=v(c,"Exception")).data).baseType="ExceptionData",o.baseData.exceptions=[{typeName:"SDKLoadFailed",message:n.replace(/\./g,"-"),hasFullStack:!1,stack:n+"\nSnippet failed to load ["+a+"] -- Telemetry is disabled\nHelp Link: https://go.microsoft.com/fwlink/?linkid=2128109\nHost: "+(S&&S.pathname||"_unknown_")+"\nEndpoint: "+i,parsedStack:[]}],r)),u.push(function(e,t,n,a){var i=v(c,"Message"),r=i.data;r.baseType="MessageData";var o=r.baseData;return o.message='AI (Internal): 99 message:"'+("SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details) ("+n+")").replace(/\"/g,"")+'"',o.properties={endpoint:a},i}(0,0,t,l)),function(e,t){if(JSON){var n=T.fetch;if(n&&!y.useXhr)n(t,{method:w,body:JSON.stringify(e),mode:"cors"});else if(XMLHttpRequest){var a=new XMLHttpRequest;a.open(w,t),a.setRequestHeader("Content-type","application/json"),a.send(JSON.stringify(e))}}}(u,l))}function i(e,t){f||setTimeout(function(){!t&&m.core||a()},500)}var e=function(){var n=l.createElement(u);n.src=h;var e=y[b];return!e&&""!==e||"undefined"==n[b]||(n[b]=e),n.onload=i,n.onerror=a,n.onreadystatechange=function(e,t){"loaded"!==n.readyState&&"complete"!==n.readyState||i(0,t)},n}();y.ld<0?l.getElementsByTagName("head")[0].appendChild(e):setTimeout(function(){l.getElementsByTagName(u)[0].parentNode.appendChild(e)},y.ld||0)}try{m.cookie=l.cookie}catch(p){}function t(e){for(;e.length;)!function(t){m[t]=function(){var e=arguments;g||m.queue.push(function(){m[t].apply(m,e)})}}(e.pop())}var n="track",r="TrackPage",o="TrackEvent";t([n+"Event",n+"PageView",n+"Exception",n+"Trace",n+"DependencyData",n+"Metric",n+"PageViewPerformance","start"+r,"stop"+r,"start"+o,"stop"+o,"addTelemetryInitializer","setAuthenticatedUserContext","clearAuthenticatedUserContext","flush"]),m.SeverityLevel={Verbose:0,Information:1,Warning:2,Error:3,Critical:4};var s=(d.extensionConfig||{}).ApplicationInsightsAnalytics||{};if(!0!==d[C]&&!0!==s[C]){method="onerror",t(["_"+method]);var c=T[method];T[method]=function(e,t,n,a,i){var r=c&&c(e,t,n,a,i);return!0!==r&&m["_"+method]({message:e,url:t,lineNumber:n,columnNumber:a,error:i}),r},d.autoExceptionInstrumented=!0}return m}(y.cfg);(T[t]=n).queue&&0===n.queue.length&&n.trackPageView({})}(window,document,{
-src: "https://az416426.vo.msecnd.net/scripts/b/ai.2.min.js", // The SDK URL Source
-//name: "appInsights", // Global SDK Instance name defaults to "appInsights" when not supplied
-//ld: 0, // Defines the load delay (in ms) before attempting to load the sdk. -1 = block page load and add to head. (default) = 0ms load after timeout,
-//useXhr: 1, // Use XHR instead of fetch to report failures (if available),
-//crossOrigin: "anonymous", // When supplied this will add the provided value as the cross origin attribute on the script tag 
-cfg: { // Application Insights Configuration
-    instrumentationKey: "78d202c5-fd94-4940-9bc9-816f1301cfbf",
-    autoTrackPageVisitTime: true,
-    crossOrigin: "anonymous",
-    /* ...Other Configuration Options... */
-}});
-        </script>
+    <script type="text/javascript">
+        !function (T, l, y) { var S = T.location, u = "script", k = "instrumentationKey", D = "ingestionendpoint", C = "disableExceptionTracking", E = "ai.device.", I = "toLowerCase", b = "crossOrigin", w = "POST", e = "appInsightsSDK", t = y.name || "appInsights"; (y.name || T[e]) && (T[e] = t); var n = T[t] || function (d) { var g = !1, f = !1, m = { initialize: !0, queue: [], sv: "4", version: 2, config: d }; function v(e, t) { var n = {}, a = "Browser"; return n[E + "id"] = a[I](), n[E + "type"] = a, n["ai.operation.name"] = S && S.pathname || "_unknown_", n["ai.internal.sdkVersion"] = "javascript:snippet_" + (m.sv || m.version), { time: function () { var e = new Date; function t(e) { var t = "" + e; return 1 === t.length && (t = "0" + t), t } return e.getUTCFullYear() + "-" + t(1 + e.getUTCMonth()) + "-" + t(e.getUTCDate()) + "T" + t(e.getUTCHours()) + ":" + t(e.getUTCMinutes()) + ":" + t(e.getUTCSeconds()) + "." + ((e.getUTCMilliseconds() / 1e3).toFixed(3) + "").slice(2, 5) + "Z" }(), iKey: e, name: "Microsoft.ApplicationInsights." + e.replace(/-/g, "") + "." + t, sampleRate: 100, tags: n, data: { baseData: { ver: 2 } } } } var h = d.url || y.src; if (h) { function a(e) { var t, n, a, i, r, o, s, c, p, l, u; g = !0, m.queue = [], f || (f = !0, t = h, s = function () { var e = {}, t = d.connectionString; if (t) for (var n = t.split(";"), a = 0; a < n.length; a++) { var i = n[a].split("="); 2 === i.length && (e[i[0][I]()] = i[1]) } if (!e[D]) { var r = e.endpointsuffix, o = r ? e.location : null; e[D] = "https://" + (o ? o + "." : "") + "dc." + (r || "services.visualstudio.com") } return e }(), c = s[k] || d[k] || "", p = s[D], l = p ? p + "/v2/track" : config.endpointUrl, (u = []).push((n = "SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details)", a = t, i = l, (o = (r = v(c, "Exception")).data).baseType = "ExceptionData", o.baseData.exceptions = [{ typeName: "SDKLoadFailed", message: n.replace(/\./g, "-"), hasFullStack: !1, stack: n + "\nSnippet failed to load [" + a + "] -- Telemetry is disabled\nHelp Link: https://go.microsoft.com/fwlink/?linkid=2128109\nHost: " + (S && S.pathname || "_unknown_") + "\nEndpoint: " + i, parsedStack: [] }], r)), u.push(function (e, t, n, a) { var i = v(c, "Message"), r = i.data; r.baseType = "MessageData"; var o = r.baseData; return o.message = 'AI (Internal): 99 message:"' + ("SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details) (" + n + ")").replace(/\"/g, "") + '"', o.properties = { endpoint: a }, i }(0, 0, t, l)), function (e, t) { if (JSON) { var n = T.fetch; if (n && !y.useXhr) n(t, { method: w, body: JSON.stringify(e), mode: "cors" }); else if (XMLHttpRequest) { var a = new XMLHttpRequest; a.open(w, t), a.setRequestHeader("Content-type", "application/json"), a.send(JSON.stringify(e)) } } }(u, l)) } function i(e, t) { f || setTimeout(function () { !t && m.core || a() }, 500) } var e = function () { var n = l.createElement(u); n.src = h; var e = y[b]; return !e && "" !== e || "undefined" == n[b] || (n[b] = e), n.onload = i, n.onerror = a, n.onreadystatechange = function (e, t) { "loaded" !== n.readyState && "complete" !== n.readyState || i(0, t) }, n }(); y.ld < 0 ? l.getElementsByTagName("head")[0].appendChild(e) : setTimeout(function () { l.getElementsByTagName(u)[0].parentNode.appendChild(e) }, y.ld || 0) } try { m.cookie = l.cookie } catch (p) { } function t(e) { for (; e.length;)!function (t) { m[t] = function () { var e = arguments; g || m.queue.push(function () { m[t].apply(m, e) }) } }(e.pop()) } var n = "track", r = "TrackPage", o = "TrackEvent"; t([n + "Event", n + "PageView", n + "Exception", n + "Trace", n + "DependencyData", n + "Metric", n + "PageViewPerformance", "start" + r, "stop" + r, "start" + o, "stop" + o, "addTelemetryInitializer", "setAuthenticatedUserContext", "clearAuthenticatedUserContext", "flush"]), m.SeverityLevel = { Verbose: 0, Information: 1, Warning: 2, Error: 3, Critical: 4 }; var s = (d.extensionConfig || {}).ApplicationInsightsAnalytics || {}; if (!0 !== d[C] && !0 !== s[C]) { method = "onerror", t(["_" + method]); var c = T[method]; T[method] = function (e, t, n, a, i) { var r = c && c(e, t, n, a, i); return !0 !== r && m["_" + method]({ message: e, url: t, lineNumber: n, columnNumber: a, error: i }), r }, d.autoExceptionInstrumented = !0 } return m }(y.cfg); (T[t] = n).queue && 0 === n.queue.length && n.trackPageView({}) }(window, document, {
+            src: "https://az416426.vo.msecnd.net/scripts/b/ai.2.min.js", // The SDK URL Source
+            //name: "appInsights", // Global SDK Instance name defaults to "appInsights" when not supplied
+            //ld: 0, // Defines the load delay (in ms) before attempting to load the sdk. -1 = block page load and add to head. (default) = 0ms load after timeout,
+            //useXhr: 1, // Use XHR instead of fetch to report failures (if available),
+            //crossOrigin: "anonymous", // When supplied this will add the provided value as the cross origin attribute on the script tag 
+            cfg: { // Application Insights Configuration
+                instrumentationKey: "78d202c5-fd94-4940-9bc9-816f1301cfbf",
+                autoTrackPageVisitTime: true,
+                crossOrigin: "anonymous",
+                /* ...Other Configuration Options... */
+            }
+        });
+    </script>
 
     <%-- Favicons and the like --%>
     <link rel="apple-touch-icon" sizes="180x180" href="~/Content/favicons/apple-touch-icon.png" />
@@ -28,12 +29,26 @@ cfg: { // Application Insights Configuration
     <link rel="manifest" href="~/Content/favicons/site.webmanifest" />
 
     <meta name="viewport" content="width=device-width, user-scalable=no" />
-    <title></title>
+
+
+     <%--FreshDesk--%>
+    <script>
+        window.fwSettings = { 'widget_id': 66000000640 };
+        !function () { if ("function" != typeof window.FreshworksWidget) { var n = function () { n.q.push(arguments) }; n.q = [], window.FreshworksWidget = n } }()
+    </script>
+    <script type='text/javascript' src='https://widget.freshworks.com/widgets/66000000640.js' async defer></script>
+
+    <title>PASconcept. Job</title>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <%--bootstrap/4.5.0--%>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <%--bootstrap4-toggle--%>
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
     <link href="~/Content/fontawesome-free-5.1.1-web/css/all.css" rel="stylesheet" />
     <link href="~/Content/pasconcept.min.css" rel="stylesheet" />
@@ -45,6 +60,16 @@ cfg: { // Application Insights Configuration
             padding-left: 50px;
             padding-right: 50px;
         }
+        .imglogo {
+            vertical-align: middle;
+            border-style: none;
+            border-width:0;
+            max-height: 42px !important;
+            max-width: 110px !important;
+            height: auto;
+            width: auto;
+        }
+
     </style>
 
 </head>
@@ -54,96 +79,120 @@ cfg: { // Application Insights Configuration
         </telerik:RadScriptManager>
 
         <div class="container">
-            <div style="width:100%;text-align:center">
-            <telerik:RadNavigation ID="RadNavigationJob" runat="server" Style="z-index: 700" Width="100%" MenuButtonPosition="Right" Skin="Material">
-                <Nodes>
-                    <telerik:NavigationNode ID="NavigationNodejob_job" 
-                        Text="Job Info"
-                        NavigateUrl='<%# String.Concat("~/adm/job_job.aspx?jobId=", lblJobId.Text)%>'>
-                    </telerik:NavigationNode>
+            <table class="table-sm" style="width: 100%">
+                <tr>
+                   <td class="noprint" style="width: 180px">
+                        <a href="/">
+                            <img class="imglogo" src="../Images/logo/pas_horizontal_logo.png" height="42"  />
+                        </a>
+                    </td>
+                    <td style="text-align:center">
+                        <span class="pasconcept-pagetitle"><asp:Label runat="server" ID="lblJobName"></asp:Label></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="noprint">
+                        <asp:LinkButton runat="server" ID="btnMasterClose" CssClass="btn btn-dark btn-lg">
+                            <i class="fas fa-arrow-left"></i>&nbsp;Exit Job
+                        </asp:LinkButton>
+                    </td>
+                    <td style="text-align: center">
+                        <telerik:RadNavigation ID="RadNavigationJob" runat="server" Style="z-index: 700" Width="100%" MenuButtonPosition="Right" Skin="Material">
+                            <Nodes>
+                                <telerik:NavigationNode ID="NavigationNodejob_job"
+                                    Text="Job Info"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8001, lblJobId.Text)%>'>
+                                </telerik:NavigationNode>
 
-                    <telerik:NavigationNode
-                        Text="Billing" ID="NavigationNodejob_accounting"
-                        NavigateUrl='<%# String.Concat("~/adm/job_accounting.aspx?jobId=", lblJobId.Text)%>' Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_BillingMenu") %>'>
-                    </telerik:NavigationNode>
+                                <telerik:NavigationNode
+                                    Text="Billing" ID="NavigationNodejob_accounting"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8002, lblJobId.Text)%>'
+                                    Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_BillingMenu") %>'>
+                                </telerik:NavigationNode>
 
-                    <telerik:NavigationNode
-                        Text="Employees" ID="NavigationNodejob_employees"
-                        NavigateUrl='<%# String.Concat("~/adm/job_employees.aspx?jobId=", lblJobId.Text)%>'>
-                    </telerik:NavigationNode>
+                                <telerik:NavigationNode
+                                    Text="Employees" ID="NavigationNodejob_employees"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8003, lblJobId.Text)%>'>
+                                </telerik:NavigationNode>
 
-                    <telerik:NavigationNode
-                        Text="Proposals" ID="NavigationNodejob_proposals"
-                        NavigateUrl='<%# String.Concat("~/adm/job_proposals.aspx?jobId=", lblJobId.Text)%>' Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProposalsList") %>'>
-                    </telerik:NavigationNode>
+                                <telerik:NavigationNode
+                                    Text="Proposals" ID="NavigationNodejob_proposals"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8004, lblJobId.Text)%>' 
+                                    Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProposalsList") %>'>
+                                </telerik:NavigationNode>
 
-                    <telerik:NavigationNode
-                        Text="Expenses" ID="NavigationNodejob_rfps"
-                        NavigateUrl='<%# String.Concat("~/adm/job_rfps.aspx?jobId=", lblJobId.Text)%>' Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_RequestsProposalsList") %>'>
-                    </telerik:NavigationNode>
+                                <telerik:NavigationNode
+                                    Text="Expenses" ID="NavigationNodejob_rfps"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8005, lblJobId.Text)%>' 
+                                    Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_RequestsProposalsList") %>'>
+                                </telerik:NavigationNode>
 
-                    <telerik:NavigationNode
-                        Text="Notes" ID="NavigationNodejob_notes"
-                        NavigateUrl='<%# String.Concat("~/adm/job_notes.aspx?jobId=", lblJobId.Text)%>'>
-                    </telerik:NavigationNode>
+                                <telerik:NavigationNode
+                                    Text="Notes" ID="NavigationNodejob_notes"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8006, lblJobId.Text)%>'>
+                                </telerik:NavigationNode>
 
-                    <telerik:NavigationNode
-                        Text="Times" ID="NavigationNodejob_times"
-                        NavigateUrl='<%# String.Concat("~/adm/job_times.aspx?jobId=", lblJobId.Text)%>' Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProjectTimeEntries") %>'>
-                    </telerik:NavigationNode>
+                                <telerik:NavigationNode
+                                    Text="Times" ID="NavigationNodejob_times"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8007, lblJobId.Text)%>'
+                                    Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProjectTimeEntries") %>'>
+                                </telerik:NavigationNode>
 
-                    <telerik:NavigationNode
-                        Text="Files" ID="NavigationNodejob_links"
-                        NavigateUrl='<%# String.Concat("~/adm/job_links.aspx?jobId=", lblJobId.Text)%>'>
-                    </telerik:NavigationNode>
+                                <telerik:NavigationNode
+                                    Text="Files" ID="NavigationNodejob_links"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8008, lblJobId.Text)%>'>
+                                </telerik:NavigationNode>
 
-                    <telerik:NavigationNode
-                        Text="Schedule" ID="NavigationNodejob_schedule"
-                        NavigateUrl='<%# String.Concat("~/adm/job_schedule.aspx?jobId=", lblJobId.Text)%>'>
-                    </telerik:NavigationNode>
+                                <telerik:NavigationNode
+                                    Text="Schedule" ID="NavigationNodejob_schedule"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8009, lblJobId.Text)%>'>
+                                </telerik:NavigationNode>
 
-                    <telerik:NavigationNode
-                        Text="Revisions" ID="NavigationNodejob_reviews"
-                        NavigateUrl='<%# String.Concat("~/adm/job_reviews.aspx?jobId=", lblJobId.Text)%>'>
-                    </telerik:NavigationNode>
+                                <telerik:NavigationNode
+                                    Text="Revisions/Permits" ID="NavigationNodejob_reviews"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8010, lblJobId.Text)%>'>
+                                </telerik:NavigationNode>
 
-                    <telerik:NavigationNode
-                        Text="Tags" ID="NavigationNodejob_tags"
-                        NavigateUrl='<%# String.Concat("~/adm/job_tags.aspx?jobId=", lblJobId.Text)%>'>
-                    </telerik:NavigationNode>
+                                <telerik:NavigationNode
+                                    Text="Tags" ID="NavigationNodejob_tags"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8011, lblJobId.Text)%>'>
+                                </telerik:NavigationNode>
 
-                    <telerik:NavigationNode
-                        Text="Transmittals" ID="NavigationNodejob_trasmittals"
-                        NavigateUrl='<%# String.Concat("~/adm/job_transmittals.aspx?jobId=", lblJobId.Text)%>' Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_TransmittalList") %>'>
-                    </telerik:NavigationNode>
-                </Nodes>
-            </telerik:RadNavigation>
-            </div>
-            <div  class="pas-container" style="margin:25px">
+                                <telerik:NavigationNode
+                                    Text="Transmittals" ID="NavigationNodejob_trasmittals"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8012, lblJobId.Text)%>'
+                                    Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_TransmittalList") %>'>
+                                </telerik:NavigationNode>
+                            </Nodes>
+                        </telerik:RadNavigation>
+                    </td>
+                </tr>
+            </table>
+            <div class="pas-container" style="margin-left: 10px;margin-right:10px;margin-top:0">
 
                 <asp:ContentPlaceHolder ID="MainContent" runat="server">
                 </asp:ContentPlaceHolder>
 
             </div>
         </div>
-            <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Always">
-                <ContentTemplate>
-                    <telerik:RadNotification ID="RadNotificationWarning" runat="server"
-                        Animation="FlyIn" EnableRoundedCorners="true" EnableShadow="true"
-                        TitleIcon="info" Text="Warning"
-                        Position="BottomRight" VisibleTitlebar="false" Opacity="75" Width="300px" Skin="Sunset">
-                    </telerik:RadNotification>
-                    <telerik:RadNotification ID="RadNotificationError" runat="server" Width="300px" Skin="Sunset"
-                        Animation="Fade" EnableRoundedCorners="true" EnableShadow="true"
-                        TitleIcon="deny" Text="Error" Position="TopCenter">
-                    </telerik:RadNotification>
-                </ContentTemplate>
-            </asp:UpdatePanel>
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Always">
+            <ContentTemplate>
+                <telerik:RadNotification ID="RadNotificationWarning" runat="server"
+                    Animation="FlyIn" EnableRoundedCorners="true" EnableShadow="true"
+                    TitleIcon="info" Text="Warning"
+                    Position="BottomRight" VisibleTitlebar="false" Opacity="75" Width="300px" Skin="Sunset">
+                </telerik:RadNotification>
+                <telerik:RadNotification ID="RadNotificationError" runat="server" Width="300px" Skin="Sunset"
+                    Animation="Fade" EnableRoundedCorners="true" EnableShadow="true"
+                    TitleIcon="deny" Text="Error" Position="TopCenter">
+                </telerik:RadNotification>
+            </ContentTemplate>
+        </asp:UpdatePanel>
 
-            <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
-            <asp:Label ID="lblJobId" runat="server" Visible="False" Text="0"></asp:Label>
-            <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
-            <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
+        <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
+        <asp:Label ID="lblJobId" runat="server" Visible="False" Text="0"></asp:Label>
+        <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
+        <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
     </form>
 </body>
 </html>

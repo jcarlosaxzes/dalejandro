@@ -1,7 +1,20 @@
 ﻿Imports Microsoft.AspNet.Identity
+Imports Newtonsoft.Json
+Imports PASconcept.DataAccess.Repositories.Abstract
+Imports PASconcept.Domain.Model
 Imports Telerik.Web.UI
 Public Class Job_accounting
     Inherits System.Web.UI.Page
+
+
+    Private ReadOnly qbOperationLogRepository As IQBOperationLogRepository
+
+    Private ReadOnly invoiceRepository As IInvoiceRepository
+
+    Public Sub New(ByVal qbOperationLogRepository As IQBOperationLogRepository, ByVal invoiceRepo As IInvoiceRepository)
+        Me.qbOperationLogRepository = qbOperationLogRepository
+        Me.invoiceRepository = invoiceRepo
+    End Sub
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
@@ -13,10 +26,13 @@ Public Class Job_accounting
                 lblEmployeeEmail.Text = Master.UserEmail
                 lblEmployeeId.Text = Master.UserId
 
-                lblJobId.Text = Request.QueryString("JobId")
+                lblJobId.Text = LocalAPI.GetJobIdFromGUID(Request.QueryString("guid"))
 
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_BillingMenu") Then Response.RedirectPermanent("~/adm/job_job.aspx?JobId=" & lblJobId.Text)
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_BillingMenu") Then
+                    Dim sUrl As String = LocalAPI.GetSharedLink_URL(8001, lblJobId.Text)
+                    Response.Redirect(sUrl)
+                End If
 
 
                 lblClientId.Text = LocalAPI.GetJobProperty(lblJobId.Text, "Client")
@@ -25,10 +41,8 @@ Public Class Job_accounting
 
                 Master.ActiveTab(1)
 
-                If lblCompanyId.Text = 260962 Then
-                    ' EEG 10 Mb
-                    RadCloudUpload1.MaxFileSize = 10485760
-                End If
+                RadCloudUpload1.MaxFileSize = LocalAPI.GetCompanyMaxFileSizeForUpload(lblCompanyId.Text)
+                lblMaxSize.Text = $"[Maximum upload size per file: {LocalAPI.FormatByteSize(RadCloudUpload1.MaxFileSize)}]"
 
             End If
             RadWindowManager1.EnableViewState = False
@@ -112,16 +126,49 @@ Public Class Job_accounting
                     Response.Redirect("~/ADM/pdf_print.aspx")
 
                 Case "SendQB"
-                    If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+                    If (LocalAPI.IsQuickBookDesckModule(lblCompanyId.Text)) Then
+                        'Mark this Invoice to be Sync with QuickBooks Desktop Web Connector
                         Dim ids As String() = CType(e.CommandArgument, String).Split(",")
-                        Dim qbCustomerId As Integer = ids(1)
                         lblInvoiceId.Text = ids(0)
-                        qbAPI.SendInvoiceToQuickBooks(lblInvoiceId.Text, qbCustomerId, lblEmployeeId.Text, lblCompanyId.Text)
+                        LocalAPI.SetInvoiceQBRef(lblInvoiceId.Text, -1, lblEmployeeId.Text)
+
+                        'Save QB Operation Log
+                        Dim invoiceEntity = invoiceRepository.SingleOrDefault(lblInvoiceId.Text)
+                        Dim operation As QBOperationLog = New QBOperationLog() With {
+                            .LogDate = DateTime.Now,
+                            .OperationData = JsonConvert.SerializeObject(invoiceEntity),
+                            .OperationType = "Desktop:SyncInvoice",
+                            .ResutlStatus = ""
+                         }
+                        qbOperationLogRepository.Add(operation)
+                        qbOperationLogRepository.SaveChanges()
+
                         RadGridIncoices.Rebind()
                     Else
-                        Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=job_accounting&JobId=" & lblJobId.Text)
-                    End If
+                        If qbAPI.IsValidAccessOrRefreshToken(lblCompanyId.Text) Then
+                            System.Threading.Thread.Sleep(3000)
+                            Dim ids As String() = CType(e.CommandArgument, String).Split(",")
+                            Dim qbCustomerId As Integer = ids(1)
+                            lblInvoiceId.Text = ids(0)
+                            qbAPI.SendInvoiceToQuickBooks(lblInvoiceId.Text, qbCustomerId, lblEmployeeId.Text, lblCompanyId.Text)
 
+                            'Save QB Operation Log
+                            Dim invoiceEntity = invoiceRepository.SingleOrDefault(lblInvoiceId.Text)
+                            Dim operation As QBOperationLog = New QBOperationLog() With {
+                                .LogDate = DateTime.Now,
+                                .OperationData = JsonConvert.SerializeObject(invoiceEntity),
+                                .OperationType = "Online:SyncInvoice",
+                                .ResutlStatus = ""
+                             }
+                            qbOperationLogRepository.Add(operation)
+                            qbOperationLogRepository.SaveChanges()
+
+                            RadGridIncoices.Rebind()
+                        Else
+                            Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=job_accounting&JobId=" & lblJobId.Text)
+                        End If
+
+                    End If
             End Select
 
         Catch ex As Exception
@@ -130,9 +177,22 @@ Public Class Job_accounting
     End Sub
 
     Private Sub InvoiceDlg()
-        FormViewInvoice.DataBind()
-        RadToolTipEditInvoice.Visible = True
-        RadToolTipEditInvoice.Show()
+        If LocalAPI.GetInvoiceProperty(lblInvoiceId.Text, "InvoiceType") = 3 Then
+            ' Progress Invoice
+            Response.Redirect($"~/adm/invoicesprogress?jobId={lblJobId.Text}&invoiceId={lblInvoiceId.Text}&backpage=job_accounting")
+        Else
+            FormViewInvoice.DataBind()
+            RadToolTipEditInvoice.Visible = True
+            RadToolTipEditInvoice.Show()
+        End If
+    End Sub
+
+    Private Sub SqlDataSourceInvoices_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceInvoices.Deleting
+        Try
+            LocalAPI.sys_log_Nuevo(Master.UserEmail, LocalAPI.sys_log_AccionENUM.DeleteInvoice, lblCompanyId.Text, "Delete Invoice: " & LocalAPI.InvoiceNumber(e.Command.Parameters("@Id").Value))
+        Catch ex As Exception
+        End Try
+
     End Sub
 
     Protected Sub SqlDataSourceInvoices_Deleted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceInvoices.Deleted
@@ -217,6 +277,9 @@ Public Class Job_accounting
             Master.ErrorMessage("The discount could not be applied. The Amount or Percent must be different from zero!")
         End If
 
+    End Sub
+    Private Sub btnNewProgressInvoice_Click(sender As Object, e As EventArgs) Handles btnNewProgressInvoice.Click
+        Response.Redirect("~/adm/invoicesprogress?jobId=" & lblJobId.Text)
     End Sub
 
 #End Region
@@ -317,6 +380,12 @@ Public Class Job_accounting
     Private Sub SqlDataSourceInvoice_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceInvoice.Updating
         Dim e1 As String = e.Command.Parameters(5).Value
     End Sub
+    Private Sub SqlDataSourcePayments_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourcePayments.Deleting
+        Try
+            LocalAPI.sys_log_Nuevo(Master.UserEmail, LocalAPI.sys_log_AccionENUM.DeletePaid, lblCompanyId.Text, "Delete Payment: " & e.Command.Parameters("@Id").Value)
+        Catch ex As Exception
+        End Try
+    End Sub
     Private Sub SqlDataSourcePayment_Deleted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourcePayment.Deleted
         UpdateValues()
     End Sub
@@ -330,5 +399,7 @@ Public Class Job_accounting
         SqlDataSourceClientBalance.DataBind()
         FormViewClientBalance.DataBind()
     End Function
+
+
 #End Region
 End Class

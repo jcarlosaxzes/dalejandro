@@ -1,0 +1,101 @@
+{
+  "Header": {
+    "Time": "2020-11-20T08:01:12-08:00",
+    "ReportName": "TransactionList",
+    "StartPeriod": "2020-06-01",
+    "EndPeriod": "2020-07-31",
+    "Currency": "USD",
+    "Option": [
+      {
+        "Name": "NoReportData",
+        "Value": "true"
+      }
+    ]
+  },
+  "Columns": {
+    "Column": [
+      {
+        "ColTitle": "Date",
+        "MetaData": [
+          {
+            "Name": "ColKey",
+            "Value": "tx_date"
+          }
+        ]
+      },
+      {
+        "ColTitle": "Transaction Type",
+        "MetaData": [
+          {
+            "Name": "ColKey",
+            "Value": "txn_type"
+          }
+        ]
+      },
+      {
+        "ColTitle": "Num",
+        "MetaData": [
+          {
+            "Name": "ColKey",
+            "Value": "doc_num"
+          }
+        ]
+      },
+      {
+        "ColTitle": "Posting",
+        "MetaData": [
+          {
+            "Name": "ColKey",
+            "Value": "is_no_post"
+          }
+        ]
+      },
+      {
+        "ColTitle": "Name",
+        "MetaData": [
+          {
+            "Name": "ColKey",
+            "Value": "name"
+          }
+        ]
+      },
+      {
+        "ColTitle": "Memo/Description",
+        "MetaData": [
+          {
+            "Name": "ColKey",
+            "Value": "memo"
+          }
+        ]
+      },
+      {
+        "ColTitle": "Account",
+        "MetaData": [
+          {
+            "Name": "ColKey",
+            "Value": "account_name"
+          }
+        ]
+      },
+      {
+        "ColTitle": "Split",
+        "MetaData": [
+          {
+            "Name": "ColKey",
+            "Value": "other_account"
+          }
+        ]
+      },
+      {
+        "ColTitle": "Amount",
+        "MetaData": [
+          {
+            "Name": "ColKey",
+            "Value": "subt_nat_amount"
+          }
+        ]
+      }
+    ]
+  },
+  "Rows": {}
+}

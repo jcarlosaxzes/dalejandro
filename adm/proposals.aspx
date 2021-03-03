@@ -32,12 +32,6 @@
                 masterTable.rebind();
             }
         </script>
-        <style>
-            .table-sm td, .table-sm th {
-                padding-top: .05rem;
-                padding-bottom: .05rem;
-            }
-        </style>
     </telerik:RadCodeBlock>
     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <ClientEvents OnRequestStart="onRequestStart"></ClientEvents>
@@ -46,6 +40,7 @@
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
                     <telerik:AjaxUpdatedControl ControlID="RadWindowManager1"></telerik:AjaxUpdatedControl>
+                    <telerik:AjaxUpdatedControl ControlID="RadToolTipNewActivity" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="btnRefresh">
@@ -63,7 +58,7 @@
 
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" EnableEmbeddedSkins="false" />
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
@@ -100,25 +95,27 @@
                     <td style="width: 200px">
                         <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" MarkFirstMatch="True" DropDownAutoWidth="Enabled">
                             <Items>
-                                <telerik:RadComboBoxItem Text="(Last 30 days)" Value="30" Selected="true" />
-                                <telerik:RadComboBoxItem Text="(Last 60 days)" Value="60" />
-                                <telerik:RadComboBoxItem Text="(Last 90 days)" Value="90" />
-                                <telerik:RadComboBoxItem Text="(Last 120 days)" Value="120" />
-                                <telerik:RadComboBoxItem Text="(Last 180 days)" Value="180" />
-                                <telerik:RadComboBoxItem Text="(Last 365 days)" Value="365" />
-                                <telerik:RadComboBoxItem Text="(This year)" Value="14" />
-                                <telerik:RadComboBoxItem Text="(Last year)" Value="15" />
+                                <telerik:RadComboBoxItem Text="Last 30 days" Value="30" Selected="true" />
+                                <telerik:RadComboBoxItem Text="Last 60 days" Value="60" />
+                                <telerik:RadComboBoxItem Text="Last 90 days" Value="90" />
+                                <telerik:RadComboBoxItem Text="Last 120 days" Value="120" />
+                                <telerik:RadComboBoxItem Text="Last 180 days" Value="180" />
+                                <telerik:RadComboBoxItem Text="Last 365 days" Value="365" />
+                                <telerik:RadComboBoxItem Text="This year" Value="14" />
+                                <telerik:RadComboBoxItem Text="This month" Value="16" />
+                                <telerik:RadComboBoxItem Text="Last year" Value="15" />
+                                <telerik:RadComboBoxItem Text="Last month" Value="17" />
                                 <telerik:RadComboBoxItem Text="(All years...)" Value="13" />
                                 <telerik:RadComboBoxItem Text="Custom Range..." Value="99" />
                             </Items>
                         </telerik:RadComboBox>
                     </td>
                     <td style="width: 130px">
-                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" ToolTip="Date From for filter">
+                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US" ToolTip="Date From for filter">
                         </telerik:RadDatePicker>
                     </td>
                     <td style="width: 130px">
-                        <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" ToolTip="Date To for Filter">
+                        <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US" ToolTip="Date To for Filter">
                         </telerik:RadDatePicker>
                     </td>
                     <td style="width: 350px">
@@ -130,16 +127,14 @@
                         </telerik:RadComboBox>
                     </td>
                     <td>
-                        <telerik:RadComboBox ID="cboStatus" runat="server" DataSourceID="SqlDataSourceStatus"
-                            DataTextField="Status" DataValueField="Id" Width="100%"
-                            AppendDataBoundItems="True">
+                        <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmpl" MarkFirstMatch="True" ToolTip="Select Proposal By - Prepared By Employee"
+                            Width="100%" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AppendDataBoundItems="true">
                             <Items>
-                                <telerik:RadComboBoxItem runat="server" Text="(All Status...)" Value="-1" />
+                                <telerik:RadComboBoxItem runat="server" Text="(All Proposal By or Prepared By...)" Value="0" />
                             </Items>
                         </telerik:RadComboBox>
                     </td>
-
-
+                    <td></td>
                 </tr>
                 <tr>
                     <td colspan="3">
@@ -152,12 +147,21 @@
                         </telerik:RadComboBox>
                     </td>
                     <td>
+                        <telerik:RadComboBox ID="cboStatus" runat="server" DataSourceID="SqlDataSourceStatus"
+                            DataTextField="Status" DataValueField="Id" Width="100%"
+                            AppendDataBoundItems="True">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(All Status...)" Value="-1" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td>
                         <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech"
                             EmptyMessage="Search for Proposal Number, Name,..."
                             Width="100%">
                         </telerik:RadTextBox>
                     </td>
-                    <td style="text-align: right;">
+                    <td style="text-align: right; width: 180px">
                         <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                     <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
@@ -206,7 +210,7 @@
             </ItemTemplate>
         </asp:FormView>
     </div>
-    <div>
+    <div style="margin-top: 5px">
         <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceProp" AutoGenerateColumns="False" AllowAutomaticDeletes="True" AllowSorting="True"
             PageSize="50" AllowPaging="true"
             Height="850px" RenderMode="Lightweight"
@@ -222,7 +226,7 @@
                         HeaderStyle-Width="130px" FooterStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
                         <ItemTemplate>
                             <asp:LinkButton ID="btnEditProp" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to View/Edit Proposal"
-                                CommandName="EditProposal">
+                                CommandName="Fees & Scope">
                                 <%# Eval("ProposalNumber")%>
                             </asp:LinkButton>
 
@@ -240,15 +244,8 @@
                                     <table class="table-borderless" style="width: 200px; font-size: medium">
                                         <tr>
                                             <td>
-                                                <asp:LinkButton ID="btnEdit2" runat="server" UseSubmitBehavior="false" CommandName="EditProposal" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
-                                                    <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;View/Edit Proposal (Form Page)
-                                                </asp:LinkButton>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <asp:LinkButton ID="LinkButton1" runat="server" UseSubmitBehavior="false" CommandName="EditWizard" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
-                                                      <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;View/Edit Proposal (Wizard Page)
+                                                <asp:LinkButton ID="btnEdit2" runat="server" UseSubmitBehavior="false" CommandName="Basic Information" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                    <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Basic Information
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>
@@ -258,16 +255,58 @@
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td>
+                                                <asp:LinkButton ID="btnAddEvent" runat="server" UseSubmitBehavior="false" CommandName="AddActivity" CommandArgument='<%# Eval("Id")%>'
+                                                    CssClass="dropdown-item">
+                                                                 <i class="far fa-calendar"></i>&nbsp;&nbsp;Add Activity
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="LinkButton1444" runat="server" UseSubmitBehavior="false" CommandName="AddTime" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            <i class="fas fa-user-clock"></i>&nbsp;&nbsp;Add Time
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <div class="dropdown-divider"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="btnUploadFiles" runat="server" CommandArgument='<%# Eval("Id")%>' CommandName="Attachments" UseSubmitBehavior="false" CssClass="dropdown-item">
+                                                                <span aria-hidden="true" class="fas fa-cloud-upload-alt"></span>&nbsp;&nbsp;Attachments
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td style="padding-left: 24px">
-                                                <asp:LinkButton ID="btnEditJob2" runat="server" CommandArgument='<%# Eval("JobId") %>' CommandName="EditJob" Visible='<%# iif(Eval("JobId") = 0, False, True) %>' CssClass="dropdown-item">
-                                                    View/Edit Job
+                                                <asp:LinkButton ID="LinkButton2" runat="server" CommandArgument='<%# Eval("Id")%>' CommandName="Notes" UseSubmitBehavior="false" CssClass="dropdown-item">
+                                                                Proposal Notes
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <asp:LinkButton ID="btnUploadFiles" runat="server" CommandArgument='<%# Eval("Id")%>' CommandName="UploadFiles" UseSubmitBehavior="false" CssClass="dropdown-item">
-                                                                <span aria-hidden="true" class="fas fa-cloud-upload-alt"></span>&nbsp;&nbsp;Upload Files
+                                                <div class="dropdown-divider"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="LinkButton1" runat="server" UseSubmitBehavior="false" CommandName="EditWizard" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                      <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Proposal Wizard Page
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-left: 24px">
+                                                <asp:LinkButton ID="btnEditJob2" runat="server" CommandArgument='<%# Eval("JobId") %>' CommandName="EditJob" Visible='<%# iif(Eval("JobId") = 0, False, True) %>' CssClass="dropdown-item">
+                                                    View/Edit Job
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>
@@ -292,6 +331,25 @@
                                                 </a>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="dropdown-divider"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-left: 24px">
+                                                <asp:LinkButton runat="server" ID="btnSaveAs1" CommandName="SaveProposalAs" CommandArgument='<%# Eval("Id") %>' CssClass="dropdown-item">
+                                                    Save Proposal As...
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-left: 24px">
+                                                <asp:LinkButton runat="server" ID="btnSaveAs2" CommandName="SaveProposalAsTemplate" CommandArgument='<%# Eval("Id") %>' CssClass="dropdown-item">
+                                                    Save Proposal As Proposal Template...
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
                                     </table>
                                 </telerik:RadToolTip>
                             </div>
@@ -301,7 +359,7 @@
                         HeaderText="Date" SortExpression="Date" UniqueName="Date"
                         ItemStyle-HorizontalAlign="Center" AllowFiltering="False" HeaderStyle-Width="100px">
                     </telerik:GridBoundColumn>
-                    <telerik:GridTemplateColumn DataField="ProjectName" HeaderText="Project Name - Client"
+                    <telerik:GridTemplateColumn DataField="ProjectName" HeaderText="Project Name - Client" HeaderStyle-Width="300px"
                         SortExpression="ProjectName" UniqueName="ProjectName">
                         <ItemTemplate>
                             <asp:HyperLink ID="hlkLocation" runat="server" NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>'
@@ -382,7 +440,7 @@
                         UniqueName="Total" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Right"
                         FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}">
                     </telerik:GridBoundColumn>
-                    <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" SortExpression="Status" UniqueName="Status" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="160px">
+                    <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" SortExpression="Status" UniqueName="Status" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="170px">
                         <ItemTemplate>
                             <div style="font-size: 12px; width: 100%"
                                 class='<%# LocalAPI.GetProposalStatusLabelCSS(Eval("StatusId")) %>'>
@@ -401,16 +459,28 @@
 
                     <telerik:GridTemplateColumn HeaderText="Insights" UniqueName="Insights" AllowFiltering="False" ItemStyle-HorizontalAlign="Left" HeaderStyle-Width="150px">
                         <ItemTemplate>
-                            <spa style="font-size: x-small" title="Emitted Date"><%# Eval("EmailDate", "{0:d}") %></spa>
-                            <span title="Number of files uploaded" class="badge badge-pill badge-light" style='<%# IIf(Eval("ProposalUploadFiles")=0,"display:none","display:normal")%>'>
-                                <%#Eval("ProposalUploadFiles")%>
-                            </span>
-                            <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("Emitted")=0,"display:none;vertical-align:middle","display:normal;vertical-align:middle")%>'>
-                                <%#Eval("Emitted")%>
-                            </span>
-                            <span title="Number of times the Client has visited your Proposal Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
-                                <%#Eval("clientvisits")%>
-                            </span>
+                            <table style="width: 100%">
+                                <tr>
+                                    <%--<td style="text-align:center;width: 30px">
+                                        <span title="Number of files uploaded" class="badge badge-pill badge-light" style='<%# IIf(Eval("ProposalUploadFiles")=0,"display:none","display:normal")%>'>
+                                            <%#Eval("ProposalUploadFiles")%>
+                                        </span>
+                                    </td>--%>
+                                    <td style="text-align: right; width: 60px">
+                                        <span style="font-size: x-small" title="Emitted Date"><%# Eval("EmailDate", "{0:d}") %></span>
+                                    </td>
+                                    <td style="text-align: center; width: 30px">
+                                        <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("Emitted")=0,"display:none;vertical-align:middle","display:normal;vertical-align:middle")%>'>
+                                            <%#Eval("Emitted")%>
+                                        </span>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <span title="Number of times the Client has visited your Proposal Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
+                                            <%#Eval("clientvisits")%>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 
@@ -425,6 +495,131 @@
         </telerik:RadGrid>
     </div>
 
+    <%--New Activity Dialog--%>
+    <div>
+        <telerik:RadToolTip ID="RadToolTipNewActivity" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+
+            <table class="table-sm" style="width: 800px">
+                <tr>
+                    <td colspan="2">
+                        <h3 style="margin: 0; text-align: center; color: white; width: 800px">
+                            <span class="navbar navbar-expand-md bg-dark text-white">New Proposal Activity</span>
+                        </h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <asp:ValidationSummary ID="ValidationSummaryActivity" runat="server" Font-Size="X-Small" HeaderText="Following error occurs:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true" ValidationGroup="vActivity" ForeColor="Red" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <asp:Label ID="lblClientName" runat="server" Visible="False"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 180px; text-align: right">Activity Type:
+                    </td>
+                    <td>
+                        <telerik:RadComboBox ID="cboActivityType" runat="server" DataSourceID="SqlDataSourceActivityType" DataTextField="Name" DataValueField="Id" Width="100%" ZIndex="50001" AppendDataBoundItems="True" ValidationGroup="vActivity" CausesValidation="false">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(Select Activity...)" Value="-1" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 180px; text-align: right">Employee:
+                    </td>
+                    <td>
+                        <telerik:RadComboBox ID="cboActivityEmployees" runat="server" DataSourceID="SqlDataSourceEmployees" ZIndex="50001"
+                            DataTextField="Name" DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px">
+                        </telerik:RadComboBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right">Subject:
+                    </td>
+                    <td>
+                        <telerik:RadTextBox ID="txtActivitySubject" runat="server" MaxLength="255" Width="100%">
+                        </telerik:RadTextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 180px; text-align: right">Due Date:
+                    </td>
+                    <td>
+                        <telerik:RadDateTimePicker ID="RadDateTimePickerActivityDueDate" runat="server" Width="250px" ZIndex="50001">
+                        </telerik:RadDateTimePicker>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 180px; text-align: right">Estimated Duration:
+                    </td>
+                    <td>
+                        <telerik:RadComboBox ID="cboActivityDuration" runat="server" Width="100%" ZIndex="50001" AppendDataBoundItems="True" ValidationGroup="vActivity">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="15 Mins" Value="15" />
+                                <telerik:RadComboBoxItem runat="server" Text="30 Mins" Value="30" />
+                                <telerik:RadComboBoxItem runat="server" Text="45 Mins" Value="45" />
+                                <telerik:RadComboBoxItem runat="server" Text="1 Hr" Value="60" />
+                                <telerik:RadComboBoxItem runat="server" Text="2 Hrs" Value="120" />
+                                <telerik:RadComboBoxItem runat="server" Text="4 Hrs" Value="240" />
+                                <telerik:RadComboBoxItem runat="server" Text="8 Hrs" Value="480" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right">Description (optional):
+                    </td>
+                    <td>
+                        <telerik:RadTextBox ID="txtActivityDescription" runat="server"
+                            TextMode="MultiLine" Rows="4" MaxLength="1024" Width="100%">
+                        </telerik:RadTextBox>
+                    </td>
+                </tr>
+            </table>
+            <asp:Panel runat="server" ID="PanelLocation" Visible="false">
+                <table class="table-sm" style="width: 800px">
+                    <tr>
+                        <td style="width: 180px; text-align: right">Location:
+                        </td>
+                        <td>
+                            <telerik:RadTextBox ID="RadTextBox1" runat="server"
+                                TextMode="MultiLine" Rows="4" MaxLength="1024" Width="100%">
+                            </telerik:RadTextBox>
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>
+            <table class="table-sm" style="width: 800px">
+                <tr>
+                    <td>
+                        <telerik:RadCheckBox ID="chkMoreOptions" runat="server" Text="More Options..." AutoPostBack="false">
+                        </telerik:RadCheckBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center">
+                        <asp:LinkButton ID="btnAddActivity" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ValidationGroup="vActivity">
+                                    <i class="far fa-calendar"></i>&nbsp;Add Activity
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:CompareValidator runat="server" ID="Comparevalidator1" ValueToCompare="(Select Activity...)" ValidationGroup="vActivity" Operator="NotEqual" ControlToValidate="cboActivityType" Display="None" ErrorMessage="Activity Type is mandatory" SetFocusOnError="true"> </asp:CompareValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtActivitySubject" ValidationGroup="vActivity"
+                            Text="*" ErrorMessage="Subject is required" SetFocusOnError="true" Display="None"></asp:RequiredFieldValidator>
+
+                    </td>
+                </tr>
+            </table>
+        </telerik:RadToolTip>
+    </div>
+
+
     <asp:SqlDataSource ID="SqlDataSourceClient" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="CLIENTS_for_ProposalsList_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
@@ -433,7 +628,7 @@
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceProp" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="PROPOSAL_v20_SELECT" DeleteCommand="Proposal_DELETE" DeleteCommandType="StoredProcedure"
+        SelectCommand="Proposals_v20_SELECT" DeleteCommand="Proposal_DELETE" DeleteCommandType="StoredProcedure"
         SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="RadDatePickerFrom" Name="DateFrom" PropertyName="SelectedDate" Type="DateTime" DefaultValue="" />
@@ -441,6 +636,7 @@
             <asp:ControlParameter ControlID="cboClients" Name="Client" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="cboStatus" Name="StatusId" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="cboDepartments" Name="DepartmentId" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="cboEmployee" Name="EmployeeId" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="txtFind" ConvertEmptyStringToNull="False" Name="Find" PropertyName="Text" Type="String" />
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
@@ -478,8 +674,27 @@
             <asp:ControlParameter ControlID="txtFind" ConvertEmptyStringToNull="False" Name="Find" PropertyName="Text" Type="String" />
         </SelectParameters>
     </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceEmpl" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="EMPLOYEES2_SELECT" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+
+    <asp:SqlDataSource ID="SqlDataSourceEmployees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="SELECT [Id], [FullName] as Name FROM [Employees] WHERE companyId=@companyId and isnull(Inactive,0)=0 ORDER BY [Name]">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceActivityType" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="select Id, Name from [Appointments_types] order by name"></asp:SqlDataSource>
 
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblProposalIdFromRfp" runat="server" Visible="False" Text="0"></asp:Label>
+    <asp:Label ID="lblEmployeeId" runat="server" Visible="False" Text="0"></asp:Label>
+
+    <asp:Label ID="lblSelectedClientId" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblSelected" runat="server" Visible="False"></asp:Label>
 
 </asp:Content>

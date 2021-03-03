@@ -2,6 +2,9 @@
 Imports System.Net
 Imports System.IO
 
+Imports Twilio
+Imports Twilio.Rest.Api.V2010.Account
+
 '   DDLCarrier
 '<asp:DropDownList ID="DDLCarrier" runat="server">
 '    <asp:ListItem Value="@text.att.net">AT&T</asp:ListItem>
@@ -28,7 +31,52 @@ Imports System.IO
 
 Public Class SMS
 
-    Public Shared Function SendSMS(sPhoneNumber As String, sMessage As String, companyId As Integer) As Boolean
+    Public Shared Function SendSMS(userId As Integer, ByRef sPhoneNumberTo As String, sMessage As String, companyId As Integer) As Boolean
+        'Return SendPlivoSMS(sPhoneNumber, sMessage, companyId)
+        'Return SendClickatellSMS(sPhoneNumber, sMessage, companyId)
+        Try
+            If SendTwilioSMS(sPhoneNumberTo, sMessage, companyId) Then
+                LocalAPI.sys_log_Nuevo_Ext(sPhoneNumberTo, LocalAPI.sys_log_AccionENUM.SMS_send, companyId, Left(sMessage, 80), 0)
+                Return True
+            End If
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Private Shared Function SendTwilioSMS(ByRef sPhoneNumberTo As String, sMessage As String, companyId As Integer) As Boolean
+        Try
+            If ConfigurationManager.AppSettings("SMS") = "1" And Len(sMessage) > 0 Then
+
+                If LocalAPI.IsCompanyTwilio(companyId) Then
+
+                    Dim TwilioSettingObject = LocalAPI.GetRecord(companyId, "Company_twiliosetting_SELECT")
+                    ' Fixing phone number
+                    Select Case Len(sPhoneNumberTo)
+                        Case 10
+                            sPhoneNumberTo = "+1" & sPhoneNumberTo
+                        Case 11
+                            sPhoneNumberTo = "+" & sPhoneNumberTo
+                        Case 12
+                            sPhoneNumberTo = sPhoneNumberTo
+                        Case Else
+                            sPhoneNumberTo = ""
+                    End Select
+                    If Len(sPhoneNumberTo) = 12 Then
+                        TwilioClient.Init(TwilioSettingObject("accountSid"), TwilioSettingObject("authToken"))
+                        Dim message = MessageResource.Create(body:=sMessage, from:=New Twilio.Types.PhoneNumber(TwilioSettingObject("TwilioPhone")), [to]:=New Twilio.Types.PhoneNumber(sPhoneNumberTo))
+                        Return IIf(message.Status = MessageResource.StatusEnum.Sent Or message.Status = MessageResource.StatusEnum.Queued Or message.Status = MessageResource.StatusEnum.Sending, True, False)
+                    End If
+                End If
+            End If
+
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+
+    Public Shared Function SendSMS_clickatell(sPhoneNumber As String, sMessage As String, companyId As Integer) As Boolean
         Dim PrecioSMS As String = ConfigurationManager.AppSettings("SMS_Price")
         If ConfigurationManager.AppSettings("SMS") = "1" And Len(sMessage) > 0 Then
             ' Help: www.clickatell.com/apis-scripts/scripts/vb-net/

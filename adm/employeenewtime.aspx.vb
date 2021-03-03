@@ -8,7 +8,7 @@ Public Class employeenewtime
             Master.PageTitle = "Employee New Time"
             If Not IsPostBack Then
                 lblCompanyId.Text = Session("companyId")
-                lblLogedEmployeeId.text = Master.UserId
+                lblLogedEmployeeId.Text = Master.UserId
 
                 If Not Session("employeefortime") Is Nothing Then
                     lblEmployeeId.Text = Session("employeefortime")
@@ -17,12 +17,9 @@ Public Class employeenewtime
                 End If
 
                 lblSelectedJob.Text = Request.QueryString("JobId")
-                lblJobName.Text = LocalAPI.GetJobName(lblSelectedJob.Text)
                 lblEmployeeName.Text = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "FullName")
 
                 lblClientId.Text = LocalAPI.GetJobProperty(lblSelectedJob.Text, "Client")
-
-                cboCategory.DataBind()
 
                 If Not Request.QueryString("JobTicketId") Is Nothing Then
                     lblSelectedTicket.Text = Request.QueryString("JobTicketId")
@@ -32,14 +29,15 @@ Public Class employeenewtime
                     Master.HideMasterMenu()
                     btnBack.Visible = False
                 End If
-
-                If Not Request.QueryString("backpage") Is Nothing Then
-                    Session("employeenewbackpage") = Request.QueryString("backpage")
-                Else
-                    Session("employeenewbackpage") = ""
+                If Not Request.QueryString("HideMenu") Is Nothing Then
+                    Master.HideMasterMenu()
                 End If
 
-
+                If Not Request.QueryString("backpage") Is Nothing Then
+                    Session("employeenewtimebackpage") = Request.QueryString("backpage")
+                Else
+                    Session("employeenewtimebackpage") = ""
+                End If
 
                 InitDialog()
 
@@ -52,15 +50,14 @@ Public Class employeenewtime
     Private Sub InitDialog()
         Try
             cboJobStatus.DataBind()
-            cboJobStatus.SelectedValue = -1
+
+            If lblCompanyId.Text = 260962 Then ' EEG
+                cboJobStatus.SelectedValue = -2
+            Else
+                cboJobStatus.SelectedValue = -1
+            End If
+
             txtDescription.Text = ""
-
-            Dim DefaultValuesObject = LocalAPI.GetJobNewTimeDefaultValues(lblSelectedJob.Text, lblEmployeeId.Text)
-            ' Dim SalesRep as String = verificationRecord("SalesRep")
-
-            txtTimeSel.Text = DefaultValuesObject("Hours")
-
-            RadDatePicker1.DbSelectedDate = DefaultValuesObject("DateOfWork")
 
             If LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 Then
                 ' Programmers/Computer/IT
@@ -78,14 +75,20 @@ Public Class employeenewtime
                 divProposalTask.Visible = LocalAPI.IsProposalTaskForJob(lblSelectedJob.Text)
             End If
 
-            cboCategory.SelectedValue = DefaultValuesObject("CategoryId")
+            Dim DefaultValuesObject = LocalAPI.GetJobNewTimeDefaultValues(lblSelectedJob.Text, lblEmployeeId.Text)
+            ' Dim SalesRep as String = verificationRecord("SalesRep")
+
+            txtTimeSel.Text = DefaultValuesObject("Hours")
+
+
+            ' Fdo, categoria a escoger cboCategory.SelectedValue = DefaultValuesObject("CategoryId")
 
             If divProposalTask.Visible Then
-                'cboTask.DataBind()
-                'cboTask.SelectedValue = DefaultValuesObject("ProposalTaskId")
-                cboMulticolumnTask.DataBind()
-                cboMulticolumnTask.Value = DefaultValuesObject("ProposalTaskId")
-                cboMulticolumnTask.Focus()
+                cboTask.DataBind()
+                cboTask.SelectedValue = DefaultValuesObject("ProposalTaskId")
+                'cboMulticolumnTask.DataBind()
+                'cboMulticolumnTask.Value = DefaultValuesObject("ProposalTaskId")
+                'cboMulticolumnTask.Focus()
             Else
                 txtDescription.Focus()
             End If
@@ -94,6 +97,8 @@ Public Class employeenewtime
             RadGridTimes.DataBind()
 
             BotonesVisibles()
+
+            RefreshCalendar(DefaultValuesObject("DateOfWork"))
 
         Catch ex As Exception
 
@@ -138,17 +143,20 @@ Public Class employeenewtime
     End Sub
     Protected Sub LocalNewInvoice(TimeId As Integer)
         Dim dRate As Double = 0
-        'If Val(cboTask.SelectedValue) > 0 Then
-        'dRate = LocalAPI.GetProposalTaskRate(cboTask.SelectedValue)
-        If Val(cboMulticolumnTask.Value) > 0 Then
-            dRate = LocalAPI.GetProposalTaskRate(cboMulticolumnTask.Value)
+        If Val(cboTask.SelectedValue) > 0 Then
+            dRate = LocalAPI.GetProposalTaskRate(cboTask.SelectedValue)
+            'If Val(cboMulticolumnTask.Value) > 0 Then
+            '    dRate = LocalAPI.GetProposalTaskRate(cboMulticolumnTask.Value)
         Else
             ' Parche para Axzes a $35/Hour
-            If lblCompanyId.Text = 260973 Then
-                dRate = 35
-            Else
-                dRate = LocalAPI.GetEmployeeHourRate(lblEmployeeId.Text)
-            End If
+            'If lblCompanyId.Text = 260973 Then
+            '    dRate = 35
+            'Else
+            ' dRate = LocalAPI.GetEmployeeHourRate(lblEmployeeId.Text)
+            'End If
+
+            ' 9-3-2020 
+            dRate = LocalAPI.GetEmployeeAssignedHourRate(lblSelectedJob.Text, lblEmployeeId.Text)
 
         End If
 
@@ -157,30 +165,37 @@ Public Class employeenewtime
     End Sub
     Protected Function LocalNewTime() As Boolean
         Try
-            Dim taskId As Integer = 0
-            Dim JobTicketId As Integer = 0
-            If divProposalTask.Visible Then
-                'If cboTask.SelectedValue > 0 Then
-                '    taskId = cboTask.SelectedValue
-                If cboMulticolumnTask.Value > 0 Then
-                    taskId = cboMulticolumnTask.Value
+            If txtTimeSel.Value > 0 Then
 
+                Dim taskId As Integer = 0
+                Dim JobTicketId As Integer = 0
+                If divProposalTask.Visible Then
+                    If cboTask.SelectedValue > 0 Then
+                        taskId = cboTask.SelectedValue
+                        'If cboMulticolumnTask.Value > 0 Then
+                        '    taskId = cboMulticolumnTask.Value
+
+                    End If
                 End If
-            End If
-            If divTickets.Visible Then
-                JobTicketId = cboActiveTickets.SelectedValue
-            End If
-            If LocalAPI.InsertNewTime(lblEmployeeId.Text, lblSelectedJob.Text, RadDatePicker1.SelectedDate, txtTimeSel.Value, txtDescription.Text,
-                                  taskId, cboCategory.SelectedValue, lblCompanyId.Text, JobTicketId) Then
-
-                ' Actualizar el status del Job
-                If cboJobStatus.SelectedValue <> -1 Then
-                    LocalAPI.SetJobStatus(lblSelectedJob.Text, cboJobStatus.SelectedValue, lblEmployeeId.Text, lblCompanyId.Text, lblEmployeeId.Text)
-                    cboJobStatus.SelectedValue = -1
+                If divTickets.Visible Then
+                    JobTicketId = cboActiveTickets.SelectedValue
                 End If
+                If LocalAPI.InsertNewTime(lblEmployeeId.Text, lblSelectedJob.Text, RadDatePicker1.SelectedDate, txtTimeSel.Value, txtDescription.Text,
+                                      taskId, cboCategory.SelectedValue, lblCompanyId.Text, JobTicketId) Then
 
-                Return True
+                    ' Actualizar el status del Job
+                    If cboJobStatus.SelectedValue > 0 Then
+                        LocalAPI.SetJobStatus(lblSelectedJob.Text, cboJobStatus.SelectedValue, lblEmployeeId.Text, lblCompanyId.Text, lblEmployeeId.Text)
+                        cboJobStatus.SelectedValue = -1
+                    End If
+
+                    Return True
+                End If
+            Else
+                Master.ErrorMessage("The Hours Value must be Greater than Zero!")
+                txtTimeSel.Focus()
             End If
+
         Catch ex As Exception
             Throw ex
         End Try
@@ -201,10 +216,6 @@ Public Class employeenewtime
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         BackPage()
     End Sub
-    Private Sub btnTotals_Click(sender As Object, e As EventArgs) Handles btnTotals.Click
-        FormViewViewSummary.Visible = Not FormViewViewSummary.Visible
-        lblJobName.Visible = Not FormViewViewSummary.Visible
-    End Sub
 
     Private Sub BotonesVisibles()
         ' Botones Time & TimeAndInvoices Visible????
@@ -214,8 +225,10 @@ Public Class employeenewtime
         Select Case type
             Case 1  ' Solo Time
                 btnInsertTimeAndInvoice.Visible = False
+                btnInsertTime.Visible = True
             Case 2  ' Solo Time+Invoices
                 btnInsertTime.Visible = False
+                btnInsertTimeAndInvoice.Visible = True
             Case Else
 
                 ' Case 2: FROM JOB BillType
@@ -223,21 +236,25 @@ Public Class employeenewtime
                 Select Case type
                     Case 1  ' Solo Time
                         btnInsertTimeAndInvoice.Visible = False
+                        btnInsertTime.Visible = True
                     Case 2  ' Solo Time+Invoices
                         btnInsertTime.Visible = False
+                        btnInsertTimeAndInvoice.Visible = True
                     Case Else
                         If divProposalTask.Visible Then
-                            If cboMulticolumnTask.Value > 0 Then
+                            If cboTask.SelectedValue > 0 Then
                                 ' Case 3: FROM Proposal_detail BillType
-                                type = LocalAPI.GetProposalDetailProperty(cboMulticolumnTask.Value, "BillType")
+                                type = LocalAPI.GetProposalDetailProperty(cboTask.SelectedValue, "BillType")
                                 Select Case type
                                     Case 1  ' Solo Time
                                         btnInsertTimeAndInvoice.Visible = False
+                                        btnInsertTime.Visible = True
                                     Case 2  ' Solo Time+Invoices
                                         btnInsertTime.Visible = False
+                                        btnInsertTimeAndInvoice.Visible = True
                                     Case Else
                                         ' 0 Billiable=False
-                                        btnInsertTimeAndInvoice.Visible = False
+                                        btnInsertTimeAndInvoice.Visible = True
                                         btnInsertTime.Visible = True
                                 End Select
                             End If
@@ -246,20 +263,100 @@ Public Class employeenewtime
         End Select
 
     End Sub
-    Private Sub cboMulticolumnTask_SelectedIndexChanged(sender As Object, e As RadMultiColumnComboBoxSelectedIndexChangedEventArgs) Handles cboMulticolumnTask.SelectedIndexChanged
+    'Private Sub cboMulticolumnTask_SelectedIndexChanged(sender As Object, e As RadMultiColumnComboBoxSelectedIndexChangedEventArgs) Handles cboMulticolumnTask.SelectedIndexChanged
+    '    BotonesVisibles()
+    'End Sub
+
+    Private Sub BackPage()
+        Dim sUrl As String
+        Select Case Session("employeenewtimebackpage")
+
+            Case "jobs"
+                Response.Redirect("~/adm/jobs.aspx?restoreFilter=true")
+
+            Case "activejobsdashboad"
+                Response.Redirect("~/adm/activejobsdashboad.aspx?restoreFilter=true")
+
+            Case "time"
+                Response.Redirect("~/adm/time.aspx?restoreFilter=true")
+
+            Case "job_times"
+                sUrl = LocalAPI.GetSharedLink_URL(8007, lblSelectedJob.Text)
+                Response.Redirect(sUrl)
+
+            Case "job_employees"
+                sUrl = LocalAPI.GetSharedLink_URL(8003, lblSelectedJob.Text)
+                Response.Redirect(sUrl)
+
+            Case Else
+                Response.RedirectPermanent("~/adm/schedule.aspx")
+        End Select
+
+    End Sub
+    Private Sub RefreshCalendar(Date1 As DateTime)
+        Try
+            RadDatePicker1.DbSelectedDate = Date1.Date
+            'SqlDataSourceEmployeeDailyTimeWorked.DataBind()
+            FormViewViewSummary.DataBind()
+            RadScheduler1.DataBind()
+
+        Catch ex As Exception
+        End Try
+    End Sub
+    Private Sub RadScheduler1_NavigationCommand(sender As Object, e As SchedulerNavigationCommandEventArgs) Handles RadScheduler1.NavigationCommand
+        If e.SelectedDate > CDate("1-1-2000") Then
+            RefreshCalendar(e.SelectedDate)
+        End If
+        'Select Case e.Command
+        '    Case SchedulerNavigationCommand.SwitchToDayView
+        '        e.Cancel = True
+        'End Select
+    End Sub
+
+    Private Sub RadScheduler1_NavigationComplete(sender As Object, e As SchedulerNavigationCompleteEventArgs) Handles RadScheduler1.NavigationComplete
+        Select Case e.Command
+            Case SchedulerNavigationCommand.SwitchToSelectedDay And RadScheduler1.SelectedView = SchedulerViewType.DayView
+                RadScheduler1.SelectedView = SchedulerViewType.WeekView
+        End Select
+    End Sub
+
+    Private Sub RadScheduler1_AppointmentDataBound(sender As Object, e As SchedulerEventArgs) Handles RadScheduler1.AppointmentDataBound
+        Select Case e.Appointment.Description
+            Case "Productive Time"
+                e.Appointment.CssClass = "rsCategoryBlue"
+                e.Appointment.Font.Size = 10
+                e.Appointment.ForeColor = System.Drawing.Color.White
+            Case "Non Productive Time"
+                e.Appointment.CssClass = "rsCategoryPink"
+                e.Appointment.Font.Size = 10
+                e.Appointment.ForeColor = System.Drawing.Color.White
+
+            Case "Holiday"
+                e.Appointment.CssClass = "rsCategoryGreen"
+                e.Appointment.Font.Size = 10
+                e.Appointment.ForeColor = System.Drawing.Color.White
+        End Select
+    End Sub
+
+    Private Sub RadScheduler1_FormCreating(sender As Object, e As SchedulerFormCreatingEventArgs) Handles RadScheduler1.FormCreating
+
+        Select Case e.Mode
+            Case SchedulerFormMode.Edit, SchedulerFormMode.Insert
+                RadDatePicker1.DbSelectedDate = e.Appointment.Start
+        End Select
+        e.Cancel = True
+
+        Dim Hours As Double = LocalAPI.GetHoursEmployeeTimeCheckIn(lblEmployeeId.Text, RadDatePicker1.DbSelectedDate)
+        txtTimeSel.Text = IIf(Hours > 8, 1, 8 - Hours)
+        txtTimeSel.Focus()
+    End Sub
+
+    Private Sub cboTask_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboTask.SelectedIndexChanged
         BotonesVisibles()
     End Sub
 
-    Private Sub BackPage()
-        Select Case Session("employeenewbackpage")
-            Case "activejobsdashboad"
-                Response.Redirect("~/adm/activejobsdashboad.aspx?restoreFilter=true")
-            Case "time"
-                Response.Redirect("~/adm/time.aspx?restoreFilter=true")
-            Case Else
-                Response.Redirect("~/adm/default.aspx")
-        End Select
-
+    Private Sub SqlDataSourceEmployeeDailyTimeWorked_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceEmployeeDailyTimeWorked.Selecting
+        Dim e1 As String = e.Command.Parameters(0).Value
     End Sub
 End Class
 

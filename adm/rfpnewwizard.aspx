@@ -172,7 +172,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="text-align: right; vertical-align: top">Introductory Text:
+                                <td style="text-align: right; vertical-align: top">Opening Text:
                                 </td>
                                 <td colspan="3">
                                     <telerik:RadTextBox ID="txtIntroductoryText" runat="server" Width="100%" MaxLength="512" TextMode="MultiLine"
@@ -509,28 +509,28 @@
                     </fieldset>
                 </telerik:RadWizardStep>
 
-                <%-- Term & Conditions 4--%>
-                <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Term & Conditions" Enabled="false" StepType="Step" ValidationGroup="TermConditions">
+                <%-- Terms & Conditions 4--%>
+                <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Terms & Conditions" Enabled="false" StepType="Step" ValidationGroup="TermConditions">
                     <div>
                         <asp:ValidationSummary ID="ValidationSummary4" runat="server" ValidationGroup="TermConditions"
                             HeaderText="<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
                                         There were errors on this step:"></asp:ValidationSummary>
                     </div>
                     <fieldset>
-                        <legend>Term & Conditions</legend>
+                        <legend>Terms & Conditions</legend>
 
 
                         <table style="width: 100%" class="table-sm">
                             <tr>
                             </tr>
                             <tr>
-                                <td style="text-align: right">Select Term & Conditions Template:
+                                <td style="text-align: right">Select Terms & Conditions Template:
                                 </td>
                                 <td style="width: 60%; padding-left: 50px">
                                     <telerik:RadComboBox ID="cboTandCtemplates" runat="server" DataSourceID="SqlDataSourceTandCtemplates" AutoPostBack="true"
                                         DataTextField="Name" DataValueField="Id" Width="100%" Height="450px" AppendDataBoundItems="true">
                                         <Items>
-                                            <telerik:RadComboBoxItem runat="server" Text="(Select Term & Conditions Template...)" Value="-1" />
+                                            <telerik:RadComboBoxItem runat="server" Text="(Select Terms & Conditions Template...)" Value="-1" />
                                         </Items>
                                     </telerik:RadComboBox>
                                 </td>
@@ -548,7 +548,7 @@
                         </table>
                         <div>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" Display="None"
-                                ControlToValidate="radEditor_TandC" ErrorMessage="Term & Conditions is Required" SetFocusOnError="true"
+                                ControlToValidate="radEditor_TandC" ErrorMessage="Terms & Conditions is Required" SetFocusOnError="true"
                                 Style="color: red" ValidationGroup="TermConditions"></asp:RequiredFieldValidator>
                         </div>
                     </fieldset>

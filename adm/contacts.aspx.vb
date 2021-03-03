@@ -5,7 +5,7 @@ Public Class contacts
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             ' Si no tiene permiso, la dirijo a message
-            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ContactsList") Then Response.RedirectPermanent("~/adm/default.aspx")
+            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ContactsList") Then Response.RedirectPermanent("~/adm/schedule.aspx")
             ' Si no tiene permiso New, boton.Visible=False
             btnNewContact.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewContact")
             btnImport.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Importdata")
@@ -42,10 +42,9 @@ Public Class contacts
         Dim sUrl As String = ""
         Select Case e.CommandName
             Case "o"
-                sUrl = "~/ADM/Contact.aspx?ContactId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 850, 700)
+                Response.Redirect($"~/ADM/contact.aspx?contactId={e.CommandArgument}&backpage=contacts")
             Case "c"
-                Response.Redirect("~/adm/client.aspx?clientId=" & e.CommandArgument & "&fromcontacts=1")
+                Response.Redirect($"~/ADM/Client.aspx?clientId={e.CommandArgument}&backpage=contacts")
             Case "e"
                 Response.Redirect("~/adm/employee.aspx?employeeId=" & e.CommandArgument & "&fromcontacts=1")
             Case "s"
@@ -95,7 +94,7 @@ Public Class contacts
     End Sub
 
     Protected Sub btnNewContact_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewContact.Click
-        CreateRadWindows("NewContact", "~/ADM/NewContact.aspx", 850, 700)
+        Response.Redirect("~/adm/newcontact.aspx")
     End Sub
 
     Private Sub SaveFilter()

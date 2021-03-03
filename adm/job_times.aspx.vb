@@ -7,10 +7,21 @@ Public Class Job_times
 
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
-                lblJobId.Text = Request.QueryString("JobId")
+                lblJobId.Text = LocalAPI.GetJobIdFromGUID(Request.QueryString("guid"))
 
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ProjectTimeEntries") Then Response.RedirectPermanent("~/adm/job_job.aspx?JobId=" & lblJobId.Text)
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ProjectTimeEntries") Then
+                    Dim sUrl As String = LocalAPI.GetSharedLink_URL(8001, lblJobId.Text)
+                    Response.Redirect(sUrl)
+                End If
+
+                cboEmployee.DataBind()
+                If cboEmployee.Items.Count = 0 Then
+                    btnNewTime.Visible = False
+                    cboEmployee.Visible = False
+                Else
+                    cboEmployee.SelectedValue = Master.UserId
+                End If
 
                 Master.ActiveTab(6)
             End If
@@ -27,10 +38,13 @@ Public Class Job_times
 
             Case "NewHrInvoice"
                 lblTimeId.Text = e.CommandArgument
-                txtTimeSel.DbValue = LocalAPI.GetTimeProperty(lblTimeId.Text, "Time")
-                txtRate.DbValue = LocalAPI.GetTimeProperty(lblTimeId.Text, "HourRate")
-                txtTimeDescription.Text = LocalAPI.GetTimeProperty(lblTimeId.Text, "Description")
-                ConfirmInsertDlg("New Invoice", "Create New (hr) Invoice from Time record")
+                Dim Employees_timeObject = LocalAPI.GetRecord(lblTimeId.Text, "Employees_time_SELECT")
+                txtTimeSel.DbValue = Employees_timeObject("Time")           ' LocalAPI.GetTimeProperty(lblTimeId.Text, "Time")
+                'Dim emloyeeId As Integer = LocalAPI.GetTimeProperty(lblTimeId.Text, "Employee")
+                txtRate.DbValue = Employees_timeObject("BillingRate")           'LocalAPI.GetEmployeeAssignedHourRate(lblJobId.Text, emloyeeId)
+
+                txtTimeDescription.Text = Employees_timeObject("Description")    ' LocalAPI.GetTimeProperty(lblTimeId.Text, "Description")
+                NewHrInvoiceDlg()
 
             Case "DeleteHrInvoice"
                 lblInvoiceSelected.Text = e.CommandArgument
@@ -40,10 +54,7 @@ Public Class Job_times
 
     End Sub
 
-    Private Sub ConfirmInsertDlg(Title As String, Text As String)
-        RadToolTipConfirmInsert.Title = Title
-        lblActionMesage.Text = Text & "<br /><br />Are you sure to do this action?<br /><br />"
-        btnOk.Text = Title
+    Private Sub NewHrInvoiceDlg()
         RadToolTipConfirmInsert.Visible = True
         RadToolTipConfirmInsert.Show()
     End Sub
@@ -56,9 +67,6 @@ Public Class Job_times
         RadToolTipConfirmDelete.Show()
     End Sub
 
-    Protected Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        RadToolTipConfirmInsert.Visible = False
-    End Sub
     Protected Sub btnCancel2_Click(sender As Object, e As EventArgs) Handles btnCancel2.Click
         RadToolTipConfirmDelete.Visible = False
     End Sub
@@ -110,5 +118,10 @@ Public Class Job_times
     Private Sub btnExport_Click(sender As Object, e As EventArgs) Handles btnExport.Click
         ConfigureExport(LocalAPI.GetJobCodeName(lblJobId.Text))
         RadGridExportData.MasterTableView.ExportToCSV()
+    End Sub
+
+    Private Sub btnNewTime_Click(sender As Object, e As EventArgs) Handles btnNewTime.Click
+        Session("employeefortime") = cboEmployee.SelectedValue
+        Response.Redirect("~/adm/employeenewtime.aspx?JobId=" & lblJobId.Text & "&backpage=job_times&HideMenu=1")
     End Sub
 End Class

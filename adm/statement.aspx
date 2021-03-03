@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Statements" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="statement.aspx.vb" Inherits="pasconcept20.statement" %>
+﻿<%@ Page Title="Receivable Statements" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="statement.aspx.vb" Inherits="pasconcept20.statement" %>
 
 <%@ Import Namespace="pasconcept20" %>
 
@@ -13,7 +13,7 @@
         </script>
     </telerik:RadCodeBlock>
 
-    <%--    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+        <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadGrid1">
                 <UpdatedControls>
@@ -29,6 +29,7 @@
                     <telerik:AjaxUpdatedControl ControlID="RadDatePickerTo" />
                     <telerik:AjaxUpdatedControl ControlID="RadDatePickerFrom" />
                     <telerik:AjaxUpdatedControl ControlID="cboClients" />
+                    <telerik:AjaxUpdatedControl ControlID="cboStatus" />
                     <telerik:AjaxUpdatedControl ControlID="txtFind" />
                     <telerik:AjaxUpdatedControl ControlID="RadWindowManager1" />
                     <telerik:AjaxUpdatedControl ControlID="FormViewViewSummary" />
@@ -38,10 +39,10 @@
 
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />--%>
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />
 
     <div class="pasconcept-bar">
-        <span class="pasconcept-pagetitle">Statements</span>
+        <span class="pasconcept-pagetitle">Receivable Statements</span>
 
         <span style="float: right; vertical-align: middle;">
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
@@ -63,7 +64,7 @@
         <asp:Panel ID="pnlFind" runat="server" class="pasconcept-bar" DefaultButton="btnFind">
             <table class="table-sm" style="width: 100%">
                 <tr>
-                    <td width="180px" align="left">
+                    <td style="width: 160px">
                         <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" MarkFirstMatch="True">
                             <Items>
                                 <telerik:RadComboBoxItem Text="(Last 90 days)" Value="90" />
@@ -74,7 +75,7 @@
                             </Items>
                         </telerik:RadComboBox>
                     </td>
-                    <td width="400px">
+                    <td style="width: 380px">
                         <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClients"
                             Width="100%" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains"
                             Height="300px" AppendDataBoundItems="true">
@@ -83,11 +84,21 @@
                             </Items>
                         </telerik:RadComboBox>
                     </td>
-                    <td style="wi=250px">
+                    <td style="width: 250px">
+                         <telerik:RadComboBox ID="cboStatus" runat="server" Width="100%" CheckBoxes="true" EnableCheckAllItemsCheckBox="true" >
+                            <Localization AllItemsCheckedString="All status Checked" CheckAllString="Check All..." ItemsCheckedString="status checked"></Localization>
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="Pending Balance" Value="0" Checked="true" />
+                                <telerik:RadComboBoxItem runat="server" Text="Not Yet Emitted" Value="1" Checked="true"/>
+                                <telerik:RadComboBoxItem runat="server" Text="Collected" Value="2" Checked="false"/>
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td style="width: 280px">
                         <telerik:RadComboBox ID="cboReconcile" runat="server" AppendDataBoundItems="true"
                             Filter="Contains" MarkFirstMatch="True" Width="100%">
                             <Items>
-                                <telerik:RadComboBoxItem runat="server" Selected="true" Text="(All Reconciled/Not Reconciled Payments...)" Value="-1" />
+                                <telerik:RadComboBoxItem runat="server" Selected="true" Text="(All Reconciled/Not Reconciled ...)" Value="-1" />
                                 <telerik:RadComboBoxItem runat="server" Selected="true" Text="Reconciled" Value="1" />
                                 <telerik:RadComboBoxItem runat="server" Selected="true" Text="Not Reconciled" Value="0" />
                             </Items>
@@ -98,7 +109,7 @@
                         </telerik:RadTextBox>
                     </td>
                     <td style="text-align: right; width: 150px">
-                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
+                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                             <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
 
@@ -164,7 +175,7 @@
             </script>
         </telerik:RadCodeBlock>
         <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticUpdates="True" AutoGenerateColumns="False"
-            DataSourceID="SqlDataSource1" AllowAutomaticInserts="True" AllowAutomaticDeletes="True" AllowSorting="True" Height="1500px"
+            DataSourceID="SqlDataSource1" AllowAutomaticInserts="True" AllowAutomaticDeletes="True" AllowSorting="True" Height="850px"
             PageSize="50" AllowPaging="true" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
             FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
             <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1" CommandItemDisplay="None" ShowFooter="True" EditMode="PopUp">
@@ -172,11 +183,70 @@
                 <Columns>
                     <telerik:GridTemplateColumn DataField="Id" DataType="System.Int32" FilterControlAltText="Filter Id column"
                         HeaderText="Number" SortExpression="Id" UniqueName="Id"
-                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" FooterStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
+                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="120px" FooterStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
                         <ItemTemplate>
                             <asp:LinkButton ID="btnEdit" runat="server" CommandArgument='<%# Eval("Id") %>'
                                 CommandName="Edit" Text='<%# Eval("Number")%>'>
                             </asp:LinkButton>
+                            <div style="float: right; vertical-align: top; margin: 0;">
+                                <%--Three Point Action Menu--%>
+                                <asp:HyperLink runat="server" ID="lblAction" NavigateUrl="javascript:void(0);" Style="text-decoration: none;">
+                                            <i title="Click to menu for this row" style="color:dimgray" class="fas fa-ellipsis-v"></i>
+                                </asp:HyperLink>
+
+                                <telerik:RadToolTip ID="RadToolTipAction" runat="server" TargetControlID="lblAction" RelativeTo="Element"
+                                    RenderMode="Lightweight" EnableViewState="true" ShowCallout="false" RenderInPageRoot="true"
+                                    Position="BottomRight" Modal="True" Title="" ShowEvent="OnClick"
+                                    HideDelay="100" HideEvent="LeaveToolTip" IgnoreAltAttribute="true">
+                                    <table class="table-borderless" style="width: 200px; font-size: medium">
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="btnEdit2" runat="server" UseSubmitBehavior="false" CommandName="Edit" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;View/Edit Statement
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="dropdown-divider"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton runat="server" ID="btnSatementPrint" CommandName="EmailPrint" CommandArgument='<%# Eval("Id") %>' CssClass="dropdown-item">
+                                                    <i class="far fa-envelope"></i>&nbsp;&nbsp;Send Statement Email to Client
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href='<%# LocalAPI.GetSharedLink_URL(55, Eval("Id"), True)%>' target="_blank" class="dropdown-item">
+                                                    <i class="fas fa-print"></i>&nbsp;&nbsp;Print Statement Page
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href='<%# LocalAPI.GetSharedLink_URL(55, Eval("Id"))%>' target="_blank" class="dropdown-item">
+                                                    <i class="far fa-share-square"></i>&nbsp;&nbsp;View/Share Statement Page
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="dropdown-divider"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-left: 24px">
+                                                <asp:LinkButton runat="server" ID="LinkbtnInvoicePaymentutton1" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("AmountDue") > 0 %>' CssClass="dropdown-item">
+                                                    Receive Payments
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </telerik:RadToolTip>
+                            </div>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="InvoiceDate" DataType="System.DateTime" FilterControlAltText="Filter InvoiceDate column"
@@ -204,20 +274,6 @@
                         DataFormatString="{0:N2}" FooterAggregateFormatString="{0:N2}"
                         Aggregate="Sum" FooterStyle-HorizontalAlign="Right">
                     </telerik:GridBoundColumn>
-                    <telerik:GridTemplateColumn DataField="Emitted" FilterControlAltText="Filter Emitted column"
-                        HeaderText="Emitted" SortExpression="Emitted" UniqueName="Emitted"
-                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px">
-                        <ItemTemplate>
-                            <asp:Label ID="EmittedLabel" runat="server" Text='<%# Eval("FirstEmission", "{0:d}") %>' ToolTip="Emitted Date"></asp:Label>
-                            <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
-                                <%#Eval("Emitted")%>
-                            </span>
-                            <span title="Number of times the Client has visited your Statement Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
-                                <%#Eval("clientvisits")%>
-                            </span>
-
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="LatestEmission" DataType="System.DateTime" FilterControlAltText="Filter LatestEmission column"
                         HeaderText="Last" SortExpression="LatestEmission" UniqueName="LatestEmission"
                         HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Center">
@@ -229,39 +285,30 @@
                     <telerik:GridCheckBoxColumn DataField="ReconciledBank" DataType="System.Boolean" HeaderText="R" HeaderTooltip="Reconciled Bank"
                         SortExpression="ReconciledBank" UniqueName="ReconciledBank" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
                     </telerik:GridCheckBoxColumn>
-                    <telerik:GridTemplateColumn DataField="InvoiceNotes" FilterControlAltText="Filter InvoiceNotes column"
-                        HeaderText="Notes" SortExpression="InvoiceNotes" ItemStyle-Font-Size="X-Small"
-                        UniqueName="InvoiceNotes">
+                    <telerik:GridTemplateColumn DataField="Emitted" HeaderText="Insights" SortExpression="Emitted" UniqueName="Emitted"
+                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px">
+                        <ItemTemplate>
+                            <table style="width: 100%">
+                                <tr>
+                                    <td style="text-align: right; width: 60px">
+                                        <span style="font-size: x-small" title="First Emission Date"><%# Eval("FirstEmission", "{0:d}")%></span>
+                                    </td>
+                                    <td style="text-align: center; width: 30px">
+                                        <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'><%#Eval("Emitted")%></span>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <span title="Number of times the Client has visited your Statement Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'><%#Eval("clientvisits")%></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </ItemTemplate>
+                    </telerik:GridTemplateColumn>
+                    <telerik:GridTemplateColumn DataField="InvoiceNotes" HeaderText="Notes" SortExpression="InvoiceNotes" ItemStyle-Font-Size="X-Small" UniqueName="InvoiceNotes">
                         <ItemTemplate>
                             <%# Eval("InvoiceNotes") %>
                         </ItemTemplate>
-                        <HeaderStyle HorizontalAlign="Center" />
                     </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="column" AllowFiltering="False"
-                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px">
-                        <ItemTemplate>
-                            <asp:LinkButton runat="server" ID="btnSatementPrint" CommandName="EmailPrint" CommandArgument='<%# Eval("Id") %>' ToolTip="Send Email with Statement information">
-                                                    <i class="far fa-envelope"></i>
-                            </asp:LinkButton>
-                            <asp:LinkButton ID="btnPrintStatement" runat="server" UseSubmitBehavior="false" ToolTip="Print Statement"
-                                CommandName="PDF" CommandArgument='<%# Eval("Id")%>' Visible="false">
-                                                <i class="far fa-file-pdf"></i></a>
-                            </asp:LinkButton>
-                            <a href='<%# LocalAPI.GetSharedLink_URL(55, Eval("Id"), True)%>' target="_blank" title="Print View Proposal Page">
-                                <i style="font-size: small; vertical-align: middle" class="fas fa-print"></i></a>
-                            </a>
 
-                            <a class="far fa-share-square" title="View Statement Page to share link"
-                                            href='<%# LocalAPI.GetSharedLink_URL(55, Eval("Id"))%>' target="_blank" aria-hidden="true"></a>
-                            
-                            <asp:LinkButton runat="server" ID="LinkbtnInvoicePaymentutton1" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
-                                ToolTip="Receive Payments" Visible='<%# Eval("AmountDue") > 0 %>'
-                                CssClass="badge-success badge">
-                                                    <i class="fas fa-dollar-sign"></i>
-                            </asp:LinkButton>
-
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
                     <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this Statement?" ConfirmTitle="Delete"
                         ButtonType="ImageButton" CommandName="Delete" Text="Delete" UniqueName="DeleteColumn"
                         HeaderText="" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
@@ -555,7 +602,7 @@
     </telerik:RadWindowManager>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         UpdateCommand="Statement_v20_UPDATE" UpdateCommandType="StoredProcedure"
-        SelectCommand="Statements_v20_SELECT" SelectCommandType="StoredProcedure"
+        SelectCommand="Statements_v21_SELECT" SelectCommandType="StoredProcedure"
         DeleteCommand="STATEMENT_DELETE"
         InsertCommand="Statement_v20_INSERT" InsertCommandType="StoredProcedure"
         DeleteCommandType="StoredProcedure">
@@ -574,6 +621,7 @@
             <asp:ControlParameter ControlID="RadDatePickerFrom" Name="DateFrom" PropertyName="SelectedDate" Type="DateTime" DefaultValue="" />
             <asp:ControlParameter ControlID="RadDatePickerTo" Name="DateTo" PropertyName="SelectedDate" Type="DateTime" />
             <asp:ControlParameter ControlID="cboClients" Name="Client" PropertyName="SelectedValue" Type="Int32" />
+            <asp:Parameter  Name="Status" Type="String"  />
             <asp:ControlParameter ControlID="cboReconcile" Name="ReconciledId" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="txtFind" ConvertEmptyStringToNull="False" Name="Find" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text"
@@ -640,8 +688,8 @@
     <asp:Label ID="lblStatementId" runat="server"></asp:Label>
     <asp:Label ID="lblStatementClientId" runat="server"></asp:Label>
 
-    <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" Visible="false" ToolTip="Date From of the filter">
+    <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US" Visible="false" ToolTip="Date From of the filter">
     </telerik:RadDatePicker>
-    <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" Visible="false" ToolTip="Date To of the filter">
+    <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US" Visible="false" ToolTip="Date To of the filter">
     </telerik:RadDatePicker>
 </asp:Content>

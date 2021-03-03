@@ -35,7 +35,7 @@
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />
     <div class="pasconcept-bar noprint">
         <span class="pasconcept-pagetitle">Time Sheet</span>
         <span style="float: right; vertical-align: middle;">
@@ -44,7 +44,7 @@
                     <td>From:
                     </td>
                     <td>
-                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" AutoPostBack="true" Width="130px"
+                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" AutoPostBack="true" Width="140px"
                             DateFormat="MM/dd/yyyy">
                         </telerik:RadDatePicker>
                     </td>

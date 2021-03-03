@@ -3,6 +3,28 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <%@ Import Namespace="pasconcept20" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+
+        <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+        <AjaxSettings>
+            <telerik:AjaxSetting AjaxControlID="RadGrid1">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadGrid2" LoadingPanelID="RadAjaxLoadingPanel1"/>
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+            <telerik:AjaxSetting AjaxControlID="btnRefresh">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadGrid2" LoadingPanelID="RadAjaxLoadingPanel1"/>
+                    <telerik:AjaxUpdatedControl ControlID="cboPeriod" />
+                    <telerik:AjaxUpdatedControl ControlID="RadDatePickerFrom" />
+                    <telerik:AjaxUpdatedControl ControlID="RadDatePickerTo" />
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+        </AjaxSettings>
+    </telerik:RadAjaxManager>
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />
+
     <telerik:RadCodeBlock ID="RadCodeBlock" runat="server">
         <script type="text/javascript">
             function PrintReport(sender, args) {
@@ -39,23 +61,27 @@
                     <td style="width: 180px">
                         <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" MarkFirstMatch="True" DropDownAutoWidth="Enabled">
                             <Items>
-                                <telerik:RadComboBoxItem Text="(Last 30 days)" Value="30" Selected="true" />
-                                <telerik:RadComboBoxItem Text="(Last 60 days)" Value="60" />
-                                <telerik:RadComboBoxItem Text="(Last 90 days)" Value="90" />
-                                <telerik:RadComboBoxItem Text="(Last 120 days)" Value="120" />
-                                <telerik:RadComboBoxItem Text="(Last 180 days)" Value="180" />
-                                <telerik:RadComboBoxItem Text="(Last 365 days)" Value="365" />
-                                <telerik:RadComboBoxItem Text="(This year)" Value="14" />
+                                <telerik:RadComboBoxItem Text="Last 30 days" Value="30" Selected="true" />
+                                <telerik:RadComboBoxItem Text="Last 60 days" Value="60" />
+                                <telerik:RadComboBoxItem Text="Last 90 days" Value="90" />
+                                <telerik:RadComboBoxItem Text="Last 120 days" Value="120" />
+                                <telerik:RadComboBoxItem Text="Last 180 days" Value="180" />
+                                <telerik:RadComboBoxItem Text="Last 365 days" Value="365" />
+                                <telerik:RadComboBoxItem Text="This year" Value="14" />
+                                <telerik:RadComboBoxItem Text="This month" Value="16" />
+                                <telerik:RadComboBoxItem Text="Last year" Value="15" />
+                                <telerik:RadComboBoxItem Text="Last month" Value="17" />
                                 <telerik:RadComboBoxItem Text="(All years...)" Value="13" />
+                                <telerik:RadComboBoxItem Text="Custom Range..." Value="99" />
                             </Items>
                         </telerik:RadComboBox>
                     </td>
                     <td style="width: 130px">
-                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" ToolTip="Date From for filter">
+                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US" ToolTip="Date From for filter">
                         </telerik:RadDatePicker>
                     </td>
                     <td style="width: 130px">
-                        <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" ToolTip="Date To for Filter">
+                        <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US" ToolTip="Date To for Filter">
                         </telerik:RadDatePicker>
                     </td>
                     <td style="width: 450px">
@@ -109,6 +135,8 @@
     </div>
     <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
         <WizardSteps>
+            
+            <%--Productive Time--%>
             <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Productive Time" StepType="Step">
                 <asp:Panel ID="PanelAssignedEmployees" runat="server" class="noprint">
                     <asp:Label ID="lblPanelAssignedEmployees" runat="server" Text="Job's Assigned Employees"></asp:Label>
@@ -314,6 +342,8 @@
                     </telerik:RadGrid>
                 </div>
             </telerik:RadWizardStep>
+
+            <%--Non-Productive Time--%>
             <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Non-Productive Time" StepType="Step">
                 <telerik:RadGrid ID="RadGrid2" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
                     AutoGenerateColumns="False" DataSourceID="SqlDataSource2" PageSize="50" AllowPaging="true"
@@ -325,14 +355,11 @@
                     <PagerStyle Mode="Slider" AlwaysVisible="false" />
                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource2">
                         <Columns>
-                            <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
-                                HeaderText="" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
+                            <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn" HeaderText="" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
                             </telerik:GridEditCommandColumn>
-                            <telerik:GridBoundColumn AllowFiltering="False" DataField="nEmployee" HeaderText="Employee" ReadOnly="True"
-                                SortExpression="nEmployee" UniqueName="nEmployee" HeaderStyle-Width="250px" >
+                            <telerik:GridBoundColumn AllowFiltering="False" DataField="nEmployee" HeaderText="Employee" ReadOnly="True" SortExpression="nEmployee" UniqueName="nEmployee" HeaderStyle-Width="220px" >
                             </telerik:GridBoundColumn>
-                            <telerik:GridTemplateColumn DataField="Name" FilterControlAltText="Filter Name column" HeaderText="Category"
-                                SortExpression="Name" UniqueName="Name" >
+                            <telerik:GridTemplateColumn DataField="Name" HeaderStyle-Width="220px" HeaderText="Category" SortExpression="Name" UniqueName="Name" >
                                 <EditItemTemplate>
                                     <div style="margin: 5px">
                                         <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceType" DataTextField="Name" Width="100%"
@@ -348,17 +375,17 @@
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridBoundColumn DataField="DateFrom" DataType="System.DateTime" HeaderText="From"
-                                SortExpression="DateFrom" UniqueName="DateFrom" DataFormatString="{0:d}" HeaderStyle-Width="100px"
+                            <telerik:GridBoundColumn DataField="DateFrom" DataType="System.DateTime" HeaderText="From" SortExpression="DateFrom" UniqueName="DateFrom" DataFormatString="{0:d}" HeaderStyle-Width="100px"
                                 ItemStyle-HorizontalAlign="Right" >
                             </telerik:GridBoundColumn>
                             <telerik:GridBoundColumn DataField="DateTo" DataType="System.DateTime" HeaderText="To" SortExpression="DateTo" UniqueName="DateTo" DataFormatString="{0:d}" HeaderStyle-Width="100px"
                                 ItemStyle-HorizontalAlign="Right">
                             </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Hours" HeaderText="Time" SortExpression="Hours" UniqueName="Hours"  ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px">
+                            <telerik:GridBoundColumn DataField="Hours" HeaderText="Time" SortExpression="Hours" UniqueName="Hours"  ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px">
                             </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Notes" HeaderText="Notes" SortExpression="Notes"
-                                UniqueName="Notes"  ItemStyle-HorizontalAlign="Left">
+                            <telerik:GridBoundColumn DataField="Notes" HeaderText="Notes" SortExpression="Notes" UniqueName="Notes" HeaderStyle-Width="250px">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="ExtraInfo" HeaderText="Additional Info" UniqueName="ExtraInfo" ReadOnly="true">
                             </telerik:GridBoundColumn>
                             <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
                                 CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText="" HeaderStyle-Width="50px"

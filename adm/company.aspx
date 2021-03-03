@@ -11,6 +11,7 @@
 
         .wizardStepHidden {
             height: 100%;
+            height: 100%;
             display: none !important;
         }
     </style>
@@ -24,13 +25,11 @@
 
 
 
-    <table class="table-sm pasconcept-bar" style="padding-left: 50px; padding-top: 10px">
-        <tr>
-            <td>
+    <div class="pasconcept-bar" style="width:100%">
                 <asp:FormView ID="FormView1" runat="server" DataKeyNames="companyId" DataSourceID="SqlDataSource1" Width="100%">
                     <ItemTemplate>
-                        <telerik:RadWizard ID="RadWizard1" runat="server" Height="720px" DisplayCancelButton="false"
-                            RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
+                        <telerik:RadWizard ID="RadWizard1" runat="server" Height="800px" DisplayCancelButton="false"
+                            RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false" Width="100%" RenderedSteps="Active">
                             <WizardSteps>
                                 <telerik:RadWizardStep runat="server" ID="RadWizardStepsCompanyInfo" Title="Company Information" ValidationGroup="Company" StepType="Start">
                                     <table style="width: 98%">
@@ -50,147 +49,158 @@
 
                                     <table class="table-sm">
                                         <tr>
-                                            <td width="160px">Company ID:
+                                            <td style="width:250px; text-align:right">Company ID:
                                             </td>
                                             <td>
-                                                <asp:Label ID="companyIdLabel" runat="server" Text='<%# Eval("companyId") %>' />
+                                                <%# Eval("companyId") %>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Company Name:
+                                            <td style="text-align:right">Company Name:
                                             </td>
                                             <td>
-                                                <asp:Label ID="NameLabel0" runat="server" Text='<%# Eval("Name")%>' />
+                                                <%# Eval("Name")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td width="160px">Administrator Email:
+                                            <td style="text-align:right">Administrator Name:
                                             </td>
                                             <td>
-                                                <asp:Label ID="EmailLabel" runat="server" Text='<%# Eval("Email")%>' />
+                                                <%# Eval("Contact")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Company Type:
+                                            <td style="text-align:right">Administrator Email:
                                             </td>
                                             <td>
-                                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("TypeName") %>' />
+                                                <%# Eval("Email")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Representative:
+                                            <td style="text-align:right">Company Type:
                                             </td>
                                             <td>
-                                                <asp:Label ID="ContactLabel" runat="server" Text='<%# Eval("Contact")%>' />
+                                                <%# Eval("TypeName") %>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Address Line 1:
+                                            <td style="text-align:right">Address Line 1:
                                             </td>
                                             <td>
-                                                <asp:Label ID="AddressLabel" runat="server" Text='<%# Eval("Address")%>' />
+                                                <%# Eval("Address")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Address Line 2:
+                                            <td style="text-align:right">Address Line 2:
                                             </td>
                                             <td>
-                                                <asp:Label ID="Label4" runat="server" Text='<%# Eval("Address2")%>' />
+                                                <%# Eval("Address2")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>City:
+                                            <td style="text-align:right">City:
                                             </td>
                                             <td>
-                                                <asp:Label ID="CityLabel" runat="server" Text='<%# Eval("City")%>' />
+                                                <%# Eval("City")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>State:
+                                            <td style="text-align:right">State:
                                             </td>
                                             <td>
-                                                <asp:Label ID="StateLabel" runat="server" Text='<%# Eval("State")%>' />
+                                                <%# Eval("State")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Zip Code:
+                                            <td style="text-align:right">Zip Code:
                                             </td>
                                             <td>
-                                                <asp:Label ID="ZipCodeLabel" runat="server" Text='<%# Eval("ZipCode")%>' />
+                                                <%# Eval("ZipCode")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Telephone:
+                                            <td style="text-align:right">Telephone:
                                             </td>
                                             <td>
-                                                <asp:Label ID="PhoneLabel" runat="server" Text='<%# Eval("Phone")%>' />
+                                                <%# Eval("Phone")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Cell Phone:
+                                            <td style="text-align:right">Cell Phone:
                                             </td>
                                             <td>
-                                                <asp:Label ID="MovileLabel" runat="server" Text='<%# Eval("Movile")%>' />
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;
-                                        <telerik:RadButton ID="btnSMS" runat="server" Text="Send Test SMS" OnClick="btnSMS_Click" ToolTip="Send SMS to CellPhone" Visible='<%# LocalAPI.IsCompanySMSservice(lblCompanyId.Text)%>'>
-                                        </telerik:RadButton>
-                                                &nbsp;
-
+                                                <%# Eval("Movile")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Fax:
+                                            <td style="text-align:right">Fax:
                                             </td>
                                             <td>
-                                                <asp:Label ID="FaxLabel" runat="server" Text='<%# Eval("Fax")%>' />
+                                                <%# Eval("Fax")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Website:
+                                            <td style="text-align:right">Website:
                                             </td>
                                             <td>
                                                 <asp:HyperLink ID="webLabel" runat="server" Target="_blank" Text='<%# Eval("web")%>' NavigateUrl='<%# Eval("web")%>'></asp:HyperLink>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Language</td>
+                                            <td style="text-align:right">Language</td>
                                             <td>
-                                                <asp:Label ID="LanguageLabel" runat="server" Text='<%# Eval("Language")%>' />
+                                                <%# Eval("Language")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Accountant's Email:
+                                            <td style="text-align:right">Accounting Email:
                                             </td>
                                             <td>
-                                                <asp:Label ID="Label6" runat="server" Text='<%# Eval("AccountantEmail")%>' ToolTip="Email of the Accountant for send BCC Invoices and Statements copy" />
+                                                <asp:Label ID="Label6" runat="server" Text='<%# Eval("AccountantEmail")%>' ToolTip="This email will receive BCC copies of invoices" />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>HR Manager Name:
+                                            <td style="text-align:right">Human Resources Manager Name:
                                             </td>
                                             <td>
-                                                <asp:Label ID="Label7" runat="server" Text='<%# Eval("HR_Name")%>' ToolTip="Human Resource manager" />
+                                                <%# Eval("HR_Name")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>HR Manager's Email:
+                                            <td style="text-align:right">Human Resources Manager Email:
                                             </td>
                                             <td>
-                                                <asp:Label ID="Label8" runat="server" Text='<%# Eval("HR_Email")%>' ToolTip="Email of Time off Request (Vacations/Personal days)" />
+                                                <asp:Label ID="Label8" runat="server" Text='<%# Eval("HR_Email")%>' ToolTip="Human Resources Manager Email to Vacation Request" />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Expiration Date:
+                                            <td style="text-align:right">HR Pay Frequency:
+                                            </td>
+                                            <td>
+                                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("HR_payfrequency")%>' ToolTip="Payment Frequency" />
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td style="text-align:right">Expiration Date:
                                             </td>
                                             <td>
                                                 <asp:Label ID="Label2" runat="server" Text='<%# Eval("billingExpirationDate", "{0:d}")%>' ToolTip="Due Date to renove your PASconcept subscription." />
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td style="text-align:right">Time Zone (UTC):
+                                            </td>
+                                            <td>
+                                                <%# Eval("TimeZone")%>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>hourly offset from GMT, example: ET Eastern Time UTC -5:00 / -4:00</small>
+                                            </td>
+                                        </tr>
                                     </table>
                                 </telerik:RadWizardStep>
 
-                                <telerik:RadWizardStep runat="server" ID="RadWizardStepSMTP" Title="Email/Storage" ValidationGroup="SMTP" StepType="Step">
+                                <telerik:RadWizardStep runat="server" ID="RadWizardStepSMTP" Title="Email/SMS/Storage" ValidationGroup="SMTP" StepType="Step">
                                     <table style="width: 98%">
                                         <tr>
                                             <td>
@@ -208,7 +218,7 @@
 
                                     <table class="table-sm">
                                         <tr>
-                                            <td style="width: 180px">Outgoing Email From:
+                                            <td style="width: 250px">Outgoing Email From:
                                             </td>
                                             <td>
                                                 <asp:Label ID="labelwebEmailUserNameTextBox" runat="server" Text='<%# Eval("webEmailUserName")%>' ToolTip="Outgoing account name (username@company_domain.com)"></asp:Label>
@@ -217,7 +227,7 @@
                                         </tr>
 
                                         <tr>
-                                            <td style="width: 180px">SMTP Server:
+                                            <td>SMTP Server:
                                             </td>
                                             <td>
                                                 <asp:Label ID="webEmailSMTPLabel" runat="server" Text='<%# Eval("webEmailSMTP")%>' ToolTip="Outgoing mail SMTP (smtp.company_domain.com)" />
@@ -225,10 +235,10 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="width: 180px">SMTP TLS/SSL Required:
+                                            <td>SMTP TLS/SSL Required:
                                             </td>
                                             <td>
-                                                <asp:CheckBox ID="CheckBox655" runat="server" Checked='<%# Eval("webEmailEnableSsl")%>' Enabled="false" />
+                                                <telerik:RadCheckBox ID="CheckBox655" runat="server" Checked='<%# Eval("webEmailEnableSsl")%>' Enabled="false" />
 
                                             </td>
                                         </tr>
@@ -240,10 +250,10 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="width: 180px">SMTP Use Default Credentials:
+                                            <td>SMTP Use Default Credentials:
                                             </td>
                                             <td>
-                                                <asp:CheckBox ID="CheckBox13" runat="server" Checked='<%# Eval("webUseDefaultCredentials")%>' Enabled="false" />
+                                                <telerik:RadCheckBox ID="CheckBox13" runat="server" Checked='<%# Eval("webUseDefaultCredentials")%>' Enabled="false" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -259,6 +269,32 @@
 
                                     </table>
 
+                                     <table style="width: 98%">
+                                        <tr>
+                                            <td colspan="2">
+                                                <h4 style="margin: 0">
+                                                SMS Setting</h3>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 250px">Active/Inactive:
+                                            </td>
+                                            <td>
+                                                <telerik:RadCheckBox ID="CheckBox15" runat="server" Checked='<%# Eval("Active")%>' Enabled="false" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <asp:LinkButton ID="btnSMS" runat="server" ToolTip="Send Test SMS" CommandName="SendTestSMS" CausesValidation="False" CssClass="btn btn-primary" UseSubmitBehavior="false"
+                                                    Visible='<%# Eval("Active")%>'>
+                                                        <i class="fas fa-sms"></i> Test SMS
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+
                                     <table style="width: 98%">
                                         <tr>
                                             <td colspan="2">
@@ -267,7 +303,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="width: 180px">Number of Files:
+                                            <td style="width: 250px">Number of Files:
                                             </td>
                                             <td>
                                                 <%# Eval("StorageFiles")%>
@@ -304,35 +340,35 @@
                                             <td width="160px">Job Profit:
                                             </td>
                                             <td>
-                                                <asp:CheckBox ID="Notification_invoiceemittedCheckBox" runat="server" Checked='<%# Eval("Notification_JobProfit")%>' Enabled="false" />
+                                                <telerik:RadCheckBox ID="Notification_invoiceemittedCheckBox" runat="server" Checked='<%# Eval("Notification_JobProfit")%>' Enabled="false" />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Proposal Accepted/Declined:
                                             </td>
                                             <td>
-                                                <asp:CheckBox ID="CheckBox1" runat="server" Checked='<%# Eval("Notification_AceptedProposal")%>' Enabled="false" />
+                                                <telerik:RadCheckBox ID="CheckBox1" runat="server" Checked='<%# Eval("Notification_AceptedProposal")%>' Enabled="false" />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>RFP Accepted/Declined:
                                             </td>
                                             <td>
-                                                <asp:CheckBox ID="CheckBox5" runat="server" Checked='<%# Eval("Notification_AceptedRFP")%>' Enabled="false" />
+                                                <telerik:RadCheckBox ID="CheckBox5" runat="server" Checked='<%# Eval("Notification_AceptedRFP")%>' Enabled="false" />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Invoice Emitted:
                                             </td>
                                             <td>
-                                                <asp:CheckBox ID="CheckBox2" runat="server" Checked='<%# Eval("Notification_EmittedInvoice")%>' Enabled="false" />
+                                                <telerik:RadCheckBox ID="CheckBox2" runat="server" Checked='<%# Eval("Notification_EmittedInvoice")%>' Enabled="false" />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Invoice Collected:
                                             </td>
                                             <td>
-                                                <asp:CheckBox ID="CheckBox3" runat="server" Checked='<%# Eval("Notification_CollectedInvoice")%>' Enabled="false" />
+                                                <telerik:RadCheckBox ID="CheckBox3" runat="server" Checked='<%# Eval("Notification_CollectedInvoice")%>' Enabled="false" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -364,7 +400,7 @@
                                                 <td width="160px">Activate SMS:
                                                 </td>
                                                 <td>
-                                                    <asp:CheckBox ID="CheckBox6" runat="server" Checked='<%# Bind("SMSservice")%>' Enabled="false" />
+                                                    <telerik:RadCheckBox ID="CheckBox6" runat="server" Checked='<%# Bind("SMSservice")%>' Enabled="false" />
                                                 </td>
                                             </tr>
                                         </table>
@@ -450,18 +486,16 @@
                                     </table>
                                 </telerik:RadWizardStep>
 
-
                                 <telerik:RadWizardStep runat="server" ID="RadWizardStepLogo" Title="Logo & Signature" StepType="Step">
                                     <h4 style="margin: 0">Logo & Signature Setting</h3>
-                                    <table class="table-sm">
+                                    <table class="table-sm" style="width:100%">
                                         <tr>
-                                            <td>Picture quality recommended for company letter head: 1700 x 225 pixels, 200 dpi resolution equivalent to 8,5" x 1,5"
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; vertical-align: top">
+                                            <td style="width: 60%; vertical-align: top">
                                                 <h3>Company Logo</h3>
-                                                <telerik:RadGrid runat="server" AutoGenerateColumns="False" ID="RadGridLogo" DataSourceID="SqlDataSourceLogo" AllowAutomaticUpdates="True">
+                                                <small>
+                                                    The Company Logo is used in the header of client communication pages, such as Proposal, Invoices, Statements
+                                                </small>
+                                                <telerik:RadGrid runat="server" AutoGenerateColumns="False" ID="RadGridLogo" DataSourceID="SqlDataSourceLogo" AllowAutomaticUpdates="True" AllowAutomaticDeletes="true">
                                                     <MasterTableView DataKeyNames="companyId" DataSourceID="SqlDataSourceLogo">
                                                         <Columns>
                                                             <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
@@ -470,6 +504,11 @@
                                                             <telerik:GridBinaryImageColumn DataField="shortLogo" HeaderText="Proposal/Invoice Logo" UniqueName="shortLogo"
                                                                 ImageAlign="NotSet" ImageWidth="180px" ImageHeight="170px" ResizeMode="Fit">
                                                             </telerik:GridBinaryImageColumn>
+                                                            <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Remove Company Logo Image?" ConfirmTitle="Delete"
+                                                                ButtonType="ImageButton" CommandName="Delete" Text="Delete" UniqueName="DeleteColumn"
+                                                                HeaderText="Remove" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="100px"
+                                                                ItemStyle-HorizontalAlign="Center">
+                                                            </telerik:GridButtonColumn>
                                                         </Columns>
                                                         <EditFormSettings CaptionFormatString="Edit Proposal/Invoice Logo" FormCaptionStyle-ForeColor="#ff8c00">
                                                             <FormTableItemStyle Wrap="False"></FormTableItemStyle>
@@ -482,6 +521,7 @@
                                                             </EditColumn>
                                                             <FormTableButtonRowStyle HorizontalAlign="Left" CssClass="EditFormButtonRow"></FormTableButtonRowStyle>
                                                         </EditFormSettings>
+
                                                     </MasterTableView>
                                                 </telerik:RadGrid>
                                             </td>
@@ -489,7 +529,10 @@
                                         <tr>
                                             <td style="vertical-align: top">
                                                 <h3>Signature Pictures</h3>
-                                                <telerik:RadGrid runat="server" AutoGenerateColumns="False" ID="RadGridSign" DataSourceID="SqlDataSourceSign" AllowAutomaticUpdates="True">
+                                                <small>
+                                                    Signature is used in Proposals sent to clients
+                                                </small>
+                                                <telerik:RadGrid runat="server" AutoGenerateColumns="False" ID="RadGridSign" DataSourceID="SqlDataSourceSign" AllowAutomaticUpdates="True" AllowAutomaticDeletes="true">
                                                     <MasterTableView DataKeyNames="companyId" DataSourceID="SqlDataSourceSign">
                                                         <Columns>
                                                             <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn" HeaderText="Edit"
@@ -498,6 +541,11 @@
                                                             <telerik:GridBinaryImageColumn DataField="imgSign" HeaderText="Proposal Signature" UniqueName="imgSign"
                                                                 ImageAlign="NotSet" ImageHeight="180px" ImageWidth="180px" ResizeMode="Fit">
                                                             </telerik:GridBinaryImageColumn>
+                                                            <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Remove Company Signature Pictures?" ConfirmTitle="Delete"
+                                                                ButtonType="ImageButton" CommandName="Delete" Text="Delete" UniqueName="DeleteColumn"
+                                                                HeaderText="Remove" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="100px"
+                                                                ItemStyle-HorizontalAlign="Center">
+                                                            </telerik:GridButtonColumn>
                                                         </Columns>
                                                         <EditFormSettings CaptionFormatString="Edit Proposal Signature" FormCaptionStyle-ForeColor="#ff8c00">
                                                             <FormTableItemStyle Wrap="False"></FormTableItemStyle>
@@ -517,9 +565,9 @@
                                     </table>
                                 </telerik:RadWizardStep>
 
-                                <telerik:RadWizardStep runat="server" ID="RadWizardStep4" Title="QuickBooks" ValidationGroup="QuickBooks" StepType="Step" CssClass="wizardStepHidden">
+                                <telerik:RadWizardStep runat="server" ID="RadWizardStepQuickBook" Title="QuickBooks" ValidationGroup="QuickBooks" StepType="Step" CssClass='<%# IIf(LocalAPI.IsQuickBookModule(lblCompanyId.Text), "wizardStep", "wizardStepHidden") %>'>
                                     <div class="pasconcept-bar">
-                                        <table class="table-sm">
+                                        <table class="table-sm" style="width:100%">
                                             <tr>
                                                 <td colspan="2">
                                                     <h3 style="padding-left: 50px; margin: 3px">Sign In to authorize PASconcept to connect to Intuit</h3>
@@ -564,28 +612,28 @@
                                                 <td style="width: 250px; text-align: right; padding-right: 5px">Synchronize Employees:
                                                 </td>
                                                 <td>
-                                                    <asp:CheckBox ID="ckhSynchronizeEmployeesRO" runat="server" Checked='<%# Eval("qbSynchronizeEmployees")%>' Enabled="false" />
+                                                    <telerik:RadCheckBox ID="ckhSynchronizeEmployeesRO" runat="server" Checked='<%# Eval("qbSynchronizeEmployees")%>' Enabled="false" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right; padding-right: 5px">Synchronize Employees Time:
                                                 </td>
                                                 <td>
-                                                    <asp:CheckBox ID="chkqbSynchronizeEmployeesTimeRO" runat="server" Checked='<%# Eval("qbSynchronizeEmployeesTime")%>' Enabled="false" />
+                                                    <telerik:RadCheckBox ID="chkqbSynchronizeEmployeesTimeRO" runat="server" Checked='<%# Eval("qbSynchronizeEmployeesTime")%>' Enabled="false" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right; padding-right: 5px">Synchronize Employee Vacations:
                                                 </td>
                                                 <td>
-                                                    <asp:CheckBox ID="chkqbSynchronizeEmployeesVacationRO" runat="server" Checked='<%# Eval("qbSynchronizeEmployeesVacation")%>' Enabled="false" />
+                                                    <telerik:RadCheckBox ID="chkqbSynchronizeEmployeesVacationRO" runat="server" Checked='<%# Eval("qbSynchronizeEmployeesVacation")%>' Enabled="false" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right; padding-right: 5px">Synchronize Employees Personal Time:
                                                 </td>
                                                 <td>
-                                                    <asp:CheckBox ID="chkqbSynchronizeEmployeesPersonalRO" runat="server" Checked='<%# Eval("qbSynchronizeEmployeesPersonal")%>' Enabled="false" />
+                                                    <telerik:RadCheckBox ID="chkqbSynchronizeEmployeesPersonalRO" runat="server" Checked='<%# Eval("qbSynchronizeEmployeesPersonal")%>' Enabled="false" />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -597,21 +645,21 @@
                                                 <td style="width: 250px; text-align: right; padding-right: 5px">Synchronize Clients:
                                                 </td>
                                                 <td>
-                                                    <asp:CheckBox ID="chkqbSynchronizeClientsRO" runat="server" Checked='<%# Eval("qbSynchronizeClients")%>' Enabled="false" />
+                                                    <telerik:RadCheckBox ID="chkqbSynchronizeClientsRO" runat="server" Checked='<%# Eval("qbSynchronizeClients")%>' Enabled="false" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="width: 250px; text-align: right; padding-right: 5px">Online Payment:
                                                 </td>
                                                 <td>
-                                                    <asp:CheckBox ID="CheckBox9" runat="server" Checked='<%# Eval("qbOnlinePayment")%>' Enabled="false" />
+                                                    <telerik:RadCheckBox ID="CheckBox9" runat="server" Checked='<%# Eval("qbOnlinePayment")%>' Enabled="false" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right; padding-right: 5px">Synchronize Invoices:
                                                 </td>
                                                 <td>
-                                                    <asp:CheckBox ID="CheckBox11" runat="server" Checked='<%# Eval("qbSynchronizeInvoices")%>' Enabled="false" />
+                                                    <telerik:RadCheckBox ID="CheckBox11" runat="server" Checked='<%# Eval("qbSynchronizeInvoices")%>' Enabled="false" />
                                                 </td>
                                             </tr>
                                         </table>
@@ -620,45 +668,99 @@
                                     </div>
                                 </telerik:RadWizardStep>
 
-                                <telerik:RadWizardStep runat="server" ID="RadWizardStep5" Title="Add-Ons" ValidationGroup="Add-Ons" StepType="Step" CssClass="wizardStepHidden">
-                                    <div class="pasconcept-bar" style="width: 800px">
-                                        <h3>List of modules available</h3>
+                                <telerik:RadWizardStep runat="server" ID="RadWizardStep5" Title="Add-Ons and Integration" ValidationGroup="Add-Ons" StepType="Step">
+                                    <div class="pasconcept-bar" style="width: 98%">
+                                        <h3>PASconcept Add-Ons and  Integrations</h3>
+                                        <br />
+                                        <table class="table-sm">
+                                            <tr>
+                                                <td colspan="3">
+                                                    <hr />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width:20px">
+                                                    <telerik:RadCheckBox ID="chkazureStorage" runat="server" Checked='<%# Eval("azureStorage")%>' Enabled="false" />
+                                                </td>
+                                                <td style="width:400px">
+                                                    <h4>PASconcept Cloud Files Storage</h4>
+                                                </td>
+                                                <td>
+                                                    Activating this Add-on allows PASconcept users to upload files directly to Jobs, Clients and Proposals.
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <telerik:RadCheckBox ID="chkbillingModule" runat="server" Checked='<%# Eval("billingModule")%>' Enabled="false" />
+                                                </td>
+                                                <td>
+                                                    <h4>PASconcept Additional Billing Options</h4>
+                                                </td>
+                                                <td>
+                                                    Activating this Add-on opens PASconcept to include additional billing options such as periodic billing.
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <hr />
+                                                </td>
+                                            </tr>
 
-                                        <div class="checkbox">
-                                            <label>
-                                                <asp:CheckBox ID="chkPayPal" runat="server" Text="PayPal Connection" Checked='<%# Eval("PayPalModule")%>' Enabled="false" />
-                                                <p class="text-muted" style="padding-left: 20px">'Pay here' button in Invoices and Statements</p>
-                                            </label>
-                                        </div>
+                                            <tr>
+                                                <td>
+                                                    <telerik:RadCheckBox ID="chkPayPal" runat="server" Checked='<%# Eval("PayPalModule")%>' Enabled="false" />
+                                                </td>
+                                                <td>
+                                                    <h4>PayPal Integration</h4>
+                                                </td>
+                                                <td>
+                                                    Activating the PayPal integrations allows your clients to process payment for invoices and statements though a 'Pay Here' button. Any payments made are tracked in PASconcept.
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <telerik:RadCheckBox ID="chkqbModule" runat="server" Checked='<%# Eval("qbModule")%>' Enabled="false" />
+                                                </td>
+                                                <td>
+                                                    <h4>Quick Book Integration</h4>
+                                                </td>
+                                                <td>
+                                                    Activating this integration allows for an exchange of information between PASconcept and QuickBooks. This exchange of information includes Clients, Employees, Invoices and Payments.
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <telerik:RadCheckBox ID="chkSMSservice" runat="server" Checked='<%# Eval("SMSservice")%>' Enabled="false" />
+                                                </td>
+                                                <td>
+                                                    <h4>Twillio Integration</h4>
+                                                </td>
+                                                <td>
+                                                    Activating this integration allows for PASconcept to sent messages via SMS to Clients and Users.
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <telerik:RadCheckBox ID="RadCheckBox1" runat="server" Checked='<%# Eval("IsEbilityModule")%>' Enabled="false" />
+                                                </td>
+                                                <td>
+                                                    <h4>eBillity Integrations</h4>
+                                                </td>
+                                                <td>
+                                                    Activating this integration allows for an exchange of information between PASconcept and eBillity. This exchange of information includes Clients, Employees, Projects, Time Entires and Time Activities.
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <hr />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <br />
+                                        <small>To activate any of the above integrations or add-ons please contact Matthew Mur at <a href="mailto:matt@axzes.com" title="Mail to">matt@axzes.com</a></small>
 
-                                        <div class="checkbox">
-                                            <label>
-                                                <asp:CheckBox ID="chkqbModule" runat="server" Text="Quick Book Connection" Checked='<%# Eval("qbModule")%>' Enabled="false" />
-                                                <p class="text-muted" style="padding-left: 20px">Connect the jobs and invoices directly to QB</p>
-                                            </label>
-                                        </div>
 
-                                        <div class="checkbox">
-                                            <label>
-                                                <asp:CheckBox ID="chkazureStorage" runat="server" Text="File Storage" Checked='<%# Eval("azureStorage")%>' Enabled="false" />
-                                                <p class="text-muted" style="padding-left: 20px">Allows you to upload files to the cloud associated projects</p>
-                                            </label>
-                                        </div>
-
-                                        <div class="checkbox">
-                                            <label>
-                                                <asp:CheckBox ID="chkSMSservice" runat="server" Text="SMS Service" Checked='<%# Eval("SMSservice")%>' Enabled="false" />
-                                                <p class="text-muted" style="padding-left: 20px">Allows send SMS text like Emails</p>
-                                            </label>
-                                        </div>
-
-                                        <div class="checkbox">
-                                            <label>
-                                                <asp:CheckBox ID="chkbillingModule" runat="server" Text="Additional Billing Options" Checked='<%# Eval("billingModule")%>' Enabled="false" />
-                                                <p class="text-muted" style="padding-left: 20px">Schedule periodic sending invoices and other options</p>
-                                            </label>
-                                        </div>
-                                        <h4>To request the hiring of these modules, contact:  matt@axzes.com</h4>
+                                        
                                     </div>
                                 </telerik:RadWizardStep>
                             </WizardSteps>
@@ -667,7 +769,7 @@
                     </ItemTemplate>
 
                     <EditItemTemplate>
-                        <telerik:RadWizard ID="RadWizard2" runat="server" Height="720px" DisplayCancelButton="false"
+                        <telerik:RadWizard ID="RadWizard2" runat="server" Height="750px" DisplayCancelButton="false"
                             RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
                             <WizardSteps>
                                 <telerik:RadWizardStep runat="server" ID="RadWizardStepsCompanyInfo2" Title="Company Information" ValidationGroup="Company" StepType="Start">
@@ -692,28 +794,29 @@
                                     </table>
                                     <table class="table-sm">
                                         <tr>
-                                            <td>Company ID:
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="companyIdLabel" runat="server" Text='<%# Eval("companyId") %>' />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Company Name:
+                                            <td style="width:250px; text-align:right">Company Name:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' Width="500px" />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Administrator Email:
+                                            <td style="text-align:right">Administrator Name:
+                                            </td>
+                                            <td>
+                                                <telerik:RadTextBox ID="ContactTextBox" runat="server" Text='<%# Bind("Contact")%>'
+                                                    Width="500px" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right">Administrator Email:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="EmailTextBox" runat="server" Text='<%# Bind("Email")%>' MaxLength="128" Width="500px" />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Company Type:
+                                            <td style="text-align:right">Company Type:
                                             </td>
                                             <td>
                                                 <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceTypes"
@@ -726,15 +829,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Representative:
-                                            </td>
-                                            <td>
-                                                <telerik:RadTextBox ID="ContactTextBox" runat="server" Text='<%# Bind("Contact")%>'
-                                                    Width="500px" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Address Line 1:
+                                            <td style="text-align:right">Address Line 1:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="AddressTextBox" runat="server" Text='<%# Bind("Address")%>'
@@ -742,7 +837,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Address Line 2:
+                                            <td style="text-align:right">Address Line 2:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="RadTextBox1" runat="server" Text='<%# Bind("Address2")%>'
@@ -750,56 +845,92 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>City:
+                                            <td style="text-align:right">City:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="CityTextBox" runat="server" Text='<%# Bind("City")%>' Width="500px" />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>State:
+                                            <td style="text-align:right">State:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="StateTextBox" runat="server" Text='<%# Bind("State")%>' Width="500px" />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Zip Code:
+                                            <td style="text-align:right">Zip Code:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="ZipCodeTextBox" runat="server" Text='<%# Bind("ZipCode") %>' />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Telephone:
+                                            <td style="text-align:right">Telephone:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="PhoneTextBox" runat="server" Text='<%# Bind("Phone")%>' />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Cell Phone:
+                                            <td style="text-align:right">Cell Phone:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="MovileTextBox" runat="server" Text='<%# Bind("Movile")%>' />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Fax:
+                                            <td style="text-align:right">Fax:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="FaxTextBox" runat="server" Text='<%# Bind("Fax")%>' />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Website:
+                                            <td style="text-align:right">Website:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="webTextBox" runat="server" Text='<%# Bind("web")%>' Width="500px" />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Language</td>
+                                            <td style="text-align:right">Accounting Email:
+                                            </td>
+                                            <td>
+                                                <telerik:RadTextBox ID="txtAccountantEmail" runat="server" Text='<%# Bind("AccountantEmail")%>' MaxLength="128" Width="500px" ToolTip="This email will receive BCC copies of invoices" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right">Human Resources Manager Name:
+                                            </td>
+                                            <td>
+                                                <telerik:RadTextBox ID="RadTextBox4" runat="server" Text='<%# Bind("HR_Name")%>' MaxLength="80" Width="500px" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right">Human Resources Manager Email:
+                                            </td>
+                                            <td>
+                                                <telerik:RadTextBox ID="RadTextBox5" runat="server" Text='<%# Bind("HR_Email")%>' MaxLength="128" Width="500px" EmptyMessage="Email to send Time off Request" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right">HR Pay Frequency:
+                                            </td>
+                                            <td>
+                                                <telerik:RadComboBox ID="cboHR_payfrequency" runat="server" Width="300px" SelectedValue='<%# Bind("HR_payfrequencyId")%>'>
+                                                    <Items>
+                                                        <telerik:RadComboBoxItem runat="server" Text="Not defined" Value="0" />
+                                                        <telerik:RadComboBoxItem runat="server" Text="Every Week" Value="7" />
+                                                        <telerik:RadComboBoxItem runat="server" Text="Every Other Week" Value="14" />
+                                                        <telerik:RadComboBoxItem runat="server" Text="Every Month" Value="1" />
+                                                    </Items>
+                                                </telerik:RadComboBox>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="text-align:right">Language:</td>
                                             <td>
                                                 <telerik:RadComboBox ID="cboLanguage" runat="server" Width="150px" SelectedValue='<%# Bind("Language")%>'>
                                                     <Items>
@@ -810,27 +941,15 @@
 
                                             </td>
                                         </tr>
+
                                         <tr>
-                                            <td width="160px">Accountant's Email:
-                                            </td>
+                                            <td style="text-align:right">Time Zone:</td>
                                             <td>
-                                                <telerik:RadTextBox ID="txtAccountantEmail" runat="server" Text='<%# Bind("AccountantEmail")%>' MaxLength="128" Width="500px" EmptyMessage="Email to send BCC invoices copy" ToolTip="Email of the Accountant for send BCC Invoices and Statements copy" />
+                                                <telerik:RadNumericTextBox ID="RadTextBox15" runat="server" Text='<%# Bind("TimeZone")%>' Width="150px" />
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>hourly offset from GMT, example: ET Eastern Time UTC -5:00 / -4:00</small>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td width="160px">HR Manager Name:
-                                            </td>
-                                            <td>
-                                                <telerik:RadTextBox ID="RadTextBox4" runat="server" Text='<%# Bind("HR_Name")%>' MaxLength="80" Width="500px" EmptyMessage="Human Resource manager Name" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="160px">HR Manager's Email:
-                                            </td>
-                                            <td>
-                                                <telerik:RadTextBox ID="RadTextBox5" runat="server" Text='<%# Bind("HR_Email")%>' MaxLength="128" Width="500px" EmptyMessage="Email to send Time off Request" />
-                                            </td>
-                                        </tr>
+
                                     </table>
                                 </telerik:RadWizardStep>
 
@@ -839,7 +958,7 @@
                                         <tr>
                                             <td>
                                                 <h4 style="margin: 0">
-                                                Email SMTP Outgoing Settings</h3>
+                                                Email SMTP Outgoing Settings</h4>
                                             </td>
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton7" runat="server" ToolTip="Update changes to Company Email SMTP Settings" CommandName="Update" CausesValidation="True"
@@ -856,7 +975,7 @@
                                     </table>
                                     <table class="table-sm">
                                         <tr>
-                                            <td style="width: 220px">Outgoing Email From:
+                                            <td style="width: 250px">Outgoing Email From:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="webEmailUserNameTextBox" runat="server" Text='<%# Bind("webEmailUserName")%>' ToolTip="Outgoing account name (username@company_domain.com)"
@@ -901,14 +1020,59 @@
                                             <td>SMTP TLS/SSL Required:
                                             </td>
                                             <td>
-                                                <asp:CheckBox ID="CheckBox6jj" runat="server" Checked='<%# Bind("webEmailEnableSsl")%>' />
+                                                <telerik:RadCheckBox ID="CheckBox6jj" runat="server" Checked='<%# Bind("webEmailEnableSsl")%>' />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>SMTP Use Default Credentials:
                                             </td>
                                             <td>
-                                                <asp:CheckBox ID="CheckBox14" runat="server" Checked='<%# Bind("webUseDefaultCredentials")%>' />
+                                                <telerik:RadCheckBox ID="CheckBox14" runat="server" Checked='<%# Bind("webUseDefaultCredentials")%>' />
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                     <table class="table-sm">
+                                        <tr>
+                                            <td colspan="2">
+                                                <hr />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <h4>
+                                                Twilio SMS Settings (https://www.twilio.com/console)</h4>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Active:
+                                            </td>
+                                            <td>
+                                                <telerik:RadCheckBox ID="CheckBox16" runat="server" Checked='<%# Bind("Active")%>' />
+                                            </td>
+                                        </tr>
+                                         <tr>
+                                            <td style="width: 250px">Account SID:
+                                            </td>
+                                            <td>
+                                                <telerik:RadTextBox ID="RadTextBox12" runat="server" Text='<%# Bind("accountSid")%>' 
+                                                    Width="500px" EmptyMessage="" />
+                                            </td>
+                                        </tr>
+                                         <tr>
+                                            <td>Auth Token:
+                                            </td>
+                                            <td>
+                                                <telerik:RadTextBox ID="RadTextBox13" runat="server" Text='<%# Bind("authToken")%>' 
+                                                    Width="500px"  />
+                                            </td>
+                                        </tr>
+                                         <tr>
+                                            <td>Twilio Phone:
+                                            </td>
+                                            <td>
+                                                <telerik:RadTextBox ID="RadTextBox14" runat="server" Text='<%# Bind("TwilioPhone")%>' 
+                                                    Width="500px"  />
                                             </td>
                                         </tr>
                                     </table>
@@ -939,35 +1103,35 @@
                                             <td width="180px">Job Profit:
                                             </td>
                                             <td>
-                                                <asp:CheckBox ID="CheckBox11_EDIT" runat="server" Checked='<%# Bind("Notification_JobProfit")%>' />
+                                                <telerik:RadCheckBox ID="CheckBox11_EDIT" runat="server" Checked='<%# Bind("Notification_JobProfit")%>' />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Proposal Accepted/Declined:
                                             </td>
                                             <td>
-                                                <asp:CheckBox ID="CheckBox1_EDIT" runat="server" Checked='<%# Bind("Notification_AceptedProposal")%>' />
+                                                <telerik:RadCheckBox ID="CheckBox1_EDIT" runat="server" Checked='<%# Bind("Notification_AceptedProposal")%>' />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>RFP Accepted/Declined:
                                             </td>
                                             <td>
-                                                <asp:CheckBox ID="CheckBox4" runat="server" Checked='<%# Bind("Notification_AceptedRFP")%>' />
+                                                <telerik:RadCheckBox ID="CheckBox4" runat="server" Checked='<%# Bind("Notification_AceptedRFP")%>' />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Invoice Emitted:
                                             </td>
                                             <td>
-                                                <asp:CheckBox ID="CheckBox2_EDIT" runat="server" Checked='<%# Bind("Notification_EmittedInvoice")%>' />
+                                                <telerik:RadCheckBox ID="CheckBox2_EDIT" runat="server" Checked='<%# Bind("Notification_EmittedInvoice")%>' />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Invoice Collected:
                                             </td>
                                             <td>
-                                                <asp:CheckBox ID="CheckBox3_EDIT" runat="server" Checked='<%# Bind("Notification_CollectedInvoice")%>' />
+                                                <telerik:RadCheckBox ID="CheckBox3_EDIT" runat="server" Checked='<%# Bind("Notification_CollectedInvoice")%>' />
                                             </td>
                                         </tr>
                                         <tr>
@@ -1002,7 +1166,7 @@
                                             <td width="160px">Activate SMS:
                                             </td>
                                             <td>
-                                                <asp:CheckBox ID="CheckBoxSMSservice" runat="server" Checked='<%# Bind("SMSservice")%>' />
+                                                <telerik:RadCheckBox ID="CheckBoxSMSservice" runat="server" Checked='<%# Bind("SMSservice")%>' />
                                             </td>
                                         </tr>
 
@@ -1150,28 +1314,28 @@
                                             <td style="width: 260px; text-align: right; padding-right: 5px">Synchronize Employees:
                                             </td>
                                             <td>
-                                                <asp:CheckBox ID="ckhSynchronizeEmployees" runat="server" Checked='<%# Bind("qbSynchronizeEmployees")%>' />
+                                                <telerik:RadCheckBox ID="ckhSynchronizeEmployees" runat="server" Checked='<%# Bind("qbSynchronizeEmployees")%>' />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right; padding-right: 5px">Synchronize Employees Time:
                                             </td>
                                             <td>
-                                                <asp:CheckBox ID="chkqbSynchronizeEmployeesTime" runat="server" Checked='<%# Bind("qbSynchronizeEmployeesTime")%>' />
+                                                <telerik:RadCheckBox ID="chkqbSynchronizeEmployeesTime" runat="server" Checked='<%# Bind("qbSynchronizeEmployeesTime")%>' />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right; padding-right: 5px">Synchronize Employee Vacations:
                                             </td>
                                             <td>
-                                                <asp:CheckBox ID="chkqbSynchronizeEmployeesVacationRO" runat="server" Checked='<%# Bind("qbSynchronizeEmployeesVacation")%>' />
+                                                <telerik:RadCheckBox ID="chkqbSynchronizeEmployeesVacationRO" runat="server" Checked='<%# Bind("qbSynchronizeEmployeesVacation")%>' />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right; padding-right: 5px">Synchronize Employees Personal Time:
                                             </td>
                                             <td>
-                                                <asp:CheckBox ID="chkqbSynchronizeEmployeesPersonalRO" runat="server" Checked='<%# Bind("qbSynchronizeEmployeesPersonal")%>' />
+                                                <telerik:RadCheckBox ID="chkqbSynchronizeEmployeesPersonalRO" runat="server" Checked='<%# Bind("qbSynchronizeEmployeesPersonal")%>' />
                                             </td>
                                         </tr>
                                         <tr>
@@ -1183,21 +1347,21 @@
                                             <td style="width: 260px; text-align: right; padding-right: 5px">Synchronize Clients:
                                             </td>
                                             <td>
-                                                <asp:CheckBox ID="CheckBox7" runat="server" Checked='<%# Bind("qbSynchronizeClients")%>' />
+                                                <telerik:RadCheckBox ID="CheckBox7" runat="server" Checked='<%# Bind("qbSynchronizeClients")%>' />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="width: 260px; text-align: right; padding-right: 5px">Online Payment:
                                             </td>
                                             <td>
-                                                <asp:CheckBox ID="CheckBox8" runat="server" Checked='<%# Bind("qbOnlinePayment")%>' />
+                                                <telerik:RadCheckBox ID="CheckBox8" runat="server" Checked='<%# Bind("qbOnlinePayment")%>' />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right; padding-right: 5px">Synchronize Invoices:
                                             </td>
                                             <td>
-                                                <asp:CheckBox ID="CheckBox10" runat="server" Checked='<%# Bind("qbSynchronizeInvoices")%>' />
+                                                <telerik:RadCheckBox ID="CheckBox10" runat="server" Checked='<%# Bind("qbSynchronizeInvoices")%>' />
                                             </td>
                                         </tr>
                                     </table>
@@ -1209,85 +1373,31 @@
                     </EditItemTemplate>
 
                 </asp:FormView>
-            </td>
-        </tr>
 
-        <tr>
-            <td>
-
-                <telerik:RadWizard ID="RadWizard5" runat="server" Height="720px" DisplayCancelButton="false"
-                    RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
-                    <WizardSteps>
-                        <telerik:RadWizardStep runat="server" ID="RadWizardStepsCompanyInfo2" Title="Holidays" StepType="Step">
-                            <telerik:RadGrid ID="RadGridHoliday" GridLines="None" runat="server" AllowAutomaticDeletes="True"
-                                HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
-                                AllowAutomaticInserts="True" AllowAutomaticUpdates="True" AllowPaging="True" AutoGenerateColumns="False" DataSourceID="SqlDataSourceHoliday"
-                                Height="350px" PageSize="100">
-                                <ClientSettings>
-                                    <Scrolling AllowScroll="True" SaveScrollPosition="true"></Scrolling>
-                                </ClientSettings>
-                                <MasterTableView CommandItemDisplay="Top" DataKeyNames="Id"
-                                    DataSourceID="SqlDataSourceHoliday" HorizontalAlign="NotSet" AutoGenerateColumns="False">
-                                    <PagerStyle Mode="Slider" AlwaysVisible="false" />
-                                    <CommandItemSettings AddNewRecordText="Holiday" />
-                                    <Columns>
-                                        <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
-                                            HeaderText="" HeaderStyle-Width="40px">
-                                        </telerik:GridEditCommandColumn>
-                                        <telerik:GridDateTimeColumn DataField="Holiday" HeaderStyle-Width="180px" PickerType="DatePicker" HeaderText="Holiday"
-                                            SortExpression="Holiday" UniqueName="Holiday" DataFormatString="{0:d}">
-                                        </telerik:GridDateTimeColumn>
-                                        <telerik:GridBoundColumn DataField="Description" HeaderText="Description"
-                                            SortExpression="Description" UniqueName="Description">
-                                        </telerik:GridBoundColumn>
-                                        <telerik:GridButtonColumn ConfirmText="Delete this record?" ConfirmDialogType="RadWindow"
-                                            ConfirmTitle="Delete" HeaderText="" HeaderStyle-Width="50px"
-                                            CommandName="Delete" Text="Delete" UniqueName="DeleteColumn">
-                                        </telerik:GridButtonColumn>
-                                    </Columns>
-                                </MasterTableView>
-                            </telerik:RadGrid>
-                        </telerik:RadWizardStep>
-                    </WizardSteps>
-                </telerik:RadWizard>
-
-            </td>
-        </tr>
-
-    </table>
+       
+    </div>
 
     <asp:SqlDataSource ID="SqlDataSourceLogo" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT companyId, shortLogo FROM [Company] WHERE ([companyId] = @companyId)"
-        UpdateCommand="UPDATE [Company] SET [shortLogo] = @shortLogo WHERE [companyId] = @companyId"
+        UpdateCommand="UPDATE [Company] SET [shortLogo] = @shortLogo WHERE [companyId] = @companyId" 
+        DeleteCommand="UPDATE [Company] SET [shortLogo] = Null WHERE [companyId] = @companyId" 
         ProviderName="<%$ ConnectionStrings:cnnProjectsAccounting.ProviderName %>">
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text"
-                Type="Int32" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
         <UpdateParameters>
             <asp:Parameter Name="shortLogo" DbType="Binary" />
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text"
-                Type="Int32" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
         </UpdateParameters>
+        <DeleteParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
+        </DeleteParameters>
     </asp:SqlDataSource>
-
-    <asp:SqlDataSource ID="SqlDataSourceLetterHead" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT companyId, imgLogo FROM [Company] WHERE ([companyId] = @companyId)"
-        UpdateCommand="UPDATE [Company] SET [imgLogo] = @imgLogo WHERE [companyId] = @companyId"
-        ProviderName="<%$ ConnectionStrings:cnnProjectsAccounting.ProviderName %>">
-        <SelectParameters>
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text"
-                Type="Int32" />
-        </SelectParameters>
-        <UpdateParameters>
-            <asp:Parameter Name="imgLogo" DbType="Binary" />
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text"
-                Type="Int32" />
-        </UpdateParameters>
-    </asp:SqlDataSource>
+    
     <asp:SqlDataSource ID="SqlDataSourceSign" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT companyId, imgSign  FROM [Company] WHERE ([companyId] = @companyId)"
         UpdateCommand="UPDATE [Company] SET [imgSign] = @imgSign  WHERE [companyId] = @companyId"
+        DeleteCommand="UPDATE [Company] SET [imgSign] = Null WHERE [companyId] = @companyId" 
         ProviderName="<%$ ConnectionStrings:cnnProjectsAccounting.ProviderName %>">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
@@ -1297,11 +1407,14 @@
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text"
                 Type="Int32" />
         </UpdateParameters>
+        <DeleteParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
+        </DeleteParameters>
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="CompanyProfile_SELECT" SelectCommandType="StoredProcedure"
-        UpdateCommand="CompanyProfile_UPDATE" UpdateCommandType="StoredProcedure">
+        UpdateCommand="CompanyProfile_v21_UPDATE" UpdateCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
@@ -1357,34 +1470,21 @@
             <asp:Parameter Name="AttorneyPhone" />
             <asp:Parameter Name="AttorneyEmail" />
 
+            <asp:Parameter Name="Active" />
+            <asp:Parameter Name="accountSid" />
+            <asp:Parameter Name="authToken" />
+            <asp:Parameter Name="TwilioPhone" />
+
+            <asp:Parameter Name="TimeZone" />
+            <asp:Parameter Name="HR_payfrequencyId" />
+
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text"
                 Type="Int32" />
         </UpdateParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceTypes" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT Id, Name FROM Company_types ORDER BY Name"></asp:SqlDataSource>
-    <asp:SqlDataSource ID="SqlDataSourceHoliday" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT Id, Holiday, Description FROM Company_hollidays WHERE ([companyId] = @companyId) ORDER BY Holiday DESC"
-        InsertCommand="INSERT INTO Company_hollidays(Holiday, Description, companyId) VALUES(@Holiday, @Description, @companyId)"
-        DeleteCommand="DELETE FROM Company_hollidays WHERE Id=@Id"
-        UpdateCommand="UPDATE Company_hollidays SET Holiday=@Holiday, Description=@Description WHERE Id=@Id">
-        <SelectParameters>
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
-        </SelectParameters>
-        <DeleteParameters>
-            <asp:Parameter Name="Id" Type="Int32" />
-        </DeleteParameters>
-        <InsertParameters>
-            <asp:Parameter Name="Holiday" />
-            <asp:Parameter Name="Description" />
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
-        </InsertParameters>
-        <UpdateParameters>
-            <asp:Parameter Name="Id" Type="Int32" />
-            <asp:Parameter Name="Holiday" />
-            <asp:Parameter Name="Description" />
-        </UpdateParameters>
-    </asp:SqlDataSource>
+    
 
 
 

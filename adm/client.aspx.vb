@@ -10,7 +10,7 @@ Public Class client
                 lblClientId.Text = Request.QueryString("clientId")
 
                 'Not necessary, Client_Select include @companyId
-                'If LocalAPI.IsCompanyViolation(lblClientId.Text, "Clients", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/default.aspx")
+                'If LocalAPI.IsCompanyViolation(lblClientId.Text, "Clients", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
                 If Not Request.QueryString("fromcontacts") Is Nothing Then
                     lblBackSource.Text = 1
@@ -25,12 +25,27 @@ Public Class client
                 SqlDataSource1.DataBind()
                 FormView1.DataBind()
 
-                If Request.QueryString("FullPage") Is Nothing Then
+                If Not Request.QueryString("backpage") Is Nothing Then
+                    Session("clientbackpage") = Request.QueryString("backpage")
+                End If
+
+                If Not Request.QueryString("tab") Is Nothing Then
+                    If Request.QueryString("tab") = "schedule" Then
+                        RadWizard1.WizardSteps(3).Active = True
+                    End If
+                End If
+
+                If Not Request.QueryString("Dialog") Is Nothing Then
                     Master.HideMasterMenu()
                     btnBack.Visible = False
                 End If
+
                 SqlDataSourceMessages.DataBind()
                 RadGridMessages.DataBind()
+
+                Dim ViewMode As Integer = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "RadScheduler_JobEdit_View")
+                RadScheduler1.SelectedView = IIf(ViewMode = -1, 1, ViewMode)
+
             End If
             RadWindowManager1.EnableViewState = False
         Catch ex As Exception
@@ -108,11 +123,14 @@ Public Class client
     End Sub
 
     Private Sub Back()
-        If lblBackSource.Text = 1 Then
-            Response.Redirect("~/adm/contacts.aspx?restoreFilter=true")
-        Else
-            Response.Redirect("~/adm/clients.aspx?restoreFilter=true")
-        End If
+        Select Case Session("clientbackpage")
+            Case "clients"
+                Response.Redirect("~/adm/clients.aspx?restoreFilter=true")
+            Case "clientmanagement"
+                Response.Redirect("~/adm/clientmanagement.aspx?restoreFilter=true")
+            Case "contacts"
+                Response.Redirect("~/adm/contacts.aspx?restoreFilter=true")
+        End Select
 
     End Sub
 
@@ -123,5 +141,78 @@ Public Class client
 
     Protected Sub btnFindMessages_Click(sender As Object, e As EventArgs)
         RadGridMessages.DataBind()
+    End Sub
+
+    Protected Sub RadScheduler1_FormCreating(sender As Object, e As SchedulerFormCreatingEventArgs)
+
+        If e.Mode <> SchedulerFormMode.Hidden Then
+            e.Cancel = True
+        End If
+
+        Dim appointmentToEdit = RadScheduler1.PrepareToEdit(e.Appointment, RadScheduler1.EditingRecurringSeries)
+        Session("appointment_start") = appointmentToEdit.Start.ToString("yyyy-MM-dd HH:mm:ss")
+        Session("appointment_end") = appointmentToEdit.End.ToString("yyyy-MM-dd HH:mm:ss")
+        Dim Id = appointmentToEdit.ID
+
+        Dim url = $"{LocalAPI.GetHostAppSite()}/adm/appointment?Id={Id}&EntityType=Client&EntityId={lblClientId.Text}&backpage=Client"
+        ScriptManager.RegisterStartupScript(Page, [GetType](), "formScript", $"RedirectPage('{url}');", True)
+
+    End Sub
+
+    Protected Sub btnAddEvent_Click(sender As Object, e As EventArgs) Handles btnAddEvent.Click
+
+        Response.Redirect($"~/adm/appointment?Id=&EntityType=Client&EntityId={lblClientId.Text}&backpage=Client")
+
+    End Sub
+
+    Private Sub SqlDataSource1_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSource1.Updating
+        Dim e1 As String = e.Command.Parameters("@SalesRep1").Value
+    End Sub
+
+    Public Function GetDueDateColor(ByVal DueDate As DateTime) As System.Drawing.Color
+        If DueDate < Today Then
+            Return System.Drawing.Color.Red
+        Else
+            Return System.Drawing.Color.Black
+        End If
+    End Function
+    Private Sub SqlDataSourceAppointments_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAppointments.Updating
+        LocalAPI.Appointment_DragAndDrop_UPDATE(e.Command.Parameters("@Id").Value, e.Command.Parameters("@Start").Value, e.Command.Parameters("@End").Value)
+        RefreshData()
+        e.Cancel = True
+    End Sub
+    Private Sub RadGridPending_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridPending.ItemCommand
+        Select Case e.CommandName
+            Case "Complete"
+                CompleteDlg(e.CommandArgument)
+
+            Case "EditActivity"
+                Response.Redirect(LocalAPI.GetSharedLink_URL(12001, e.CommandArgument))
+
+
+
+        End Select
+    End Sub
+    Private Sub CompleteDlg(activityId As Integer)
+        lblSelectedAppointmentId.Text = activityId
+        Dim AppointmentObject = LocalAPI.GetRecord(lblSelectedAppointmentId.Text, "Appointment_v21_SELECT")
+
+        lblActivitySubject.Text = AppointmentObject("Subject")
+        RadDateTimePickerCompletedDate.DbSelectedDate = AppointmentObject("End")
+        cboDuration.SelectedValue = DateDiff(DateInterval.Minute, AppointmentObject("Start"), AppointmentObject("End"))
+
+        RadToolTipComplete.Visible = True
+        RadToolTipComplete.Show()
+
+    End Sub
+    Private Sub btnCompleteActivity_Click(sender As Object, e As EventArgs) Handles btnCompleteActivity.Click
+
+        LocalAPI.AppointmentComplete(lblSelectedAppointmentId.Text, RadDateTimePickerCompletedDate.DbSelectedDate, cboDuration.SelectedValue)
+        RefreshData()
+    End Sub
+    Private Sub RefreshData()
+        RadGridPending.DataBind()
+        RadScheduler1.Rebind()
+        RadScheduler1.DataBind()
     End Sub
 End Class

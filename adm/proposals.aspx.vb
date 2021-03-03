@@ -7,7 +7,7 @@ Public Class proposals
 
             If (Not Page.IsPostBack) Then
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ProposalsList") Then Response.RedirectPermanent("~/adm/default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ProposalsList") Then Response.RedirectPermanent("~/adm/schedule.aspx")
                 ' Si no tiene permiso New, boton.Visible=False
                 'btnNew.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewProposal")
                 btnNewWizard.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewProposal")
@@ -20,46 +20,55 @@ Public Class proposals
                 Master.Help = "http://blog.pasconcept.com/2012/04/fee-proposal-proposals-list-page.html"
 
                 lblCompanyId.Text = Session("companyId")
-                Dim employeeId As Integer = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
-
+                lblEmployeeId.Text = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
 
                 cboDepartments.DataBind()
-                cboDepartments.SelectedValue = LocalAPI.GetEmployeeProperty(employeeId, "FilterProposal_Department")
+                cboDepartments.SelectedValue = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "FilterProposal_Department")
 
                 cboStatus.DataBind()
                 cboClients.DataBind()
 
-                If Not Request.QueryString("Buscar") Is Nothing Then
-                    txtFind.Text = Request.QueryString("Buscar")
-                End If
-
                 cboPeriod.DataBind()
-                cboPeriod.SelectedValue = LocalAPI.GetEmployeeProperty(employeeId, "FilterProposal_Month")
-                IniciaPeriodo(cboPeriod.SelectedValue)
+
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Allow_OtherEmployeeJobs") Then
+                    cboEmployee.DataBind()
+                    cboEmployee.SelectedValue = lblEmployeeId.Text
+                    cboEmployee.Enabled = False
+                End If
 
                 If Not Request.QueryString("restoreFilter") Is Nothing Then
                     RestoreFilter()
+                Else
+                    DefaultFilters()
                 End If
-
                 RefreshRecordset()
 
-                If Not Request.QueryString("rfpGUID") Is Nothing Then
-                    lblProposalIdFromRfp.Text = LocalAPI.CreateProposalFromRFP(Request.QueryString("rfpGUID"), employeeId, lblCompanyId.Text)
-                End If
-
+                SaveFilter()
             End If
 
             RadWindowManager1.EnableViewState = False
-            'If RadWindowManager1.Windows.Count > 0 Then
-            '    RadWindowManager1.Windows.Clear()
-            '    'RadGrid1.DataBind()
-            'End If
 
         Catch ex As Exception
 
         End Try
     End Sub
+    Private Sub DefaultFilters()
+        Try
+            If Not Request.QueryString("Buscar") Is Nothing Then
+                txtFind.Text = Request.QueryString("Buscar")
+            End If
 
+            cboPeriod.SelectedValue = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "FilterProposal_Month")
+
+
+            If Not Request.QueryString("rfpGUID") Is Nothing Then
+                lblProposalIdFromRfp.Text = LocalAPI.CreateProposalFromRFP(Request.QueryString("rfpGUID"), lblEmployeeId.Text, lblCompanyId.Text)
+            End If
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
     Private Sub Administradores_Proposals_PreRender(sender As Object, e As EventArgs) Handles Me.PreRender
         If lblProposalIdFromRfp.Text > 0 Then
             lblProposalIdFromRfp.Text = "0"
@@ -79,6 +88,14 @@ Public Class proposals
                 RadDatePickerFrom.DbSelectedDate = "01/01/" & Today.Year - 1
                 RadDatePickerTo.DbSelectedDate = "12/31/" & Today.Year - 1
 
+            Case 16  ' (This Month)
+                RadDatePickerFrom.DbSelectedDate = Today.Month & "/01/" & Today.Year
+                RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Day, -1, DateAdd(DateInterval.Month, 1, RadDatePickerFrom.DbSelectedDate))
+            Case 17  ' (Past Month)
+                RadDatePickerFrom.DbSelectedDate = Today.Month & "/01/" & Today.Year
+                RadDatePickerFrom.DbSelectedDate = DateAdd(DateInterval.Month, -1, RadDatePickerFrom.DbSelectedDate)
+                RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Day, -1, DateAdd(DateInterval.Month, 1, RadDatePickerFrom.DbSelectedDate))
+
             Case 30, 60, 90, 120, 180, 365 '   days....
                 RadDatePickerTo.DbSelectedDate = Date.Today
                 RadDatePickerFrom.DbSelectedDate = DateAdd(DateInterval.Day, 0 - nPeriodo, RadDatePickerTo.DbSelectedDate)
@@ -97,29 +114,62 @@ Public Class proposals
     Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
         Dim sUrl As String = ""
         Select Case e.CommandName
-            Case "EmailPrint"
-                Response.Redirect("~/adm/sendproposal.aspx?ProposalId=" & e.CommandArgument)
 
+
+            ' pro_XXXX pages..................................................................................
+            Case "Fees & Scope"
+                sUrl = LocalAPI.GetSharedLink_URL(11006, e.CommandArgument) & "&backpage=proposals"
+                Response.Redirect(sUrl)
+
+            Case "Basic Information"
+                sUrl = LocalAPI.GetSharedLink_URL(11001, e.CommandArgument) & "&backpage=proposals"
+                Response.Redirect(sUrl)
+
+            Case "Attachments"
+                sUrl = LocalAPI.GetSharedLink_URL(11005, e.CommandArgument) & "&backpage=proposals"
+                Response.Redirect(sUrl)
+
+            Case "Notes"
+                sUrl = LocalAPI.GetSharedLink_URL(11007, e.CommandArgument) & "&backpage=proposals"
+                Response.Redirect(sUrl)
+
+            ' others options
             Case "GetSharedLink"
                 Dim ObjGuid As String = LocalAPI.GetProposalProperty(e.CommandArgument, "guid")
                 sUrl = "~/adm/sharelink.aspx?ObjType=11&ObjGuid=" & ObjGuid
                 CreateRadWindows(e.CommandName, sUrl, 520, 400, False)
+
+            Case "EmailPrint"
+                Response.Redirect("~/adm/sendproposal.aspx?ProposalId=" & e.CommandArgument)
+
+            Case "EditJob"
+                sUrl = LocalAPI.GetSharedLink_URL(8001, e.CommandArgument) & "&backpage=proposals"
+                Response.Redirect(sUrl)
+
+            Case "EditClient"
+                sUrl = $"~/ADM/Client.aspx?clientId={e.CommandArgument}&Dialog=1"
+                CreateRadWindows("ClientW", sUrl, 970, 750, False)
+
+            Case "SaveProposalAs"
+                Response.Redirect($"~/adm/proposal_save_copy.aspx?ProposalId={e.CommandArgument}&backpage=proposals")
+
+            Case "SaveProposalAsTemplate"
+                Response.Redirect($"~/adm/proposal_save_as_template.aspx?ProposalId={e.CommandArgument}&backpage=proposals")
+
+            ' obsoleto!!!!!!!!!!!!!!
             Case "EditProposal"
                 Response.Redirect("~/adm/proposal.aspx?proposalId=" & e.CommandArgument)
 
             Case "EditWizard"
-                Response.Redirect("~/ADM/ProposalNewWizard.aspx?proposalId=" & e.CommandArgument)
+                Response.Redirect("~/adm/ProposalNewWizard.aspx?proposalId=" & e.CommandArgument)
 
-            Case "UploadFiles"
-                Response.Redirect("~/ADM/ProposalNewWizard.aspx?proposalId=" & e.CommandArgument & "&AttachmentsTab=1")
+            Case "AddActivity"
+                lblSelected.Text = e.CommandArgument
+                lblSelectedClientId.Text = LocalAPI.GetProposalProperty(lblSelected.Text, "ClientId")
+                NewClientActivityDlg(True)
 
-            Case "EditJob"
-                sUrl = "~/ADM/Job_job.aspx?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 820, True)
-
-            Case "EditClient"
-                sUrl = "~/ADM/Client.aspx?clientId=" & e.CommandArgument
-                CreateRadWindows("ClientW", sUrl, 970, 750, False)
+            Case "AddTime"
+                Response.Redirect("~/adm/employeenewdowntime.aspx?proposalId=" & e.CommandArgument & "&backpage=proposals")
         End Select
     End Sub
 
@@ -174,16 +224,17 @@ Public Class proposals
             SqlDataSourceProp.DataBind()
             RadGrid1.DataBind()
             FormViewViewSummary.DataBind()
+            SaveFilter()
         Catch ex As Exception
         End Try
     End Sub
 
     Protected Sub btnRefresh_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnRefresh.Click
         RefreshRecordset()
-        SaveFilter()
     End Sub
 
     Private Sub SaveFilter()
+        Session("Filter_Proposals_cboPeriod") = cboPeriod.SelectedValue
         Session("Filter_Proposals_RadDatePickerFrom") = RadDatePickerFrom.SelectedDate
         Session("Filter_Proposals_RadDatePickerTo") = RadDatePickerTo.SelectedDate
         Session("Filter_Proposals_cboClients") = cboClients.SelectedValue
@@ -194,6 +245,8 @@ Public Class proposals
 
     Private Sub RestoreFilter()
         Try
+            cboPeriod.DataBind()
+            cboPeriod.SelectedValue = Session("Filter_Proposals_cboPeriod")
             RadDatePickerFrom.SelectedDate = Convert.ToDateTime(Session("Filter_Proposals_RadDatePickerFrom"))
             RadDatePickerTo.SelectedDate = Convert.ToDateTime(Session("Filter_Proposals_RadDatePickerTo"))
             cboClients.SelectedValue = Session("Filter_Proposals_cboClients")
@@ -232,8 +285,50 @@ Public Class proposals
     '    CreateRadWindows("NewProposal", "~/ADM/Proposal_new.aspx", 970, 810, True)
     'End Sub
     Protected Sub btnNewWizard_Click(sender As Object, e As EventArgs) Handles btnNewWizard.Click
-        CreateRadWindows("NewWizard", "~/ADM/ProposalNewWizard.aspx", 970, 810, True)
-        Response.Redirect("~/ADM/ProposalNewWizard.aspx")
+        Response.Redirect("~/adm/ProposalNewWizard.aspx")
     End Sub
 
+    Private Sub SqlDataSourceProp_Deleted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceProp.Deleted
+    End Sub
+
+    Private Sub SqlDataSourceProp_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceProp.Deleting
+        Try
+            Dim proposalId As Integer = e.Command.Parameters("@Id").Value
+            Dim Notes As String = LocalAPI.ProposalNumber(proposalId) & " " & LocalAPI.GetProposalProperty(proposalId, "ProjectName")
+            LocalAPI.sys_log_Nuevo(Master.UserEmail, LocalAPI.sys_log_AccionENUM.DeleteProposal, lblCompanyId.Text, "Delete Proposal: " & Notes)
+        Catch ex As Exception
+        End Try
+    End Sub
+
+#Region "Activity"
+    Private Sub NewClientActivityDlg(bInitDlg As Boolean)
+        If bInitDlg Then
+            cboActivityEmployees.SelectedValue = lblEmployeeId.Text
+            RadDateTimePickerActivityDueDate.DbSelectedDate = DateAdd(DateInterval.Hour, 24, Now)
+            cboActivityType.SelectedValue = -1
+            lblClientName.Text = LocalAPI.GetClientProperty(lblSelectedClientId.Text, "Client")
+            txtActivitySubject.Text = ""
+        End If
+
+        RadToolTipNewActivity.Visible = True
+        RadToolTipNewActivity.Show()
+    End Sub
+
+    Private Sub btnAddActivity_Click(sender As Object, e As EventArgs) Handles btnAddActivity.Click
+        Try
+            ' Insert new Activity
+            Dim EndDate As DateTime = DateAdd(DateInterval.Minute, CInt(cboActivityDuration.SelectedValue), RadDateTimePickerActivityDueDate.DbSelectedDate)
+            Dim ActivityId As Integer = LocalAPI.Activity_INSERT(txtActivitySubject.Text, RadDateTimePickerActivityDueDate.DbSelectedDate, EndDate, cboActivityType.SelectedValue, cboActivityEmployees.SelectedValue, lblSelectedClientId.Text, 0, lblSelected.Text, 0, lblCompanyId.Text, 1, txtActivityDescription.Text)
+            If chkMoreOptions.Checked Then
+                Response.Redirect($"~/adm/appointment?Id={ActivityId}&EntityType=Proposal&EntityId={lblSelected.Text}&backpage=Proposals")
+            Else
+                Master.InfoMessage("The Activity was inserted successfully!")
+            End If
+
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
+    End Sub
+
+#End Region
 End Class

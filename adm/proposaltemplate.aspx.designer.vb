@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class proposaltemplate
-    
+
     '''<summary>
     '''btnBack control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class proposaltemplate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''vsPre_Project control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class proposaltemplate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents vsPre_Project As Global.System.Web.UI.WebControls.ValidationSummary
-    
+
     '''<summary>
     '''NameTextBox control.
     '''</summary>
@@ -39,34 +39,7 @@ Partial Public Class proposaltemplate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents NameTextBox As Global.Telerik.Web.UI.RadTextBox
-    
-    '''<summary>
-    '''cboTask control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboTask As Global.Telerik.Web.UI.RadComboBox
-    
-    '''<summary>
-    '''btnAddTaskID control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnAddTaskID As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''TaskIdListTextBox control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents TaskIdListTextBox As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''cboPaymentSchedules control.
     '''</summary>
@@ -75,7 +48,7 @@ Partial Public Class proposaltemplate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboPaymentSchedules As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''btnGeneratePaymentSchedules control.
     '''</summary>
@@ -84,7 +57,7 @@ Partial Public Class proposaltemplate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnGeneratePaymentSchedules As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''PaymentsScheduleListTextBox control.
     '''</summary>
@@ -93,7 +66,7 @@ Partial Public Class proposaltemplate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents PaymentsScheduleListTextBox As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''PaymentsTextListTextBox control.
     '''</summary>
@@ -102,7 +75,7 @@ Partial Public Class proposaltemplate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents PaymentsTextListTextBox As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''TextBeginTextBox control.
     '''</summary>
@@ -111,7 +84,7 @@ Partial Public Class proposaltemplate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents TextBeginTextBox As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''TextEndTextBox control.
     '''</summary>
@@ -120,7 +93,7 @@ Partial Public Class proposaltemplate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents TextEndTextBox As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''cboTandCtemplates control.
     '''</summary>
@@ -129,7 +102,52 @@ Partial Public Class proposaltemplate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboTandCtemplates As Global.Telerik.Web.UI.RadComboBox
-    
+
+    '''<summary>
+    '''lblPhaseLabel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblPhaseLabel As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''cboPhase control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboPhase As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
+    '''cboTask control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboTask As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
+    '''btnAddTaskID control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnAddTaskID As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''RadGridFees control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadGridFees As Global.Telerik.Web.UI.RadGrid
+
     '''<summary>
     '''btnUpdate control.
     '''</summary>
@@ -138,7 +156,7 @@ Partial Public Class proposaltemplate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnUpdate As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''rName control.
     '''</summary>
@@ -147,7 +165,7 @@ Partial Public Class proposaltemplate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents rName As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
+
     '''<summary>
     '''SqlDataSource1 control.
     '''</summary>
@@ -156,7 +174,7 @@ Partial Public Class proposaltemplate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceTask control.
     '''</summary>
@@ -165,7 +183,7 @@ Partial Public Class proposaltemplate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceTask As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceTandCtemplates control.
     '''</summary>
@@ -174,7 +192,7 @@ Partial Public Class proposaltemplate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceTandCtemplates As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourcePaymentSchedules control.
     '''</summary>
@@ -183,7 +201,25 @@ Partial Public Class proposaltemplate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourcePaymentSchedules As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
+    '''<summary>
+    '''SqlDataSourceServiceFees control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceServiceFees As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourcePhases control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourcePhases As Global.System.Web.UI.WebControls.SqlDataSource
+
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -192,7 +228,7 @@ Partial Public Class proposaltemplate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblTemplateId control.
     '''</summary>
@@ -201,7 +237,16 @@ Partial Public Class proposaltemplate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblTemplateId As Global.System.Web.UI.WebControls.Label
-    
+
+    '''<summary>
+    '''lblTaskCode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTaskCode As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
     '''Master property.
     '''</summary>
@@ -210,7 +255,7 @@ Partial Public Class proposaltemplate
     '''</remarks>
     Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
         Get
-            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
+            Return CType(MyBase.Master, pasconcept20.ADM_Main_Responsive)
         End Get
     End Property
 End Class

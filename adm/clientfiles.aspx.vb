@@ -5,7 +5,7 @@ Public Class clientfiles
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             ' Si no tiene permiso, la dirijo a message
-            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ClientsList") Then Response.RedirectPermanent("~/adm/default.aspx")
+            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ClientsList") Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Uploaded Files"
             Master.PageTitle = "Clients/Uploaded Files"
@@ -35,10 +35,8 @@ Public Class clientfiles
             btnGridPage.Visible = Not RadListViewFiles.Visible
             btnTablePage.Visible = RadListViewFiles.Visible
 
-            If lblCompanyId.Text = 260962 Then
-                ' EEG 10 Mb
-                RadCloudUpload1.MaxFileSize = 10485760
-            End If
+            RadCloudUpload1.MaxFileSize = LocalAPI.GetCompanyMaxFileSizeForUpload(lblCompanyId.Text)
+            lblMaxSize.Text = $"[Maximum upload size per file: {LocalAPI.FormatByteSize(RadCloudUpload1.MaxFileSize)}]"
 
         End If
         If cboClients.SelectedItem Is Nothing Then

@@ -93,7 +93,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: right; vertical-align: top">Introductory Text:</td>
+                                                <td style="text-align: right; vertical-align: top">Opening Text:</td>
                                                 <td>
                                                     <telerik:RadTextBox ID="txtIntroductoryText" runat="server" MaxLength="512" Rows="3" Text='<%# Bind("IntroductoryText")%>' TextMode="MultiLine" Width="100%">
                                                     </telerik:RadTextBox>
@@ -369,7 +369,7 @@
                                         </table>
 
                                     </telerik:RadWizardStep>
-                                    <telerik:RadWizardStep runat="server" ID="RadWizardStep4" Title="Term & Conditions" StepType="Step">
+                                    <telerik:RadWizardStep runat="server" ID="RadWizardStep4" Title="Terms & Conditions" StepType="Step">
 
                                         <table style="width: 100%" class="table-sm">
                                             <tr>

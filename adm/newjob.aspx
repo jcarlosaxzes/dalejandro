@@ -204,13 +204,13 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align: right">Unit:
+                <td style="text-align: right">Quantity:
                 </td>
                 <td>
                     <telerik:RadNumericTextBox ID="txtUnit" runat="server" Width="100%">
                     </telerik:RadNumericTextBox>
                 </td>
-                <td style="text-align: right">Measure:
+                <td style="text-align: right">Units
                 </td>
                 <td>
                     <telerik:RadComboBox ID="cboMeasure" runat="server" DataSourceID="SqlDataSourceMeasure" DataTextField="Name" DataValueField="Id" Width="180px" AppendDataBoundItems="True">
@@ -278,12 +278,6 @@
         </asp:SqlDataSource>
 
 
-        <asp:SqlDataSource ID="SqlDataSourceEmployees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-            SelectCommand="SELECT [Id], [Name] FROM [Employees] WHERE companyId=@companyId ORDER BY [Name]">
-            <SelectParameters>
-                <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
-            </SelectParameters>
-        </asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSourceJobStatus" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
             SelectCommand="SELECT [Id], [Name] FROM [Jobs_status] ORDER BY [OrderBy]"></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSourceProjectSector" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"

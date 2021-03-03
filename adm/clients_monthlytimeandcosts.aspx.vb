@@ -6,7 +6,7 @@ Public Class clients_monthlytimeandcosts
         If Not IsPostBack() Then
             ' Si no tiene permiso, la dirijo a message
             '!!! pending permiso especifico
-            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_AnalyticReports") Then Response.RedirectPermanent("~/adm/default.aspx")
+            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_AnalyticReports") Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Margins per Client"
             Master.PageTitle = "Analytics/Margins per Client"

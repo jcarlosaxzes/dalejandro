@@ -2,16 +2,32 @@
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+        <AjaxSettings>
+            <telerik:AjaxSetting AjaxControlID="RadGrid1">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+            <telerik:AjaxSetting AjaxControlID="btnRefresh">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+        </AjaxSettings>
+    </telerik:RadAjaxManager>
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" EnableEmbeddedSkins="false" />
 
-        <div class="pasconcept-bar noprint">
+    <div class="pasconcept-bar noprint">
         <span class="pasconcept-pagetitle">Clients Aging Report</span>
 
         <span style="float: right; vertical-align: middle;">
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                 <i class="fas fa-filter"></i>&nbsp;Filter
+           
             </button>
 
-                        <asp:LinkButton ID="btnExport" runat="server" ToolTip="Export records to Excel" Width="100px"
+            <asp:LinkButton ID="btnExport" runat="server" ToolTip="Export records to Excel" Width="100px"
                 CssClass="btn btn-secondary btn" UseSubmitBehavior="false">
                                     <i class="fas fa-download"></i> Export
             </asp:LinkButton>
@@ -24,7 +40,7 @@
     <div class="collapse" id="collapseFilter">
         <table class="table-sm" style="width: 100%">
             <tr>
-             
+
                 <td style="width: 400px">
                     <telerik:RadComboBox ID="cboClients" runat="server" AppendDataBoundItems="true"
                         DataSourceID="SqlDataSourceClients" DataTextField="Name" DataValueField="Id" Filter="Contains"
@@ -55,7 +71,7 @@
     <div>
         <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" GridLines="None"
             AllowSorting="True" AllowPaging="True" PageSize="50" Skin="Bootstrap" HeaderStyle-HorizontalAlign="Center"
-            CellSpacing="0" AutoGenerateColumns="False" Height="1000px" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right">
+            CellSpacing="0" AutoGenerateColumns="False" Height="850px" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right">
             <ClientSettings>
                 <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
             </ClientSettings>

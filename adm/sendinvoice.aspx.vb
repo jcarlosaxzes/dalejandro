@@ -12,7 +12,7 @@ Public Class sendinvoice
                 If lblInvoice.Text > 0 Then
                     lblJobId.Text = LocalAPI.GetInvoiceProperty(lblInvoice.Text, "JobId")
                     lblClientId.Text = LocalAPI.GetJobProperty(lblJobId.Text, "Client")
-                    txtEmissionRecurrenceDays.DbValue = LocalAPI.GetInvoiceProperty(lblInvoice.Text, "EmissionRecurrenceDays")
+                    txtEmissionRecurrenceDays.Text = LocalAPI.GetInvoiceProperty(lblInvoice.Text, "EmissionRecurrenceDays")
                     lblOrigen.Text = "" & Request.QueryString("Origen")
                     If Len(lblOrigen.Text) = 0 Then lblOrigen.Text = "1"
 
@@ -96,7 +96,9 @@ Public Class sendinvoice
             Case "104"
                 Response.Redirect("~/adm/editjob.aspx?Job=" & jobId & "#invoices")
             Case "1103"
-                Response.Redirect("~/adm/Job_accounting.aspx?JobId=" & jobId) '& "#invoices")
+                Dim sUrl As String = LocalAPI.GetSharedLink_URL(8002, jobId)
+                Response.Redirect(sUrl)
+
         End Select
     End Sub
 #End Region
@@ -168,7 +170,7 @@ Public Class sendinvoice
 
                 If txtTo.Text.Length > 0 Then
 
-                    LocalAPI.ActualizarEmittedInvoice(lblInvoice.Text, lblEmployeeId.Text, txtEmissionRecurrenceDays.DbValue)
+                    LocalAPI.ActualizarEmittedInvoice(lblInvoice.Text, lblEmployeeId.Text, Val(txtEmissionRecurrenceDays.Text))
                     If cboInternalNotification.SelectedValue = 1 Then
                         LocalAPI.InvoiceMessage(lblInvoice.Text, lblCompanyId.Text)
                     End If
@@ -202,7 +204,7 @@ Public Class sendinvoice
             End If
 
             If cboNotification.SelectedValue = 2 Or cboNotification.SelectedValue = 3 Then
-                If SendProposalSMS() Then
+                If SendInvoiceSMS() Then
                     bSendSMS = True
                 End If
 
@@ -228,7 +230,7 @@ Public Class sendinvoice
     Private Sub SMS_Init()
         If LocalAPI.IsCompanySMSservice(lblCompanyId.Text) Then
             Dim clientId As Integer = LocalAPI.GetClientIdFromInvoice(lblInvoice.Text)
-            If Not LocalAPI.IsClientDenySMS(clientId) Then
+            If Not LocalAPI.IsClientAllowSMS(clientId) Then
                 txtCellular.Text = LocalAPI.GetInvoiceProperty(lblInvoice.Text, "[Clients].[Cellular]")
                 Dim InvoiceNumber As String = LocalAPI.InvoiceNumber(lblInvoice.Text)
                 Dim sURL As String = LocalAPI.GetSharedLink_URL(4, lblInvoice.Text) & " "
@@ -242,12 +244,12 @@ Public Class sendinvoice
         End If
     End Sub
 
-    Private Function SendProposalSMS() As Boolean
+    Private Function SendInvoiceSMS() As Boolean
         Try
 
             Dim sCellPhone As String = txtCellular.Text
             If SMS.IsValidPhone(sCellPhone) Then
-                If SMS.SendSMS(sCellPhone, txtSMS.Text, lblCompanyId.Text) Then
+                If SMS.SendSMS(lblEmployeeId.Text, sCellPhone, txtSMS.Text, lblCompanyId.Text) Then
                     Return True
                 End If
             Else

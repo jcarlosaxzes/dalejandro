@@ -40,19 +40,22 @@
 
 
     Private Sub LeerStatementTemplate()
-        Dim Subject As String
-        Dim Body As String = ""
-        If LocalAPI.LeerStatementTemplate(lblStatementId.Text, lblCompanyId.Text, Subject, Body) Then
-            txtSubject.Text = Subject
 
-            Dim sClienteName = LocalAPI.GetStatementProperty(lblStatementId.Text, "[Clients].[Name]")
-            Dim sSign As String = LocalAPI.GetEmployeesSign(lblEmployeeId.Text)
+        Dim sClienteName = LocalAPI.GetStatementProperty(lblStatementId.Text, "[Clients].[Name]")
+        Dim sSign As String = LocalAPI.GetEmployeesSign(lblEmployeeId.Text)
+        Dim statementNumber As String = LocalAPI.GetStatementNumber(lblStatementId.Text)
+        Dim sURL As String = LocalAPI.GetSharedLink_URL(5555, lblStatementId.Text)
 
-            Body = Replace(Body, "[Client Name]", sClienteName)
-            Body = Replace(Body, "[Sign]", sSign)
+        Dim DictValues As Dictionary(Of String, String) = New Dictionary(Of String, String)
+        DictValues.Add("[Client_Name]", sClienteName)
+        DictValues.Add("[Sign]", sSign)
+        DictValues.Add("[Statement_Number]", statementNumber)
+        DictValues.Add("[PASSign]", LocalAPI.GetPASSign())
+        DictValues.Add("[StatementUrl]", sURL)
 
-            txtBody.Content = Body
-        End If
+        ' Leer subjet y body template
+        txtSubject.Text = LocalAPI.GetMessageTemplateSubject("Statement", lblCompanyId.Text, DictValues)
+        txtBody.Content = LocalAPI.GetMessageTemplateBody("Statement", lblCompanyId.Text, DictValues)
 
     End Sub
     Protected Sub btnEnviar_Click(sender As Object, e As EventArgs) Handles btnEnviar.Click

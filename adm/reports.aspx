@@ -16,21 +16,21 @@
             </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="cboGroups">
                 <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="cboNames" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="cboNames"  />
                     <telerik:AjaxUpdatedControl ControlID="cboDepartment" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="cboTimeFrame">
                 <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadDatePickerFrom" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="RadDatePickerTo" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadDatePickerFrom" />
+                    <telerik:AjaxUpdatedControl ControlID="RadDatePickerTo"  />
                 </UpdatedControls>
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />
 
-    <div class="pasconcept-bar noprint">
+    <div class="pasconcept-bar noprint" style="margin: 0px;">
         <span class="pasconcept-pagetitle">Reports</span>
         <table style="float: right; vertical-align: middle;">
             <tr>
@@ -70,7 +70,7 @@
             <table class="table-sm pasconcept-bar" style="width: 100%">
                 <tr>
                     <td style="width: 180px">
-                        <telerik:RadComboBox ID="cboTimeFrame" runat="server" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True" AutoPostBack="true" ToolTip="Select Timeframe">
+                        <telerik:RadComboBox ID="cboTimeFrame" runat="server" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True" ToolTip="Select Timeframe">
                             <Items>
                                 <telerik:RadComboBoxItem Text="All Years" Value="1" />
                                 <telerik:RadComboBoxItem Text="Last Year" Value="2" />
@@ -97,11 +97,11 @@
 
                     </td>
                     <td style="width: 130px">
-                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" MinDate="01/01/2000">
+                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US" MinDate="01/01/2000">
                         </telerik:RadDatePicker>
                     </td>
                     <td style="width: 130px">
-                        <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" MinDate="01/01/2000">
+                        <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US" MinDate="01/01/2000">
                         </telerik:RadDatePicker>
                     </td>
                     <td style="width: 150px">
@@ -122,12 +122,13 @@
 
     </div>
 
-    <div>
+    <div class="container" style="padding:0px;">
         <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" DataSourceID="SqlDataSource1" RenderMode="Lightweight"
-            AllowPaging="True" PageSize="250" Height="1000px" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small">
+            AllowPaging="True" PageSize="250" Height="850px" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small">
             <ClientSettings>
                 <Scrolling AllowScroll="True" UseStaticHeaders="True"></Scrolling>
             </ClientSettings>
+
             <MasterTableView DataSourceID="SqlDataSource1" ShowFooter="True" CssClass="table-sm">
                 <PagerStyle Mode="Slider" AlwaysVisible="false"></PagerStyle>
             </MasterTableView>
@@ -137,9 +138,10 @@
     <asp:SqlDataSource ID="SqlDataSourceGroups" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT RPTGroup FROM Reports GROUP BY RPTGroup ORDER BY RPTGroup"></asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceName" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT Id, [Name] FROM [Reports] WHERE ([RPTGroup] = @RPTGroup) ORDER BY [Name]">
+        SelectCommand="SELECT Id, [Name] FROM [Reports] WHERE (isnull(CustomCompanyId,0)=0 or isnull(CustomCompanyId,0)=@companyId) and [RPTGroup] = @RPTGroup ORDER BY [Name]">
         <SelectParameters>
             <asp:ControlParameter ControlID="cboGroups" Name="RPTGroup" PropertyName="SelectedValue" Type="String" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceYear" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"

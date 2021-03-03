@@ -11,6 +11,7 @@
                     <telerik:AjaxUpdatedControl ControlID="RadWindowManagerJob"></telerik:AjaxUpdatedControl>
                     <telerik:AjaxUpdatedControl ControlID="RadToolTipJobStatus"></telerik:AjaxUpdatedControl>
                     <telerik:AjaxUpdatedControl ControlID="lblSelectedJobId"></telerik:AjaxUpdatedControl>
+                    <telerik:AjaxUpdatedControl ControlID="RadToolTipNewActivity" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="btnUpdateJobStatus">
@@ -29,6 +30,10 @@
                     <telerik:AjaxUpdatedControl ControlID="RadDatePickerTo" />
                     <telerik:AjaxUpdatedControl ControlID="RadDatePickerFrom" />
                     <telerik:AjaxUpdatedControl ControlID="cboEmployee" />
+                    <telerik:AjaxUpdatedControl ControlID="cboStatus" />
+                    <telerik:AjaxUpdatedControl ControlID="cboClients" />
+                    <telerik:AjaxUpdatedControl ControlID="cboJobType" />
+                    <telerik:AjaxUpdatedControl ControlID="cboBalanceStatus" />
                     <telerik:AjaxUpdatedControl ControlID="cboDepartments" />
                     <telerik:AjaxUpdatedControl ControlID="lblDepartmentIdIN_List" />
                     <telerik:AjaxUpdatedControl ControlID="lblExcludeClientId_List" />
@@ -49,7 +54,7 @@
             <telerik:AjaxSetting AjaxControlID="btnApplyStatus">
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
-                     <telerik:AjaxUpdatedControl ControlID="cboStatusLotes" />
+                    <telerik:AjaxUpdatedControl ControlID="cboStatusLotes" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="btnNew">
@@ -65,7 +70,12 @@
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" EnableEmbeddedSkins="false" />
+    <%-- <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" Skin="" >
+        <asp:Image  runat="server" AlternateText="Loading..." ImageUrl="~/Images/logo/Logo-Animation.gif" style="border: 0px;padding-top:50px" Height="150" />
+        <br />
+        <asp:Label ID="Label1" runat="server" Text="Fetching your data..." ForeColor="#039BE5" BackColor="White"></asp:Label>
+    </telerik:RadAjaxLoadingPanel>--%>
 
 
     <telerik:RadCodeBlock ID="RadCodeBlock" runat="server">
@@ -142,13 +152,13 @@
                 padding-bottom: .05rem;
             }
             /*Job Action Buttom*/
-            .RadComboBox_Material .rcbInner {
+            /*.RadComboBox_Material .rcbInner {
                 padding: 4px 20px 4px 4px;
             }
 
             .rcbActionButton {
                 padding-top: 0 !important;
-            }
+            }*/
         </style>
     </telerik:RadCodeBlock>
     <telerik:RadWindowManager ID="RadWindowManagerJob" runat="server" Skin="Outlook">
@@ -163,6 +173,10 @@
                 <i class="fas fa-filter"></i>&nbsp;Filter
             </button>
 
+            <asp:LinkButton ID="btnExport" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Export to Excel file format (.CSV)">
+                <i class="fas fa-cloud-download-alt"></i> Export
+            </asp:LinkButton>
+
             <span id="spanViewSummary" runat="server">
                 <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseSummary" aria-expanded="false" aria-controls="collapseSummary" title="Show/Hide Summary panel">
                     View Summary
@@ -175,7 +189,7 @@
             </asp:LinkButton>
 
             <asp:LinkButton ID="btnPrivate" runat="server" UseSubmitBehavior="false" ToolTip="Private/Public Mode" Font-Underline="false">
-                <input type="checkbox" data-toggle="toggle" data-onstyle="danger" />
+                <input type="checkbox" data-toggle="toggle" data-onstyle="danger" id="togglePrivate"/>
             </asp:LinkButton>
         </span>
     </div>
@@ -193,19 +207,21 @@
                                 <telerik:RadComboBoxItem Text="Last 120 days" Value="120" />
                                 <telerik:RadComboBoxItem Text="Last 180 days" Value="180" />
                                 <telerik:RadComboBoxItem Text="Last 365 days" Value="365" />
-                                <telerik:RadComboBoxItem Text="(This year...)" Value="14" />
-                                <telerik:RadComboBoxItem Text="(Last year...)" Value="15" />
+                                <telerik:RadComboBoxItem Text="This year" Value="14" />
+                                <telerik:RadComboBoxItem Text="This month" Value="16" />
+                                <telerik:RadComboBoxItem Text="Last year" Value="15" />
+                                <telerik:RadComboBoxItem Text="Last month" Value="17" />
                                 <telerik:RadComboBoxItem Text="(All years...)" Value="13" />
                                 <telerik:RadComboBoxItem Text="Custom Range..." Value="99" />
                             </Items>
                         </telerik:RadComboBox>
                     </td>
                     <td style="width: 130px">
-                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" ToolTip="Date From for filter">
+                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US" ToolTip="Date From for filter">
                         </telerik:RadDatePicker>
                     </td>
                     <td style="width: 130px">
-                        <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" ToolTip="Date To for filter">
+                        <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US" ToolTip="Date To for filter">
                         </telerik:RadDatePicker>
                     </td>
                     <td style="width: 250px">
@@ -298,9 +314,9 @@
 
     </div>
     <div runat="server" id="panelSubbar" class="pasconcept-bar" visible="false">
-        <table style="width:100%">
+        <table style="width: 100%">
             <tr>
-                <td style="width:180px">
+                <td style="width: 180px">
                     <telerik:RadComboBox ID="cboStatusLotes" runat="server" DataSourceID="SqlDataSourceJobStatus" ToolTip="Update Job Status to selected records"
                         Width="100%" DataTextField="Name" DataValueField="Id" Height="200px" AppendDataBoundItems="true" RenderMode="Lightweight">
                         <Items>
@@ -313,10 +329,8 @@
                           Update Status
                     </asp:LinkButton>
                 </td>
-                <td style="text-align:right">
-                    <asp:LinkButton ID="btnPrint" runat="server" UseSubmitBehavior="false">
-                                                    <i class="fas fa-print" style="padding-right:10px"></i>
-                    </asp:LinkButton>
+                <td style="text-align: right">
+
 
                     <asp:LinkButton ID="btnClientUnhide" runat="server" UseSubmitBehavior="false" ToolTip="Stop hiding clients Filter">
                     <i class="fas fa-eye" style="padding-right:10px"></i>
@@ -333,6 +347,7 @@
                     <asp:LinkButton ID="btnShare" runat="server" UseSubmitBehavior="false" ToolTip="Share">
                     <i class="far fa-share-square" style="padding-right:10px"></i>
                     </asp:LinkButton>
+
                 </td>
             </tr>
         </table>
@@ -376,175 +391,229 @@
         </table>
     </div>
 
-    <table class="table-sm" style="width: 100%;">
+    <table class="table-sm" style="width: 100%; margin-top: 5px">
         <tr>
             <td>
                 <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" GroupingEnabled="false" AutoGenerateColumns="False" DataSourceID="SqlDataSourceJobs" Width="100%"
-                    PageSize="50" AllowPaging="true" Height="850px" RenderMode="Lightweight" BorderStyle="None"
-                    AllowMultiRowSelection="True" AllowAutomaticDeletes="true"
+                    PageSize="50" AllowPaging="true" Height="850px" RenderMode="Lightweight" AllowMultiRowSelection="True" AllowAutomaticDeletes="true"
                     HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
                     FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
                     <ClientSettings Selecting-AllowRowSelect="true">
                         <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
                     </ClientSettings>
                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceJobs" ShowFooter="True" CommandItemDisplay="None">
-                        <PagerStyle Mode="Slider" AlwaysVisible="false"></PagerStyle>
+                        <PagerStyle Mode="Slider" AlwaysVisible="false" PageSizeControlType="RadComboBox"></PagerStyle>
                         <Columns>
                             <telerik:GridClientSelectColumn ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" UniqueName="ClientSelectColumn" Visible="false">
                             </telerik:GridClientSelectColumn>
                             <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="Id" ReadOnly="True" UniqueName="Id" Display="false" HeaderStyle-Width="20px">
                             </telerik:GridBoundColumn>
 
-                            <telerik:GridTemplateColumn DataField="Code" UniqueName="Code" HeaderStyle-Width="120px" HeaderText="Code" ItemStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
+                            <telerik:GridTemplateColumn DataField="Code" UniqueName="Code" HeaderStyle-Width="120px" HeaderText="Number" ItemStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="btnEditJob" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Info" CommandName="View/Edit Info" UseSubmitBehavior="false" Font-Bold="true">
-                                                <%#Eval("Code")%> 
-                                    </asp:LinkButton>
-                                    <div style="float: right; vertical-align: top; margin: 0;">
-
-                                        <%--Three Point Action Menu--%>
-                                        <asp:HyperLink runat="server" ID="lblAction" NavigateUrl="javascript:void(0);" Style="text-decoration: none;">
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td style="text-align:center">
+                                                <%# Eval("ExternalReference") %>
+                                            </td>
+                                            <td rowspan="2" style="text-align: right; width: 16px">
+                                                <%--Three Point Action Menu--%>
+                                                <asp:HyperLink runat="server" ID="lblAction" NavigateUrl="javascript:void(0);" Style="text-decoration: none;">
                                             <i title="Click to menu for this Job" style="color:dimgray" class="fas fa-ellipsis-v"></i>
-                                        </asp:HyperLink>
+                                                </asp:HyperLink>
 
-                                        <telerik:RadToolTip ID="RadToolTipAction" runat="server" TargetControlID="lblAction" RelativeTo="Element"
-                                            RenderMode="Lightweight" EnableViewState="true" ShowCallout="false" RenderInPageRoot="true"
-                                            Position="BottomRight" Modal="True" Title="" ShowEvent="OnClick"
-                                            HideDelay="100" HideEvent="LeaveToolTip" IgnoreAltAttribute="true">
+                                                <telerik:RadToolTip ID="RadToolTipAction" runat="server" TargetControlID="lblAction" RelativeTo="Element"
+                                                    RenderMode="Lightweight" EnableViewState="true" ShowCallout="false" RenderInPageRoot="true"
+                                                    Position="BottomRight" Modal="True" Title="" ShowEvent="OnClick"
+                                                    HideDelay="100" HideEvent="LeaveToolTip" IgnoreAltAttribute="true">
 
-                                            <table class="table-borderless" style="width: 200px; font-size: medium">
-                                                <tr>
-                                                    <td>
+                                                    <table class="table-borderless" style="width: 200px; font-size: medium">
+                                                        <tr>
+                                                            <td>
 
-                                                        <asp:LinkButton ID="LinkButton1" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Info" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                                <asp:LinkButton ID="LinkButton1" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Info" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
                                                             <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;View/Edit Job
-                                                        </asp:LinkButton>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:LinkButton ID="LinkButton2" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Billing" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_BillingMenu") %>'>
+                                                                </asp:LinkButton>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="dropdown-divider"></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <asp:LinkButton ID="LinkButton16" runat="server" UseSubmitBehavior="false" CommandName="AddActivity" CommandArgument='<%# Eval("Id")%>'
+                                                                    CssClass="dropdown-item">
+                                                                                        <i class="far fa-calendar"></i>&nbsp;&nbsp;Add Activity
+                                                                </asp:LinkButton>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="dropdown-divider"></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <asp:LinkButton ID="LinkButton2" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Billing" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_BillingMenu") %>'>
                                                             <i class="fas fa-dollar-sign"></i>&nbsp;&nbsp;&nbsp;View/Edit Billing
-                                                        </asp:LinkButton>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:LinkButton ID="LinkButton3" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Employees" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible="false">
+                                                                </asp:LinkButton>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <asp:LinkButton ID="LinkButton3" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Employees" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
                                                             <i class="fas fa-user-alt"></i>&nbsp;&nbsp;View/Edit Employees
-                                                        </asp:LinkButton>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="dropdown-divider"></div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding-left: 24px">
-                                                        <asp:LinkButton ID="LinkButton4" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Proposal(s)" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProposalsList") %>'>
+                                                                </asp:LinkButton>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="dropdown-divider"></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding-left: 24px">
+                                                                <asp:LinkButton ID="LinkButton4" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Proposal(s)" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProposalsList") %>'>
                                                             View/Edit Proposals
-                                                        </asp:LinkButton>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding-left: 24px">
-                                                        <asp:LinkButton ID="LinkButton5" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Expenses" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_RequestsProposalsList") %>'>
+                                                                </asp:LinkButton>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding-left: 24px">
+                                                                <asp:LinkButton ID="LinkButton5" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Expenses" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_RequestsProposalsList") %>'>
                                                             View/Edit Expenses
-                                                        </asp:LinkButton>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding-left: 24px">
-                                                        <asp:LinkButton ID="LinkButton6" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Notes" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                                </asp:LinkButton>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding-left: 24px">
+                                                                <asp:LinkButton ID="LinkButton6" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Notes" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
                                                             View/Edit Notes
-                                                        </asp:LinkButton>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="dropdown-divider"></div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding-left: 24px">
-                                                        <asp:LinkButton ID="LinkButton7" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Time Entries" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProjectTimeEntries") %>'>
+                                                                </asp:LinkButton>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="dropdown-divider"></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding-left: 24px">
+                                                                <asp:LinkButton ID="LinkButton7" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Time Entries" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProjectTimeEntries") %>'>
                                                             View/Edit Time Entries
-                                                        </asp:LinkButton>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:LinkButton ID="LinkButton14" runat="server" UseSubmitBehavior="false" CommandName="Add Time" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                                </asp:LinkButton>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <asp:LinkButton ID="LinkButton14" runat="server" UseSubmitBehavior="false" CommandName="Add Time" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
                                                             <i class="fas fa-user-clock"></i>&nbsp;&nbsp;Add Time
-                                                        </asp:LinkButton>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="dropdown-divider"></div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:LinkButton ID="LinkButton8" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Files" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                                </asp:LinkButton>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="dropdown-divider"></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <asp:LinkButton ID="LinkButton8" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Files" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
                                                             <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;View/Edit Files
-                                                        </asp:LinkButton>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:LinkButton ID="LinkButton9" runat="server" UseSubmitBehavior="false" CommandName="View Schedule" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                                </asp:LinkButton>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <asp:LinkButton ID="LinkButton9" runat="server" UseSubmitBehavior="false" CommandName="View Schedule" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
                                                             <i class="fas fa-calendar-alt"></i>&nbsp;&nbsp;View Schedule
-                                                        </asp:LinkButton>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding-left: 24px">
-                                                        <asp:LinkButton ID="LinkButton10" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Revisions" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                                </asp:LinkButton>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding-left: 24px">
+                                                                <asp:LinkButton ID="LinkButton10" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Revisions" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
                                                             View/Edit Revisions
-                                                        </asp:LinkButton>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding-left: 24px">
-                                                        <asp:LinkButton ID="LinkButton11" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Transmittals" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item"
-                                                            Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_TransmittalList") %>'>
+                                                                </asp:LinkButton>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding-left: 24px">
+                                                                <asp:LinkButton ID="LinkButton13" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Tickets" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible='<%# LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 %>'>
+                                                            View/Edit Tickets
+                                                                </asp:LinkButton>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td style="padding-left: 24px">
+                                                                <asp:LinkButton ID="LinkButton11" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Transmittals" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item"
+                                                                    Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_TransmittalList") And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
                                                             View/Edit Transmittals
-                                                        </asp:LinkButton>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="dropdown-divider"></div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding-left: 24px">
-                                                        <asp:LinkButton ID="LinkButton12" runat="server" UseSubmitBehavior="false" CommandName="Update Status" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                                </asp:LinkButton>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="dropdown-divider"></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding-left: 24px">
+                                                                <asp:LinkButton ID="LinkButton12" runat="server" UseSubmitBehavior="false" CommandName="Update Status" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
                                                             Update Status
-                                                        </asp:LinkButton>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a runat="server" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid")) %>' class="dropdown-item" target="_blank">
-                                                            <i class="fas fa-th-list"></i>&nbsp;&nbsp; Scope of Work Print View
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:LinkButton ID="LinkButton15" runat="server" UseSubmitBehavior="false" CommandName="Hide Client" CommandArgument='<%# Eval("ClientID")%>' CssClass="dropdown-item" Visible='<%# lblCompanyId.Text = 260962 %>'>
+                                                                </asp:LinkButton>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <a runat="server" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid")) %>' class="dropdown-item" target="_blank" visible='<%# LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
+                                                                    <i class="fas fa-th-list"></i>&nbsp;&nbsp; Download Scope of Work
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <asp:LinkButton ID="LinkButton15" runat="server" UseSubmitBehavior="false" CommandName="Hide Client" CommandArgument='<%# Eval("ClientID")%>' CssClass="dropdown-item" Visible='<%# lblCompanyId.Text = 260962 %>'>
                                                             <i class="fas fa-eye-slash"></i>&nbsp;&nbsp; Hide Client
-                                                        </asp:LinkButton>
-                                                    </td>
-                                                </tr>
+                                                                </asp:LinkButton>
+                                                            </td>
+                                                        </tr>
 
-                                            </table>
-                                        </telerik:RadToolTip>
+                                                        <tr>
+                                                            <td>
+                                                                <asp:LinkButton ID="btnAddEvent" runat="server" UseSubmitBehavior="false" CommandName="AddCalendar" CommandArgument='<%# Eval("Id")%>'
+                                                                    CssClass="dropdown-item">
+                                                                 <i class="far fa-calendar"></i>&nbsp;&nbsp;Add Calendar Event
+                                                                </asp:LinkButton>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <asp:LinkButton ID="btnAddNotification" runat="server" UseSubmitBehavior="false" CommandName="AddNotifications" CommandArgument='<%# Eval("Id")%>'
+                                                                    CssClass="dropdown-item">
+                                                                 <i class="far fa-bell"></i>&nbsp;&nbsp; Add Notification
+                                                                </asp:LinkButton>
+                                                            </td>
+                                                        </tr>
 
-                                    </div>
+                                                    </table>
+                                                </telerik:RadToolTip>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:center">
+                                                <asp:LinkButton ID="btnEditJob" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Info" CommandName="View/Edit Info" UseSubmitBehavior="false" Font-Bold="true">
+                                                    <%#Eval("Code")%> 
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+
+
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="Open_date" HeaderText="Date" UniqueName="Open_date" HeaderStyle-Width="100px" SortExpression="Open_date" ItemStyle-HorizontalAlign="Center">
@@ -565,11 +634,12 @@
                                     <span title="Number of files uploaded" class="badge badge-pill badge-light" style='<%# IIf(Eval("JobUploadFiles")=0,"display:none","display:normal")%>'>
                                         <%#Eval("JobUploadFiles")%>
                                     </span>
-                                    <a title="Click here to view Scope Of Work" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid")) %>' target="_blank"
+                                    <%--href='<%#String.Concat("../adm/titleblock.aspx?guid=", Eval("guid")) %>'--%>
+                                    <a title="Click here to download titlebox file" href='<%#String.Concat("../adm/titleblock.aspx?guid=", Eval("guid")) %>' target="_blank"
                                         style='<%# IIf(Eval("companyId")=260962,"display:normal;font-size:x-small","display:none")%>'>
                                         <i class="fas fa-th-list"></i>
                                     </a>
-                                    <a title="Click here to download titlebox file" href='<%#String.Concat("../adm/titleblock.aspx?guid=", Eval("guid")) %>' target="_blank"
+                                    <a title="Click here to Download Scope of Work" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid"), "&Print=1") %>' target="_blank"
                                         style='<%# IIf(Eval("companyId")=260962,"display:normal;font-size:x-small","display:none")%>'>
                                         <i class="fas fa-cloud-download-alt"></i>
                                     </a>
@@ -624,12 +694,12 @@
                             </telerik:GridTemplateColumn>
 
                             <%--PM - Employees--%>
-                            <telerik:GridTemplateColumn DataField="EmployeeName" HeaderText="PM - Employees" SortExpression="EmployeeName"
+                            <telerik:GridTemplateColumn DataField="EmployeeName" HeaderText="Project Manager - Team Members" SortExpression="EmployeeName"
                                 UniqueName="EmployeeName" AllowFiltering="true">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lnkEmployeeName" runat="server" CommandName="View/Edit Employees" CommandArgument='<%# Eval("Id") %>' ToolTip='<%# Eval("EmployeesSeparateComma") %>'>
-                                                    <span aria-hidden="true" style='<%# IIf(Left(Eval("EmployeeName"),2)="PM","color:red","color:#23527c")%>'><%# Eval("EmployeeName")%></span>
-                                                    <span class="badge badge-pill badge-primary" style='<%# IIf(Eval("OthersEmployeesCount")=0,"display:none","display:normal;font-size:x-small")%>'>
+                                                    <span aria-hidden="true" style='<%# IIf(Left(Eval("EmployeeName"),10)="Unassigned","color:red","color:#23527c")%>'><%# Eval("EmployeeName")%></span>
+                                                    <span title="Others Team Members" class="badge badge-pill badge-primary" style='<%# IIf(Eval("OthersEmployeesCount")=0,"display:none","display:normal;font-size:x-small")%>'>
                                                         +<%# Eval("OthersEmployeesCount") %>
                                                     </span>
                                     </asp:LinkButton>
@@ -675,7 +745,7 @@
                                                     ToolTip="Budget Used"
                                                     Value='<%# Eval("Profit")%>'
                                                     Width="100%"
-                                                    CssClass='<%# GetBudgetUsedCss(Eval("Profit"))%>'>
+                                                    CssClass='<%# LocalAPI.GetBudgetUsedCss(Eval("Profit"))%>'>
                                                     <AnimationSettings Duration="0" />
                                                 </telerik:RadProgressBar>
                                             </td>
@@ -692,7 +762,7 @@
                                 UniqueName="Status" AllowFiltering="true" HeaderStyle-Width="150px">
                                 <ItemTemplate>
 
-                                    <asp:LinkButton ID="lnkUpdateStatus" runat="server" UseSubmitBehavior="false" CommandName="Update Status" CommandArgument='<%# Eval("Id") %>' >
+                                    <asp:LinkButton ID="lnkUpdateStatus" runat="server" UseSubmitBehavior="false" CommandName="Update Status" CommandArgument='<%# Eval("Id") %>'>
                                         <div title="Clic to edit Job Status" class='<%# LocalAPI.GetJobStatusLabelCSS(Eval("StatusId")) %>' style="font-size: 12px; width: 120px"><%# Eval("Status") %></div>
                                     </asp:LinkButton>
                                 </ItemTemplate>
@@ -707,11 +777,11 @@
                                         <tr>
                                             <td style="width: 47%; text-align: right">
 
-                                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("BudgetUsed", "{0:C0}")%>' Font-Size="12px" ToolTip="Budget Used"></asp:Label>
+                                                <asp:Label ID="lblBudgetUsedColumn" runat="server" Text='<%# Eval("BudgetUsed", "{0:C0}")%>' Font-Size="12px" ToolTip="Budget Used"></asp:Label>
                                             </td>
-                                            <td style=" text-align: center">of
+                                            <td style="text-align: center">of
                                             </td>
-                                            <td style="width: 47%;text-align: right">
+                                            <td style="width: 47%; text-align: right">
                                                 <asp:Label ID="lblBudget" runat="server" Text='<%# Eval("Budget", "{0:C0}")%>' Font-Size="12px" ToolTip="Job Budget"></asp:Label>
                                             </td>
                                         </tr>
@@ -730,7 +800,7 @@
                                                         ToolTip="Budget Used. Click to View/Edit Time Entries"
                                                         Value='<%# Eval("Profit")%>'
                                                         Width="100%"
-                                                        CssClass='<%# GetBudgetUsedCss(Eval("Profit"))%>'>
+                                                        CssClass='<%#LocalAPI.GetBudgetUsedCss(Eval("Profit"))%>'>
                                                         <AnimationSettings Duration="0" />
                                                     </telerik:RadProgressBar>
                                                 </asp:LinkButton>
@@ -810,6 +880,58 @@
                         </Columns>
                     </MasterTableView>
                 </telerik:RadGrid>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+
+                <div class="container">
+                    <div style="height: 1px; width: 300px; overflow: hidden">
+                        <asp:Panel ID="ExportPanel" runat="server" Height="1px">
+                            <telerik:RadGrid ID="RadGridToPrint" runat="server" DataSourceID="SqlDataSourceJobs" Width="300px" Culture="en-US">
+                                <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceJobs" AutoGenerateColumns="False">
+                                    <Columns>
+                                        <telerik:GridBoundColumn DataField="Code" FilterControlAltText="Filter Name column" HeaderText="Code" SortExpression="Code" UniqueName="Code" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Open_date" FilterControlAltText="Filter Open_date column" HeaderText="Date" SortExpression="Open_date" UniqueName="Open_date" ReadOnly="True" DataFormatString="{0:MM/dd/yyy}">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Job" FilterControlAltText="Filter Job column" HeaderText="Job" SortExpression="Job" UniqueName="Job" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="ProjectLocation" FilterControlAltText="Location" HeaderText="Location" SortExpression="ProjectLocation" UniqueName="ProjectLocation" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="JobType" FilterControlAltText="JobType" HeaderText="Type" SortExpression="JobType" UniqueName="JobType" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="ClientName" FilterControlAltText="ClientName" HeaderText="Client" SortExpression="ClientName" UniqueName="ClientName" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Company" FilterControlAltText="Company" HeaderText="Company" SortExpression="Company" UniqueName="Company" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Tags" FilterControlAltText="Tags" HeaderText="Tags" SortExpression="Tags" UniqueName="Tags" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="EmployeeName" FilterControlAltText="EmployeeName" HeaderText="PM-Employee" SortExpression="EmployeeName" UniqueName="EmployeeName" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Budget" FilterControlAltText="Budget" HeaderText="Budget" SortExpression="Budget" UniqueName="Budget" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Collected" FilterControlAltText="Collected" HeaderText="Collected" SortExpression="Collected" UniqueName="Collected" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Profit" FilterControlAltText="Profit" HeaderText="Profit" SortExpression="Profit" UniqueName="Profit" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Status" FilterControlAltText="Status" HeaderText="Status" SortExpression="Status" UniqueName="Status" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="AmountBilled" FilterControlAltText="AmountBilled" HeaderText="Amount Billed" SortExpression="AmountBilled" UniqueName="AmountBilled" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Balance" FilterControlAltText="Balance" HeaderText="Balance" SortExpression="Balance" UniqueName="Balance" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="SubFees" FilterControlAltText="SubFees" HeaderText="SubFees" SortExpression="SubFees" UniqueName="SubFees" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                    </Columns>
+                                </MasterTableView>
+                            </telerik:RadGrid>
+                        </asp:Panel>
+                    </div>
+                </div>
+
             </td>
         </tr>
     </table>
@@ -821,7 +943,6 @@
                 <td colspan="2">
                     <h2 style="margin: 0; text-align: center; color: white; width: 600px">
                         <span class="navbar navbar-expand-md bg-dark text-white">Update Job Status</span>
-                        </>
                     </h2>
                 </td>
             </tr>
@@ -854,7 +975,7 @@
             <span class="navbar navbar-expand-md bg-dark text-white">Share Copied Filters
             </span>
         </h2>
-        <table class="table-sm" style="width: 500px">
+        <table class="table-borderless" style="width: 500px">
             <tr>
                 <td style="width: 80px">Employee To:
                 </td>
@@ -886,8 +1007,133 @@
         </table>
     </telerik:RadToolTip>
 
+    <%--New Activity Dialog--%>
+    <div>
+        <telerik:RadToolTip ID="RadToolTipNewActivity" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+
+            <table class="table-borderless" style="width: 800px">
+                <tr>
+                    <td colspan="2">
+                        <h3 style="margin: 0; text-align: center; color: white; width: 800px">
+                            <span class="navbar navbar-expand-md bg-dark text-white">New Job Activity</span>
+                        </h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <asp:ValidationSummary ID="ValidationSummaryActivity" runat="server" Font-Size="X-Small" HeaderText="Following error occurs:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true" ValidationGroup="vActivity" ForeColor="Red" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <asp:Label ID="lblClientName" runat="server" Visible="False"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 180px; text-align: right">Activity Type:
+                    </td>
+                    <td>
+                        <telerik:RadComboBox ID="cboActivityType" runat="server" DataSourceID="SqlDataSourceActivityType" DataTextField="Name" DataValueField="Id" Width="100%" ZIndex="50001" AppendDataBoundItems="True" ValidationGroup="vActivity" CausesValidation="false">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(Select Activity...)" Value="-1" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 180px; text-align: right">Employee:
+                    </td>
+                    <td>
+                        <telerik:RadComboBox ID="cboActivityEmployees" runat="server" DataSourceID="SqlDataSourceEmployees" ZIndex="50001"
+                            DataTextField="Name" DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px">
+                        </telerik:RadComboBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right">Subject:
+                    </td>
+                    <td>
+                        <telerik:RadTextBox ID="txtActivitySubject" runat="server" MaxLength="255" Width="100%">
+                        </telerik:RadTextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 180px; text-align: right">Due Date:
+                    </td>
+                    <td>
+                        <telerik:RadDateTimePicker ID="RadDateTimePickerActivityDueDate" runat="server" Width="250px" ZIndex="50001">
+                        </telerik:RadDateTimePicker>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 180px; text-align: right">Estimated Duration:
+                    </td>
+                    <td>
+                        <telerik:RadComboBox ID="cboActivityDuration" runat="server" Width="100%" ZIndex="50001" AppendDataBoundItems="True" ValidationGroup="vActivity">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="15 Mins" Value="15" />
+                                <telerik:RadComboBoxItem runat="server" Text="30 Mins" Value="30" />
+                                <telerik:RadComboBoxItem runat="server" Text="45 Mins" Value="45" />
+                                <telerik:RadComboBoxItem runat="server" Text="1 Hr" Value="60" />
+                                <telerik:RadComboBoxItem runat="server" Text="2 Hrs" Value="120" />
+                                <telerik:RadComboBoxItem runat="server" Text="4 Hrs" Value="240" />
+                                <telerik:RadComboBoxItem runat="server" Text="8 Hrs" Value="480" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right">Description (optional):
+                    </td>
+                    <td>
+                        <telerik:RadTextBox ID="txtActivityDescription" runat="server"
+                            TextMode="MultiLine" Rows="4" MaxLength="1024" Width="100%">
+                        </telerik:RadTextBox>
+                    </td>
+                </tr>
+            </table>
+            <asp:Panel runat="server" ID="PanelLocation" Visible="false">
+                <table class="table-sm" style="width: 800px">
+                    <tr>
+                        <td style="width: 180px; text-align: right">Location:
+                        </td>
+                        <td>
+                            <telerik:RadTextBox ID="RadTextBox1" runat="server"
+                                TextMode="MultiLine" Rows="4" MaxLength="1024" Width="100%">
+                            </telerik:RadTextBox>
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>
+            <table class="table-sm" style="width: 800px">
+                <tr>
+                    <td>
+                        <telerik:RadCheckBox ID="chkMoreOptions" runat="server" Text="More Options..." AutoPostBack="false">
+                        </telerik:RadCheckBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center">
+                        <asp:LinkButton ID="btnAddActivity" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ValidationGroup="vActivity">
+                                    <i class="far fa-calendar"></i>&nbsp;Add Activity
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:CompareValidator runat="server" ID="Comparevalidator1" ValueToCompare="(Select Activity...)" ValidationGroup="vActivity" Operator="NotEqual" ControlToValidate="cboActivityType" Display="None" ErrorMessage="Activity Type is mandatory" SetFocusOnError="true"> </asp:CompareValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtActivitySubject" ValidationGroup="vActivity"
+                            Text="*" ErrorMessage="Subject is required" SetFocusOnError="true" Display="None"></asp:RequiredFieldValidator>
+
+                    </td>
+                </tr>
+            </table>
+        </telerik:RadToolTip>
+    </div>
+
+
     <asp:SqlDataSource ID="SqlDataSourceJobs" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="JOBS_v_20_SELECT" SelectCommandType="StoredProcedure"
+        SelectCommand="JOBS_v_21_SELECT" SelectCommandType="StoredProcedure"
         DeleteCommand="JOB_DELETE" DeleteCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
@@ -960,6 +1206,14 @@
     <asp:SqlDataSource ID="SqlDataSourceProjectSector" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT Id, Name FROM Jobs_sectors ORDER BY Name"></asp:SqlDataSource>
 
+    <asp:SqlDataSource ID="SqlDataSourceActivityType" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="select Id, Name from [Appointments_types] order by name"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceEmployees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="SELECT [Id], [FullName] as Name FROM [Employees] WHERE companyId=@companyId and isnull(Inactive,0)=0 ORDER BY [Name]">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+        </SelectParameters>
+    </asp:SqlDataSource>
 
     <asp:Label ID="lblCompanyId" runat="server" Text="0" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployee" runat="server" Visible="False"></asp:Label>
@@ -970,4 +1224,5 @@
     <asp:Label ID="lblTagId" runat="server" Visible="False" Text=""></asp:Label>
     <asp:Label ID="lblTagIN_List" runat="server" Visible="False" Text=""></asp:Label>
     <asp:Label ID="lblJobIdInput" runat="server" Visible="False" Text="0"></asp:Label>
+    <asp:Label ID="lblSelectedClientId" runat="server" Visible="False"></asp:Label>
 </asp:Content>

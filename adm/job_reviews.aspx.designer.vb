@@ -12,16 +12,7 @@ Option Explicit On
 
 
 Partial Public Class job_reviews
-    
-    '''<summary>
-    '''PanelNo16Type control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents PanelNo16Type As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''btnNewReview control.
     '''</summary>
@@ -30,7 +21,16 @@ Partial Public Class job_reviews
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnNewReview As Global.System.Web.UI.WebControls.LinkButton
-    
+
+    '''<summary>
+    '''PanelNo16Type control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PanelNo16Type As Global.System.Web.UI.WebControls.Panel
+
     '''<summary>
     '''RadGridReviewsPermits control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class job_reviews
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGridReviewsPermits As Global.Telerik.Web.UI.RadGrid
-    
+
     '''<summary>
     '''Panel16Type control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class job_reviews
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Panel16Type As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''btnAddAppName control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class job_reviews
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnAddAppName As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''RadGridAppName control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class job_reviews
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGridAppName As Global.Telerik.Web.UI.RadGrid
-    
+
     '''<summary>
     '''btnAddModule control.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class job_reviews
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnAddModule As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''RadGridLocationModule control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class job_reviews
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGridLocationModule As Global.Telerik.Web.UI.RadGrid
-    
+
     '''<summary>
     '''SqlDataSourceReviewsPermits control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class job_reviews
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceReviewsPermits As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourcePlanReview_status control.
     '''</summary>
@@ -102,7 +102,7 @@ Partial Public Class job_reviews
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourcePlanReview_status As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceReviewer control.
     '''</summary>
@@ -111,25 +111,7 @@ Partial Public Class job_reviews
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceReviewer As Global.System.Web.UI.WebControls.SqlDataSource
-    
-    '''<summary>
-    '''SqlDataSourceReviewCity control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceReviewCity As Global.System.Web.UI.WebControls.SqlDataSource
-    
-    '''<summary>
-    '''SqlDataSourceReviewDepartment control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceReviewDepartment As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceAppName control.
     '''</summary>
@@ -138,7 +120,7 @@ Partial Public Class job_reviews
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceAppName As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceLocationModule control.
     '''</summary>
@@ -147,7 +129,7 @@ Partial Public Class job_reviews
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceLocationModule As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''lblJobId control.
     '''</summary>
@@ -156,7 +138,7 @@ Partial Public Class job_reviews
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblJobId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -165,7 +147,7 @@ Partial Public Class job_reviews
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''Master property.
     '''</summary>
@@ -174,7 +156,7 @@ Partial Public Class job_reviews
     '''</remarks>
     Public Shadows ReadOnly Property Master() As pasconcept20.MasterJOB
         Get
-            Return CType(MyBase.Master,pasconcept20.MasterJOB)
+            Return CType(MyBase.Master, pasconcept20.MasterJOB)
         End Get
     End Property
 End Class

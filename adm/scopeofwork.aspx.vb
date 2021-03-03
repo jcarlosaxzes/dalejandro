@@ -1,4 +1,6 @@
-﻿Public Class scopeofwork
+﻿Imports Intuit.Ipp.Core.Configuration
+
+Public Class scopeofwork
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -13,48 +15,58 @@
             '!!! lblProposalId.Text = 21164
 
             Dim sb = New StringBuilder()
-            sb.AppendLine("Proposal Number: <b>" & LocalAPI.ProposalNumber(lblProposalId.Text) & "</b>")
+            sb.AppendLine("Project: <b>" & LocalAPI.GetJobCodeName(lblJobId.Text) & "</b>")
             sb.AppendLine("<br/>")
-            sb.AppendLine("Proposal By: <b>" & LocalAPI.GetJobProposalBy(lblJobId.Text) & "</b>")
             sb.AppendLine("<br/>")
             sb.AppendLine("Client Name: <b>" & LocalAPI.GetClientProperty(CustomerID, "Name") & "</b>")
             sb.AppendLine("<br/>")
             sb.AppendLine("Company: <b>" & LocalAPI.GetClientProperty(CustomerID, "Company") & "</b>")
             sb.AppendLine("<br/>")
+            sb.AppendLine("Proposal Number: <b>" & LocalAPI.ProposalNumber(lblProposalId.Text) & "</b>")
+            sb.AppendLine("<br/>")
+            sb.AppendLine("Proposal By: <b>" & LocalAPI.GetJobProposalBy(lblJobId.Text) & "</b>")
+            sb.AppendLine("<br/>")
             sb.AppendLine("<br/>")
             LocalAPI.GetScopeOfWork(lblProposalId.Text, sb)
             lblContent.Text = sb.ToString
             txtHTML.Content = sb.ToString
+
+            If Not Request.QueryString("Print") Is Nothing Then
+                'Response.Write("<script>window.print();</script>")
+                Pdf_ServerClick()
+            End If
         End If
     End Sub
 
 
-    Private Sub Previous()
-        Try
-            'Dim attachment As String = "attachment; filename=" & LocalAPI.GetJobCode(lblJobId.Text) & "_ScopeOfWork.docx"
-            Dim attachment As String = "attachment; filename=" & "19-001" & "__ScopeOfWork.txt"
-            HttpContext.Current.Response.Clear()
-            HttpContext.Current.Response.ClearHeaders()
-            HttpContext.Current.Response.ClearContent()
-            HttpContext.Current.Response.AddHeader("Content-Disposition", attachment)
-            HttpContext.Current.Response.ContentType = "text/csv"
-            HttpContext.Current.Response.AddHeader("axzes", "public")
-            Dim sb = New StringBuilder()
+    'Private Sub Previous()
+    '    Try
+    '        'Dim attachment As String = "attachment; filename=" & LocalAPI.GetJobCode(lblJobId.Text) & "_ScopeOfWork.docx"
+    '        Dim attachment As String = "attachment; filename=" & "19-001" & "__ScopeOfWork.txt"
+    '        HttpContext.Current.Response.Clear()
+    '        HttpContext.Current.Response.ClearHeaders()
+    '        HttpContext.Current.Response.ClearContent()
+    '        HttpContext.Current.Response.AddHeader("Content-Disposition", attachment)
+    '        HttpContext.Current.Response.ContentType = "text/csv"
+    '        HttpContext.Current.Response.AddHeader("axzes", "public")
+    '        Dim sb = New StringBuilder()
 
-            sb.AppendLine(txtHTML.Text.Replace("<br/>", "\r\n"))
+    '        sb.AppendLine(txtHTML.Text.Replace("<br/>", "\r\n"))
 
-            HttpContext.Current.Response.Write(sb.ToString())
-            HttpContext.Current.Response.End()
+    '        HttpContext.Current.Response.Write(sb.ToString())
+    '        HttpContext.Current.Response.End()
 
-        Catch ex As Exception
-        End Try
-    End Sub
+    '    Catch ex As Exception
+    '    End Try
+    'End Sub
 
-    Protected Async Sub Pdf_ServerClick(sender As Object, e As EventArgs)
-        Dim FileName As String = LocalAPI.GetJobCode(lblJobId.Text) & "_ScopeOfWork"
+    Protected Async Sub Pdf_ServerClick()
+        Dim FileName As String = LocalAPI.GetJobCode(lblJobId.Text) & "_ScopeOfWork.pdf"
         Dim companyId = LocalAPI.GetJobProperty(lblJobId.Text, "companyId")
         Dim pdf As PdfApi = New PdfApi()
-        Dim pdfBytes = Await pdf.CreateWorkScopePdfBytes(companyId, lblJobId.Text)
+        ' Link to free page (no password)
+        Dim url As String = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/scopeofwork.aspx" & "?guid=" & Request.QueryString("guid")
+        Dim pdfBytes = Await pdf.GetConvertApiPdf(url)
         Dim response As HttpResponse = HttpContext.Current.Response
         response.ContentType = "application/pdf"
         response.AddHeader("Content-Disposition", "attachment; filename=" & FileName)
